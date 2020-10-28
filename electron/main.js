@@ -7,7 +7,7 @@ function createMainWindow() {
     }
   })
 
-  if (process.env === 'DEVELOPMENT') win.loadURL('localhost:3000');
+  if (process.env === 'DEVELOPMENT') win.loadURL('http://localhost:3000');
   else win.loadFile('public/index.html');
   win.removeMenu();
 }

@@ -12,8 +12,8 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "env=DEVELOPMENT concurrently 'react-scripts start' 'wait-on http://localhost:3000 electron .'",
-    "electron": "electron",
+    "start": "env=DEVELOPMENT concurrently 'react-scripts start' 'yarn electron'",
+    "electron": "wait-on http://localhost:3000 && electron",
     "build": "react-scripts build",
     "test": "react-scripts test"
   },
