@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require('electron');
+const isDev = require('electron-is-dev');
 
 function createMainWindow() {
   const win = new BrowserWindow({
@@ -7,13 +8,19 @@ function createMainWindow() {
     }
   })
 
-  if (process.env === 'DEVELOPMENT') win.loadURL('http://localhost:3000');
-  else win.loadFile('public/index.html');
+  console.log(isDev)
+
+  win.loadURL(
+    isDev
+    ? "http://localhost:3000"
+      : `file://${path.join(__dirname, "../build/index.html")}`
+  )
+
+  
   win.removeMenu();
 }
 app.setName('Rainbow Board');
-app.whenReady().then(() => {
-})
+app.whenReady().then(createMainWindow)
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
