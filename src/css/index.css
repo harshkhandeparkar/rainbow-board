@@ -20,17 +20,27 @@ body {
   background-color: white;
 }
 
-.logo-text {
+#main {
+  min-height: 100vh;
+}
+
+.brand-gradient {
   /* Gradient text made using https://cssgradient.io */
   background: rgb(180,58,58);
   background: linear-gradient(143deg, rgba(180,58,58,1) 0%, rgba(253,141,29,1) 24%, rgba(88,69,252,1) 85%);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  font-size: xx-large;
   font-weight: bold;
-  /* Gradient text made using https://cssgradient.io */
+  /* Gradient text made using https://cssgradient.io  */
+}
 
+.logo-text {
   -webkit-user-select: none;
   -moz-user-select: none;
+  font-size: xx-large;
+}
+
+.btn {
+  border-radius: 1rem;
 }
