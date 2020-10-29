@@ -1,26 +1,25 @@
 const { app, BrowserWindow } = require('electron');
+const path = require('path');
 const isDev = require('electron-is-dev');
 
 function createMainWindow() {
   const win = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true
-    }
+    },
+    icon: path.join(__dirname, '..', 'public', 'logo512.png')
   })
-
-  console.log(isDev)
 
   win.loadURL(
     isDev
     ? "http://localhost:3000"
-      : `file://${path.join(__dirname, "../build/index.html")}`
+      : `file://${path.join(__dirname, '..', 'build', 'index.html')}`
   )
 
-  
   win.removeMenu();
 }
 app.setName('Rainbow Board');
-app.whenReady().then(createMainWindow)
+app.whenReady().then(createMainWindow);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
