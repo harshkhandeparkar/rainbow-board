@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'materialize-css/dist/css/materialize.min.css';
 
 import './css/material-icons.css';
 import './css/index.css';

@@ -5,7 +5,8 @@ const isDev = require('electron-is-dev');
 function createMainWindow() {
   const win = new BrowserWindow({
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      devTools: true
     },
     icon: path.join(__dirname, '..', 'public', 'logo512.png')
   })
@@ -16,7 +17,8 @@ function createMainWindow() {
       : `file://${path.join(__dirname, '..', 'build', 'index.html')}`
   )
 
-  win.removeMenu();
+  // win.removeMenu();
+  win.webContents.openDevTools();
 }
 app.setName('Rainbow Board');
 app.whenReady().then(createMainWindow);
