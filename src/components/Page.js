@@ -21,7 +21,7 @@ export class Page extends Component {
     const drawBoard = new RealDrawBoard({
       canvas: this.canvasRef.current,
       GPU,
-      bgColor: [1, 1, 224 / 255],
+      bgColor: [1, 1, 240 / 255],
       brushColor: [0, 0, 0],
       xScaleFactor: 1,
       yScaleFactor: 1,

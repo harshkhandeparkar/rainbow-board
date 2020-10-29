@@ -17,20 +17,20 @@ html {
 body {
   padding: 0;
   margin: 0;
-  min-height: 100vh;
+  background-color: white;
 }
 
-.header {
-  /* Made using https://cssgradient.io */
+.logo-text {
+  /* Gradient text made using https://cssgradient.io */
   background: rgb(180,58,58);
   background: linear-gradient(143deg, rgba(180,58,58,1) 0%, rgba(253,141,29,1) 24%, rgba(88,69,252,1) 85%);
-  -webkit-text-fill-color: rgba(0, 0, 0, 0.1);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
   font-size: xx-large;
   font-weight: bold;
-}
+  /* Gradient text made using https://cssgradient.io */
 
-.page {
-  width: 100%;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  -webkit-user-select: none;
+  -moz-user-select: none;
 }
