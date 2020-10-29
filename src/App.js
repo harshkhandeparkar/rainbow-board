@@ -3,7 +3,7 @@ function App() {
     <div className="App">
       Rainbow Board
     </div>
-  );
+  )
 }
 
 export default App;
