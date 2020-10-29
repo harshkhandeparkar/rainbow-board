@@ -28,17 +28,20 @@ body {
   /* Gradient text made using https://cssgradient.io */
   background: rgb(180,58,58);
   background: linear-gradient(143deg, rgba(180,58,58,1) 0%, rgba(253,141,29,1) 24%, rgba(88,69,252,1) 85%);
+  /* Gradient text made using https://cssgradient.io  */
+}
+
+.gradient-text {
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  font-weight: bold;
-  /* Gradient text made using https://cssgradient.io  */
 }
 
 .logo-text {
   -webkit-user-select: none;
   -moz-user-select: none;
   font-size: xx-large;
+  font-weight: bold;
 }
 
 .btn {
