@@ -1,12 +1,13 @@
+import Main from './components/Main';
+import Pages from './components/Pages';
+import { HashRouter, Route } from 'react-router-dom';
+
 function App() {
   return (
-    <div className="container-fluid">
-      <nav>
-        <div class="nav-wrapper header white">
-          <span class="logo-text brand-logo center">Rainbow Board</span>
-        </div>
-      </nav>
-    </div>
+    <HashRouter>
+      <Route exact path="/" component={Main} />
+      <Route path="/pages" component={Pages} />
+    </HashRouter>
   )
 }
 
