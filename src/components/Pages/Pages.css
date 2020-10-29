@@ -1,0 +1,16 @@
+#main {
+  min-height: 100vh;
+}
+
+.page-btn {
+  margin-top: 45vh;
+  position: absolute !important;
+}
+
+.page-btn.right {
+  right: 1rem;
+}
+
+.page-btn.left {
+  left: 1rem;
+}

@@ -2,6 +2,8 @@ import React, { Component, createRef } from 'react';
 import { RealDrawBoard } from 'gpujs-real-renderer';
 import { GPU } from 'gpu.js';
 
+import './Page.css';
+
 export class Page extends Component {
   constructor(...props) {
     super(...props);
@@ -12,7 +14,7 @@ export class Page extends Component {
   render() {
     return (
       <div>
-        <canvas ref={this.canvasRef} className="page"></canvas>
+        <canvas ref={this.canvasRef} className="page z-depth-2"></canvas>
       </div>
     )
   }
@@ -21,7 +23,7 @@ export class Page extends Component {
     const drawBoard = new RealDrawBoard({
       canvas: this.canvasRef.current,
       GPU,
-      bgColor: [1, 1, 240 / 255],
+      bgColor: [1, 1, 1],
       brushColor: [0, 0, 0],
       xScaleFactor: 1,
       yScaleFactor: 1,
