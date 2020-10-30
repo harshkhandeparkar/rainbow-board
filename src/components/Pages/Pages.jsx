@@ -64,6 +64,8 @@ export class Pages extends Component {
           </button>
           <ul>
             <li>
+            </li>
+            <li>
               <button title="Pick Color" className="btn-floating white">
                 <i className="material-icons brand-gradient gradient-text">palette</i>
               </button>
