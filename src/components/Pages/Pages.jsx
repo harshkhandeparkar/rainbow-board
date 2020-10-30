@@ -63,22 +63,20 @@ export class Pages extends Component {
             <i className={`brand-gradient gradient- fa fa-${this.state.mode === 'paint' ? 'paint-brush' : 'eraser'}`} />
           </button>
           <ul>
-            {
-              this.state.mode === 'erase' &&
-              <li>
-                <button title="Brush" className="btn-floating white" onClick={e => this._setMode('paint')}>
-                  <i className="fa fa-paint-brush brand-gradient gradient-text" />
-                </button>
-              </li>
-            }
-            {
-              this.state.mode === 'paint' &&
-              <li>
-                <button title="Eraser" className="btn-floating white" onClick={e => this._setMode('erase')}>
-                  <i className="fa fa-eraser brand-gradient gradient-text" />
-                </button>
-              </li>
-            }
+            <li>
+              <button title="Pick Color" className="btn-floating white">
+                <i className="material-icons brand-gradient gradient-text">palette</i>
+              </button>
+            </li>
+            <li>
+              <button
+                title={this.state.mode === 'eraser' ? 'Eraser' : 'Brush'}
+                className="btn-floating white"
+                onClick={e => this._setMode(this.state.mode === 'erase' ? 'paint' : 'erase')}
+              >
+                <i className={`fa fa-${this.state.mode === 'paint' ? 'eraser' : 'paint-brush'} brand-gradient gradient-text`} />
+              </button>
+            </li>
             <li>
               <button title="Clear the board" className="btn-floating white" onClick={e => this.modalInstance.open()}>
                 <i className="fa fa-ban brand-gradient gradient-text" />
