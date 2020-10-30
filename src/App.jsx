@@ -1,5 +1,5 @@
-import Main from './components/Main';
-import Pages from './components/Pages/Pages';
+import Main from './components/Main.jsx';
+import Pages from './components/Pages/Pages.jsx';
 import { HashRouter, Route } from 'react-router-dom';
 
 function App() {

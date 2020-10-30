@@ -14,10 +14,10 @@ function Main() {
         </p>
 
         <NavLink to="/pages" className="btn center brand-gradient gradient-text">
-          <i className="material-icons left">brush</i>Start New
+          <i className="fa fa-paint-brush left" /> Start New
         </NavLink>
         <NavLink to="/" className="btn center brand-gradient gradient-text">
-          <i className="material-icons left">folder_open</i>Open Saved File
+          <i className="fa fa-folder-open left" />Open Saved File
         </NavLink>
       </div>
     </div>
