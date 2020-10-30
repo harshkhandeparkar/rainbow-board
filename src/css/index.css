@@ -28,6 +28,10 @@ footer {
   box-shadow: 0px -1px 3px rgba(0,0,0,0.2);
 }
 
+footer a:hover {
+  font-weight: bold;
+}
+
 #pages {
   min-height: 100vh;
 }

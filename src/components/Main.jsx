@@ -26,8 +26,15 @@ function Main() {
         <div className="container">
           <div className="row">
             <div className="col l6 s12">
-              <h5>Rainbow Board</h5>
-              <p>You can use rows and columns here to organize your footer content.</p>
+              <div className="row">
+                <h5>Rainbow Board</h5>
+              </div>
+              <div className="row">
+                <ul>
+                  <li><a href="https://github.com/HarshKhandeparkar/rainbow-board/releases" target="_blank" rel="noreferrer">Latest Release</a></li>
+                  <li><a href="https://github.com/HarshKhandeparkar/rainbow-board/" target="_blank" rel="noreferrer">Star on Github</a></li>
+                </ul>
+              </div>
             </div>
             <div className="col l4 offset-l2 s12">
               <h5>Made Using</h5>
@@ -40,15 +47,11 @@ function Main() {
             </div>
           </div>
         </div>
-        <div className="footer-copyright container">
-          <div className="container">
+        <hr />
+        <div className="footer-copyright container center">
+          <p className="center" style={{width: '100%'}}>
             v{version}
-            <a
-              className="right"
-              href="https://github.com/HarshKhandeparkar/rainbow-board"
-              target="_blank"
-            >Star On Github</a>
-          </div>
+          </p>
         </div>
       </footer>
     </div>
