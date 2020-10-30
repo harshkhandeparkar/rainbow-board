@@ -1,5 +1,6 @@
 import React, { Component, createRef } from 'react';
 import { CompactPicker } from 'react-color';
+import M from 'materialize-css';
 
 import './PaintSettings.css';
 
@@ -34,6 +35,11 @@ export default class PaintSettings extends Component {
     this.setState({
       eraserSize: Number(this.eraserSizeRangeRef.current.value)
     })
+  }
+
+  componentDidMount() {
+    M.Range.init(this.brushSizeRangeRef.current);
+    M.Range.init(this.eraserSizeRangeRef.current);
   }
 
   render () {
