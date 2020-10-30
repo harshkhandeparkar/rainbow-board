@@ -2,6 +2,7 @@
   "name": "rainbow-board",
   "version": "0.1.0",
   "main": "electron/main.js",
+  "homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -23,7 +24,8 @@
     "start": "concurrently 'BROWSER=none react-scripts start' 'yarn electron'",
     "electron": "wait-on http://localhost:3000 && electron .",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +48,7 @@
   "devDependencies": {
     "concurrently": "^5.3.0",
     "electron": "^10.1.5",
+    "gh-pages": "^3.1.0",
     "wait-on": "^5.2.0"
   }
 }
