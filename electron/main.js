@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, shell } = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev');
 
@@ -19,6 +19,11 @@ function createMainWindow() {
 
   // win.removeMenu();
   win.webContents.openDevTools();
+
+  win.webContents.on('new-window', function(e, url) {
+    e.preventDefault();
+    shell.openExternal(url);
+  })
 }
 app.setName('Rainbow Board');
 app.whenReady().then(createMainWindow);

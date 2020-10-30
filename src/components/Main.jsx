@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { version } from '../../package.json';
 
 function Main() {
   return (
@@ -20,6 +21,37 @@ function Main() {
           <i className="fa fa-folder-open left" />Open Saved File
         </NavLink>
       </div>
+
+      <footer className="page-footer brand-gradient gradient-text">
+        <div className="container">
+          <div className="row">
+            <div className="col l6 s12">
+              <h5>Rainbow Board</h5>
+              <p>You can use rows and columns here to organize your footer content.</p>
+            </div>
+            <div className="col l4 offset-l2 s12">
+              <h5>Made Using</h5>
+              <ul>
+                <li><a href="https://electronjs.org">Electron</a></li>
+                <li><a href="https://reactjs.org">React</a></li>
+                <li><a href="https://gpu.rocks">GPU.js</a></li>
+                <li><a href="https://harshkhandeparkar.github.io/gpujs-real-renderer">GPU.js Real Renderer</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div className="footer-copyright container">
+          <div className="container">
+            v{version}
+            <a
+              className="right"
+              target="_external"
+              href="https://github.com/HarshKhandeparkar/rainbow-board"
+              target="_blank"
+            >Star On Github</a>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
