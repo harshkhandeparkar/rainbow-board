@@ -32,10 +32,10 @@ function Main() {
             <div className="col l4 offset-l2 s12">
               <h5>Made Using</h5>
               <ul>
-                <li><a href="https://electronjs.org">Electron</a></li>
-                <li><a href="https://reactjs.org">React</a></li>
-                <li><a href="https://gpu.rocks">GPU.js</a></li>
-                <li><a href="https://harshkhandeparkar.github.io/gpujs-real-renderer">GPU.js Real Renderer</a></li>
+                <li><a href="https://electronjs.org" target="_blank" rel="noreferrer">Electron</a></li>
+                <li><a href="https://reactjs.org" target="_blank" rel="noreferrer">React</a></li>
+                <li><a href="https://gpu.rocks" target="_blank" rel="noreferrer">GPU.js</a></li>
+                <li><a href="https://harshkhandeparkar.github.io/gpujs-real-renderer" target="_blank" rel="noreferrer">GPU.js Real Renderer</a></li>
               </ul>
             </div>
           </div>
@@ -45,7 +45,6 @@ function Main() {
             v{version}
             <a
               className="right"
-              target="_external"
               href="https://github.com/HarshKhandeparkar/rainbow-board"
               target="_blank"
             >Star On Github</a>
