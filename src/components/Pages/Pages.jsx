@@ -24,6 +24,61 @@ export class Pages extends Component {
     this.colorPickerRef = createRef();
   }
 
+  static boardOptions = {
+    bgColor: [1, 1, 1],
+    brushColor: [0, 0, 0],
+    xScaleFactor: 1,
+    yScaleFactor: 1,
+    drawAxes: false,
+    xOffset: 0,
+    yOffset: 0,
+    brushSize: 5,
+    eraserSize: 8
+  }
+
+  componentDidMount() {
+    this._initializeFAB();
+    this._initializeModal();
+
+    this.setState({
+      drawBoard: new RealDrawBoard({
+        canvas: this.canvasRef.current,
+        GPU,
+        dimensions: [
+          this.canvasRef.current.clientWidth,
+          this.canvasRef.current.clientHeight
+        ],
+        ...Pages.boardOptions
+      }).draw().startRender()
+    })
+  }
+
+  componentDidUpdate() {
+    this._initializeFAB();
+    this._initializeModal();
+  }
+
+  _setMode(mode) {
+    this.state.drawBoard.changeMode(mode);
+    this.setState({
+      mode
+    })
+  }
+
+  _clearBoard() {
+    this.state.drawBoard.clear();
+  }
+
+  _initializeFAB() {
+    const elems = document.querySelectorAll('.fixed-action-btn');
+    M.FloatingActionButton.init(elems, { hoverEnabled: false });
+  }
+
+  _initializeModal() {
+    this.modalInstance = M.Modal.init(this.modalRef.current);
+    this.colorPickerInstance = M.Modal.init(this.colorPickerRef.current);
+  }
+
   render() {
     return (
       <div className="container-fluid center" id="pages">
@@ -93,8 +148,8 @@ export class Pages extends Component {
             <p>If you clear the board, <b>ALL</b> the changes you made will be <b>LOST FOREVER.</b></p>
           </div>
           <div className="modal-footer container">
-            <button className="btn green right" onClick={e => this.modalInstance.close()}>No</button>
-            <button className="btn red left" onClick={e => {
+            <button className="btn white green-text right" onClick={e => this.modalInstance.close()}>No</button>
+            <button className="btn white red-text left" onClick={e => {
               this._clearBoard();
               this.modalInstance.close();
             }}>Yes</button>
@@ -105,68 +160,21 @@ export class Pages extends Component {
           <div className="modal-content">
             <PaintSettings
               initialColor="#000"
+              initialBrushSize={Pages.boardOptions.brushSize}
+              initialEraserSize={Pages.boardOptions.eraserSize}
+              onBrushSizeChange={size => this.state.drawBoard.changeBrushSize(size)}
+              onEraserSizeChange={size => this.state.drawBoard.changeEraserSize(size)}
               onPickColor={color => {
                 this.state.drawBoard.changeBrushColor([color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255])
               }}
             />
           </div>
           <div className="modal-footer container">
-            <button className="btn green" onClick={e => this.colorPickerInstance.close()}>Done</button>
+            <button className="btn green brand-gradient gradient-text" onClick={e => this.colorPickerInstance.close()}>Done</button>
           </div>
         </div>
       </div>
     )
-  }
-
-  componentDidMount() {
-    this._initializeFAB();
-    this._initializeModal();
-
-    this.setState({
-      drawBoard: new RealDrawBoard({
-        canvas: this.canvasRef.current,
-        GPU,
-        bgColor: [1, 1, 1],
-        brushColor: [0, 0, 0],
-        xScaleFactor: 1,
-        yScaleFactor: 1,
-        drawAxes: false,
-        xOffset: 0,
-        yOffset: 0,
-        dimensions: [
-          this.canvasRef.current.clientWidth,
-          this.canvasRef.current.clientHeight
-        ],
-        brushSize: 5,
-        eraserSize: 8
-      }).draw().startRender()
-    })
-  }
-
-  componentDidUpdate() {
-    this._initializeFAB();
-    this._initializeModal();
-  }
-
-  _setMode(mode) {
-    this.state.drawBoard.changeMode(mode);
-    this.setState({
-      mode
-    })
-  }
-
-  _clearBoard() {
-    this.state.drawBoard.clear();
-  }
-
-  _initializeFAB() {
-    const elems = document.querySelectorAll('.fixed-action-btn');
-    M.FloatingActionButton.init(elems, { hoverEnabled: false });
-  }
-
-  _initializeModal() {
-    this.modalInstance = M.Modal.init(this.modalRef.current);
-    this.colorPickerInstance = M.Modal.init(this.colorPickerRef.current);
   }
 
   // addPage = (e) => {

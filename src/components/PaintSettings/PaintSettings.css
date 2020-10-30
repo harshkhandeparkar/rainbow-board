@@ -1,0 +1,16 @@
+input[type=range] {
+  border: none !important;
+}
+.thumb {
+  background-color: rgb(91, 68, 219) !important;
+  border-bottom-color: rgb(91, 68, 219) !important;
+}
+input[type=range]::-webkit-slider-thumb {
+  background-color: rgb(91, 68, 219) !important;
+}
+input[type=range]::-moz-range-thumb {
+  background-color: rgb(91, 68, 219) !important;
+}
+input[type=range]::-ms-thumb {
+  background-color: rgb(91, 68, 219) !important;
+}
