@@ -5,6 +5,7 @@ import { GPU } from 'gpu.js';
 import { RealDrawBoard } from 'gpujs-real-renderer';
 
 // import Page from '../Page/Page';
+import PaintSettings from '../PaintSettings/PaintSettings';
 
 import '../Page/Page.css';
 
@@ -20,6 +21,7 @@ export class Pages extends Component {
 
     this.canvasRef = createRef();
     this.modalRef = createRef();
+    this.colorPickerRef = createRef();
   }
 
   render() {
@@ -64,10 +66,8 @@ export class Pages extends Component {
           </button>
           <ul>
             <li>
-            </li>
-            <li>
               <button title="Pick Color" className="btn-floating white">
-                <i className="material-icons brand-gradient gradient-text">palette</i>
+                <i className="material-icons brand-gradient gradient-text" onClick={e => this.colorPickerInstance.open()}>palette</i>
               </button>
             </li>
             <li>
@@ -88,7 +88,7 @@ export class Pages extends Component {
         </div>
 
         <div className="modal bottom-sheet" ref={this.modalRef}>
-          <div className="modal-content">
+          <div className="modal-content container center">
             <h4>Do you want to clear the board?</h4>
             <p>If you clear the board, <b>ALL</b> the changes you made will be <b>LOST FOREVER.</b></p>
           </div>
@@ -98,6 +98,15 @@ export class Pages extends Component {
               this._clearBoard();
               this.modalInstance.close();
             }}>Yes</button>
+          </div>
+        </div>
+
+        <div className="modal bottom-sheet" ref={this.colorPickerRef}>
+          <div className="modal-content">
+            <PaintSettings />
+          </div>
+          <div className="modal-footer container">
+            <button className="btn green" onClick={e => this.colorPickerInstance.close()}>Done</button>
           </div>
         </div>
       </div>
@@ -152,6 +161,7 @@ export class Pages extends Component {
 
   _initializeModal() {
     this.modalInstance = M.Modal.init(this.modalRef.current);
+    this.colorPickerInstance = M.Modal.init(this.colorPickerRef.current);
   }
 
   // addPage = (e) => {
