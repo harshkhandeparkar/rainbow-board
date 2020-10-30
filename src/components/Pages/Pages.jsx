@@ -103,7 +103,12 @@ export class Pages extends Component {
 
         <div className="modal bottom-sheet" ref={this.colorPickerRef}>
           <div className="modal-content">
-            <PaintSettings />
+            <PaintSettings
+              initialColor="#000"
+              onPickColor={color => {
+                this.state.drawBoard.changeBrushColor([color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255])
+              }}
+            />
           </div>
           <div className="modal-footer container">
             <button className="btn green" onClick={e => this.colorPickerInstance.close()}>Done</button>
