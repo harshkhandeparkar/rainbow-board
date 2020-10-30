@@ -1,4 +1,5 @@
 import React, { Component, createRef } from 'react';
+import { NavLink } from 'react-router-dom';
 import M from 'materialize-css';
 import './Pages.css';
 import { GPU } from 'gpu.js';
@@ -22,6 +23,7 @@ export class Pages extends Component {
     this.canvasRef = createRef();
     this.modalRef = createRef();
     this.colorPickerRef = createRef();
+    this.goHomeRef = createRef();
   }
 
   static boardOptions = {
@@ -77,6 +79,7 @@ export class Pages extends Component {
   _initializeModal() {
     this.modalInstance = M.Modal.init(this.modalRef.current);
     this.colorPickerInstance = M.Modal.init(this.colorPickerRef.current);
+    this.goHomeInstance = M.Modal.init(this.goHomeRef.current);
   }
 
   render() {
@@ -138,7 +141,12 @@ export class Pages extends Component {
           </button>
           <ul>
             <li>
-              <button title="Pick Color" className="btn-floating white">
+              <button title="Go to home" className="btn-floating white">
+                <i className="material-icons brand-gradient gradient-text" onClick={e => this.goHomeInstance.open()}>home</i>
+              </button>
+            </li>
+            <li>
+              <button title="Pick Color and Size" className="btn-floating white">
                 <i className="material-icons brand-gradient gradient-text" onClick={e => this.colorPickerInstance.open()}>palette</i>
               </button>
             </li>
@@ -157,6 +165,17 @@ export class Pages extends Component {
               </button>
             </li>
           </ul>
+        </div>
+
+        <div className="modal bottom-sheet" ref={this.goHomeRef}>
+          <div className="modal-content container center">
+            <h4>Are you sure you want to go to the home page?</h4>
+            <p>If you do this, <b>ALL</b> the changes you made will be <b>LOST FOREVER.</b></p>
+          </div>
+          <div className="modal-footer container">
+            <button className="btn white green-text right" onClick={e => this.goHomeInstance.close()}>No</button>
+            <NavLink to="/" className="btn white red-text left">Yes</NavLink>
+          </div>
         </div>
 
         <div className="modal bottom-sheet" ref={this.modalRef}>
