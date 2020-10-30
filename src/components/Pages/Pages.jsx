@@ -112,8 +112,25 @@ export class Pages extends Component {
             {this.state.pagesList[this.state.currentPage]}
           </div>
         } */}
+        <div className="undo-redo-btns">
+          <button
+            className="btn-floating white"
+            title="Undo"
+            style={{marginRight: '1rem'}}
+            onClick={e => this.state.drawBoard.undo()}
+          >
+            <i className="material-icons brand-gradient gradient-text">undo</i>
+          </button>
+          <button
+            className="btn-floating white"
+            title="Redo"
+            onClick={e => this.state.drawBoard.redo()}
+          >
+            <i className="material-icons brand-gradient gradient-text">redo</i>
+          </button>
+        </div>
 
-        <canvas className="page z-depth-2" ref={this.canvasRef}></canvas>
+        <canvas className="page" ref={this.canvasRef}></canvas>
 
         <div className="fixed-action-btn">
           <button className="btn-floating btn-large">
