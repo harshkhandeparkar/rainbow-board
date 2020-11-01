@@ -1,13 +1,15 @@
 {
   "name": "rainbow-board",
+  "description": "Cross-platform Whiteboard app made using react, electron and gpujs-real-renderer!",
   "version": "0.1.0",
-  "main": "electron/main.js",
+  "main": "public/electron.js",
   "homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "electron-is-dev": "^1.2.0",
+    "electron-squirrel-startup": "^1.0.0",
     "gpu.js": "^2.10.4",
     "gpujs-real-renderer": "^0.4.1",
     "material-icons": "^0.3.1",
@@ -21,11 +23,13 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "concurrently 'BROWSER=none react-scripts start' 'yarn electron'",
+    "start": "electron-forge start",
     "electron": "wait-on http://localhost:3000 && electron .",
     "build": "react-scripts build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "eslintConfig": {
     "extends": [
@@ -46,9 +50,41 @@
     ]
   },
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "concurrently": "^5.3.0",
     "electron": "^10.1.5",
     "gh-pages": "^3.1.0",
     "wait-on": "^5.2.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "rainbow_board"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {
+            "options": {
+              "maintainer": "Harsh Khandeparkar",
+              "homepage": "https://harshkhandeparkar.github.io/rainbow-board"
+            }
+          }
+        }
+      ]
+    }
   }
 }
