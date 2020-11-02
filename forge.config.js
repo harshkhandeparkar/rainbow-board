@@ -2,7 +2,7 @@ module.exports = {
   packagerConfig: {
     ignore: [
       // Thanks to https://regex101.com
-      'node_modules\/(?!electron-is-dev|electron-squirrel-startup)[a-zA-Z\/\.\\]*'
+      'node_modules\/(?!electron-is-dev|electron-squirrel-startup)[a-zA-Z\/\.\\\-]*'
     ]
   },
   makers: [

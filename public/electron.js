@@ -1,7 +1,6 @@
 const { app, BrowserWindow, shell } = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev');
-const SquirrelWindowsStartupEvent = require('electron-squirrel-startup');
 
 function createMainWindow() {
   const win = new BrowserWindow({
@@ -41,4 +40,4 @@ app.on('activate', () => {
   }
 })
 
-if (SquirrelWindowsStartupEvent) return app.quit();
+if (require('electron-squirrel-startup')) return app.quit();
