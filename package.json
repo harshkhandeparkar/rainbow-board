@@ -5,16 +5,12 @@
   "main": "public/electron.js",
   "homepage": ".",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
     "electron-is-dev": "^1.2.0",
     "electron-squirrel-startup": "^1.0.0",
     "gpu.js": "^2.10.4",
     "gpujs-real-renderer": "^0.4.1",
     "material-icons": "^0.3.1",
     "materialize-css": "^1.0.0",
-    "rc-color-picker": "^1.2.6",
     "react": "^17.0.1",
     "react-color": "^2.19.3",
     "react-dom": "^17.0.1",
@@ -24,12 +20,11 @@
   },
   "scripts": {
     "start": "electron-forge start",
-    "electron": "wait-on http://localhost:3000 && electron .",
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "yarn build && electron-forge make"
   },
   "eslintConfig": {
     "extends": [
@@ -60,31 +55,6 @@
     "wait-on": "^5.2.0"
   },
   "config": {
-    "forge": {
-      "packagerConfig": {},
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "rainbow_board"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {
-            "options": {
-              "maintainer": "Harsh Khandeparkar",
-              "homepage": "https://harshkhandeparkar.github.io/rainbow-board"
-            }
-          }
-        }
-      ]
-    }
+    "forge": "./forge.config.js"
   }
 }
