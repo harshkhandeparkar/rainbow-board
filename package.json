@@ -1,6 +1,6 @@
 {
   "name": "rainbow-board",
-  "description": "Cross-platform Whiteboard app made using react, electron and gpujs-real-renderer!",
+  "description": "Cross-platform Whiteboard app made using Real, Electron, GPU.js and GPU.js Real Renderer!",
   "version": "0.1.0",
   "main": "public/electron.js",
   "homepage": ".",
