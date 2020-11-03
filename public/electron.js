@@ -5,8 +5,7 @@ const isDev = require('electron-is-dev');
 function createMainWindow() {
   const win = new BrowserWindow({
     webPreferences: {
-      nodeIntegration: true,
-      devTools: true
+      nodeIntegration: true
     },
     icon: path.join(__dirname, '..', 'public', 'logo512.png')
   })
@@ -17,8 +16,7 @@ function createMainWindow() {
       : `file://${path.join(__dirname, '..', 'build', 'index.html')}`
   )
 
-  // win.removeMenu();
-  win.webContents.openDevTools();
+  win.removeMenu();
 
   win.webContents.on('new-window', function(e, url) {
     e.preventDefault();
