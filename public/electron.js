@@ -5,7 +5,6 @@ const isDev = require('electron-is-dev');
 function createMainWindow() {
   const win = new BrowserWindow({
     webPreferences: {
-      nodeIntegration: true,
       devTools: isDev
     },
     icon: path.join(__dirname, 'public', 'logo512.png')
