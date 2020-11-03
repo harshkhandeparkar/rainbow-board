@@ -14,6 +14,7 @@ export default class Download extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <div>
         {
@@ -78,18 +79,22 @@ export default class Download extends Component {
       if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
         const releaseInfo = JSON.parse(xmlHttp.responseText);
 
+        const debAsset = releaseInfo.assets.find((asset) => asset.name.includes('.deb'));
+        const zipLinuxAsset = releaseInfo.assets.find((asset) => asset.name.includes('.zip'));
+        const squirrelAsset = releaseInfo.assets.find((asset) => asset.name.includes('.exe'));
+
         this.setState({
           latestVersion: releaseInfo.tag_name,
           downloadURLs: {
-            deb: releaseInfo.assets.find((asset) => asset.name.includes('.deb')).url,
-            zip_linux: releaseInfo.assets.find((asset) => asset.name.includes('.zip') && asset.name.includes('linux')).url,
-            squirrel: releaseInfo.assets.find((asset) => asset.name.includes('.exe')).url,
+            deb: debAsset ? debAsset.url : '',
+            zip_linux: zipLinuxAsset ? zipLinuxAsset.url : '',
+            squirrel: squirrelAsset ? squirrelAsset.url : '',
           }
         })
       }
     }
-    // xmlHttp.open('GET', 'https://api.github.com/repos/HarshKhandeparkar/rainbow-board/releases/latest', true); // true for asynchronous
-    // xmlHttp.send(null);
+    xmlHttp.open('GET', 'https://api.github.com/repos/HarshKhandeparkar/rainbow-board/releases/latest', true); // true for asynchronous
+    xmlHttp.send(null);
     xmlHttp.onerror = console.log;
   }
 }
