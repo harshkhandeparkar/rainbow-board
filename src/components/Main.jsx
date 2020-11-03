@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { version } from '../../package.json';
+import Download from './Download/Download';
 
 function Main() {
   return (
@@ -10,16 +11,31 @@ function Main() {
         </div>
       </nav>
       <div className="container center">
-        <p>
-          Open Source, Cross Platform Whiteboard software made with React JS, Electron and GPU.JS Real Renderer.
-        </p>
+        <div className="row">
+          <p>
+            Open Source, Cross Platform Whiteboard software made with React JS, Electron and GPU.JS Real Renderer.
+          </p>
+        </div>
 
-        <NavLink to="/pages" className="btn center brand-gradient gradient-text">
-          <i className="fa fa-paint-brush left" /> Start New
-        </NavLink>
-        <NavLink to="/" className="btn center brand-gradient gradient-text">
-          <i className="fa fa-folder-open left" />Open Saved File
-        </NavLink>
+        <div className="row">
+          <div className="col s2 offset-s4">
+            <NavLink to="/pages" className="btn center brand-gradient gradient-text">
+              <i className="fa fa-paint-brush left" /> Start New
+            </NavLink>
+          </div>
+
+          <div className="col s2">
+            <NavLink to="/" className="btn center brand-gradient gradient-text">
+              <i className="fa fa-folder-open left" />Open Saved File
+            </NavLink>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col s12">
+            <Download />
+          </div>
+        </div>
       </div>
 
       <footer className="page-footer brand-gradient gradient-text">
