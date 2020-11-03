@@ -39,7 +39,7 @@ export default class Download extends Component {
                   </li>
                 }
                 {
-                  this.state.downloadURLs.squirrel !== '' &&
+                  this.state.downloadURLs.zip_linux !== '' &&
                   <li>
                     <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.zip_linux} className="btn-flat brand-gradient gradient-text">
                       <i className="fa fa-linux" />
@@ -80,15 +80,15 @@ export default class Download extends Component {
         const releaseInfo = JSON.parse(xmlHttp.responseText);
 
         const debAsset = releaseInfo.assets.find((asset) => asset.name.includes('.deb'));
-        const zipLinuxAsset = releaseInfo.assets.find((asset) => asset.name.includes('.zip'));
+        const zipLinuxAsset = releaseInfo.assets.find((asset) => asset.name.includes('.zip') && asset.name.includes('linux'));
         const squirrelAsset = releaseInfo.assets.find((asset) => asset.name.includes('.exe'));
 
         this.setState({
           latestVersion: releaseInfo.tag_name,
           downloadURLs: {
-            deb: debAsset ? debAsset.url : '',
-            zip_linux: zipLinuxAsset ? zipLinuxAsset.url : '',
-            squirrel: squirrelAsset ? squirrelAsset.url : '',
+            deb: debAsset ? debAsset.browser_download_url : '',
+            zip_linux: zipLinuxAsset ? zipLinuxAsset.browser_download_url : '',
+            squirrel: squirrelAsset ? squirrelAsset.browser_download_url : '',
           }
         })
       }
