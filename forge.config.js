@@ -12,22 +12,20 @@ module.exports = {
     {
       name: '@electron-forge/maker-squirrel',
       config: {
-        name: 'rainbow_board'
+        name: 'rainbow_board',
+        setupIcon: 'public/favicon.ico'
       }
     },
     {
-      name: '@electron-forge/maker-zip',
-      platforms: [
-        'darwin',
-        'linux'
-      ]
+      name: '@electron-forge/maker-zip'
     },
     {
       name: '@electron-forge/maker-deb',
       config: {
         options: {
           maintainer: 'Harsh Khandeparkar',
-          homepage: 'https://harshkhandeparkar.github.io/rainbow-board'
+          homepage: 'https://harshkhandeparkar.github.io/rainbow-board',
+          icon: 'public/logo512.png'
         }
       }
     }

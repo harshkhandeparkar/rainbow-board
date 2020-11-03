@@ -7,7 +7,7 @@ function createMainWindow() {
     webPreferences: {
       nodeIntegration: true
     },
-    icon: path.join(__dirname, '..', 'public', 'logo512.png')
+    icon: path.join(__dirname, 'public', 'logo512.png')
   })
 
   win.loadURL(
@@ -18,7 +18,7 @@ function createMainWindow() {
 
   win.removeMenu();
 
-  win.webContents.on('new-window', function(e, url) {
+  win.webContents.on('new-window', (e, url) => {
     e.preventDefault();
     shell.openExternal(url);
   })
