@@ -9,7 +9,7 @@
     "electron-squirrel-startup": "^1.0.0"
   },
   "scripts": {
-    "start": "electron-forge start",
+    "start": "concurrently 'BROWSER=none react-scripts start' 'wait-on tcp:3000 && electron-forge start'",
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",

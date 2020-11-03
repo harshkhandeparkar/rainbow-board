@@ -48,7 +48,7 @@ function Main() {
           </div>
         </div>
         <hr />
-        <div className="footer-copyright container center">
+        <div className="footer-copyright container center brand-gradient gradient-text">
           <p className="center" style={{width: '100%'}}>
             v{version}
           </p>
