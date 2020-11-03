@@ -27,7 +27,6 @@ function createMainWindow() {
 }
 app.setName('Rainbow Board');
 app.whenReady().then(createMainWindow);
-app.icon
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

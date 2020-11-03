@@ -17,12 +17,14 @@ export default class Download extends Component {
     return (
       <div>
         {
-          !gt(this.state.latestVersion, version) &&
+          (!navigator.userAgent.toLowerCase().includes('electron') || gt(this.state.latestVersion, version)) &&
           (
             <div>
               <button className="dropdown-trigger btn center brand-gradient gradient-text" data-target="download-dropdown">
                 <i className="fa fa-download left" />
-                Download New Version
+                Download {
+                  navigator.userAgent.toLowerCase().includes('electron') ? 'New Version' : 'Desktop App'
+                }
               </button>
 
               <ul id='download-dropdown' className='dropdown-content'>
@@ -54,8 +56,9 @@ export default class Download extends Component {
                   </li>
                 }
                 <li>
-                  <a href="#" target="_blank" rel="noopener noreferrer" className="btn-flat brand-gradient gradient-text">
+                  <a href="https://github.com/HarshKhandeparkar/rainbow-board/blob/master/MAC_PUBLISH.md" target="_blank" rel="noopener noreferrer" className="btn-flat brand-gradient gradient-text">
                     <i className="fa fa-apple" />
+                    Need Help
                   </a>
                 </li>
               </ul>

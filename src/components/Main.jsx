@@ -18,13 +18,13 @@ function Main() {
         </div>
 
         <div className="row">
-          <div className="col s2 offset-s4">
+          <div className="col offset-s2 s4">
             <NavLink to="/pages" className="btn center brand-gradient gradient-text">
               <i className="fa fa-paint-brush left" /> Start New
             </NavLink>
           </div>
 
-          <div className="col s2">
+          <div className="col s4">
             <NavLink to="/" className="btn center brand-gradient gradient-text">
               <i className="fa fa-folder-open left" />Open Saved File
             </NavLink>
@@ -41,7 +41,7 @@ function Main() {
       <footer className="page-footer brand-gradient gradient-text">
         <div className="container">
           <div className="row">
-            <div className="col l6 s12">
+            <div className="col s6">
               <div className="row">
                 <h5>Rainbow Board</h5>
               </div>
@@ -52,7 +52,7 @@ function Main() {
                 </ul>
               </div>
             </div>
-            <div className="col l4 offset-l2 s12">
+            <div className="col s6">
               <h5>Made Using</h5>
               <ul>
                 <li><a href="https://electronjs.org" target="_blank" rel="noreferrer">Electron</a></li>
