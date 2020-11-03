@@ -12,7 +12,7 @@ function createMainWindow() {
 
   win.loadURL(
     isDev
-    ? "http://localhost:3000"
+    ? 'http://localhost:3000'
       : `file://${path.join(__dirname, '..', 'build', 'index.html')}`
   )
 
@@ -25,6 +25,7 @@ function createMainWindow() {
 }
 app.setName('Rainbow Board');
 app.whenReady().then(createMainWindow);
+app.icon
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
