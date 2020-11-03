@@ -6,14 +6,16 @@ module.exports = {
       '[\/]?src/[a-zA-Z\/\.\\\-]*',
       '[\/]?forge.config.js',
       '[\/]?public\/(?!electron.js)[a-zA-Z\/\.\\\-]*'
-    ]
+    ],
+    executableName: 'rainbow-board'
   },
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
       config: {
         name: 'rainbow_board',
-        setupIcon: 'public/favicon.ico'
+        setupIcon: 'public/favicon.ico',
+        title: 'Rainbow Board'
       }
     },
     {
@@ -25,7 +27,11 @@ module.exports = {
         options: {
           maintainer: 'Harsh Khandeparkar',
           homepage: 'https://harshkhandeparkar.github.io/rainbow-board',
-          icon: 'public/logo512.png'
+          icon: 'public/logo512.png',
+          name: 'rainbow-board',
+          productName: 'Rainbow Board',
+          genericName: 'Whiteboard',
+          categories: ['Education', 'Utility']
         }
       }
     }
