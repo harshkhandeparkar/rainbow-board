@@ -70,6 +70,11 @@ export default class Download extends Component {
     )
   }
 
+  componentDidUpdate() {
+    const elems = document.querySelectorAll('.dropdown-trigger');
+    M.Dropdown.init(elems);
+  }
+
   componentDidMount() {
     const elems = document.querySelectorAll('.dropdown-trigger');
     M.Dropdown.init(elems);
