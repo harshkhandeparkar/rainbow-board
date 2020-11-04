@@ -1,3 +1,5 @@
+const { name, description, productName } = require('./package.json');
+
 module.exports = {
   packagerConfig: {
     ignore: [
@@ -7,13 +9,17 @@ module.exports = {
       '^[\/]?forge.config.js',
       '^[\/]?public\/(?!electron.js)[a-zA-Z\/\.\\\-]*'
     ],
-    executableName: 'rainbow-board'
+    executableName: name
   },
   makers: [
     {
       name: '@electron-forge/maker-wix',
       config: {
-        manufacturer: 'Harsh Khandeparkar'
+        manufacturer: 'Harsh Khandeparkar',
+        name: productName,
+        shortName: productName.replace(' ', ''),
+        description,
+        iconPath: 'public/favicon.ico'
       }
     },
     {
@@ -26,8 +32,8 @@ module.exports = {
           maintainer: 'Harsh Khandeparkar',
           homepage: 'https://harshkhandeparkar.github.io/rainbow-board',
           icon: 'public/logo512.png',
-          name: 'rainbow-board',
-          productName: 'Rainbow Board',
+          name,
+          productName,
           genericName: 'Whiteboard',
           categories: ['Education', 'Utility']
         }
