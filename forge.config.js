@@ -17,7 +17,7 @@ module.exports = {
         setupIcon: 'public/favicon.ico',
         title: 'Rainbow Board',
         authors: 'Harsh Khandeparkar',
-        iconURL: 'public/favicon.ico'
+        iconUrl: 'public/favicon.ico'
       }
     },
     {
