@@ -11,7 +11,10 @@ module.exports = {
   },
   makers: [
     {
-      name: '@electron-forge/maker-wix'
+      name: '@electron-forge/maker-wix',
+      config: {
+        manufacturer: 'Harsh Khandeparkar'
+      }
     },
     {
       name: '@electron-forge/maker-zip'
