@@ -34,7 +34,7 @@ export default class Download extends Component {
                   <li>
                     <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.deb} className="btn-flat brand-gradient gradient-text">
                       <i className="fa fa-linux" />
-                      Linux
+                      Linux (deb)
                     </a>
                   </li>
                 }

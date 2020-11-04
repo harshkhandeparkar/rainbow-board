@@ -60,3 +60,7 @@ footer a:hover {
   border-radius: 1rem;
   margin-right: 0.5rem;
 }
+
+.dropdown-content {
+  border-radius: 1rem;
+}
