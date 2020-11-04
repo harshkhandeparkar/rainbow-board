@@ -2,10 +2,10 @@ module.exports = {
   packagerConfig: {
     ignore: [
       // Thanks to https://regex101.com
-      '[\/]?node_modules\/(?!electron-is-dev|electron-squirrel-startup)[a-zA-Z\/\.\\\-]*',
-      '[\/]?src/[a-zA-Z\/\.\\\-]*',
-      '[\/]?forge.config.js',
-      '[\/]?public\/(?!electron.js)[a-zA-Z\/\.\\\-]*'
+      '^[\/]?node_modules\/(?!electron-is-dev|electron-squirrel-startup)[a-zA-Z\/\.\\\-]*',
+      '^[\/]?src/[a-zA-Z\/\.\\\-]*',
+      '^[\/]?forge.config.js',
+      '^[\/]?public\/(?!electron.js)[a-zA-Z\/\.\\\-]*'
     ],
     executableName: 'rainbow-board'
   },
@@ -15,7 +15,9 @@ module.exports = {
       config: {
         name: 'rainbow_board',
         setupIcon: 'public/favicon.ico',
-        title: 'Rainbow Board'
+        title: 'Rainbow Board',
+        authors: 'Harsh Khandeparkar',
+        iconURL: 'public/favicon.ico'
       }
     },
     {
