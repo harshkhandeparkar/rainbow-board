@@ -11,14 +11,7 @@ module.exports = {
   },
   makers: [
     {
-      name: '@electron-forge/maker-squirrel',
-      config: {
-        name: 'rainbow_board',
-        setupIcon: 'public/favicon.ico',
-        title: 'Rainbow Board',
-        authors: 'Harsh Khandeparkar',
-        iconUrl: 'public/favicon.ico'
-      }
+      name: '@electron-forge/maker-wix'
     },
     {
       name: '@electron-forge/maker-zip'
