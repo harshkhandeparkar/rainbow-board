@@ -43,7 +43,7 @@
     "electron": "^10.1.5",
     "gh-pages": "^3.1.0",
     "gpu.js": "^2.10.4",
-    "gpujs-real-renderer": "^0.4.1",
+    "gpujs-real-renderer": "^0.4.4",
     "material-icons": "^0.3.1",
     "materialize-css": "^1.0.0",
     "react": "^17.0.1",
