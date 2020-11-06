@@ -8,7 +8,7 @@ export default class Download extends Component {
     latestVersion: version,
     downloadURLs: {
       deb: '',
-      msi: '',
+      exe: '',
       zip_linux: ''
     }
   }
@@ -48,11 +48,11 @@ export default class Download extends Component {
                   </li>
                 }
                 {
-                  this.state.downloadURLs.msi !== '' &&
+                  this.state.downloadURLs.exe !== '' &&
                   <li>
-                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.msi} className="btn-flat brand-gradient gradient-text">
+                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.exe} className="btn-flat brand-gradient gradient-text">
                       <i className="fa fa-windows" />
-                      Windows (MSI)
+                      Windows (EXE)
                     </a>
                   </li>
                 }
@@ -86,14 +86,14 @@ export default class Download extends Component {
 
         const debAsset = releaseInfo.assets.find((asset) => asset.name.includes('.deb'));
         const zipLinuxAsset = releaseInfo.assets.find((asset) => asset.name.includes('.zip') && asset.name.includes('linux'));
-        const msiAsset = releaseInfo.assets.find((asset) => asset.name.includes('.msi'));
+        const exeAsset = releaseInfo.assets.find((asset) => asset.name.includes('.exe'));
 
         this.setState({
           latestVersion: releaseInfo.tag_name,
           downloadURLs: {
             deb: debAsset ? debAsset.browser_download_url : '',
             zip_linux: zipLinuxAsset ? zipLinuxAsset.browser_download_url : '',
-            msi: msiAsset ? msiAsset.browser_download_url : '',
+            exe: exeAsset ? exeAsset.browser_download_url : '',
           }
         })
       }
