@@ -19,7 +19,7 @@
     "package": "electron-forge package",
     "make": "yarn build && electron-forge make",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder",
+    "dist": "yarn build && electron-builder",
     "postinstall": "electron-builder install-app-deps"
   },
   "eslintConfig": {
