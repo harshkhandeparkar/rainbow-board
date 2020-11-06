@@ -26,7 +26,7 @@ function Main() {
 
           <div className="col s4">
             <NavLink to="/" className="btn center brand-gradient gradient-text">
-              <i className="fa fa-folder-open left" />Open Saved File
+              <i className="fa fa-folder-open left" /> Open Saved File
             </NavLink>
           </div>
         </div>
@@ -47,7 +47,7 @@ function Main() {
               </div>
               <div className="row">
                 <ul>
-                  <li><a href="https://github.com/HarshKhandeparkar/rainbow-board/releases" target="_blank" rel="noreferrer">Latest Release</a></li>
+                  <li><a href="https://github.com/HarshKhandeparkar/rainbow-board/releases" target="_blank" rel="noreferrer">Older Releases</a></li>
                   <li><a href="https://github.com/HarshKhandeparkar/rainbow-board/" target="_blank" rel="noreferrer">Star on Github</a></li>
                 </ul>
               </div>
