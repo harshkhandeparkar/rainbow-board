@@ -13,16 +13,6 @@ module.exports = {
   },
   makers: [
     {
-      name: '@electron-forge/maker-wix',
-      config: {
-        manufacturer: 'Harsh Khandeparkar',
-        name: productName,
-        shortName: productName.replace(' ', ''),
-        description,
-        iconPath: 'public/favicon.ico'
-      }
-    },
-    {
       name: '@electron-forge/maker-zip'
     },
     {
