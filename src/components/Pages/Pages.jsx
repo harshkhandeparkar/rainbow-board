@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import M from 'materialize-css';
 import './Pages.css';
-import { GPU } from 'gpu.js';
+// import { GPU } from 'gpu.js';
 import { RealDrawBoard } from 'gpujs-real-renderer';
 
 // import Page from '../Page/Page';
@@ -45,7 +45,6 @@ export class Pages extends Component {
     this.setState({
       drawBoard: new RealDrawBoard({
         canvas: this.canvasRef.current,
-        GPU,
         dimensions: [
           this.canvasRef.current.clientWidth,
           this.canvasRef.current.clientHeight
