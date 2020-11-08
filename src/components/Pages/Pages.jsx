@@ -34,8 +34,8 @@ export class Pages extends Component {
     drawAxes: false,
     xOffset: 0,
     yOffset: 0,
-    brushSize: 5,
-    eraserSize: 8
+    brushSize: 3,
+    eraserSize: 10
   }
 
   componentDidMount() {
