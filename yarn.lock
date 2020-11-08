@@ -6464,10 +6464,10 @@ gpu.js@^2.10.4:
     gl-wiretap "^0.6.2"
     gpu-mock.js "^1.3.0"
 
-gpujs-real-renderer@^0.4.5:
-  version "0.4.5"
-  resolved "https://registry.yarnpkg.com/gpujs-real-renderer/-/gpujs-real-renderer-0.4.5.tgz#20b9ce815bf9f01da1d3ddb584c13f1aa530c46f"
-  integrity sha512-Un92roZugnHBpI9e0LPHlhM85nBxYUu/ERumJdGHnHLn0Vc6UCFBLWU8k5oscDdXgey3wkc9c6S2kz8jGvRrdg==
+gpujs-real-renderer@^0.4.6:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/gpujs-real-renderer/-/gpujs-real-renderer-0.4.6.tgz#abfaa9f31b9ae221f5de5d7f1bb59b320c663e24"
+  integrity sha512-3a5hA5MYi5ch6/yEvYVZrIM9V57aEal0Y2UFP76HpAuV92BUUQIDu7RBZnVPXthMmEYNg+PnPxyGJWe5HOBwUA==
   dependencies:
     "@rollup/plugin-commonjs" "^15.0.0"
     "@rollup/plugin-node-resolve" "^9.0.0"
