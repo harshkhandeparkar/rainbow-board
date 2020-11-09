@@ -53,6 +53,10 @@ export class Pages extends Component {
         ...Pages.boardOptions
       }).draw().startRender()
     })
+
+    window.onbeforeunload = function() {
+      return `Do you want to leave this page? You may lose saved changes.`;
+    }
   }
 
   componentDidUpdate() {
