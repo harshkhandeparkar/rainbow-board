@@ -59,6 +59,10 @@ export class Pages extends Component {
     }
   }
 
+  componentWillUnmount() {
+    window.onbeforeunload = () => {};
+  }
+
   componentDidUpdate() {
     this._initializeFAB();
     this._initializeModal();

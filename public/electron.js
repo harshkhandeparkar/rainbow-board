@@ -60,4 +60,3 @@ app.on('activate', () => {
     createMainWindow();
   }
 })
-
