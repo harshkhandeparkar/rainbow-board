@@ -25,18 +25,17 @@ function createMainWindow() {
     shell.openExternal(url);
   })
 
-  // Inside main/index.js, where BrowserWindow is initialized
   app.showExitPrompt = true;
   win.on('close', (e) => {
     if (app.showExitPrompt) {
-      if (win.webContents.getURL().includes('/#/pages')) {
+      if (win.webContents.getURL().toLowerCase().includes('#/pages')) {
         e.preventDefault(); // Prevents the window from closing
         dialog.showMessageBox({
           type: 'question',
           buttons: ['Yes', 'No'],
-          title: 'Confirm',
+          title: 'Quit?',
           message: 'Unsaved data will be lost. Are you sure you want to quit?'
-        }, (response) => {
+        }).then(({ response }) => {
           if (response === 0) { // Runs the following if 'Yes' is clicked
             app.showExitPrompt = false;
             win.close();
