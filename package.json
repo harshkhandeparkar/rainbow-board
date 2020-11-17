@@ -5,7 +5,7 @@
     "name": "Harsh Khandeparkar"
   },
   "description": "Cross-platform Whiteboard app made using React, Electron, GPU.js and GPU.js Real Renderer!",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "main": "public/electron.js",
   "homepage": ".",
   "dependencies": {
