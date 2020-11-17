@@ -54,8 +54,10 @@ export class Pages extends Component {
       }).draw().startRender()
     })
 
-    window.onbeforeunload = function() {
-      return `Do you want to leave this page? You may lose saved changes.`;
+    if (!navigator.userAgent.toLowerCase().includes('electron')) {
+      window.onbeforeunload = function() {
+        return `Do you want to leave this page? You may lose saved changes.`;
+      }
     }
   }
 
