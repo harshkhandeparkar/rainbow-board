@@ -10,7 +10,8 @@ export default class Download extends Component {
       deb: '',
       snap: '',
       exe: '',
-      zip_linux: ''
+      zip_linux: '',
+      appimg: ''
     }
   }
 
@@ -35,6 +36,15 @@ export default class Download extends Component {
                     <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.deb} className="btn-flat brand-gradient gradient-text">
                       <i className="fa fa-linux" />
                       Linux (deb)
+                    </a>
+                  </li>
+                }
+                {
+                  this.state.downloadURLs.appimg !== '' &&
+                  <li>
+                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.appimg} className="btn-flat brand-gradient gradient-text">
+                      <i className="fa fa-linux" />
+                      Linux (AppImage, portable)
                     </a>
                   </li>
                 }
@@ -97,6 +107,7 @@ export default class Download extends Component {
         const zipLinuxAsset = releaseInfo.assets.find((asset) => asset.name.includes('.zip') && asset.name.includes('linux'));
         const exeAsset = releaseInfo.assets.find((asset) => asset.name.includes('.exe'));
         const snapAsset = releaseInfo.assets.find((asset) => asset.name.includes('.snap'));
+        const appimgAsset = releaseInfo.assets.find((asset) => asset.name.toLowerCase().includes('.AppImage'));
 
         this.setState({
           latestVersion: releaseInfo.tag_name,
@@ -105,6 +116,7 @@ export default class Download extends Component {
             zip_linux: zipLinuxAsset ? zipLinuxAsset.browser_download_url : '',
             exe: exeAsset ? exeAsset.browser_download_url : '',
             snap: snapAsset ? snapAsset.browser_download_url : '',
+            snap: appimgAsset ? appimgAsset.browser_download_url : '',
           }
         })
       }
