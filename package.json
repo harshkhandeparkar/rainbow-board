@@ -1,11 +1,11 @@
 {
   "name": "rainbow-board",
+  "version": "0.2.1",
   "productName": "Rainbow Board",
   "author": {
     "name": "Harsh Khandeparkar"
   },
   "description": "Cross-platform Whiteboard app made using React, Electron, GPU.js and GPU.js Real Renderer!",
-  "version": "0.2.0",
   "main": "public/electron.js",
   "homepage": ".",
   "website": "https://harshkhandeparkar.github.io/rainbow-board",
