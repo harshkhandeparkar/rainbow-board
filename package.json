@@ -83,7 +83,7 @@
     },
     "linux": {
       "target": ["AppImage", "snap"],
-      "executablename": "rainbow-board",
+      "executableName": "rainbow-board",
       "icon": "public/logo512.png",
       "category": "Utility"
     }
