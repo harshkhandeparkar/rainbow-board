@@ -14,12 +14,3 @@
 .page-btn.left {
   left: 1rem;
 }
-
-.undo-redo-btns {
-  position: fixed;
-  height: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-}

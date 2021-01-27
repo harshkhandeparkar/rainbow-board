@@ -5,3 +5,12 @@
   margin-top: 2vh;
   box-shadow: 0 0 5px rgb(75, 75, 75);
 }
+
+.undo-redo-btns {
+  position: fixed;
+  height: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
