@@ -110,12 +110,16 @@ export class Page extends Component {
       }
     }
 
-    // png.pack();
-    console.log(png.data);
     const buffer = PNG.sync.write(png);
-
     const dataURL = 'data:image/png;base64,' + buffer.toString('base64');
-    console.log(dataURL);
+
+    const a = document.createElement('a');
+    a.href = dataURL;
+    a.download = 'slide.png';
+
+    document.body.append(a);
+    a.click();
+    a.remove();
   }
 
   render() {
