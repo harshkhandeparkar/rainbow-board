@@ -9,7 +9,8 @@
   "main": "public/electron.js",
   "homepage": ".",
   "dependencies": {
-    "electron-is-dev": "^1.2.0"
+    "electron-is-dev": "^1.2.0",
+    "pngjs": "^6.0.0"
   },
   "scripts": {
     "start": "concurrently 'BROWSER=none react-scripts start' 'wait-on tcp:3000 && electron-forge start'",
