@@ -100,7 +100,7 @@ export class Page extends Component {
 
     for (let y = 0; y < pixels.length; y++) {
       for (let x = 0; x < pixels[0].length; x++) {
-        const idx = (pixels[0].length * y + x) << 2;
+        const idx = (pixels[0].length * (pixels.length - y) + x) << 2;
 
         // invert color
         png.data[idx] = pixels[y][x][0] * 255;
