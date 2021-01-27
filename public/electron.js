@@ -30,7 +30,7 @@ function createMainWindow() {
     if (app.showExitPrompt) {
       if (win.webContents.getURL().toLowerCase().includes('#/pages')) {
         e.preventDefault(); // Prevents the window from closing
-        dialog.showMessageBox({
+        dialog.showMessageBox(win, {
           type: 'question',
           buttons: ['Yes', 'No'],
           title: 'Quit?',
