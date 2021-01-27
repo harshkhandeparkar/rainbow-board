@@ -22,6 +22,7 @@
     "make": "yarn build && electron-forge make",
     "pack": "electron-builder --dir",
     "dist": "yarn build && electron-builder",
+    "ship": "yarn build && electron-forge make && electron-builder",
     "postinstall": "electron-builder install-app-deps"
   },
   "eslintConfig": {
