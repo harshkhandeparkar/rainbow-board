@@ -1,4 +1,4 @@
-const { name, description, productName } = require('./package.json');
+const { author, name, description, productName, website, version } = require('./package.json');
 
 module.exports = {
   packagerConfig: {
@@ -19,13 +19,15 @@ module.exports = {
       name: '@electron-forge/maker-deb',
       config: {
         options: {
-          maintainer: 'Harsh Khandeparkar',
-          homepage: 'https://harshkhandeparkar.github.io/rainbow-board',
+          maintainer: author.name,
+          homepage: website,
           icon: 'public/logo512.png',
           name,
           productName,
+          version,
+          description,
           genericName: 'Whiteboard',
-          categories: ['Education', 'Utility']
+          categories: ['Utility']
         }
       }
     }
