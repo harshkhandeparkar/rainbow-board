@@ -107,7 +107,7 @@ export default class Download extends Component {
         const zipLinuxAsset = releaseInfo.assets.find((asset) => asset.name.includes('.zip') && asset.name.includes('linux'));
         const exeAsset = releaseInfo.assets.find((asset) => asset.name.includes('.exe'));
         const snapAsset = releaseInfo.assets.find((asset) => asset.name.includes('.snap'));
-        const appimgAsset = releaseInfo.assets.find((asset) => asset.name.toLowerCase().includes('.AppImage'));
+        const appimgAsset = releaseInfo.assets.find((asset) => asset.name.toLowerCase().includes('.appimage'));
 
         this.setState({
           latestVersion: releaseInfo.tag_name,
