@@ -9,8 +9,7 @@
   "main": "public/electron.js",
   "homepage": ".",
   "dependencies": {
-    "electron-is-dev": "^1.2.0",
-    "pngjs": "^6.0.0"
+    "electron-is-dev": "^1.2.0"
   },
   "scripts": {
     "start": "concurrently 'BROWSER=none react-scripts start' 'wait-on tcp:3000 && electron-forge start'",
@@ -53,6 +52,7 @@
     "gpujs-real-renderer": "^0.4.8",
     "material-icons": "^0.3.1",
     "materialize-css": "^1.0.0",
+    "pngjs": "^6.0.0",
     "react": "^17.0.1",
     "react-color": "^2.19.3",
     "react-dom": "^17.0.1",
