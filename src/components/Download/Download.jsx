@@ -44,7 +44,7 @@ export default class Download extends Component {
                   <li>
                     <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.appimg} className="btn-flat brand-gradient gradient-text">
                       <i className="fa fa-linux" />
-                      Linux (AppImage, portable)
+                      Linux (portable)
                     </a>
                   </li>
                 }
@@ -116,7 +116,7 @@ export default class Download extends Component {
             zip_linux: zipLinuxAsset ? zipLinuxAsset.browser_download_url : '',
             exe: exeAsset ? exeAsset.browser_download_url : '',
             snap: snapAsset ? snapAsset.browser_download_url : '',
-            snap: appimgAsset ? appimgAsset.browser_download_url : '',
+            appimg: appimgAsset ? appimgAsset.browser_download_url : '',
           }
         })
       }
