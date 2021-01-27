@@ -4,6 +4,7 @@ import M from 'materialize-css';
 import './Page.css';
 import { GPU } from 'gpu.js';
 import { RealDrawBoard } from 'gpujs-real-renderer';
+import { PNG } from 'pngjs/browser';
 
 import PaintSettings from '../PaintSettings/PaintSettings';
 
@@ -89,6 +90,34 @@ export class Page extends Component {
     this.goHomeInstance = M.Modal.init(this.goHomeRef.current);
   }
 
+  _save() {
+    const png = new PNG({
+      width: this.canvasRef.current.clientWidth,
+      height: this.canvasRef.current.clientHeight
+    })
+
+    const pixels = this.state.drawBoard.graphPixels.toArray();
+
+    for (let y = 0; y < pixels.length; y++) {
+      for (let x = 0; x < pixels[0].length; x++) {
+        const idx = (pixels[0].length * y + x) << 2;
+
+        // invert color
+        png.data[idx] = pixels[y][x][0] * 255;
+        png.data[idx + 1] = pixels[y][x][1] * 255;
+        png.data[idx + 2] = pixels[y][x][2] * 255;
+        png.data[idx + 3] = 255;
+      }
+    }
+
+    // png.pack();
+    console.log(png.data);
+    const buffer = PNG.sync.write(png);
+
+    const dataURL = 'data:image/png;base64,' + buffer.toString('base64');
+    console.log(dataURL);
+  }
+
   render() {
     return (
       <div>
@@ -120,6 +149,11 @@ export class Page extends Component {
             <li>
               <button title="Go to home" className="btn-floating white">
                 <i className="material-icons brand-gradient gradient-text" onClick={e => this.goHomeInstance.open()}>home</i>
+              </button>
+            </li>
+            <li>
+              <button title="Save this page" className="btn-floating white">
+                <i className="material-icons brand-gradient gradient-text" onClick={e => this._save()}>save</i>
               </button>
             </li>
             <li>
