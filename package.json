@@ -79,6 +79,12 @@
     ],
     "win": {
       "icon": "public/logo512.png"
+    },
+    "linux": {
+      "target": ["AppImage", "snap"],
+      "executablename": "rainbow-board",
+      "icon": "public/logo512.png",
+      "category": "Utility"
     }
   }
 }
