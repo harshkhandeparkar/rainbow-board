@@ -25,7 +25,7 @@ function Main() {
           </div>
 
           <div className="col s4">
-            <NavLink to="/" className="btn center brand-gradient gradient-text">
+            <NavLink to="/" className="btn center grey-text disabled">
               <i className="fa fa-folder-open left" /> Open Saved File
             </NavLink>
           </div>
