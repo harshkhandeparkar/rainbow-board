@@ -2,7 +2,7 @@
 Cross-platform Whiteboard app made using [React](https://reactjs.org), [Electron](https://electronjs.org), [GPU.js](https://gpu.rocks) and [GPU.js Real Renderer](https://harshkhandeparkar.github.io/gpujs-real-renderer)! Also works in the browser.
 
 Download/use at https://harshkhandeparkar.github.io/rainbow-board.
-Ask any questions or give feedback [here](https://github.com/HarshKhandeparkar/rainbow-board/issues/new/choose)
+Ask any questions or give feedback [here](https://github.com/HarshKhandeparkar/rainbow-board/issues/new/choose).
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/HarshKhandeparkar/rainbow-board/master/public/icon.png" />
