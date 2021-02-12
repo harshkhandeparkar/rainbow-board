@@ -49,15 +49,12 @@ export default class Download extends Component {
                     </a>
                   </li>
                 }
-                {
-                  this.state.downloadURLs.snap !== '' &&
-                  <li>
-                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.snap} className="btn-flat brand-gradient gradient-text">
-                      <i className="fa fa-linux" />
-                      Linux (snap)
-                    </a>
-                  </li>
-                }
+                <li>
+                  <a target="_blank" rel="noreferrer" href="https://snapcraft.io/rainbow-board" className="btn-flat brand-gradient gradient-text">
+                    <i className="fa fa-linux" />
+                    Linux (snap)
+                  </a>
+                </li>
                 {
                   this.state.downloadURLs.zip_linux !== '' &&
                   <li>
