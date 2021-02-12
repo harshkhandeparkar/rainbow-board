@@ -47,7 +47,7 @@ function Main() {
               </div>
               <div className="row">
                 <ul>
-                  <li><a href="https://github.com/HarshKhandeparkar/rainbow-board/releases" target="_blank" rel="noreferrer">Older Releases</a></li>
+                  <li><a href="https://github.com/HarshKhandeparkar/rainbow-board/issues/new/choose" target="_blank" rel="noreferrer">Feedback or Questions</a></li>
                   <li><a href="https://github.com/HarshKhandeparkar/rainbow-board/" target="_blank" rel="noreferrer">Star on Github</a></li>
                 </ul>
               </div>
