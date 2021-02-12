@@ -11,7 +11,8 @@ export default class Download extends Component {
       snap: '',
       exe: '',
       zip_linux: '',
-      appimg: ''
+      appimg: '',
+      dmg: ''
     }
   }
 
@@ -76,9 +77,9 @@ export default class Download extends Component {
                   </li>
                 }
                 <li>
-                  <a href="https://github.com/HarshKhandeparkar/rainbow-board/blob/master/MAC_PUBLISH.md" target="_blank" rel="noopener noreferrer" className="btn-flat brand-gradient gradient-text">
+                  <a href={this.state.downloadURLs.dmg !== '' ? this.state.downloadURLs.dmg : 'https://github.com/HarshKhandeparkar/rainbow-board/blob/master/MAC_PUBLISH.md'} target="_blank" rel="noopener noreferrer" className="btn-flat brand-gradient gradient-text">
                     <i className="fa fa-apple" />
-                    Need Help
+                    {this.state.downloadURLs.dmg !== '' ? 'Mac (DMG)' : 'Need Help'}
                   </a>
                 </li>
               </ul>
@@ -108,6 +109,7 @@ export default class Download extends Component {
         const exeAsset = releaseInfo.assets.find((asset) => asset.name.includes('.exe'));
         const snapAsset = releaseInfo.assets.find((asset) => asset.name.includes('.snap'));
         const appimgAsset = releaseInfo.assets.find((asset) => asset.name.toLowerCase().includes('.appimage'));
+        const dmgAsset = releaseInfo.assets.find((asset) => asset.name.toLowerCase().includes('.dmg'));
 
         this.setState({
           latestVersion: releaseInfo.tag_name,
@@ -117,6 +119,7 @@ export default class Download extends Component {
             exe: exeAsset ? exeAsset.browser_download_url : '',
             snap: snapAsset ? snapAsset.browser_download_url : '',
             appimg: appimgAsset ? appimgAsset.browser_download_url : '',
+            dmg: dmgAsset ? dmgAsset.browser_download_url : ''
           }
         })
       }
