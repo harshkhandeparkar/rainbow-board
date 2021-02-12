@@ -43,7 +43,7 @@ function Main() {
           <div className="row">
             <div className="col s6">
               <div className="row">
-                <h5>Rainbow Board</h5>
+                <h5>Additional Links</h5>
               </div>
               <div className="row">
                 <ul>
