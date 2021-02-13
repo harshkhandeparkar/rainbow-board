@@ -4,12 +4,12 @@ import './Credits.css';
 
 function Credit({title, desc, link}) {
   return (
-    <div class="card">
-      <div class="card-content">
-        <span class="card-title brand-gradient gradient-text styled-text">{title}</span>
+    <div className="card">
+      <div className="card-content">
+        <span className="card-title brand-gradient gradient-text styled-text">{title}</span>
         <p>{desc}</p>
       </div>
-      <div class="card-action">
+      <div className="card-action">
         <a href={link}>Link</a>
       </div>
     </div>

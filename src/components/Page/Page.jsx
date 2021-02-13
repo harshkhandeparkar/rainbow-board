@@ -25,8 +25,6 @@ export class Page extends Component {
   }
 
   static boardOptions = {
-    bgColor: [1, 1, 1],
-    brushColor: [0, 0, 0],
     xScaleFactor: 1,
     yScaleFactor: 1,
     drawAxes: false,
@@ -48,7 +46,9 @@ export class Page extends Component {
           this.canvasRef.current.clientWidth,
           this.canvasRef.current.clientHeight
         ],
-        ...Page.boardOptions
+        ...Page.boardOptions,
+        bgColor: this.props.getTheme() === 'white' ? [1, 1, 1] : [0, 0, 0],
+        brushColor: this.props.getTheme() === 'white' ? [0, 0, 0] : [1, 1, 1]
       }).draw().startRender()
     })
 
@@ -127,7 +127,7 @@ export class Page extends Component {
       <div>
         <div className="undo-redo-btns">
           <button
-            className="btn-floating white"
+            className="btn-floating"
             title="Undo"
             style={{marginRight: '1rem'}}
             onClick={e => this.state.drawBoard.undo()}
@@ -135,7 +135,7 @@ export class Page extends Component {
             <i className="material-icons brand-gradient gradient-text">undo</i>
           </button>
           <button
-            className="btn-floating white"
+            className="btn-floating"
             title="Redo"
             onClick={e => this.state.drawBoard.redo()}
           >
@@ -151,31 +151,31 @@ export class Page extends Component {
           </button>
           <ul>
             <li>
-              <button title="Go to home" className="btn-floating white">
+              <button title="Go to home" className="btn-floating">
                 <i className="material-icons brand-gradient gradient-text" onClick={e => this.goHomeInstance.open()}>home</i>
               </button>
             </li>
             <li>
-              <button title="Save this page" className="btn-floating white">
+              <button title="Save this page" className="btn-floating">
                 <i className="material-icons brand-gradient gradient-text" onClick={e => this._save()}>save</i>
               </button>
             </li>
             <li>
-              <button title="Pick Color and Size" className="btn-floating white">
+              <button title="Pick Color and Size" className="btn-floating">
                 <i className="material-icons brand-gradient gradient-text" onClick={e => this.colorPickerInstance.open()}>palette</i>
               </button>
             </li>
             <li>
               <button
                 title={this.state.mode === 'eraser' ? 'Eraser' : 'Brush'}
-                className="btn-floating white"
+                className="btn-floating"
                 onClick={e => this._setMode(this.state.mode === 'erase' ? 'paint' : 'erase')}
               >
                 <i className={`fa fa-${this.state.mode === 'paint' ? 'eraser' : 'paint-brush'} brand-gradient gradient-text`} />
               </button>
             </li>
             <li>
-              <button title="Clear the board" className="btn-floating white" onClick={e => this.modalInstance.open()}>
+              <button title="Clear the board" className="btn-floating" onClick={e => this.modalInstance.open()}>
                 <i className="fa fa-ban brand-gradient gradient-text" />
               </button>
             </li>
@@ -188,8 +188,8 @@ export class Page extends Component {
             <p>If you do this, <b>ALL</b> the changes you made will be <b>LOST FOREVER.</b></p>
           </div>
           <div className="modal-footer container">
-            <button className="btn white green-text right" onClick={e => this.goHomeInstance.close()}>No</button>
-            <NavLink to="/" className="btn white red-text left">Yes</NavLink>
+            <button className="btn green-text right" onClick={e => this.goHomeInstance.close()}>No</button>
+            <NavLink to="/" className="btn red-text left">Yes</NavLink>
           </div>
         </div>
 
@@ -199,8 +199,8 @@ export class Page extends Component {
             <p>If you clear the board, <b>ALL</b> the changes you made will be <b>LOST FOREVER.</b></p>
           </div>
           <div className="modal-footer container">
-            <button className="btn white green-text right" onClick={e => this.modalInstance.close()}>No</button>
-            <button className="btn white red-text left" onClick={e => {
+            <button className="btn green-text right" onClick={e => this.modalInstance.close()}>No</button>
+            <button className="btn red-text left" onClick={e => {
               this._clearBoard();
               this.modalInstance.close();
             }}>Yes</button>

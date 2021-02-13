@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { version } from '../../package.json';
 import Download from './Download/Download';
 
-function Main() {
+function Main({toggleTheme, getTheme}) {
   return (
     <div id="main">
       <nav>
@@ -25,7 +25,7 @@ function Main() {
           </div>
 
           <div className="col s4">
-            <NavLink to="/" className="btn center grey-text disabled">
+            <NavLink to="/" className="btn center disabled">
               <i className="fa fa-folder-open left" /> Open Saved File
             </NavLink>
           </div>
@@ -51,6 +51,16 @@ function Main() {
                   <li><a href="https://github.com/HarshKhandeparkar/rainbow-board/" target="_blank" rel="noreferrer">Star on Github</a></li>
                 </ul>
               </div>
+              <div className="row">
+                <div className="switch" title="Change Theme">
+                  <label>
+                    <i className="fa fa-sun-o" />
+                    <input type="checkbox" onInput={e => toggleTheme()} defaultChecked={getTheme() === 'dark'} />
+                    <span className="lever" />
+                    <i className="fa fa-moon-o" />
+                  </label>
+                </div>
+              </div>
             </div>
             <div className="col s6">
               <h5>Made Using</h5>
@@ -64,8 +74,8 @@ function Main() {
             </div>
           </div>
         </div>
-        <hr />
-        <div className="footer-copyright container center brand-gradient gradient-text">
+
+        <div className="footer-copyright container-fluid center brand-gradient gradient-text z-depth-2">
           <p className="center" style={{width: '100%'}}>
             v{version}
           </p>

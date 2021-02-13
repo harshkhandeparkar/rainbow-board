@@ -23,14 +23,14 @@ export class Pages extends Component {
           this.state.pagesList.length === 0 ?
           <button
             title="Add a new page"
-            className="btn-floating btn-large white page-btn"
+            className="btn-floating btn-large page-btn"
             onClick={this.addPage}
           >
             <i className="fa fa-plus gradient-text brand-gradient" />
           </button> :
           <div>
             {/* <button
-              className="btn-floating right page-btn white"
+              className="btn-floating right page-btn"
               onClick={this.state.currentPage === this.state.pagesList.length - 1 ? this.addPage : this.nextPage}
             >
               <i className={`fa gradient-text brand-gradient fa-${this.state.currentPage === this.state.pagesList.length - 1 ? 'plus' : 'chevron-right'}`} />
@@ -39,7 +39,7 @@ export class Pages extends Component {
             {
               this.state.currentPage !== 0 &&
               <button
-                className="btn-floating left page-btn white"
+                className="btn-floating left page-btn"
                 onClick={this.lastPage}
               >
                 <i className="fa fa-chevron-left gradient-text brand-gradient" />
@@ -56,7 +56,7 @@ export class Pages extends Component {
   addPage = (e) => {
     e.preventDefault();
 
-    this.state.pagesList.push(<Page key={this.state.pagesList.length}></Page>);
+    this.state.pagesList.push(<Page key={this.state.pagesList.length} getTheme={this.props.getTheme}></Page>);
     this.setState({
       pagesList: this.state.pagesList,
       currentPage: this.state.pagesList.length - 1
