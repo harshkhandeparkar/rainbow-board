@@ -49,6 +49,7 @@ export default class PaintSettings extends Component {
           <div className="col s5 offset-s1 center">
             <h5>Brush color</h5>
             <CompactPicker
+              className="color-picker"
               color={this.state.selected}
               onChangeComplete={this.handleChangeComplete}
             />

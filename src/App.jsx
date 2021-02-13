@@ -48,16 +48,16 @@ class App extends Component {
               color: ${this.state.theme.textColor} !important;
             }
 
-            button, .btn, .btn-flat, .btn-floating, .lever {
+            button, .btn, .btn-flat, .btn-floating, .lever, .card, .color-picker {
               background-color: ${this.state.theme.bg1} !important;
+            }
+
+            .color-picker * {
+              color: ${this.state.theme.textColor} !important;
             }
 
             button:hover, .btn:hover, .btn-flat:hover, .btn-floating:hover, .lever::after, .btn.disabled {
               background-color: ${this.state.theme.bg2} !important;
-            }
-
-            .card {
-              background-color: ${this.state.theme.bg1} !important;
             }
 
             .dropdown-content {
