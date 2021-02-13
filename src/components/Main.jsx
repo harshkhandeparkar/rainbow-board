@@ -59,6 +59,7 @@ function Main() {
                 <li><a href="https://reactjs.org" target="_blank" rel="noreferrer">React</a></li>
                 <li><a href="https://gpu.rocks" target="_blank" rel="noreferrer">GPU.js</a></li>
                 <li><a href="https://harshkhandeparkar.github.io/gpujs-real-renderer" target="_blank" rel="noreferrer">GPU.js Real Renderer</a></li>
+                <li><NavLink to="/credits">Full Credits</NavLink></li>
               </ul>
             </div>
           </div>
