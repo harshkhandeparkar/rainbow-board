@@ -125,7 +125,7 @@ export class Page extends Component {
   render() {
     return (
       <div>
-        <div className="undo-redo-btns">
+        {/* <div className="undo-redo-btns">
           <button
             className="btn-floating"
             title="Undo"
@@ -141,7 +141,7 @@ export class Page extends Component {
           >
             <i className="material-icons brand-gradient gradient-text">redo</i>
           </button>
-        </div>
+        </div> */}
 
         <canvas className="page" ref={this.canvasRef}></canvas>
 
