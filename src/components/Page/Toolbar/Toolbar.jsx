@@ -48,9 +48,9 @@ export class Toolbar extends Component {
   }
 
   onEraserSizeChange = () => {
-    this.props.onEraserSizeChange(Number(this.brushSizeRangeRef.current.value));
+    this.props.onEraserSizeChange(Number(this.eraserSizeRangeRef.current.value));
     this.setState({
-      eraserSize: Number(this.brushSizeRangeRef.current.value)
+      eraserSize: Number(this.eraserSizeRangeRef.current.value)
     })
   }
 
