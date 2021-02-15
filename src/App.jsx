@@ -7,8 +7,8 @@ import Credits from './components/Credits/Credits';
 class App extends Component {
   whiteTheme = {
     bgColor: 'white',
-    bg1: '#fcfcfc',
-    bg2: '#f0f0f0',
+    bg1: 'white',
+    bg2: 'white',
     textColor: 'black'
   }
 
@@ -48,9 +48,9 @@ class App extends Component {
               color: ${this.state.theme.textColor} !important;
             }
 
-            button, .btn, .btn-flat, .btn-floating, .lever, .card, .color-picker, .bottom-toolbar {
+            button, .btn, .btn-flat, .btn-floating, .lever, .card, .color-picker, .bottom-toolbar, .top-toolbar {
               background-color: ${this.state.theme.bg1} !important;
-              color: ${this.state.theme.textColor} !important;
+              color: ${this.state.theme.textColor};
             }
 
             .color-picker * {

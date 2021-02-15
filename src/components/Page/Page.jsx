@@ -106,6 +106,8 @@ export class Page extends Component {
           _setTool={(tool) => this._setTool(tool)}
           _save={() => this._save()}
           _clearBoard={() => this._clearBoard()}
+          onBrushSizeChange={(size) => this.state.boardState.drawBoard.changeBrushSize(size)}
+          onEraserSizeChange={(size) => this.state.boardState.drawBoard.changeEraserSize(size)}
         />
       </div>
     )

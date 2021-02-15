@@ -2,9 +2,8 @@
   position: absolute;
   bottom: 0.5rem;
   left: 20%;
-  margin: auto;
 
-  height: 3.6rem;
+  height: 3.5rem;
   width: 60%;
   border-radius: 1rem;
 }
@@ -12,4 +11,47 @@
 .bottom-toolbar button {
   height: 100%;
   width: 5rem;
+}
+
+.top-toolbar {
+  position: absolute;
+  left: 30%;
+  top: 0.5rem;
+
+  height: 2rem;
+  width: 40%;
+  border-radius: 0.8rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  text-align: center;
+}
+
+.top-toolbar input[type=range] {
+  width: 70%;
+}
+
+.top-toolbar label {
+  width: 30%;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  background-color: rgb(91, 68, 219) !important;
+}
+
+input[type=range]::-moz-range-thumb {
+  background-color: rgb(91, 68, 219) !important;
+}
+
+input[type=range]::-ms-thumb {
+  background-color: rgb(91, 68, 219) !important;
+}
+
+input[type=range] {
+  border: none !important;
+}
+
+.thumb {
+  background-color: rgb(91, 68, 219) !important;
+  border-bottom-color: rgb(91, 68, 219) !important;
 }
