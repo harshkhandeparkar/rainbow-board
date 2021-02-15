@@ -1,0 +1,15 @@
+.bottom-toolbar {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 20%;
+  margin: auto;
+
+  height: 3.6rem;
+  width: 60%;
+  border-radius: 1rem;
+}
+
+.bottom-toolbar button {
+  height: 100%;
+  width: 5rem;
+}
