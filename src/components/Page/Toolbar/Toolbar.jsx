@@ -82,14 +82,14 @@ export class Toolbar extends Component {
         </div>
 
         <div className="bottom-toolbar z-depth-1">
-          <button className="btn-flat" title="Paint Brush" onClick={() => _setTool('brush')}>
+          <button className={`btn-flat ${boardState.tool === 'brush' ? 'active' : ''}`} title="Paint Brush" onClick={() => _setTool('brush')}>
             <i className="fa fa-paint-brush brand-gradient gradient-text"></i>
           </button>
 
-          <button className="btn-flat" title="Eraser" onClick={() => _setTool('eraser')}>
+          <button className={`btn-flat ${boardState.tool === 'eraser' ? 'active' : ''}`} title="Eraser" onClick={() => _setTool('eraser')}>
             <i className="fa fa-eraser brand-gradient gradient-text"></i>
           </button>
-          <button className="btn-flat" title="Line Tool" onClick={() => _setTool('line')}>
+          <button className={`btn-flat ${boardState.tool === 'line' ? 'active' : ''}`} title="Line Tool" onClick={() => _setTool('line')}>
             <i className="material-icons brand-gradient gradient-text">timeline</i>
           </button>
           <button className="btn-flat" title="Color Palette" onClick={() => this.colorPickerInstance.open()}>

@@ -9,6 +9,7 @@ class App extends Component {
     bgColor: 'white',
     bg1: 'white',
     bg2: 'white',
+    highlight: '#f0f0f0',
     textColor: 'black'
   }
 
@@ -16,6 +17,7 @@ class App extends Component {
     bgColor: '#121212',
     bg1: '#202020',
     bg2: '#303030',
+    highlight: '#303030',
     textColor: '#f1f1f1'
   }
 
@@ -57,8 +59,8 @@ class App extends Component {
               color: ${this.state.theme.textColor} !important;
             }
 
-            button:hover, .btn:hover, .btn-flat:hover, .btn-floating:hover, .lever::after, .btn.disabled {
-              background-color: ${this.state.theme.bg2} !important;
+            button:hover, .btn:hover, .btn-flat:hover, .btn-floating:hover, .lever::after, .btn.disabled, .active {
+              background-color: ${this.state.theme.highlight} !important;
             }
 
             .dropdown-content {
