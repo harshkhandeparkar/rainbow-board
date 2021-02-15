@@ -9,7 +9,7 @@ class App extends Component {
     bgColor: 'white',
     bg1: 'white',
     bg2: 'white',
-    highlight: '#f0f0f0',
+    highlight: '#e6e6e6',
     textColor: 'black'
   }
 
@@ -50,7 +50,7 @@ class App extends Component {
               color: ${this.state.theme.textColor} !important;
             }
 
-            button, .btn, .btn-flat, .btn-floating, .lever, .card, .color-picker, .bottom-toolbar, .top-toolbar {
+            button, .btn, .btn-flat, .btn-floating, .card, .color-picker, .bottom-toolbar, .top-toolbar {
               background-color: ${this.state.theme.bg1} !important;
               color: ${this.state.theme.textColor};
             }
@@ -59,7 +59,7 @@ class App extends Component {
               color: ${this.state.theme.textColor} !important;
             }
 
-            button:hover, .btn:hover, .btn-flat:hover, .btn-floating:hover, .lever::after, .btn.disabled, .active {
+            button:hover, .btn:hover, .btn-flat:hover, .btn-floating:hover, .lever::after, .lever, .btn.disabled, .active {
               background-color: ${this.state.theme.highlight} !important;
             }
 
@@ -68,7 +68,7 @@ class App extends Component {
             }
 
             .dropdown-content li:hover {
-              background-color: ${this.state.theme.bg1} !important;
+              background-color: ${this.state.theme.highlight} !important;
             }
             `
           }
