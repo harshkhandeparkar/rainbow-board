@@ -2,8 +2,8 @@ import { PNG } from 'pngjs/browser';
 
 export function saveSlide(pixels) {
   const png = new PNG({
-    width: this.canvasRef.current.clientWidth,
-    height: this.canvasRef.current.clientHeight
+    width: pixels.length,
+    height: pixels[0].length
   })
 
   for (let y = 0; y < pixels.length; y++) {
