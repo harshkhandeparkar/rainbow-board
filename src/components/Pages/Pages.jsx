@@ -19,7 +19,7 @@ export class Pages extends Component {
   render() {
     return (
       <div className="container-fluid center" id="pages">
-        {
+        {/* {
           this.state.pagesList.length === 0 ?
           <button
             title="Add a new page"
@@ -28,7 +28,7 @@ export class Pages extends Component {
           >
             <i className="fa fa-plus gradient-text brand-gradient" />
           </button> :
-          <div>
+          <div> */}
             {/* <button
               className="btn-floating right page-btn"
               onClick={this.state.currentPage === this.state.pagesList.length - 1 ? this.addPage : this.nextPage}
@@ -36,7 +36,7 @@ export class Pages extends Component {
               <i className={`fa gradient-text brand-gradient fa-${this.state.currentPage === this.state.pagesList.length - 1 ? 'plus' : 'chevron-right'}`} />
             </button> */}
 
-            {
+            {/* {
               this.state.currentPage !== 0 &&
               <button
                 className="btn-floating left page-btn"
@@ -48,7 +48,8 @@ export class Pages extends Component {
 
             {this.state.pagesList[this.state.currentPage]}
           </div>
-        }
+        } */}
+        <Page getTheme={this.props.getTheme} />
       </div>
     )
   }
