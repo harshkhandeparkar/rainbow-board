@@ -79,7 +79,8 @@
       "public/*"
     ],
     "win": {
-      "icon": "public/logo512.png"
+      "icon": "public/logo512.png",
+      "publisherName": "Harsh Khandeparkar"
     },
     "linux": {
       "target": [
