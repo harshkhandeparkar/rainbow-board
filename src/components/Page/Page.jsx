@@ -86,19 +86,24 @@ export class Page extends Component {
   }
 
   _setHotkeys() {
-    hotkeys('ctrl+z, command+z', 'undo-redo', () => {
+    hotkeys('ctrl+z, command+z', 'drawboard', () => {
       this.state.boardState.drawBoard.undo();
     })
 
-    hotkeys('ctrl+shift+z, command+shift+z', 'undo-redo', () => {
+    hotkeys('ctrl+shift+z, command+shift+z', 'drawboard', () => {
       this.state.boardState.drawBoard.redo();
     })
 
-    hotkeys.setScope('undo-redo');
+    hotkeys('ctrl+s, command+s', 'drawboard', (e) => {
+      e.preventDefault();
+      this._save();
+    })
+
+    hotkeys.setScope('drawboard');
   }
 
   _removeHotkeys() {
-    hotkeys.deleteScope('undo-redo');
+    hotkeys.deleteScope('drawboard');
   }
 
   render() {
