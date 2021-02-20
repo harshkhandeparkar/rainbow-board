@@ -28,7 +28,9 @@ export class Page extends Component {
     xOffset: 0,
     yOffset: 0,
     brushSize: 3,
-    eraserSize: 10
+    eraserSize: 10,
+    allowUndo: true,
+    maxSnapshots: 10
   }
 
   componentDidMount() {
@@ -81,24 +83,6 @@ export class Page extends Component {
   render() {
     return (
       <div>
-        {/* <div className="undo-redo-btns">
-          <button
-            className="btn-floating"
-            title="Undo"
-            style={{marginRight: '1rem'}}
-            onClick={e => this.state.boardState.drawBoard.undo()}
-          >
-            <i className="material-icons brand-gradient gradient-text">undo</i>
-          </button>
-          <button
-            className="btn-floating"
-            title="Redo"
-            onClick={e => this.state.boardState.drawBoard.redo()}
-          >
-            <i className="material-icons brand-gradient gradient-text">redo</i>
-          </button>
-        </div> */}
-
         <canvas className="page" ref={this.canvasRef}></canvas>
         <Toolbar
           boardOptions={Page.boardOptions}
@@ -106,6 +90,8 @@ export class Page extends Component {
           _setTool={(tool) => this._setTool(tool)}
           _save={() => this._save()}
           _clearBoard={() => this._clearBoard()}
+          _onUndo={() => this.state.boardState.drawBoard.undo()}
+          _onRedo={() => this.state.boardState.drawBoard.redo()}
           onBrushSizeChange={(size) => this.state.boardState.drawBoard.changeBrushSize(size)}
           onEraserSizeChange={(size) => this.state.boardState.drawBoard.changeEraserSize(size)}
         />

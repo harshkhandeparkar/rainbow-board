@@ -62,7 +62,7 @@ export class Toolbar extends Component {
   }
 
   render() {
-    const { boardState, _setTool, _clearBoard, _save } = this.props;
+    const { boardState, _setTool, _clearBoard, _save, _onUndo, _onRedo } = this.props;
 
     return (
       <div className="toolbar">
@@ -94,6 +94,12 @@ export class Toolbar extends Component {
           </button>
           <button className="btn-flat" title="Color Palette" onClick={() => this.colorPickerInstance.open()}>
             <i className="material-icons brand-gradient gradient-text">palette</i>
+          </button>
+          <button className="btn-flat" title="Undo" onClick={() => _onUndo()}>
+            <i className="material-icons brand-gradient gradient-text">undo</i>
+          </button>
+          <button className="btn-flat" title="Redo" onClick={() => _onRedo()}>
+            <i className="material-icons brand-gradient gradient-text">redo</i>
           </button>
           <button className="btn-flat" title="Save this slide" onClick={() => _save()}>
             <i className="material-icons brand-gradient gradient-text">save</i>
