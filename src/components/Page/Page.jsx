@@ -2,6 +2,7 @@ import React, { Component, createRef } from 'react';
 import './Page.css';
 import { GPU } from 'gpu.js';
 import { RealDrawBoard } from 'gpujs-real-renderer';
+import hotkeys from 'hotkeys-js';
 import { saveSlide } from './save-slide';
 
 import { Toolbar } from './Toolbar/Toolbar';
@@ -56,10 +57,14 @@ export class Page extends Component {
         return `Do you want to leave this page? You may lose saved changes.`;
       }
     }
+
+    this._removeHotkeys();
+    this._setHotkeys();
   }
 
   componentWillUnmount() {
     window.onbeforeunload = () => {};
+    this._removeHotkeys();
   }
 
   _setTool(tool) {
@@ -80,10 +85,27 @@ export class Page extends Component {
     saveSlide(this.state.boardState.drawBoard.graphPixels.toArray());
   }
 
+  _setHotkeys() {
+    hotkeys('ctrl+z, command+z', 'undo-redo', () => {
+      this.state.boardState.drawBoard.undo();
+    })
+
+    hotkeys('ctrl+shift+z, command+shift+z', 'undo-redo', () => {
+      this.state.boardState.drawBoard.redo();
+    })
+
+    hotkeys.setScope('undo-redo');
+  }
+
+  _removeHotkeys() {
+    hotkeys.deleteScope('undo-redo');
+  }
+
   render() {
     return (
       <div>
         <canvas className="page" ref={this.canvasRef}></canvas>
+
         <Toolbar
           boardOptions={Page.boardOptions}
           boardState={this.state.boardState}
