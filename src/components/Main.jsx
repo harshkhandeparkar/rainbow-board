@@ -25,8 +25,8 @@ function Main({toggleTheme, getTheme}) {
           </div>
 
           <div className="col s4">
-            <NavLink to="/" className="btn center disabled">
-              <i className="fa fa-folder-open left" /> Open Saved File
+            <NavLink to="/new" className="btn center brand-gradient gradient-text">
+              <i className="material-icons left">new_releases</i> What's New!
             </NavLink>
           </div>
         </div>
