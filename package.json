@@ -5,6 +5,7 @@
   "author": {
     "name": "Harsh Khandeparkar"
   },
+  "repository": "https://github.com/HarshKhandeparkar/rainbow-board",
   "description": "Cross-platform Whiteboard app made using React, Electron, GPU.js and GPU.js Real Renderer!",
   "main": "public/electron.js",
   "homepage": ".",
@@ -86,11 +87,18 @@
     "linux": {
       "target": [
         "AppImage",
-        "snap"
+        "snap",
+        "deb",
+        "zip"
       ],
       "executableName": "rainbow-board",
       "icon": "public/logo512.png",
       "category": "Utility"
+    },
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": "dmg",
+      "icon": "public/logo512.png",
     }
   }
 }
