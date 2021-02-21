@@ -10,7 +10,7 @@ function New({title, desc, version}) {
         <p>{desc}</p>
       </div>
       <div className="card-action">
-        Added in <a href={`https://github.com/HarshKhandeparkar/rainbow-board/releases/${version}`}>v{version}</a>
+        Added in <a href={`https://github.com/HarshKhandeparkar/rainbow-board/releases/${version}`}>v{version.replace('v', '')}</a>
       </div>
     </div>
   )
