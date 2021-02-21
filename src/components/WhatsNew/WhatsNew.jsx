@@ -45,6 +45,15 @@ export default class WhatsNew extends Component {
                 version="0.4.0"
               />
             </div>
+            <div className="row valign-wrapper">
+              <div className="col s6">
+                <New
+                  title="macOS Support"
+                  desc="Rainbow Board will be published to macOS every time as a dmg file."
+                  version="v0.4.1"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

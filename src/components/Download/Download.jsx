@@ -73,12 +73,15 @@ export default class Download extends Component {
                     </a>
                   </li>
                 }
-                <li>
-                  <a href={this.state.downloadURLs.dmg !== '' ? this.state.downloadURLs.dmg : 'https://github.com/HarshKhandeparkar/rainbow-board/blob/master/MAC_PUBLISH.md'} target="_blank" rel="noopener noreferrer" className="btn-flat brand-gradient gradient-text">
-                    <i className="fa fa-apple" />
-                    {this.state.downloadURLs.dmg !== '' ? 'Mac (DMG)' : 'Need Help'}
-                  </a>
-                </li>
+                {
+                  this.state.downloadURLs.dmg !== '' &&
+                  <li>
+                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.exe} className="btn-flat brand-gradient gradient-text">
+                      <i className="fa fa-apple" />
+                      Mac (DMG)
+                    </a>
+                  </li>
+                }
               </ul>
             </div>
           )
