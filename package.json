@@ -98,6 +98,10 @@
       "category": "public.app-category.utilities",
       "target": "dmg",
       "icon": "public/logo512.png"
+    },
+    "publish": {
+      "provider": "github",
+      "releaseType": "prerelease"
     }
   }
 }
