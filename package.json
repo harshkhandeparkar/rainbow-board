@@ -98,7 +98,7 @@
     "mac": {
       "category": "public.app-category.utilities",
       "target": "dmg",
-      "icon": "public/logo512.png",
+      "icon": "public/logo512.png"
     }
   }
 }
