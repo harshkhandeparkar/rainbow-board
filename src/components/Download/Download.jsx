@@ -30,6 +30,30 @@ export default class Download extends Component {
               </button>
 
               <ul id='download-dropdown' className='dropdown-content'>
+                <li>
+                  <a target="_blank" rel="noreferrer" href="https://snapcraft.io/rainbow-board" className="btn-flat brand-gradient gradient-text">
+                    <i className="fa fa-linux" />
+                    Linux (snap)
+                  </a>
+                </li>
+                {
+                  this.state.downloadURLs.exe !== '' &&
+                  <li>
+                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.exe} className="btn-flat brand-gradient gradient-text">
+                      <i className="fa fa-windows" />
+                      Windows (EXE)
+                    </a>
+                  </li>
+                }
+                {
+                  this.state.downloadURLs.dmg !== '' &&
+                  <li>
+                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.exe} className="btn-flat brand-gradient gradient-text">
+                      <i className="fa fa-apple" />
+                      Mac (DMG)
+                    </a>
+                  </li>
+                }
                 {
                   this.state.downloadURLs.deb !== '' &&
                   <li>
@@ -48,36 +72,12 @@ export default class Download extends Component {
                     </a>
                   </li>
                 }
-                <li>
-                  <a target="_blank" rel="noreferrer" href="https://snapcraft.io/rainbow-board" className="btn-flat brand-gradient gradient-text">
-                    <i className="fa fa-linux" />
-                    Linux (snap)
-                  </a>
-                </li>
                 {
                   this.state.downloadURLs.zip_linux !== '' &&
                   <li>
                     <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.zip_linux} className="btn-flat brand-gradient gradient-text">
                       <i className="fa fa-linux" />
                       Linux (zip)
-                    </a>
-                  </li>
-                }
-                {
-                  this.state.downloadURLs.exe !== '' &&
-                  <li>
-                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.exe} className="btn-flat brand-gradient gradient-text">
-                      <i className="fa fa-windows" />
-                      Windows (EXE)
-                    </a>
-                  </li>
-                }
-                {
-                  this.state.downloadURLs.dmg !== '' &&
-                  <li>
-                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.exe} className="btn-flat brand-gradient gradient-text">
-                      <i className="fa fa-apple" />
-                      Mac (DMG)
                     </a>
                   </li>
                 }
