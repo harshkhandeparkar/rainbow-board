@@ -1,16 +1,17 @@
 .bottom-toolbar {
   position: absolute;
   bottom: 0.5rem;
-  left: 20%;
+  left: 10%;
 
   height: 3.5rem;
-  width: 60%;
+  width: 80%;
   border-radius: 1rem;
 }
 
 .bottom-toolbar button {
   height: 100%;
-  width: 5rem;
+  width: 10%;
+  padding: 0px;
 }
 
 .top-toolbar {
