@@ -8,7 +8,6 @@ export default class Download extends Component {
     latestVersion: version,
     downloadURLs: {
       deb: '',
-      snap: '',
       exe: '',
       zip_linux: '',
       appimg: '',
@@ -107,7 +106,6 @@ export default class Download extends Component {
         const debAsset = releaseInfo.assets.find((asset) => asset.name.includes('.deb'));
         const zipLinuxAsset = releaseInfo.assets.find((asset) => asset.name.includes('.zip') && asset.name.includes('linux'));
         const exeAsset = releaseInfo.assets.find((asset) => asset.name.includes('.exe'));
-        const snapAsset = releaseInfo.assets.find((asset) => asset.name.includes('.snap'));
         const appimgAsset = releaseInfo.assets.find((asset) => asset.name.toLowerCase().includes('.appimage'));
         const dmgAsset = releaseInfo.assets.find((asset) => asset.name.toLowerCase().includes('.dmg'));
 
@@ -117,7 +115,6 @@ export default class Download extends Component {
             deb: debAsset ? debAsset.browser_download_url : '',
             zip_linux: zipLinuxAsset ? zipLinuxAsset.browser_download_url : '',
             exe: exeAsset ? exeAsset.browser_download_url : '',
-            snap: snapAsset ? snapAsset.browser_download_url : '',
             appimg: appimgAsset ? appimgAsset.browser_download_url : '',
             dmg: dmgAsset ? dmgAsset.browser_download_url : ''
           }
