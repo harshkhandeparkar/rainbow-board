@@ -1,6 +1,6 @@
 [![rainbow-board](https://snapcraft.io/rainbow-board/badge.svg)](https://snapcraft.io/rainbow-board)
 [![rainbow-board](https://snapcraft.io/rainbow-board/trending.svg?name=0)](https://snapcraft.io/rainbow-board)
-[![Discord](https://img.shields.io/discord/813441349419663420?label=discord%20server)](https://discord.gg/StDaagVP3M)
+[![Discord](https://img.shields.io/discord/813441349419663420?label=discord%20server)](https://discord.gg/FEpMS43UwR)
 
 ### Rainbow Board
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/rainbow-board)
