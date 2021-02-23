@@ -6,7 +6,7 @@ function Credit({title, desc, link}) {
   return (
     <div className="card">
       <div className="card-content">
-        <span className="card-title brand-gradient gradient-text styled-text">{title}</span>
+        <span className="card-title styled-text brand-text">{title}</span>
         <p>{desc}</p>
       </div>
       <div className="card-action">
@@ -20,11 +20,11 @@ export default class Credits extends Component {
   render() {
     return (
       <div>
-        <nav className="brand-gradient">
+        <nav>
           <div className="nav-wrapper header container">
-            <span className="logo-text brand-logo center styled-text">Credits</span>
+            <span className="brand-logo center styled-text brand-text">Credits</span>
             <NavLink to="/" title="Home">
-              <i className="material-icons">home</i>
+              <i className="material-icons brand-text">home</i>
             </NavLink>
           </div>
         </nav>

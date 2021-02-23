@@ -114,6 +114,7 @@ export class Page extends Component {
         <Toolbar
           boardOptions={Page.boardOptions}
           boardState={this.state.boardState}
+          initialBrushColor={this.props.getTheme() === 'white' ? [0, 0, 0] : [1, 1, 1]}
           _setTool={(tool) => this._setTool(tool)}
           _save={() => this._save()}
           _clearBoard={() => this._clearBoard()}

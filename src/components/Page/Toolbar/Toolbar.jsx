@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import M from 'materialize-css';
 import PaintSettings from '../../PaintSettings/PaintSettings';
 
@@ -62,7 +62,8 @@ export class Toolbar extends Component {
   }
 
   render() {
-    const { boardState, _setTool, _clearBoard, _save, _onUndo, _onRedo } = this.props;
+    const { initialBrushColor, boardState, _setTool, _clearBoard, _save, _onUndo, _onRedo } = this.props;
+    const [r, g, b] = initialBrushColor;
 
     return (
       <div className="toolbar">
@@ -82,33 +83,33 @@ export class Toolbar extends Component {
         </div>
 
         <div className="bottom-toolbar z-depth-1">
-          <button className={`btn-flat ${boardState.tool === 'brush' ? 'active' : ''}`} title="Paint Brush" onClick={() => _setTool('brush')}>
-            <i className="fa fa-paint-brush brand-gradient gradient-text"></i>
+          <button className={`btn-flat ${boardState.tool === 'brush' ? 'active' : ''} brand-text`} title="Paint Brush" onClick={() => _setTool('brush')}>
+            <i className="fa fa-paint-brush "></i>
           </button>
 
-          <button className={`btn-flat ${boardState.tool === 'eraser' ? 'active' : ''}`} title="Eraser" onClick={() => _setTool('eraser')}>
-            <i className="fa fa-eraser brand-gradient gradient-text"></i>
+          <button className={`btn-flat ${boardState.tool === 'eraser' ? 'active' : ''} brand-text`} title="Eraser" onClick={() => _setTool('eraser')}>
+            <i className="fa fa-eraser "></i>
           </button>
-          <button className={`btn-flat ${boardState.tool === 'line' ? 'active' : ''}`} title="Line Tool" onClick={() => _setTool('line')}>
-            <i className="material-icons brand-gradient gradient-text">timeline</i>
+          <button className={`btn-flat ${boardState.tool === 'line' ? 'active' : ''} brand-text`} title="Line Tool" onClick={() => _setTool('line')}>
+            <i className="material-icons ">timeline</i>
           </button>
-          <button className="btn-flat" title="Color Palette" onClick={() => this.colorPickerInstance.open()}>
-            <i className="material-icons brand-gradient gradient-text">palette</i>
+          <button className="btn-flat brand-text" title="Color Palette" onClick={() => this.colorPickerInstance.open()}>
+            <i className="material-icons ">palette</i>
           </button>
-          <button className="btn-flat" title="Undo" onClick={() => _onUndo()}>
-            <i className="material-icons brand-gradient gradient-text">undo</i>
+          <button className="btn-flat brand-text" title="Undo" onClick={() => _onUndo()}>
+            <i className="material-icons ">undo</i>
           </button>
-          <button className="btn-flat" title="Redo" onClick={() => _onRedo()}>
-            <i className="material-icons brand-gradient gradient-text">redo</i>
+          <button className="btn-flat brand-text" title="Redo" onClick={() => _onRedo()}>
+            <i className="material-icons ">redo</i>
           </button>
-          <button className="btn-flat" title="Save this slide" onClick={() => _save()}>
-            <i className="material-icons brand-gradient gradient-text">save</i>
+          <button className="btn-flat brand-text" title="Save this slide" onClick={() => _save()}>
+            <i className="material-icons ">save</i>
           </button>
-          <button className="btn-flat" title="Clear the board" onClick={() => this.clearBoardModalInstance.open()}>
-            <i className="fa fa-ban brand-gradient gradient-text"></i>
+          <button className="btn-flat brand-text" title="Clear the board" onClick={() => this.clearBoardModalInstance.open()}>
+            <i className="fa fa-ban "></i>
           </button>
-          <button className="btn-flat" title="Go to home" onClick={() => this.goHomeInstance.open()}>
-            <i className="material-icons brand-gradient gradient-text">home</i>
+          <button className="btn-flat brand-text" title="Go to home" onClick={() => this.goHomeInstance.open()}>
+            <i className="material-icons ">home</i>
           </button>
         </div>
 
@@ -119,7 +120,7 @@ export class Toolbar extends Component {
           </div>
           <div className="modal-footer container">
             <button className="btn green-text right" onClick={e => this.goHomeInstance.close()}>No</button>
-            <NavLink to="/" className="btn red-text left">Yes</NavLink>
+            <Link to="/" className="btn red-text left">Yes</Link>
           </div>
         </div>
 
@@ -140,14 +141,14 @@ export class Toolbar extends Component {
         <div className="modal" ref={this.colorPickerRef}>
           <div className="modal-content">
             <PaintSettings
-              initialColor="#000"
+              initialColor={`rgb(${r * 255}, ${g * 255}, ${b * 255})`}
               onPickColor={color => {
                 boardState.drawBoard.changeBrushColor([color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255]);
               }}
             />
           </div>
           <div className="modal-footer container">
-            <button className="btn green brand-gradient gradient-text" onClick={() => this.colorPickerInstance.close()}>Done</button>
+            <button className="btn brand-text" onClick={() => this.colorPickerInstance.close()}>Done</button>
           </div>
         </div>
       </div>

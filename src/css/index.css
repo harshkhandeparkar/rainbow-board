@@ -42,10 +42,8 @@ footer a:hover {
   /* Gradient text made using https://cssgradient.io  */
 }
 
-.gradient-text {
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
+.brand-text {
+  color: rgb(250, 129, 29) !important;
 }
 
 .logo-text {
@@ -62,4 +60,8 @@ footer a:hover {
 
 .dropdown-content {
   border-radius: 1rem;
+}
+
+.modal {
+  border-radius: 0.5rem;
 }

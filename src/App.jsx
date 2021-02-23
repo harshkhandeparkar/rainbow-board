@@ -51,6 +51,10 @@ class App extends Component {
               color: ${this.state.theme.textColor} !important;
             }
 
+            .nav-wrapper, nav {
+              background-color: ${this.state.theme.bg1} !important;
+            }
+
             button, .btn, .btn-flat, .btn-floating, .card, .color-picker, .bottom-toolbar, .top-toolbar {
               background-color: ${this.state.theme.bg1} !important;
               color: ${this.state.theme.textColor};
@@ -65,11 +69,25 @@ class App extends Component {
             }
 
             .dropdown-content {
-              background-color: ${this.state.theme.bgColor} !important;
+              background-color: ${this.state.theme.bg1} !important;
+            }
+
+            .dropdown-content a {
+              height: 100%;
             }
 
             .dropdown-content li:hover {
               background-color: ${this.state.theme.highlight} !important;
+            }
+
+            footer {
+              color: ${this.state.theme.textColor} !important;
+              background-color: ${this.state.theme.bg1} !important;
+            }
+
+            .footer-copyright {
+              color: ${this.state.theme.textColor} !important;
+              background-color: ${this.state.theme.bg2} !important;
             }
             `
           }

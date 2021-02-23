@@ -22,16 +22,16 @@ export default class Download extends Component {
           (!navigator.userAgent.toLowerCase().includes('electron') || gt(this.state.latestVersion, version)) &&
           (
             <div>
-              <button className="dropdown-trigger btn center brand-gradient gradient-text" data-target="download-dropdown">
+              <button className="dropdown-trigger btn center brand-text" data-target="download-dropdown">
                 <i className="fa fa-download left" />
                 Download {
                   navigator.userAgent.toLowerCase().includes('electron') ? 'New Version' : 'Desktop App'
                 }
               </button>
 
-              <ul id='download-dropdown' className='dropdown-content'>
+              <ul id="download-dropdown" className="dropdown-content">
                 <li>
-                  <a target="_blank" rel="noreferrer" href="https://snapcraft.io/rainbow-board" className="btn-flat brand-gradient gradient-text">
+                  <a target="_blank" rel="noreferrer" href="https://snapcraft.io/rainbow-board" className="btn-flat brand-text">
                     <i className="fa fa-linux" />
                     Linux (snap)
                   </a>
@@ -39,7 +39,7 @@ export default class Download extends Component {
                 {
                   this.state.downloadURLs.exe !== '' &&
                   <li>
-                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.exe} className="btn-flat brand-gradient gradient-text">
+                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.exe} className="btn-flat brand-text">
                       <i className="fa fa-windows" />
                       Windows (EXE)
                     </a>
@@ -48,7 +48,7 @@ export default class Download extends Component {
                 {
                   this.state.downloadURLs.dmg !== '' &&
                   <li>
-                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.exe} className="btn-flat brand-gradient gradient-text">
+                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.exe} className="btn-flat brand-text">
                       <i className="fa fa-apple" />
                       Mac (DMG)
                     </a>
@@ -57,7 +57,7 @@ export default class Download extends Component {
                 {
                   this.state.downloadURLs.deb !== '' &&
                   <li>
-                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.deb} className="btn-flat brand-gradient gradient-text">
+                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.deb} className="btn-flat brand-text">
                       <i className="fa fa-linux" />
                       Linux (deb)
                     </a>
@@ -66,7 +66,7 @@ export default class Download extends Component {
                 {
                   this.state.downloadURLs.appimg !== '' &&
                   <li>
-                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.appimg} className="btn-flat brand-gradient gradient-text">
+                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.appimg} className="btn-flat brand-text">
                       <i className="fa fa-linux" />
                       Linux (portable)
                     </a>
@@ -75,7 +75,7 @@ export default class Download extends Component {
                 {
                   this.state.downloadURLs.zip_linux !== '' &&
                   <li>
-                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.zip_linux} className="btn-flat brand-gradient gradient-text">
+                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.zip_linux} className="btn-flat brand-text">
                       <i className="fa fa-linux" />
                       Linux (zip)
                     </a>
