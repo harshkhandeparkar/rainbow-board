@@ -26,14 +26,14 @@ export class Pages extends Component {
             className="btn-floating btn-large page-btn"
             onClick={this.addPage}
           >
-            <i className="fa fa-plus gradient-text brand-gradient" />
+            <i className="fa fa-plus" />
           </button> :
           <div> */}
             {/* <button
               className="btn-floating right page-btn"
               onClick={this.state.currentPage === this.state.pagesList.length - 1 ? this.addPage : this.nextPage}
             >
-              <i className={`fa gradient-text brand-gradient fa-${this.state.currentPage === this.state.pagesList.length - 1 ? 'plus' : 'chevron-right'}`} />
+              <i className={`fa fa-${this.state.currentPage === this.state.pagesList.length - 1 ? 'plus' : 'chevron-right'}`} />
             </button> */}
 
             {/* {
@@ -42,7 +42,7 @@ export class Pages extends Component {
                 className="btn-floating left page-btn"
                 onClick={this.lastPage}
               >
-                <i className="fa fa-chevron-left gradient-text brand-gradient" />
+                <i className="fa fa-chevron-left" />
               </button>
             }
 

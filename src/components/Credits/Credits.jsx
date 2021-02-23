@@ -127,21 +127,14 @@ export default class Credits extends Component {
           </div>
 
           <div className="row valign-wrapper">
-            <div className="col s4">
+            <div className="col s6">
               <Credit
                 title="GIMP"
                 desc="Used to create the logo."
                 link="https://gimp.org"
               />
             </div>
-            <div className="col s4">
-              <Credit
-                title="CSSGradient.io"
-                desc="Used to create the gradient used everywhere."
-                link="https://cssgradient.io"
-              />
-            </div>
-            <div className="col s4">
+            <div className="col s6">
               <Credit
                 title="Full List of Libraries"
                 desc="Complete list of dependencies used."
