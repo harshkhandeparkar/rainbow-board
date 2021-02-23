@@ -2,16 +2,25 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './WhatsNew.css';
 
-function New({title, desc, version}) {
+function New({title, desc, version, link}) {
   return (
     <div className="card">
       <div className="card-content">
         <span className="card-title styled-text brand-text">{title}</span>
         <p>{desc}</p>
       </div>
-      <div className="card-action">
-        Added in <a href={`https://github.com/HarshKhandeparkar/rainbow-board/releases/${version}`}>v{version.replace('v', '')}</a>
-      </div>
+      {
+        version &&
+        <div className="card-action">
+          Added in <a href={`https://github.com/HarshKhandeparkar/rainbow-board/releases/${version}`}>v{version.replace('v', '')}</a>
+        </div>
+      }
+      {
+        link &&
+        <div className="card-action">
+          <a href={link}>Link</a>
+        </div>
+      }
     </div>
   )
 }
@@ -59,6 +68,22 @@ export default class WhatsNew extends Component {
                 title="Fixed Toolbar Overflow"
                 desc="Whiteboard toolbar will adjust the size of the buttons in order to prevent overflow on small screen-sizes."
                 version="v0.4.1"
+              />
+            </div>
+          </div>
+          <div className="row valign-wrapper">
+            <div className="col s6">
+              <New
+                title="UI Polish"
+                desc="The UI no longer has gradients everywhere. The gradients were removed to make the UI more simple and also because there were invisible ninja texts on some browsers!"
+                version="v0.4.2"
+              />
+            </div>
+            <div className="col s6">
+              <New
+                title="Discord Server"
+                desc={(<p>We have created a new <a href="https://discord.com">Discord</a> server to discuss and follow the development of Rainbow Board.</p>)}
+                link="https://discord.gg/FEpMS43UwR"
               />
             </div>
           </div>
