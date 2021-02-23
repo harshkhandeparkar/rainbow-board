@@ -9,6 +9,7 @@ Cross-platform Whiteboard app made using [React](https://reactjs.org), [Electron
 
 Download/use at https://harshkhandeparkar.github.io/rainbow-board.
 Ask any questions or give feedback [here](https://github.com/HarshKhandeparkar/rainbow-board/issues/new/choose).
+Discord Server: https://discord.gg/FEpMS43UwR
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/HarshKhandeparkar/rainbow-board/master/public/icon.png" />
@@ -17,3 +18,6 @@ Ask any questions or give feedback [here](https://github.com/HarshKhandeparkar/r
 ![ss1](img/screenshot-1.png)
 ![ss2](img/screenshot-2.png)
 ![ss3](img/screenshot-3.png)
+![ss4](img/screenshot-4.png)
+![ss5](img/screenshot-5.png)
+![ss6](img/screenshot-6.png)
