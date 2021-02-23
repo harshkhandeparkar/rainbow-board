@@ -87,8 +87,7 @@
     "linux": {
       "target": [
         "AppImage",
-        "snap",
-        "zip"
+        "snap"
       ],
       "executableName": "rainbow-board",
       "icon": "public/logo512.png",
