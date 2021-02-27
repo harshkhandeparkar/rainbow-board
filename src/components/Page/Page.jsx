@@ -77,6 +77,16 @@ export class Page extends Component {
     })
   }
 
+  _changeToolSetting(toolSettings,newValue) {
+    this.state.boardState.drawBoard.changeToolSetting(toolSettings,newValue);
+    this.setState({
+      boardState: {
+        ...this.state.boardState,
+        toolSettings
+      }
+    })
+  }
+
   _clearBoard() {
     this.state.boardState.drawBoard.clear();
   }
@@ -120,8 +130,7 @@ export class Page extends Component {
           _clearBoard={() => this._clearBoard()}
           _onUndo={() => this.state.boardState.drawBoard.undo()}
           _onRedo={() => this.state.boardState.drawBoard.redo()}
-          onBrushSizeChange={(size) => this.state.boardState.drawBoard.changeBrushSize(size)}
-          onEraserSizeChange={(size) => this.state.boardState.drawBoard.changeEraserSize(size)}
+          _changeToolSetting={(toolSettings,newValue) => this._changeToolSetting(toolSettings,newValue)}
         />
       </div>
     )
