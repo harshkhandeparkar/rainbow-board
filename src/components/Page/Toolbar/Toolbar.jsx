@@ -72,6 +72,11 @@ export class Toolbar extends Component {
           <input type="range" min="2" max="100" value={this.state.brushSize} ref={this.brushSizeRangeRef} onChange={this.onBrushSizeChange} />
         </div>
 
+        <div ref={this.brushTopToolbarRef} className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'rainbow_brush' ? '' : 'hide'}`}>
+          <label>Color Speed</label>
+          <input type="range" min="2" max="100" value={this.state.brushSize} ref={this.brushSizeRangeRef} onChange={this.onBrushSizeChange} />
+        </div>
+
         <div ref={this.brushTopToolbarRef} className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'eraser' ? '' : 'hide'}`}>
           <label>Eraser Size</label>
           <input type="range" min="2" max="100" value={this.state.eraserSize} ref={this.eraserSizeRangeRef} onChange={this.onEraserSizeChange} />
@@ -98,6 +103,9 @@ export class Toolbar extends Component {
           </button>
           <button className="btn-flat brand-text" title="Undo" onClick={() => _onUndo()}>
             <i className="material-icons ">undo</i>
+          </button>
+          <button className="btn-flat brand-text" title="Rainbow Brush" onClick={() => _setTool('rainbow_brush')}>
+            <i className="material-icons ">colorize</i>
           </button>
           <button className="btn-flat brand-text" title="Redo" onClick={() => _onRedo()}>
             <i className="material-icons ">redo</i>
