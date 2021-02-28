@@ -86,7 +86,7 @@ export class Toolbar extends Component {
 
     return (
       <div className="toolbar">
-        <div ref={this.brushTopToolbarRef} className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'brush' || 'rainbow_brush' ? '' : 'hide'}`}>
+        <div ref={this.brushTopToolbarRef} className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'brush' || boardState.tool === 'rainbow_brush' ? '' : 'hide'}`}>
           <label>Brush Size</label>
           <input type="range" min="2" max="100" value={this.state.brushSize} ref={this.brushSizeRangeRef} onChange={this.onBrushSizeChange} />
         </div>
@@ -102,7 +102,7 @@ export class Toolbar extends Component {
         </div>
 
         <div ref={this.brushTopToolbarRef} className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'line' ? '' : 'hide'}`}>
-          <label>Line Size</label>
+          <label>Line Thickness</label>
           <input type="range" min="2" max="100" value={this.state.lineThickness} ref={this.lineThicknessRangeRef} onChange={this.onLineThicknessChange} />
         </div>
 
