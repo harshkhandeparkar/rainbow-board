@@ -122,7 +122,7 @@ export class Page extends Component {
           _onRedo={() => this.state.boardState.drawBoard.redo()}
           onBrushSizeChange={(size) => this.state.boardState.drawBoard.changeBrushSize(size)}
           onEraserSizeChange={(size) => this.state.boardState.drawBoard.changeEraserSize(size)}
-          _changeToolSetting={(property,newValue) => this.state.boardState.drawBoard.changeToolSetting(property,newValue)}
+          _changeToolSetting={(property, newValue) => this.state.boardState.drawBoard.changeToolSetting(property, newValue)}
         />
       </div>
     )

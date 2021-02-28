@@ -46,35 +46,35 @@ export class Toolbar extends Component {
   }
 
   onBrushSizeChange = () => {
-    this.props._changeToolSetting('brushSize',Number(this.brushSizeRangeRef.current.value));
+    this.props._changeToolSetting('brushSize', Number(this.brushSizeRangeRef.current.value));
     this.setState({
       brushSize: Number(this.brushSizeRangeRef.current.value)
     })
   }
 
   onColorChangeRate = () => {
-    this.props._changeToolSetting('changeRate',Number(this.changeRateRangeRef.current.value));
+    this.props._changeToolSetting('changeRate', Number(this.changeRateRangeRef.current.value));
     this.setState({
       changeRate: Number(this.changeRateRangeRef.current.value)
     });
   }
 
   onLineColorChange = () => {
-    this.props._changeToolSetting('lineColor',Number(this.lineColorRangeRef.current.value));
+    this.props._changeToolSetting('lineColor', Number(this.lineColorRangeRef.current.value));
     this.setState({
       lineColor: Number(this.eraserSizeRangeRef.current.value)
     })
   }
 
   onEraserSizeChange = () => {
-    this.props._changeToolSetting('eraserSize',Number(this.eraserSizeRangeRef.current.value));
+    this.props._changeToolSetting('eraserSize', Number(this.eraserSizeRangeRef.current.value));
     this.setState({
       eraserSize: Number(this.eraserSizeRangeRef.current.value)
     })
   }
 
   onLineThicknessChange = () => {
-    this.props._changeToolSetting('lineThickness',Number(this.lineThicknessRangeRef.current.value));
+    this.props._changeToolSetting('lineThickness', Number(this.lineThicknessRangeRef.current.value));
     this.setState({
       lineThickness: Number(this.lineThicknessRangeRef.current.value)
     })
@@ -92,7 +92,7 @@ export class Toolbar extends Component {
         </div>
 
         <div ref={this.brushTopToolbarRef} className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'rainbow_brush' ? '' : 'hide'}`}>
-          <label>Color Speed</label>
+          <label>Color Change Rate</label>
           <input type="range" min="1" max="50" value={this.state.changeRate} ref={this.changeRateRangeRef} onChange={this.onColorRateChange} />
         </div>
 
@@ -169,7 +169,10 @@ export class Toolbar extends Component {
             <PaintSettings
               initialColor={`rgb(${r * 255}, ${g * 255}, ${b * 255})`}
               onPickColor={color => {
-                boardState.drawBoard.changeToolSetting(`${boardState.tool}Color`,[color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255]);
+                if(boardState.tool === 'brush' || boardState.tool === 'line'){
+                  boardState.drawBoard.changeToolSetting(`${boardState.tool}Color`,[color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255]);
+                }
+                else return;
               }}
             />
           </div>
