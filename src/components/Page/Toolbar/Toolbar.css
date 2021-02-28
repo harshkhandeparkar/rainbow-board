@@ -15,11 +15,11 @@
   padding: 0px;
 }
 
-div.left {
+.toolbar div.left {
   left: 7%;
 }
 
-div.right {
+.toolbar div.right {
   left: 52%;
 }
 
