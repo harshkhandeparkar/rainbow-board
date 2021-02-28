@@ -42,7 +42,7 @@ export class Toolbar extends Component {
     this._initializeModal();
   }
 
-  provideRef = (tool) => {
+  provideRef(tool) {
     if(tool === 'brush')
       return this.brushSizeRangeRef.current.value;
     else
@@ -56,16 +56,16 @@ export class Toolbar extends Component {
       return this.lineThicknessRangeRef.current.value;
   }
 
-  manageChange = (property,tool = 'brush') => {
+  manageChange(property, tool) {
     let result = this.provideRef(tool);
     this.props._changeToolSetting(property,Number(result));
     this.setState({
-      property: Number(this.colorSpeedRangeRef.current.value)
+      [property]: Number(result)
     });
   }
 
   render() {
-    const { initialBrushColor, boardState, _setTool, _clearBoard, _save, _onUndo, _onRedo,_changeToolSetting } = this.props;
+    const { initialBrushColor, boardState, _setTool, _clearBoard, _save, _onUndo, _onRedo } = this.props;
     const [r, g, b] = initialBrushColor;
 
     return (
@@ -77,7 +77,7 @@ export class Toolbar extends Component {
 
         <div ref={this.brushTopToolbarRef} className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'rainbow_brush' ? '' : 'hide'}`}>
           <label>Color Speed</label>
-          <input type="range" min="2" max="100" value={this.state.brushSize} ref={this.brushSizeRangeRef} onChange={this.manageChange('changeRate','raibow_brush')} />
+          <input type="range" min="2" max="100" value={this.state.changeRate} ref={this.changeRateRangeRef} onChange={this.manageChange('changeRate','raibow_brush')} />
         </div>
 
         <div ref={this.brushTopToolbarRef} className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'eraser' ? '' : 'hide'}`}>
@@ -87,7 +87,7 @@ export class Toolbar extends Component {
 
         <div ref={this.brushTopToolbarRef} className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'line' ? '' : 'hide'}`}>
           <label>Line Size</label>
-          <input type="range" min="2" max="100" value={this.state.brushSize} ref={this.lineSizeRangeRef} onChange={this.manageChange('lineThickness','line')} />
+          <input type="range" min="2" max="100" value={this.state.lineThickness} ref={this.lineThicknessRangeRef} onChange={this.manageChange('lineThickness','line')} />
         </div>
 
         <div className="bottom-toolbar z-depth-1">
@@ -153,7 +153,7 @@ export class Toolbar extends Component {
             <PaintSettings
               initialColor={`rgb(${r * 255}, ${g * 255}, ${b * 255})`}
               onPickColor={color => {
-                boardState.drawBoard._changeToolSetting('brushSize',[color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255]);
+                boardState.drawBoard._changeToolSetting('brushColor',[color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255]);
               }}
             />
           </div>
