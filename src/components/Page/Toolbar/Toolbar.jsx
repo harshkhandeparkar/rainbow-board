@@ -17,12 +17,17 @@ export class Toolbar extends Component {
     // Ranges
     this.brushSizeRangeRef = createRef();
     this.eraserSizeRangeRef = createRef();
-    this.lineSizeRangeRef = createRef();
+    this.changeRateRangeRef = createRef();
+    this.lineThicknessRangeRef = createRef();
+    this.lineColorRangeRef = createRef();
   }
 
   state = {
     brushSize: this.props.boardOptions.brushSize,
-    eraserSize: this.props.boardOptions.eraserSize
+    eraserSize: this.props.boardOptions.eraserSize,
+    changeRate: this.props.boardOptions.changeRate,
+    lineThickness: this.props.boardOptions.lineThickness,
+    lineColor: this.props.boardOptions.lineColor
   }
 
   _initializeModal() {
@@ -41,23 +46,37 @@ export class Toolbar extends Component {
   }
 
   onBrushSizeChange = () => {
-    this.props.onBrushSizeChange(Number(this.brushSizeRangeRef.current.value));
+    this.props._changeToolSetting('brushSize', Number(this.brushSizeRangeRef.current.value));
     this.setState({
       brushSize: Number(this.brushSizeRangeRef.current.value)
     })
   }
 
+  onColorRateChange = () => {
+    this.props._changeToolSetting('changeRate', Number(this.changeRateRangeRef.current.value));
+    this.setState({
+      changeRate: Number(this.changeRateRangeRef.current.value)
+    })
+  }
+
+  onLineColorChange = () => {
+    this.props._changeToolSetting('lineColor', Number(this.lineColorRangeRef.current.value));
+    this.setState({
+      lineColor: Number(this.eraserSizeRangeRef.current.value)
+    })
+  }
+
   onEraserSizeChange = () => {
-    this.props.onEraserSizeChange(Number(this.eraserSizeRangeRef.current.value));
+    this.props._changeToolSetting('eraserSize', Number(this.eraserSizeRangeRef.current.value));
     this.setState({
       eraserSize: Number(this.eraserSizeRangeRef.current.value)
     })
   }
 
-  onLineSizeChange = () => {
-    this.props.onBrushSizeChange(Number(this.lineSizeRangeRef.current.value));
+  onLineThicknessChange = () => {
+    this.props._changeToolSetting('lineThickness', Number(this.lineThicknessRangeRef.current.value));
     this.setState({
-      brushSize: Number(this.lineSizeRangeRef.current.value)
+      lineThickness: Number(this.lineThicknessRangeRef.current.value)
     })
   }
 
@@ -67,26 +86,33 @@ export class Toolbar extends Component {
 
     return (
       <div className="toolbar">
-        <div ref={this.brushTopToolbarRef} className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'brush' ? '' : 'hide'}`}>
+        <div className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'brush' ? '' : boardState.tool === 'rainbow_brush' ? 'left' : 'hide'}`}>
           <label>Brush Size</label>
           <input type="range" min="2" max="100" value={this.state.brushSize} ref={this.brushSizeRangeRef} onChange={this.onBrushSizeChange} />
         </div>
 
-        <div ref={this.brushTopToolbarRef} className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'eraser' ? '' : 'hide'}`}>
+        <div className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'rainbow_brush' ? 'right' : 'hide'}`}>
+          <label>Color Change Rate</label>
+          <input type="range" min="1" max="50" value={this.state.changeRate} ref={this.changeRateRangeRef} onChange={this.onColorRateChange} />
+        </div>
+
+        <div className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'eraser' ? '' : 'hide'}`}>
           <label>Eraser Size</label>
           <input type="range" min="2" max="100" value={this.state.eraserSize} ref={this.eraserSizeRangeRef} onChange={this.onEraserSizeChange} />
         </div>
 
-        <div ref={this.brushTopToolbarRef} className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'line' ? '' : 'hide'}`}>
-          <label>Line Size</label>
-          <input type="range" min="2" max="100" value={this.state.brushSize} ref={this.lineSizeRangeRef} onChange={this.onLineSizeChange} />
+        <div className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'line' ? '' : 'hide'}`}>
+          <label>Line Thickness</label>
+          <input type="range" min="2" max="100" value={this.state.lineThickness} ref={this.lineThicknessRangeRef} onChange={this.onLineThicknessChange} />
         </div>
 
         <div className="bottom-toolbar z-depth-1">
           <button className={`btn-flat ${boardState.tool === 'brush' ? 'active' : ''} brand-text`} title="Paint Brush" onClick={() => _setTool('brush')}>
             <i className="fa fa-paint-brush "></i>
           </button>
-
+          <button className={`btn-flat ${boardState.tool === 'rainbow_brush' ? 'active' : ''} brand-text`} title="Rainbow Brush" onClick={() => _setTool('rainbow_brush')}>
+            <i className="material-icons ">colorize</i>
+          </button>
           <button className={`btn-flat ${boardState.tool === 'eraser' ? 'active' : ''} brand-text`} title="Eraser" onClick={() => _setTool('eraser')}>
             <i className="fa fa-eraser "></i>
           </button>
@@ -143,7 +169,10 @@ export class Toolbar extends Component {
             <PaintSettings
               initialColor={`rgb(${r * 255}, ${g * 255}, ${b * 255})`}
               onPickColor={color => {
-                boardState.drawBoard.changeBrushColor([color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255]);
+                if(boardState.tool === 'brush' || boardState.tool === 'line'){
+                  boardState.drawBoard.changeToolSetting(`${boardState.tool}Color`,[color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255]);
+                }
+                else return;
               }}
             />
           </div>

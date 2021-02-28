@@ -15,6 +15,14 @@
   padding: 0px;
 }
 
+.top-toolbar.left {
+  left: 7%;
+}
+
+.top-toolbar.right {
+  left: 52%;
+}
+
 .top-toolbar {
   position: absolute;
   left: 30%;
