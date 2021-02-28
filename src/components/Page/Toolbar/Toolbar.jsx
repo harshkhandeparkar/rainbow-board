@@ -23,11 +23,11 @@ export class Toolbar extends Component {
   }
 
   state = {
-    brushSize: this.props.boardOptions.brushSize,
-    eraserSize: this.props.boardOptions.eraserSize,
-    changeRate: this.props.boardOptions.changeRate,
-    lineThickness: this.props.boardOptions.lineThickness,
-    lineColor: this.props.boardOptions.lineColor
+    brushSize: this.props.boardOptions.toolSettings.brushSize,
+    eraserSize: this.props.boardOptions.toolSettings.eraserSize,
+    changeRate: this.props.boardOptions.toolSettings.changeRate,
+    lineThickness: this.props.boardOptions.toolSettings.lineThickness,
+    lineColor: this.props.boardOptions.toolSettings.lineColor
   }
 
   _initializeModal() {

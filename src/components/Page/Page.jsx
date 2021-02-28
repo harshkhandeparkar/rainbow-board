@@ -28,8 +28,12 @@ export class Page extends Component {
     drawAxes: false,
     xOffset: 0,
     yOffset: 0,
-    brushSize: 3,
-    eraserSize: 10,
+    toolSettings: {
+      brushSize: 3,
+      lineThickness: 3,
+      eraserSize: 30,
+      changeRate: 5
+    },
     allowUndo: true,
     maxSnapshots: 10
   }
@@ -46,8 +50,12 @@ export class Page extends Component {
             this.canvasRef.current.clientHeight
           ],
           ...Page.boardOptions,
+          toolSettings: {
+            ...Page.boardOptions.toolSettings,
+            brushColor: this.props.getTheme() === 'white' ? [0, 0, 0] : [1, 1, 1],
+            lineColor: this.props.getTheme() === 'white' ? [0, 0, 0] : [1, 1, 1],
+          },
           bgColor: this.props.getTheme() === 'white' ? [1, 1, 1] : [0, 0, 0],
-          brushColor: this.props.getTheme() === 'white' ? [0, 0, 0] : [1, 1, 1]
         }).draw().startRender()
       }
     })
