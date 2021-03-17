@@ -1,7 +1,6 @@
 import React, { Component, createRef } from 'react';
 import './Page.css';
-import { GPU } from 'gpu.js';
-import { RealDrawBoard } from 'gpujs-real-renderer';
+import { RealDrawBoard } from 'svg-real-renderer';
 import hotkeys from 'hotkeys-js';
 import { saveSlide } from './save-slide';
 
@@ -19,7 +18,7 @@ export class Page extends Component {
       }
     }
 
-    this.canvasRef = createRef();
+    this.svgRef = createRef();
   }
 
   static boardOptions = {
@@ -43,11 +42,10 @@ export class Page extends Component {
       boardState: {
         ...this.state.boardState,
         drawBoard: new RealDrawBoard({
-          canvas: this.canvasRef.current,
-          GPU,
+          svg: this.svgRef.current,
           dimensions: [
-            this.canvasRef.current.clientWidth,
-            this.canvasRef.current.clientHeight
+            this.svgRef.current.clientWidth,
+            this.svgRef.current.clientHeight
           ],
           ...Page.boardOptions,
           toolSettings: {
@@ -117,7 +115,7 @@ export class Page extends Component {
   render() {
     return (
       <div>
-        <canvas className="page" ref={this.canvasRef}></canvas>
+        <svg className="page" ref={this.svgRef}></svg>
 
         <Toolbar
           boardOptions={Page.boardOptions}
