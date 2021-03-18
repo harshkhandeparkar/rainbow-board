@@ -13,7 +13,7 @@ function Main({toggleTheme, getTheme}) {
       <div className="container center">
         <div className="row">
           <p>
-            Open Source, Cross Platform Whiteboard software made with React JS, Electron and GPU.JS Real Renderer.
+            Open Source, Cross Platform Whiteboard software made with React JS, Electron and SVG Real Renderer.
           </p>
         </div>
 
@@ -64,12 +64,11 @@ function Main({toggleTheme, getTheme}) {
               </div>
             </div>
             <div className="col s6">
-              <h5 className="brand-text">Made Using</h5>
+              <h5 className="brand-text">Painted Using</h5>
               <ul>
                 <li><a href="https://electronjs.org" target="_blank" rel="noreferrer">Electron</a></li>
                 <li><a href="https://reactjs.org" target="_blank" rel="noreferrer">React</a></li>
-                <li><a href="https://gpu.rocks" target="_blank" rel="noreferrer">GPU.js</a></li>
-                <li><a href="https://harshkhandeparkar.github.io/gpujs-real-renderer" target="_blank" rel="noreferrer">GPU.js Real Renderer</a></li>
+                <li><a href="https://harshkhandeparkar.github.io/svg-real-renderer" target="_blank" rel="noreferrer">SVG Real Renderer</a></li>
                 <li><NavLink to="/credits">Full Credits</NavLink></li>
               </ul>
             </div>

@@ -47,29 +47,22 @@ export default class Credits extends Component {
             </div>
             <div className="col s4">
               <Credit
-                title="GPU.js"
-                desc="Used to supercharge Rainbow Board by running normal JavaScript on the GPU!"
-                link="https://gpu.rocks"
+                title="SVG Real Renderer"
+                desc="Used to make the whiteboard work."
+                link="https://harshkhandeparkar.github.io/svg-real-renderer"
               />
             </div>
           </div>
 
           <div className="row valign-wrapper">
-            <div className="col s4">
-              <Credit
-                title="GPU.js Real Renderer"
-                desc="Used to make the whiteboard work."
-                link="https://harshkhandeparkar.github.io/gpujs-real-renderer"
-              />
-            </div>
-            <div className="col s4">
+            <div className="col s6">
               <Credit
                 title="Electron Forge"
                 desc="Used to package the app for different operating systems."
                 link="https://electronforge.io"
               />
             </div>
-            <div className="col s4">
+            <div className="col s6">
               <Credit
                 title="Electron Builder"
                 desc="Used to package the app for even more operating systems."
@@ -105,9 +98,9 @@ export default class Credits extends Component {
           <div className="row valign-wrapper">
             <div className="col s4">
               <Credit
-                title="PNGjs"
-                desc="Used to download the PNG slides."
-                link="https://github.com/lukeapage/pngjs"
+                title="SVG Saver"
+                desc="Used to save the slide as PNG and SVG."
+                link="https://github.com/Hypercubed/svgsaver"
               />
             </div>
             <div className="col s4">
