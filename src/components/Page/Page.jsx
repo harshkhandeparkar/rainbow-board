@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react';
 import './Page.css';
 import { RealDrawBoard } from 'svg-real-renderer';
 import hotkeys from 'hotkeys-js';
-import { saveSlide } from './save-slide';
+import SVGSaver from 'svgsaver';
 
 import { Toolbar } from './Toolbar/Toolbar';
 
@@ -87,8 +87,10 @@ export class Page extends Component {
     this.state.boardState.drawBoard.clear();
   }
 
-  _save() {
-    saveSlide(this.state.boardState.drawBoard.graphPixels.toArray());
+  _save(type) {
+    const svgSaver = new SVGSaver();
+    if (type === 'svg') svgSaver.asSvg(this.svgRef.current, 'slide.svg');
+    else svgSaver.asPng(this.svgRef.current, 'slide');
   }
 
   _setHotkeys() {
@@ -122,7 +124,7 @@ export class Page extends Component {
           boardState={this.state.boardState}
           initialBrushColor={this.props.getTheme() === 'white' ? [0, 0, 0] : [1, 1, 1]}
           _setTool={(tool) => this._setTool(tool)}
-          _save={() => this._save()}
+          _save={(type) => this._save(type)}
           _clearBoard={() => this._clearBoard()}
           _onUndo={() => this.state.boardState.drawBoard.undo()}
           _onRedo={() => this.state.boardState.drawBoard.redo()}

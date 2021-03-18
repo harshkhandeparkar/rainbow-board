@@ -65,3 +65,23 @@ input[type=range] {
   background-color: rgb(91, 68, 219) !important;
   border-bottom-color: rgb(91, 68, 219) !important;
 }
+
+.save-type {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  padding: 0.3rem;
+  margin-left: 10%;
+}
+
+
+.save-row .col {
+  min-height: 100% !important;
+}
+
+.save-type.selected {
+  border: rgb(250, 129, 29) solid 1px;
+  border-radius: 8px;
+
+  transition: border 300ms;
+}

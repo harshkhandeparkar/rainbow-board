@@ -11,6 +11,7 @@ export class Toolbar extends Component {
 
     // Modals
     this.clearBoardRef = createRef();
+    this.saveBoardRef = createRef();
     this.colorPickerRef = createRef();
     this.goHomeRef = createRef();
 
@@ -27,13 +28,16 @@ export class Toolbar extends Component {
     eraserSize: this.props.boardOptions.toolSettings.eraserSize,
     changeRate: this.props.boardOptions.toolSettings.changeRate,
     lineThickness: this.props.boardOptions.toolSettings.lineThickness,
-    lineColor: this.props.boardOptions.toolSettings.lineColor
+    lineColor: this.props.boardOptions.toolSettings.lineColor,
+    saveType: 'png',
+    saveModalOn: false
   }
 
   _initializeModal() {
-    this.clearBoardModalInstance = M.Modal.init(this.clearBoardRef.current);
-    this.colorPickerInstance = M.Modal.init(this.colorPickerRef.current);
-    this.goHomeInstance = M.Modal.init(this.goHomeRef.current);
+    if (!this.clearBoardModalInstance) this.clearBoardModalInstance = M.Modal.init(this.clearBoardRef.current);
+    if (!this.saveBoardModalInstance) this.saveBoardModalInstance = M.Modal.init(this.saveBoardRef.current);
+    if (!this.colorPickerInstance) this.colorPickerInstance = M.Modal.init(this.colorPickerRef.current);
+    if (!this.goHomeInstance) this.goHomeInstance = M.Modal.init(this.goHomeRef.current);
   }
 
 
@@ -128,7 +132,7 @@ export class Toolbar extends Component {
           <button className="btn-flat brand-text" title="Redo" onClick={() => _onRedo()}>
             <i className="material-icons ">redo</i>
           </button>
-          <button className="btn-flat brand-text" title="Save this slide" onClick={() => _save()}>
+          <button className="btn-flat brand-text" title="Save this slide" onClick={() => this.saveBoardModalInstance.open()}>
             <i className="material-icons ">save</i>
           </button>
           <button className="btn-flat brand-text" title="Clear the board" onClick={() => this.clearBoardModalInstance.open()}>
@@ -161,6 +165,38 @@ export class Toolbar extends Component {
               _clearBoard();
               this.clearBoardModalInstance.close();
             }}>Yes</button>
+          </div>
+        </div>
+
+        <div className="modal" ref={this.saveBoardRef}>
+          <div className="modal-content container-fluid">
+            <h3>Save Slide</h3>
+            <div className="container">
+              <div className="row">
+                <div className="col s12">
+                  <div className={`save-type card ${this.state.saveType === 'png' ? 'selected' : ''}`} onClick={() => this.setState({ saveType: 'png', saveModalOn: true })}>
+                    <h6>PNG</h6>
+                    Saves as a normal image. Loads and works everywhere. Default and recommended for most users.
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col s12">
+                  <div  className={`save-type card ${this.state.saveType === 'svg' ? 'selected' : ''}`} onClick={() => {this.setState({ saveType: 'svg', saveModalOn: true })}}>
+                    <h6>SVG</h6>
+                    Saves the file as an <a href="https://en.wikipedia.org/wiki/SVG" rel="noreferrer" style={{display: 'inline'}} target="_blank">SVG</a>. Use it if you know what it is.
+                    <br />NOTE: THIS WILL SAVE THE SLIDE WITH A TRANSPARENT BACKGROUND.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="modal-footer container">
+            <button className="btn right" onClick={e => this.saveBoardModalInstance.close()}>Cancel</button>
+            <button className="btn green-text left" onClick={e => {
+              _save(this.state.saveType);
+              this.saveBoardModalInstance.close();
+            }}>Save</button>
           </div>
         </div>
 
