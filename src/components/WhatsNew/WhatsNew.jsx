@@ -40,6 +40,18 @@ export default class WhatsNew extends Component {
 
         <div className="container">
           <div className="row valign-wrapper">
+            <div className="col s12">
+              <New
+                title="SVG"
+                desc={(<p>Rainbow Board new uses <b>svg</b> instead of <b>canvas</b> which means that now you can save the slide as SVG, the whiteboard is faster, resizing is better and we will add new tools such as text tool in the future.</p>)}
+                version="0.5.0"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="container">
+          <div className="row valign-wrapper">
             <div className="col s6">
               <New
                 title="Hotkeys"
@@ -52,38 +64,6 @@ export default class WhatsNew extends Component {
                 title="Undo Redo"
                 desc={(<p>You can now <b>undo</b> and <b>redo</b>  using the shiny buttons or hotkeys.</p>)}
                 version="0.4.0"
-              />
-            </div>
-          </div>
-          <div className="row valign-wrapper">
-            <div className="col s6">
-              <New
-                title="macOS Support"
-                desc="Rainbow Board will be published to macOS every time as a dmg file."
-                version="v0.4.1"
-              />
-            </div>
-            <div className="col s6">
-              <New
-                title="Fixed Toolbar Overflow"
-                desc="Whiteboard toolbar will adjust the size of the buttons in order to prevent overflow on small screen-sizes."
-                version="v0.4.1"
-              />
-            </div>
-          </div>
-          <div className="row valign-wrapper">
-            <div className="col s6">
-              <New
-                title="UI Polish"
-                desc="The UI no longer has gradients everywhere. The gradients were removed to make the UI more simple and also because there were invisible ninja texts on some browsers!"
-                version="v0.4.2"
-              />
-            </div>
-            <div className="col s6">
-              <New
-                title="Discord Server"
-                desc={(<p>We have created a new <a href="https://discord.com">Discord</a> server to discuss and follow the development of Rainbow Board.</p>)}
-                link="https://discord.gg/FEpMS43UwR"
               />
             </div>
           </div>
