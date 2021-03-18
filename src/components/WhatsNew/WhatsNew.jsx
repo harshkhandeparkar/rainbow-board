@@ -40,7 +40,14 @@ export default class WhatsNew extends Component {
 
         <div className="container">
           <div className="row valign-wrapper">
-            <div className="col s12">
+            <div className="col s6">
+              <New
+                title="Multiple Pages"
+                desc="You can now add multiple pages and switch between them by using the buttons at the left and right edges of the screen."
+                version="v0.5.1"
+              />
+            </div>
+            <div className="col s6">
               <New
                 title="SVG"
                 desc={(<p>Rainbow Board new uses <b>svg</b> instead of <b>canvas</b> which means that now you can save the slide as SVG, the whiteboard is faster, resizing is better and we will add new tools such as text tool in the future.</p>)}
