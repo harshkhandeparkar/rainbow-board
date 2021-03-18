@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import './Pages.css';
 
 import Page from '../Page/Page';
@@ -10,46 +10,40 @@ export class Pages extends Component {
     super(...props);
 
     this.state = {
-      pagesList: [],
       currentPage: 0,
+      pagesLength: 1,
       mode: 'paint'
     }
+
+    this.pageRef = createRef();
+    this.pages = [];
   }
 
   render() {
     return (
       <div className="container-fluid center" id="pages">
-        {/* {
-          this.state.pagesList.length === 0 ?
+        <div>
           <button
-            title="Add a new page"
-            className="btn-floating btn-large page-btn"
-            onClick={this.addPage}
+            className="btn-floating right page-btn"
+            onClick={this.state.currentPage === this.state.pagesLength - 1 ? this.addPage : this.nextPage}
           >
-            <i className="fa fa-plus" />
-          </button> :
-          <div> */}
-            {/* <button
-              className="btn-floating right page-btn"
-              onClick={this.state.currentPage === this.state.pagesList.length - 1 ? this.addPage : this.nextPage}
+            <i className={`brand-text fa fa-${this.state.currentPage === this.state.pagesLength - 1 ? 'plus' : 'chevron-right'}`} />
+          </button>
+
+          {
+            this.state.currentPage !== 0 &&
+            <button
+              className="btn-floating left page-btn"
+              onClick={this.lastPage}
             >
-              <i className={`fa fa-${this.state.currentPage === this.state.pagesList.length - 1 ? 'plus' : 'chevron-right'}`} />
-            </button> */}
-
-            {/* {
-              this.state.currentPage !== 0 &&
-              <button
-                className="btn-floating left page-btn"
-                onClick={this.lastPage}
-              >
-                <i className="fa fa-chevron-left" />
-              </button>
-            }
-
-            {this.state.pagesList[this.state.currentPage]}
-          </div>
-        } */}
-        <Page getTheme={this.props.getTheme} />
+              <i className="fa fa-chevron-left brand-text" />
+            </button>
+          }
+        </div>
+        <Page
+          ref={this.pageRef}
+          getTheme={this.props.getTheme}
+        />
       </div>
     )
   }
@@ -57,15 +51,22 @@ export class Pages extends Component {
   addPage = (e) => {
     e.preventDefault();
 
-    this.state.pagesList.push(<Page key={this.state.pagesList.length} getTheme={this.props.getTheme}></Page>);
+    const board = this.pageRef.current.state.boardState.drawBoard;
+    this.pages.push(board.exportData());
+    board.clear();
+
     this.setState({
-      pagesList: this.state.pagesList,
-      currentPage: this.state.pagesList.length - 1
+      currentPage: this.state.currentPage + 1,
+      pagesLength: this.state.pagesLength + 1
     })
   }
 
   nextPage = (e) => {
     e.preventDefault();
+
+    const board = this.pageRef.current.state.boardState.drawBoard;
+    this.pages[this.state.currentPage] = board.exportData();
+    board.importData(this.pages[this.state.currentPage + 1]);
 
     this.setState({
       currentPage: this.state.currentPage + 1
@@ -74,6 +75,11 @@ export class Pages extends Component {
 
   lastPage = (e) => {
     e.preventDefault();
+
+    const board = this.pageRef.current.state.boardState.drawBoard;
+    this.pages.push(board.exportData());
+    this.pages[this.state.currentPage] = board.exportData();
+    board.importData(this.pages[this.state.currentPage - 1]);
 
     this.setState({
       currentPage: this.state.currentPage - 1
