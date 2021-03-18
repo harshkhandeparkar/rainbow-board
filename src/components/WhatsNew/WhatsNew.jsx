@@ -44,7 +44,7 @@ export default class WhatsNew extends Component {
               <New
                 title="SVG"
                 desc={(<p>Rainbow Board new uses <b>svg</b> instead of <b>canvas</b> which means that now you can save the slide as SVG, the whiteboard is faster, resizing is better and we will add new tools such as text tool in the future.</p>)}
-                version="0.5.0"
+                version="v0.5.0"
               />
             </div>
           </div>
