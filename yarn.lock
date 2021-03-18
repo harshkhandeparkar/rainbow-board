@@ -12565,10 +12565,10 @@ svg-parser@^2.0.2:
   resolved "https://registry.yarnpkg.com/svg-parser/-/svg-parser-2.0.4.tgz#fdc2e29e13951736140b76cb122c8ee6630eb6b5"
   integrity sha512-e4hG1hRwoOdRb37cIMSgzNsxyzKfayW6VOflrwvR+/bzrkyxY/31WkbgnQpgtrNp1SdpJvpUAGTa/ZoiPNDuRQ==
 
-svg-real-renderer@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/svg-real-renderer/-/svg-real-renderer-0.1.6.tgz#7010b8b3a9e89052139c6f7a11c1e323562756e1"
-  integrity sha512-Dj4DTWTAscbQVetjhwC8EU7wz+xAAwUA5XFtrKpcHk6zTXBMWJJBEW4PbRtpOjFWUEQbJiNayRJMCpanVTESng==
+svg-real-renderer@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/svg-real-renderer/-/svg-real-renderer-0.1.7.tgz#f37b0552967a462d0a96a874c2847f339a0a41f8"
+  integrity sha512-tzKM+p+HLU1N15CEQbLQQWyxA8CGM4mnt9/XmeIGiwkpG+aqHx4cscDuUl0+mIFvvdltPppA5BhvrRKCm1oZSg==
 
 svgo@^1.0.0, svgo@^1.2.2:
   version "1.3.2"
