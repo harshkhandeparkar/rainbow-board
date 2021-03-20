@@ -1,7 +1,9 @@
 import { isElectron } from './isElectron';
 
 let settings;
-if (isElectron) eval("settings = require('electron-settings')");
+if (isElectron) {
+  settings = window.electronSettingsModule;
+}
 
 /**
  *
