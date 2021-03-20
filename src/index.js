@@ -8,9 +8,17 @@ import './css/index.css';
 import './css/font-awesome.min.css';
 import 'material-icons/iconfont/material-icons.css';
 
+import { getCookie, hasCookie } from './util/cookies';
+
+let theme = 'white';
+
+if (hasCookie('theme')) {
+  theme = getCookie('theme');
+}
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App theme={theme} />
   </React.StrictMode>,
   document.getElementById('root')
 );

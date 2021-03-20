@@ -5,6 +5,8 @@ import Pages from './components/Pages/Pages.jsx';
 import Credits from './components/Credits/Credits';
 import WhatsNew from './components/WhatsNew/WhatsNew';
 
+import { setCookie } from './util/cookies';
+
 class App extends Component {
   whiteTheme = {
     bgColor: 'white',
@@ -23,17 +25,29 @@ class App extends Component {
   }
 
   state = {
-    theme: this.whiteTheme
+    theme: this.props.theme === 'white' ? this.whiteTheme : this.darkTheme
   }
 
   setTheme(theme) {
-    if (theme === 'white') this.setState({theme: this.whiteTheme});
-    else if (theme === 'dark') this.setState({theme: this.darkTheme});
+    if (theme === 'white') {
+      this.setState({theme: this.whiteTheme});
+      setCookie('theme', theme);
+    }
+    else if (theme === 'dark') {
+      this.setState({theme: this.darkTheme});
+      setCookie('theme', theme);
+    }
   }
 
   toggleTheme() {
-    if (this.state.theme === this.whiteTheme) this.setState({theme: this.darkTheme});
-    else this.setState({theme: this.whiteTheme});
+    if (this.state.theme === this.whiteTheme) {
+      this.setState({theme: this.darkTheme});
+      setCookie('theme', 'dark');
+    }
+    else {
+      this.setState({theme: this.whiteTheme});
+     setCookie('theme', 'white');
+    }
   }
 
   getTheme() {
