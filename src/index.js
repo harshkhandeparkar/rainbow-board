@@ -12,16 +12,23 @@ import { getCookie, hasCookie } from './util/cookies';
 
 let theme = 'white';
 
-if (hasCookie('theme')) {
-  theme = getCookie('theme');
-}
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App theme={theme} />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+hasCookie('theme').then((doesHaveCookie) => {
+  if (doesHaveCookie) getCookie('theme').then((cookie) => {
+    theme = cookie;
+    ReactDOM.render(
+      <React.StrictMode>
+        <App theme={theme} />
+      </React.StrictMode>,
+      document.getElementById('root')
+    )
+  })
+  else ReactDOM.render(
+    <React.StrictMode>
+      <App theme={theme} />
+    </React.StrictMode>,
+    document.getElementById('root')
+  )
+})
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

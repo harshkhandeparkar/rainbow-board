@@ -1,10 +1,19 @@
+let session;
+
+if (navigator.userAgent.includes('electron')) session = require('electron').session;
+
 /**
  *
  * @param {string} key
  * @returns boolean
  */
-export function hasCookie(key) {
-  return document.cookie.includes(`${key}=`);
+export async function hasCookie(key) {
+  if (navigator.userAgent.includes('electron')) {
+    const cookies = await session.defaultSession.cookies.get({});
+
+    return cookies.find((cookie) => cookie.name === key) !== undefined;
+  }
+  else return document.cookie.includes(`${key}=`);
 }
 
 /**
@@ -12,9 +21,14 @@ export function hasCookie(key) {
  * @param {string} key
  * @returns string
  */
-export function getCookie(key) {
-  if (hasCookie(key)) {
-    return document.cookie.split(';').find((keyValuePair) => {
+export async function getCookie(key) {
+  if (await hasCookie(key)) {
+    if (navigator.userAgent.includes('electron')) {
+      const cookies = await session.defaultSession.cookies.get({});
+
+      return cookies.find((cookie) => cookie.name === key).value;
+    }
+    else return document.cookie.split(';').find((keyValuePair) => {
       return keyValuePair.includes(key);
     }).split('=')[1];
   }
@@ -27,5 +41,11 @@ export function getCookie(key) {
  * @param {string} value
  */
 export function setCookie(key, value) {
-  document.cookie = `${key}=${value}`;
+  if (navigator.userAgent.includes('electron')) {
+    session.defaultSession.cookies.set({
+      name: key,
+      value: value
+    })
+  }
+  else document.cookie = `${key}=${value}`;
 }

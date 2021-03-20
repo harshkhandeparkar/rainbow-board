@@ -5,12 +5,17 @@ import Download from './Download/Download';
 import { hasCookie, getCookie } from '../util/cookies';
 
 function Main({toggleTheme, getTheme}) {
-  let doShowWhatsNew = true;
   const history = useHistory();
 
-  if (hasCookie('lastVersionChangelogShown')) doShowWhatsNew = getCookie('lastVersionChangelogShown') !== version;
+  hasCookie('lastVersionChangelogShown').then((doesHaveCookie) => {
+    if (doesHaveCookie) {
+      getCookie('lastVersionChangelogShown').then((cookie) => {
+        if (cookie !== version) history.push('/new');
+      })
+    }
+    else history.push('/new');
+  })
 
-  if (doShowWhatsNew) history.push('/new');
 
   return (
     <div id="main">
