@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './WhatsNew.css';
 
+import { setCookie } from '../../util/cookies';
+import { version } from '../../../package.json';
+
 function New({title, desc, version, link}) {
   return (
     <div className="card">
@@ -26,6 +29,10 @@ function New({title, desc, version, link}) {
 }
 
 export default class WhatsNew extends Component {
+  componentDidMount() {
+    setCookie('lastVersionChangelogShown', version);
+  }
+
   render() {
     return (
       <div>
