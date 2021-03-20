@@ -42,8 +42,11 @@ export function getSetting(key) {
  * @param {string} value
  */
 export function setSetting(key, value) {
+  const expiryDate = new Date();
+  expiryDate.setTime(expiryDate.getTime() + 30 * 24 * 60 * 60 * 1000); // expires in 1 month
+
   if (isElectron) {
     settings.setSync(key, value)
   }
-  else document.cookie = `${key}=${value}`;
+  else document.cookie = `${key}=${value};expires=${expiryDate.toUTCString()}`;
 }
