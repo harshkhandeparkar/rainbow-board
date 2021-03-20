@@ -47,17 +47,24 @@ export default class WhatsNew extends Component {
 
         <div className="container">
           <div className="row valign-wrapper">
-            <div className="col s6">
+          <div className="col s4">
+              <New
+                title="Save Settings"
+                desc="Your settings such as theme will be saved and the same theme will be used on restart."
+                version="v0.5.2"
+              />
+            </div>
+            <div className="col s4">
               <New
                 title="Multiple Pages"
                 desc="You can now add multiple pages and switch between them by using the buttons at the left and right edges of the screen."
                 version="v0.5.1"
               />
             </div>
-            <div className="col s6">
+            <div className="col s4">
               <New
                 title="SVG"
-                desc={(<p>Rainbow Board new uses <b>svg</b> instead of <b>canvas</b> which means that now you can save the slide as SVG, the whiteboard is faster, resizing is better and we will add new tools such as text tool in the future.</p>)}
+                desc={(<span>Rainbow Board new uses <b>svg</b> instead of <b>canvas</b> which means that now you can save the slide as SVG, the whiteboard is faster, resizing is better and we will add new tools such as text tool in the future.</span>)}
                 version="v0.5.0"
               />
             </div>
@@ -69,14 +76,14 @@ export default class WhatsNew extends Component {
             <div className="col s6">
               <New
                 title="Hotkeys"
-                desc={(<p><b>Ctrl+Z</b> or <b>Command+Z</b> to undo, <b>Ctrl+Shift+Z</b> or <b>Command+Shift+Z</b> to redo, and <b>Ctrl+S</b> or <b>Command+S</b> to save the slide!</p>)}
+                desc={(<span><b>Ctrl+Z</b> or <b>Command+Z</b> to undo, <b>Ctrl+Shift+Z</b> or <b>Command+Shift+Z</b> to redo, and <b>Ctrl+S</b> or <b>Command+S</b> to save the slide!</span>)}
                 version="0.4.0"
               />
             </div>
             <div className="col s6">
               <New
                 title="Undo Redo"
-                desc={(<p>You can now <b>undo</b> and <b>redo</b>  using the shiny buttons or hotkeys.</p>)}
+                desc={(<span>You can now <b>undo</b> and <b>redo</b>  using the shiny buttons or hotkeys.</span>)}
                 version="0.4.0"
               />
             </div>
