@@ -12,13 +12,13 @@ function New({title, desc, version, link}) {
       {
         version &&
         <div className="card-action">
-          Added in <a href={`https://github.com/HarshKhandeparkar/rainbow-board/releases/${version}`}>v{version.replace('v', '')}</a>
+          Added in <a target="_blank" rel="noreferrer" href={`https://github.com/HarshKhandeparkar/rainbow-board/releases/${version}`}>v{version.replace('v', '')}</a>
         </div>
       }
       {
         link &&
         <div className="card-action">
-          <a href={link}>Link</a>
+          <a target="_blank" rel="noreferrer" href={link}>Link</a>
         </div>
       }
     </div>

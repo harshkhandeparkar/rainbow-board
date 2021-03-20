@@ -10,7 +10,7 @@ function Credit({title, desc, link}) {
         <p>{desc}</p>
       </div>
       <div className="card-action">
-        <a href={link}>Link</a>
+        <a target="_blank" rel="noreferrer" href={link}>Link</a>
       </div>
     </div>
   )
