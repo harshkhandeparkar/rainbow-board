@@ -5,7 +5,7 @@ import Pages from './components/Pages/Pages.jsx';
 import Credits from './components/Credits/Credits';
 import WhatsNew from './components/WhatsNew/WhatsNew';
 
-import { setCookie } from './util/cookies';
+import { setSetting } from './util/settings';
 
 class App extends Component {
   whiteTheme = {
@@ -31,22 +31,22 @@ class App extends Component {
   setTheme(theme) {
     if (theme === 'white') {
       this.setState({theme: this.whiteTheme});
-      setCookie('theme', theme);
+      setSetting('theme', theme);
     }
     else if (theme === 'dark') {
       this.setState({theme: this.darkTheme});
-      setCookie('theme', theme);
+      setSetting('theme', theme);
     }
   }
 
   toggleTheme() {
     if (this.state.theme === this.whiteTheme) {
       this.setState({theme: this.darkTheme});
-      setCookie('theme', 'dark');
+      setSetting('theme', 'dark');
     }
     else {
       this.setState({theme: this.whiteTheme});
-     setCookie('theme', 'white');
+      setSetting('theme', 'white');
     }
   }
 

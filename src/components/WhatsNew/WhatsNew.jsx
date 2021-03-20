@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './WhatsNew.css';
 
-import { setCookie } from '../../util/cookies';
+import { setSetting } from '../../util/settings';
 import { version } from '../../../package.json';
 
 function New({title, desc, version, link}) {
@@ -30,7 +30,7 @@ function New({title, desc, version, link}) {
 
 export default class WhatsNew extends Component {
   componentDidMount() {
-    setCookie('lastVersionChangelogShown', version);
+    setSetting('lastVersionChangelogShown', version);
   }
 
   render() {

@@ -2,20 +2,17 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { version } from '../../package.json';
 import Download from './Download/Download';
 
-import { hasCookie, getCookie } from '../util/cookies';
+import { hasSetting, getSetting } from '../util/settings';
 
 function Main({toggleTheme, getTheme}) {
   const history = useHistory();
+  let doShowChangelog = true;
 
-  hasCookie('lastVersionChangelogShown').then((doesHaveCookie) => {
-    if (doesHaveCookie) {
-      getCookie('lastVersionChangelogShown').then((cookie) => {
-        if (cookie !== version) history.push('/new');
-      })
-    }
-    else history.push('/new');
-  })
+  if (hasSetting('lastVersionChangelogShown')) {
+    if (getSetting('lastVersionChangelogShown') === version) doShowChangelog = false;
+  }
 
+  if (doShowChangelog) history.push('/new');
 
   return (
     <div id="main">

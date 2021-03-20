@@ -8,27 +8,18 @@ import './css/index.css';
 import './css/font-awesome.min.css';
 import 'material-icons/iconfont/material-icons.css';
 
-import { getCookie, hasCookie } from './util/cookies';
+import { getSetting, hasSetting } from './util/settings';
 
 let theme = 'white';
 
-hasCookie('theme').then((doesHaveCookie) => {
-  if (doesHaveCookie) getCookie('theme').then((cookie) => {
-    theme = cookie;
-    ReactDOM.render(
-      <React.StrictMode>
-        <App theme={theme} />
-      </React.StrictMode>,
-      document.getElementById('root')
-    )
-  })
-  else ReactDOM.render(
-    <React.StrictMode>
-      <App theme={theme} />
-    </React.StrictMode>,
-    document.getElementById('root')
-  )
-})
+if (hasSetting('theme')) theme = getSetting('theme');
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App theme={theme} />
+  </React.StrictMode>,
+  document.getElementById('root')
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

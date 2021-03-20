@@ -11,7 +11,8 @@
   "homepage": ".",
   "website": "https://harshkhandeparkar.github.io/rainbow-board",
   "dependencies": {
-    "electron-is-dev": "^1.2.0"
+    "electron-is-dev": "^1.2.0",
+    "electron-settings": "^4.0.2"
   },
   "scripts": {
     "start": "concurrently 'BROWSER=none react-scripts start' 'wait-on tcp:3000 && electron-forge start'",
@@ -24,6 +25,7 @@
     "pack": "electron-builder --dir",
     "dist": "yarn build && electron-builder",
     "ship": "yarn build && electron-forge make && electron-builder",
+    "ebuild": "yarn build && electron-builder",
     "postinstall": "electron-builder install-app-deps"
   },
   "eslintConfig": {
