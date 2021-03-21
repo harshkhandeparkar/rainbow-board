@@ -23,7 +23,7 @@ function createMainWindow() {
 
   if (isDev) win.webContents.openDevTools();
 
-  win.webContents.on('new-window', (e, url) => {
+  win.webContents.setWindowOpenHandler((e, url) => {
     e.preventDefault();
     shell.openExternal(url);
   })
