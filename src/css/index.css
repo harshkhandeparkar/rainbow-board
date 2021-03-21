@@ -69,3 +69,12 @@ footer a:hover {
 .modal {
   border-radius: 0.5rem;
 }
+
+.card, .card-content, .card-action {
+  border-radius: 8px !important;
+}
+
+.card:hover {
+  transition: transform 0.1s;
+  transform: scale(1.05);
+}
