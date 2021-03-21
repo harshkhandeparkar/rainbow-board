@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rainbow Board - Loading...</title>
+  <style>
+    body {
+      padding: 1rem;
+      background-color: #121212;
+      color: white;
+      padding: auto;
+    }
+
+    @keyframes painting {
+      from {
+        color: white;
+      }
+      50% {
+        color: rgb(250, 129, 29);
+      }
+      to {
+        color: white;
+      }
+    }
+
+    .center {
+      display: block;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #logo {
+      width: 70%;
+      height: 70%;
+    }
+
+    #painting {
+      animation: painting 2s infinite;
+    }
+  </style>
+</head>
+<body style="-webkit-app-region: drag;">
+  <img id="logo" class="center" src="./logo512.png">
+  <h1 class="center">Rainbow Board</h1>
+  <h3 class="center" id="painting">Painting...</h3>
+</body>
+</html>
