@@ -7,7 +7,8 @@ function createMainWindow() {
     webPreferences: {
       devTools: isDev,
       enableRemoteModule: true,
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation: false
     },
     icon: path.join(__dirname, 'public', 'logo512.png')
   })
