@@ -16,6 +16,10 @@
   font-family: 'Oxygen';
 }
 
+.styled-text {
+  font-family: 'Finger Paint';
+}
+
 html {
   margin: 0;
   padding: 0;
