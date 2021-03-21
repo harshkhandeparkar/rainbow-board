@@ -1,10 +1,3 @@
-@font-face {
-  font-family: 'Finger Paint';
-  font-style: normal;
-  font-weight: 400;
-  src: url(../../fonts/FingerPaint/FingerPaint-Regular.ttf) format('truetype');
-}
-
 .styled-text {
   font-family: 'Finger Paint', cursive;
 }

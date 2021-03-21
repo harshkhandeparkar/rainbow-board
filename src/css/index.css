@@ -5,6 +5,13 @@
   src: url(../fonts/Oxygen/Oxygen-Regular.ttf) format('truetype');
 }
 
+@font-face {
+  font-family: 'Finger Paint';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/FingerPaint/FingerPaint-Regular.ttf) format('truetype');
+}
+
 * {
   font-family: 'Oxygen';
 }
