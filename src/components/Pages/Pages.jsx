@@ -112,7 +112,6 @@ export class Pages extends Component {
     if (this.state.pagesLength > 1) {
       const board = this.pageRef.current.state.boardState.drawBoard;
       this.pages = this.pages.filter((value, index) => index !== this.state.currentPage); // Delete that page
-      console.log(this.pages);
 
       if (this.state.currentPage === this.state.pagesLength - 1) {
         board.importData(this.pages[this.state.currentPage - 1]);
