@@ -20,6 +20,7 @@ export class Page extends Component {
     }
 
     this.svgRef = createRef();
+    this.toolbarRef = createRef();
   }
 
   static boardOptions = {
@@ -105,7 +106,7 @@ export class Page extends Component {
 
     hotkeys('ctrl+s, command+s', 'drawboard', (e) => {
       e.preventDefault();
-      this._save();
+      this.toolbarRef.current.saveBoardModalInstance.open();
     })
 
     hotkeys.setScope('drawboard');
@@ -121,6 +122,7 @@ export class Page extends Component {
         <svg className="page" ref={this.svgRef}></svg>
 
         <Toolbar
+          ref={this.toolbarRef}
           boardOptions={Page.boardOptions}
           boardState={this.state.boardState}
           initialBrushColor={this.props.getTheme() === 'white' ? [0, 0, 0] : [1, 1, 1]}

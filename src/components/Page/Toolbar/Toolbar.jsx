@@ -185,7 +185,6 @@ export class Toolbar extends Component {
                   <div  className={`save-type card ${this.state.saveType === 'svg' ? 'selected' : ''}`} onClick={() => {this.setState({ saveType: 'svg', saveModalOn: true })}}>
                     <h6>SVG</h6>
                     Saves the file as an <a href="https://en.wikipedia.org/wiki/SVG" rel="noreferrer" style={{display: 'inline'}} target="_blank">SVG</a>. Use it if you know what it is.
-                    <br />NOTE: THIS WILL SAVE THE SLIDE WITH A TRANSPARENT BACKGROUND.
                   </div>
                 </div>
               </div>
