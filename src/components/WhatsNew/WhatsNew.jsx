@@ -46,7 +46,21 @@
 
           <div className="container">
             <div className="row valign-wrapper">
-              <div className="col s12">
+              <div className="col s4">
+                <New
+                  title="Delete Page"
+                  desc="You can delete the current page using the button at the top right corner."
+                  version="v0.5.3"
+                />
+              </div>
+              <div className="col s4">
+                <New
+                  title="Page Number Display"
+                  desc="The current page number and the total pages are displayed at the top left corner."
+                  version="v0.5.3"
+                />
+              </div>
+              <div className="col s4">
                 <New
                   title="Better Load"
                   desc="The app starts with a splash screen and loads only when ready."
@@ -77,25 +91,6 @@
                   title="SVG"
                   desc={(<span>Rainbow Board new uses <b>svg</b> instead of <b>canvas</b> which means that now you can save the slide as SVG, the whiteboard is faster, resizing is better and we will add new tools such as text tool in the future.</span>)}
                   version="v0.5.0"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="container">
-            <div className="row valign-wrapper">
-              <div className="col s6">
-                <New
-                  title="Hotkeys"
-                  desc={(<span><b>Ctrl+Z</b> or <b>Command+Z</b> to undo, <b>Ctrl+Shift+Z</b> or <b>Command+Shift+Z</b> to redo, and <b>Ctrl+S</b> or <b>Command+S</b> to save the slide!</span>)}
-                  version="0.4.0"
-                />
-              </div>
-              <div className="col s6">
-                <New
-                  title="Undo Redo"
-                  desc={(<span>You can now <b>undo</b> and <b>redo</b>  using the shiny buttons or hotkeys.</span>)}
-                  version="0.4.0"
                 />
               </div>
             </div>
