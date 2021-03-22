@@ -49,14 +49,14 @@
               <div className="col s4">
                 <New
                   title="Delete Page"
-                  desc="You can delete the current page using the button at the top right corner."
+                  desc="You can delete the current page using the button at the top right corner. Also the current page number and total pages are displayed at the top left corner. Thanks to AnarcHy on Discord for the feedback."
                   version="v0.5.3"
                 />
               </div>
               <div className="col s4">
                 <New
-                  title="Page Number Display"
-                  desc="The current page number and the total pages are displayed at the top left corner."
+                  title="SVG Background"
+                  desc="The saved SVG slide now has a background color."
                   version="v0.5.3"
                 />
               </div>
