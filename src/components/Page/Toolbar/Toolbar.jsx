@@ -126,13 +126,13 @@ export class Toolbar extends Component {
           <button className="btn-flat brand-text" title="Color Palette" onClick={() => this.colorPickerInstance.open()}>
             <i className="material-icons ">palette</i>
           </button>
-          <button className="btn-flat brand-text" title="Undo" onClick={() => _onUndo()}>
+          <button className="btn-flat brand-text" title="Undo (Ctrl + Z)" onClick={() => _onUndo()}>
             <i className="material-icons ">undo</i>
           </button>
-          <button className="btn-flat brand-text" title="Redo" onClick={() => _onRedo()}>
+          <button className="btn-flat brand-text" title="Redo (Ctrl + Shift + Z)" onClick={() => _onRedo()}>
             <i className="material-icons ">redo</i>
           </button>
-          <button className="btn-flat brand-text" title="Save this slide" onClick={() => this.saveBoardModalInstance.open()}>
+          <button className="btn-flat brand-text" title="Save this slide (Ctrl + S)" onClick={() => this.saveBoardModalInstance.open()}>
             <i className="material-icons ">save</i>
           </button>
           <button className="btn-flat brand-text" title="Clear the board" onClick={() => this.clearBoardModalInstance.open()}>
