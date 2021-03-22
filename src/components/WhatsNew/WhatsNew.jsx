@@ -55,8 +55,8 @@
               </div>
               <div className="col s4">
                 <New
-                  title="SVG Background"
-                  desc="The saved SVG slide now has a background color."
+                  title="Better Save"
+                  desc="The saved SVG slide now has a background color. Also, preview for the tool is not included in the saved image."
                   version="v0.5.3"
                 />
               </div>
