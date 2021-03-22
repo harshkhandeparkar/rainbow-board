@@ -3,14 +3,25 @@
 }
 
 .page-btn {
-  margin-top: 45vh;
   position: absolute !important;
 }
 
+.page-btn.top-right {
+  right: 1rem;
+  top: 0.5rem;
+}
+
+.page-btn.top-left {
+  left: 1rem;
+  top: 0.5rem;
+}
+
 .page-btn.right {
+  top: 45vh;
   right: 1rem;
 }
 
 .page-btn.left {
+  top: 45vh;
   left: 1rem;
 }
