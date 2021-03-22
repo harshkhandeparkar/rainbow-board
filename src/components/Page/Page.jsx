@@ -91,6 +91,7 @@ export class Page extends Component {
 
   _save(type) {
     const svgSaver = new SVGSaver();
+    this.state.boardState.drawBoard.clearPreview();
     if (type === 'svg') svgSaver.asSvg(this.svgRef.current, 'slide.svg');
     else svgSaver.asPng(this.svgRef.current, 'slide');
   }
