@@ -91,9 +91,16 @@ export class Page extends Component {
 
   _save(type) {
     const svgSaver = new SVGSaver();
+
     this.state.boardState.drawBoard.clearPreview();
+    this.svgRef.current.setAttribute('width', this.state.boardState.drawBoard.dimensions[0].toString());
+    this.svgRef.current.setAttribute('height', this.state.boardState.drawBoard.dimensions[1].toString());
+
     if (type === 'svg') svgSaver.asSvg(this.svgRef.current, 'slide.svg');
     else svgSaver.asPng(this.svgRef.current, 'slide');
+
+    this.svgRef.current.removeAttribute('width');
+    this.svgRef.current.removeAttribute('height');
   }
 
   _setHotkeys() {
