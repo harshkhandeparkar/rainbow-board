@@ -4,8 +4,8 @@ const isDev = require('electron-is-dev');
 
 function makeSplashScreen() {
   const splashWin = new BrowserWindow({
-    width: 500,
-    height: 500,
+    width: 400,
+    height: 400,
     center: true,
     resizable: false,
     frame: false,
