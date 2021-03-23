@@ -5,27 +5,30 @@
   import { version } from '../../../package.json';
 
   import Grid from '../Grid/Grid';
+  import GridItem from '../Grid/GridItem';
 
   function New({title, desc, version, link, size}) {
     return (
-      <div className="card grid-card center" style={{ gridColumnEnd: `span ${size ? size : 1}` }}>
-        <div className="card-content">
-          <span className="card-title styled-text brand-text">{title}</span>
-          <p>{desc}</p>
+      <GridItem options={{size: size ? size : 1}}>
+        <div className="card full-height-card center" style={{ gridColumnEnd: `span ${size ? size : 1}` }}>
+          <div className="card-content">
+            <span className="card-title styled-text brand-text">{title}</span>
+            <p>{desc}</p>
+          </div>
+          {
+            version &&
+            <div className="card-action">
+              Added in <a target="_blank" rel="noreferrer" href={`https://github.com/HarshKhandeparkar/rainbow-board/releases/${version}`}>v{version.replace('v', '')}</a>
+            </div>
+          }
+          {
+            link &&
+            <div className="card-action">
+              <a target="_blank" rel="noreferrer" href={link}>Link</a>
+            </div>
+          }
         </div>
-        {
-          version &&
-          <div className="card-action">
-            Added in <a target="_blank" rel="noreferrer" href={`https://github.com/HarshKhandeparkar/rainbow-board/releases/${version}`}>v{version.replace('v', '')}</a>
-          </div>
-        }
-        {
-          link &&
-          <div className="card-action">
-            <a target="_blank" rel="noreferrer" href={link}>Link</a>
-          </div>
-        }
-      </div>
+      </GridItem>
     )
   }
 

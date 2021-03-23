@@ -2,18 +2,21 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import Grid from '../Grid/Grid';
+import GridItem from '../Grid/GridItem';
 
 function Credit({title, desc, link, size}) {
   return (
-    <div className="card grid-card center" style={{ gridColumnEnd: `span ${size ? size : 1}` }}>
-      <div className="card-content">
-        <span className="card-title styled-text brand-text">{title}</span>
-        <p>{desc}</p>
+    <GridItem options={{width: size ? size : 1}}>
+      <div className="card full-height-card center">
+        <div className="card-content">
+          <span className="card-title styled-text brand-text">{title}</span>
+          <p>{desc}</p>
+        </div>
+        <div className="card-action">
+          <a target="_blank" rel="noreferrer" href={link}>Link</a>
+        </div>
       </div>
-      <div className="card-action">
-        <a target="_blank" rel="noreferrer" href={link}>Link</a>
-      </div>
-    </div>
+    </GridItem>
   )
 }
 

@@ -79,14 +79,14 @@ footer a:hover {
   transform: scale(1.05);
 }
 
-.grid-card {
+.full-height-card {
   height: 100%;
 }
 
-.grid-card .card-content {
+.full-height-card .card-content {
   height: 75%;
 }
 
-.grid-card .card-action {
+.full-height-card .card-action {
   height: 25%;
 }
