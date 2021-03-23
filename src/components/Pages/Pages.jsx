@@ -1,9 +1,12 @@
 import React, { Component, createRef } from 'react';
-import './Pages.css';
+import { renderPreview } from 'svg-real-renderer';
 
 import Page from '../Page/Page';
+import Grid from '../Grid/Grid';
+import GridItem from '../Grid/GridItem';
 
 import '../Page/Page.css';
+import './Pages.css';
 
 export class Pages extends Component {
   constructor(...props) {
@@ -11,7 +14,8 @@ export class Pages extends Component {
 
     this.state = {
       currentPage: 0,
-      pagesLength: 1
+      pagesLength: 1,
+      showOverview: false
     }
 
     this.pageRef = createRef();
@@ -30,13 +34,18 @@ export class Pages extends Component {
             <i className={`brand-text fa fa-${this.state.currentPage === this.state.pagesLength - 1 ? 'plus' : 'chevron-right'}`} />
           </button>
 
-          <span
+          <button
             className="btn-floating page-btn top-left brand-text"
             style={{ fontWeight: 'bold' }}
-            title="Page Number"
+            title={this.state.showOverview ? 'Close' : 'Show Page Overview'}
+            onClick={this.state.showOverview ? this.closeOverview : this.openOverview}
           >
-            {this.state.currentPage + 1} / {this.state.pagesLength}
-          </span>
+            {
+              this.state.showOverview ?
+              <i className="material-icons brand-text">close</i>
+              : `${this.state.currentPage + 1} / ${this.state.pagesLength}`
+            }
+          </button>
 
           {
             this.state.pagesLength > 1 &&
@@ -64,8 +73,58 @@ export class Pages extends Component {
           ref={this.pageRef}
           getTheme={this.props.getTheme}
         />
+
+        <div
+          className={`pages-overview z-depth-2 ${this.state.showOverview ? '' : 'hide'}`}
+          style={{ opacity: this.state.showOverview ? 1 : 0 }}
+        >
+          <Grid options={{ numColumns: 5 }}>
+            {
+              (new Array(this.state.pagesLength).fill(0)).map((value, index) => {
+                return (
+                  <GridItem options={{ gap: '1rem 1rem' }} key={index}>
+                    <div className="card center">
+                      <div className="card-image">
+                        <svg className={`preview-svg preview-svg-${index}`} />
+                        <div className="card-title">
+                          #{index + 1}
+                          <button className="btn btn-small btn-floating">
+                            <i className="fa fa-trash red-text"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </GridItem>
+                )
+              })
+            }
+          </Grid>
+        </div>
       </div>
     )
+  }
+
+  openOverview = (e) => {
+    e.preventDefault();
+
+    const board = this.pageRef.current.state.boardState.drawBoard;
+    this.pages[this.state.currentPage] = board.exportData();
+
+    this.pages.forEach((page, index) => {
+      renderPreview(page, document.querySelector(`.preview-svg-${index}`));
+    })
+
+    this.setState({
+      showOverview: true
+    })
+  }
+
+  closeOverview = (e) => {
+    e.preventDefault();
+
+    this.setState({
+      showOverview: false
+    })
   }
 
   addPage = (e) => {
@@ -86,6 +145,7 @@ export class Pages extends Component {
 
     const board = this.pageRef.current.state.boardState.drawBoard;
     this.pages[this.state.currentPage] = board.exportData();
+
     board.importData(this.pages[this.state.currentPage + 1]);
 
     this.setState({
@@ -99,6 +159,7 @@ export class Pages extends Component {
     const board = this.pageRef.current.state.boardState.drawBoard;
     this.pages.push(board.exportData());
     this.pages[this.state.currentPage] = board.exportData();
+
     board.importData(this.pages[this.state.currentPage - 1]);
 
     this.setState({

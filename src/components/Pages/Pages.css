@@ -25,3 +25,22 @@
   top: 45vh;
   left: 1rem;
 }
+
+.pages-overview {
+  position: fixed;
+  bottom: 5rem;
+  top: 3rem;
+  width: 90%;
+  left: 5%;
+  right: 5%;
+  border-radius: 1rem;
+
+  padding: 0.5rem;
+
+  transition: opacity 200ms;
+  overflow-y: auto;
+}
+
+.preview-svg {
+  border-radius: 0.5rem;
+}

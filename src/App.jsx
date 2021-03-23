@@ -65,7 +65,7 @@ class App extends Component {
               color: ${this.state.theme.textColor} !important;
             }
 
-            .nav-wrapper, nav {
+            .nav-wrapper, nav, .pages-overview {
               background-color: ${this.state.theme.bg1} !important;
             }
 
