@@ -4,9 +4,11 @@
   import { setSetting } from '../../util/settings';
   import { version } from '../../../package.json';
 
-  function New({title, desc, version, link}) {
+  import Grid from '../Grid/Grid';
+
+  function New({title, desc, version, link, size}) {
     return (
-      <div className="card new-card">
+      <div className="card grid-card center" style={{ gridColumnEnd: `span ${size ? size : 1}` }}>
         <div className="card-content">
           <span className="card-title styled-text brand-text">{title}</span>
           <p>{desc}</p>
@@ -44,57 +46,44 @@
             </div>
           </nav>
 
-          <div className="container">
-            <div className="row valign-wrapper">
-              <div className="col s4">
-                <New
-                  title="Delete Page"
-                  desc="You can delete the current page using the button at the top right corner. Also the current page number and total pages are displayed at the top left corner. Thanks to AnarcHy on Discord for the feedback."
-                  version="v0.5.3"
-                />
-              </div>
-              <div className="col s4">
-                <New
-                  title="Better Save"
-                  desc="The saved SVG slide now has a background color. Also, preview for the tool is not included in the saved image."
-                  version="v0.5.3"
-                />
-              </div>
-              <div className="col s4">
-                <New
-                  title="Better Load"
-                  desc="The app starts with a splash screen and loads only when ready."
-                  version="v0.5.3"
-                />
-              </div>
-            </div>
-          </div>
+          <Grid
+            options={{
+              numColumns: 3
+            }}
+            className="container"
+          >
+            <New
+              title="Delete Page"
+              desc="You can delete the current page using the button at the top right corner. Also the current page number and total pages are displayed at the top left corner. Thanks to AnarcHy on Discord for the feedback."
+              version="v0.5.3"
+            />
+            <New
+              title="Better Save"
+              desc="The saved SVG slide now has a background color. Also, preview for the tool is not included in the saved image."
+              version="v0.5.3"
+            />
+            <New
+              title="Better Load"
+              desc="The app starts with a splash screen and loads only when ready."
+              version="v0.5.3"
+            />
 
-          <div className="container">
-            <div className="row valign-wrapper">
-              <div className="col s4">
-                <New
-                  title="Save Settings"
-                  desc="Your settings such as theme will be saved and the same theme will be used on restart."
-                  version="v0.5.2"
-                />
-              </div>
-              <div className="col s4">
-                <New
-                  title="Multiple Pages"
-                  desc="You can now add multiple pages and switch between them by using the buttons at the left and right edges of the screen."
-                  version="v0.5.1"
-                />
-              </div>
-              <div className="col s4">
-                <New
-                  title="SVG"
-                  desc={(<span>Rainbow Board new uses <b>svg</b> instead of <b>canvas</b> which means that now you can save the slide as SVG, the whiteboard is faster, resizing is better and we will add new tools such as text tool in the future.</span>)}
-                  version="v0.5.0"
-                />
-              </div>
-            </div>
-          </div>
+            <New
+              title="Save Settings"
+              desc="Your settings such as theme will be saved and the same theme will be used on restart."
+              version="v0.5.2"
+            />
+            <New
+              title="Multiple Pages"
+              desc="You can now add multiple pages and switch between them by using the buttons at the left and right edges of the screen."
+              version="v0.5.1"
+            />
+            <New
+              title="SVG"
+              desc={(<span>Rainbow Board new uses <b>svg</b> instead of <b>canvas</b> which means that now you can save the slide as SVG, the whiteboard is faster, resizing is better and we will add new tools such as text tool in the future.</span>)}
+              version="v0.5.0"
+            />
+          </Grid>
         </div>
       )
     }

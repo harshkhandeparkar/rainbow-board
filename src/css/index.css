@@ -78,3 +78,15 @@ footer a:hover {
   transition: transform 0.1s;
   transform: scale(1.05);
 }
+
+.grid-card {
+  height: 100%;
+}
+
+.grid-card .card-content {
+  height: 75%;
+}
+
+.grid-card .card-action {
+  height: 25%;
+}
