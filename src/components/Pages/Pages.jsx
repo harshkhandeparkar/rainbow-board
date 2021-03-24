@@ -15,7 +15,7 @@ export class Pages extends Component {
     }
 
     this.pageRef = createRef();
-    this.pages = [];
+    this.pages = [[]];
   }
 
   render() {
@@ -72,7 +72,7 @@ export class Pages extends Component {
     e.preventDefault();
 
     const board = this.pageRef.current.state.boardState.drawBoard;
-    this.pages.push(board.exportData());
+    this.pages[this.state.currentPage] = board.exportData();
     board.clear();
 
     this.setState({
