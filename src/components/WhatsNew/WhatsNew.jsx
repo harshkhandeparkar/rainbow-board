@@ -9,8 +9,8 @@
 
   function New({title, desc, version, link, size}) {
     return (
-      <GridItem options={{size: size ? size : 1}}>
-        <div className="card full-height-card center" style={{ gridColumnEnd: `span ${size ? size : 1}` }}>
+      <GridItem options={{width: size ? size : 1}}>
+        <div className="card full-height-card center">
           <div className="card-content">
             <span className="card-title styled-text brand-text">{title}</span>
             <p>{desc}</p>
@@ -55,6 +55,31 @@
             }}
             className="container"
           >
+            <New
+              title="Multiple Pages Bug Fix"
+              desc={
+                <span>
+                  There was a bug in multiple pages as reported by AnarcHy on Discord:
+
+                  <blockquote>
+                  1) start a new project
+                  2) write down '1' on first slide
+                  3) create new slide and write down '2'
+                  4) go back to first slide, do not change anything
+                  5) go to slide 2 again, add new slide and write down '3'
+                  6) create new slide and write down '4'
+                  7) go back to the previous slide and see the magic happen. It says '2', although we expect it to say '3'
+
+                  I also found a similar incorrect behaviour in some other scenarios, but this was the simplest one I found that shows it. Guess it will be the same source for the error as in these other scenarios.
+                  Basically, if you go back a single slide from the latest one, then go on to create two new slides and then go back to the first one that was newly created, it does not show what was written down on it, but another one from the series. Which one it shows I did not find the pattern yet.
+                  </blockquote>
+
+                  This bug has been fixed.
+                </span>
+              }
+              version="v0.5.4"
+              size={3}
+            />
             <New
               title="Delete Page"
               desc="You can delete the current page using the button at the top right corner. Also the current page number and total pages are displayed at the top left corner. Thanks to AnarcHy on Discord for the feedback."

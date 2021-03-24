@@ -84,9 +84,9 @@ footer a:hover {
 }
 
 .full-height-card .card-content {
-  height: 75%;
+  height: calc(100% - 3.5rem);
 }
 
 .full-height-card .card-action {
-  height: 25%;
+  height: 3.5rem;
 }
