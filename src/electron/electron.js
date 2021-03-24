@@ -10,7 +10,7 @@ function makeSplashScreen() {
     resizable: false,
     frame: false,
     show: false,
-    icon: path.join(__dirname, 'logo512.png')
+    icon: path.join(__dirname, 'icon.png')
   })
 
   splashWin.removeMenu();
@@ -35,13 +35,11 @@ function createMainWindow(splashWin) {
       contextIsolation: false
     },
     show: false,
-    icon: path.join(__dirname, 'logo512.png')
+    icon: path.join(__dirname, 'icon.png')
   })
 
   win.loadURL(
-    isDev
-    ? 'http://localhost:3000'
-      : `file://${path.join(__dirname, 'index.html')}`
+    `file://${path.join(__dirname, 'index.html')}`
   )
 
   win.removeMenu();
