@@ -7,15 +7,15 @@
   },
   "repository": "https://github.com/HarshKhandeparkar/rainbow-board",
   "description": "Cross-platform Whiteboard app made using React, Electron, SVG Real Renderer!",
-  "main": "src/electron/electron.js",
-  "homepage": ".",
+  "main": "public/electron.js",
   "website": "https://harshkhandeparkar.github.io/rainbow-board",
   "dependencies": {
     "electron-is-dev": "^2.0.0",
     "electron-settings": "^4.0.2"
   },
   "scripts": {
-    "start": "electron .",
+    "start": "webpack --mode development && electron .",
+    "build": "webpack --mode production",
     "package": "electron-forge package",
     "make": "yarn build && electron-forge make",
     "pack": "electron-builder --dir",
@@ -25,10 +25,17 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-transform-react-display-name": "^7.12.13",
+    "@babel/plugin-transform-react-jsx": "^7.13.12",
+    "@babel/preset-react": "^7.12.13",
     "@electron-forge/cli": "^6.0.0-beta.54",
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "babel-loader": "^8.2.2",
     "concurrently": "^6.0.0",
+    "css-loader": "^5.2.0",
     "electron": "^12.0.1",
     "electron-builder": "^22.10.5",
     "hotkeys-js": "^3.8.3",
@@ -40,10 +47,13 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "semver": "^7.3.2",
+    "style-loader": "^2.0.0",
     "svg-real-renderer": "^0.1.9",
     "svgsaver": "^0.9.0",
     "wait-on": "^5.2.0",
-    "web-vitals": "^1.1.1"
+    "web-vitals": "^1.1.1",
+    "webpack": "^5.28.0",
+    "webpack-cli": "^4.5.0"
   },
   "config": {
     "forge": "./forge.config.js"

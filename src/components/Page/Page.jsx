@@ -4,7 +4,7 @@ import { RealDrawBoard } from 'svg-real-renderer';
 import hotkeys from 'hotkeys-js';
 import SVGSaver from 'svgsaver';
 
-import { Toolbar } from './Toolbar/Toolbar';
+import { Toolbar } from './Toolbar/Toolbar.jsx';
 
 import '../Page/Page.css';
 

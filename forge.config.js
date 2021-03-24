@@ -4,7 +4,7 @@ module.exports = {
   packagerConfig: {
     ignore: [
       // Thanks to https://regex101.com
-      '^[\/]?node_modules\/(?!electron-is-dev|ms)[a-zA-Z\/\.\\\-]*',
+      '^[\/]?node_modules\/(?!electron-is-dev|ms|electron-settings)[a-zA-Z\/\.\\\-]*',
       '^[\/]?src/[a-zA-Z\/\.\\\-]*',
       '^[\/]?forge.config.js',
       '^[\/]?public\/(?!electron.js)[a-zA-Z\/\.\\\-]*'

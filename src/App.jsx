@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 import Main from './components/Main.jsx';
 import Pages from './components/Pages/Pages.jsx';
-import Credits from './components/Credits/Credits';
-import WhatsNew from './components/WhatsNew/WhatsNew';
+import Credits from './components/Credits/Credits.jsx';
+import WhatsNew from './components/WhatsNew/WhatsNew.jsx';
 
 import { setSetting } from './util/settings';
 

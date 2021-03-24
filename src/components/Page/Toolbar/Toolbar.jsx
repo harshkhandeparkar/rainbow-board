@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import { Link } from 'react-router-dom';
 import M from 'materialize-css';
-import PaintSettings from '../../PaintSettings/PaintSettings';
+import PaintSettings from '../../PaintSettings/PaintSettings.jsx';
 
 import './Toolbar.css';
 

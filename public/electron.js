@@ -14,10 +14,7 @@ function makeSplashScreen() {
   })
 
   splashWin.removeMenu();
-  splashWin.loadFile(
-    isDev ? path.join(__dirname, 'splash.html')
-    : path.join(__dirname, '..', 'build', 'splash.html')
-  )
+  splashWin.loadFile(path.join(__dirname, 'splash.html'));
 
   splashWin.webContents.on('did-finish-load', () => {
     splashWin.show();
@@ -38,10 +35,7 @@ function createMainWindow(splashWin) {
     icon: path.join(__dirname, 'icon.png')
   })
 
-  win.loadURL(
-    `file://${path.join(__dirname, 'index.html')}`
-  )
-
+  win.loadFile(path.join(__dirname, 'index.html'));
   win.removeMenu();
 
   if (isDev) win.webContents.openDevTools();

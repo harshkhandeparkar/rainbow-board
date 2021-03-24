@@ -1,9 +1,8 @@
 import React, { Component, createRef } from 'react';
+
+import Page from '../Page/Page.jsx';
+
 import './Pages.css';
-
-import Page from '../Page/Page';
-
-import '../Page/Page.css';
 
 export class Pages extends Component {
   constructor(...props) {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import Grid from '../Grid/Grid';
-import GridItem from '../Grid/GridItem';
+import Grid from '../Grid/Grid.jsx';
+import GridItem from '../Grid/GridItem.jsx';
 
 function Credit({title, desc, link, size}) {
   return (

@@ -4,8 +4,8 @@
   import { setSetting } from '../../util/settings';
   import { version } from '../../../package.json';
 
-  import Grid from '../Grid/Grid';
-  import GridItem from '../Grid/GridItem';
+  import Grid from '../Grid/Grid.jsx';
+  import GridItem from '../Grid/GridItem.jsx';
 
   function New({title, desc, version, link, size}) {
     return (
