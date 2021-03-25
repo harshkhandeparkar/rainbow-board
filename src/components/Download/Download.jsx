@@ -3,8 +3,6 @@ import M from 'materialize-css';
 import { gt } from 'semver';
 import { version } from '../../../package.json';
 
-import { isElectron } from '../../util/isElectron';
-
 export default class Download extends Component {
   state = {
     latestVersion: version,
@@ -21,13 +19,12 @@ export default class Download extends Component {
     return (
       <div>
         {
-          (!isElectron || gt(this.state.latestVersion, version)) &&
           (
             <div>
               <button className="dropdown-trigger btn center brand-text" data-target="download-dropdown">
                 <i className="fa fa-download left" />
                 Download {
-                  isElectron ? 'New Version' : 'Desktop App'
+                  'Desktop App'
                 }
               </button>
 

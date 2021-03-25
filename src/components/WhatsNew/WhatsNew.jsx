@@ -56,6 +56,24 @@
             className="container"
           >
             <New
+              title="Desktop App Features"
+              desc="The app has been changed to look more like a desktop app than a web app running in a wrapper.
+              A new menu has been added along with other changes. Starting from now, the web app will not be updated beyond
+              v0.5.4 because maintaining both is not possible. New optimizations and features will be added to the desktop app and the website
+              will be used as an about page.
+              "
+              version="v0.6.0"
+              size={2}
+            />
+            <New
+              title="Hotter Keys"
+              desc="New hotkeys (keyboard shortcuts) have been added to almost every action such as adding pages, changing the page, color palette and choosing the tool.
+              Use the top menu to find out which hotkey does what."
+              version="v0.6.0"
+              size={1}
+            />
+
+            <New
               title="Multiple Pages Bug Fix"
               desc={
                 <span>

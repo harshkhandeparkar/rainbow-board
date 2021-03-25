@@ -7,7 +7,6 @@ import SVGSaver from 'svgsaver';
 import { Toolbar } from './Toolbar/Toolbar';
 
 import '../Page/Page.css';
-import { isElectron } from '../../util/isElectron';
 
 export class Page extends Component {
   constructor(...props) {
@@ -60,10 +59,8 @@ export class Page extends Component {
       }
     })
 
-    if (!isElectron) {
-      window.onbeforeunload = function() {
-        return `Do you want to leave this page? You may lose saved changes.`;
-      }
+    window.onbeforeunload = function() {
+      return `Do you want to leave this page? You may lose saved changes.`;
     }
 
     this._removeHotkeys();
