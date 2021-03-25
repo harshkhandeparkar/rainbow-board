@@ -8,9 +8,14 @@ export class IPCHandler {
     'clear': {},
     'add': {},
     'delete': {},
-    'home': {},
+    'go-home': {},
+    'go-whatsnew': {},
+    'go-pages': {},
+    'go-credits': {},
     'next': {},
     'prev': {},
+    'color-palette': {},
+    'set-tool': {},
     'prompt-reply': {}
   }
 

@@ -8,7 +8,7 @@ import './css/font-awesome.min.css';
 import 'material-icons/iconfont/material-icons.css';
 
 import { getSetting, hasSetting } from './util/settings';
-import { goHome } from './util/navigation';
+import { goHome, goPages, goWhatsNew, goCredits } from './util/navigation';
 import { ipcRenderer } from 'electron';
 import ipcHandler from './util/ipc-handler';
 
@@ -24,4 +24,7 @@ ReactDOM.render(
 )
 
 ipcRenderer.send('set-hotkeys');
-ipcHandler.addEventHandler('home', 'goHomeHandler', goHome);
+ipcHandler.addEventHandler('go-home', 'goHomeHandler', goHome);
+ipcHandler.addEventHandler('go-whatsnew', 'goNewHandler', goWhatsNew);
+ipcHandler.addEventHandler('go-pages', 'goPagesHandler', goPages);
+ipcHandler.addEventHandler('go-credits', 'goCreditsHandler', goCredits);

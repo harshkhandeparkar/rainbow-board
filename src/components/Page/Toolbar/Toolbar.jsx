@@ -4,6 +4,7 @@ import PaintSettings from '../../PaintSettings/PaintSettings.jsx';
 
 import './Toolbar.css';
 import { goHome } from '../../../util/navigation';
+import ipcHandler from '../../../util/ipc-handler.js';
 
 export class Toolbar extends Component {
   constructor(...props) {
@@ -80,6 +81,26 @@ export class Toolbar extends Component {
     })
   }
 
+  _removeHotkeys() {
+    ipcHandler.removeEventHandler('color-palette', 'colorPaletteHandler');
+    ipcHandler.removeEventHandler('set-tool', 'setToolHandler');
+  }
+
+  _setHotkeys() {
+    this._removeHotkeys();
+
+    ipcHandler.addEventHandler('color-palette', 'colorPaletteHandler', () => this.colorPickerInstance.open());
+    ipcHandler.addEventHandler('set-tool', 'setToolHandler', (event, args) => this.props._setTool(args.tool));
+  }
+
+  componentDidMount() {
+    this._setHotkeys();
+  }
+
+  componentWillUnmount() {
+    this._removeHotkeys();
+  }
+
   render() {
     const { initialBrushColor, boardState, _setTool, _clearBoard, _save, _onUndo, _onRedo } = this.props;
     const [r, g, b] = initialBrushColor;
@@ -134,7 +155,7 @@ export class Toolbar extends Component {
           <button
             className="btn-flat brand-text"
             title="Clear the board"
-            onClick={this.props._clearBoard}
+            onClick={_clearBoard}
           >
             <i className="fa fa-ban "></i>
           </button>
