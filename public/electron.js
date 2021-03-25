@@ -42,28 +42,28 @@ function createMainWindow(splashWin) {
       type: 'submenu',
       label: '&File',
       submenu: [
-        {label: 'Start New', accelerator: 'CommandOrControl + N'},
-        {label: 'Save Page', accelerator: 'CommandOrControl + S'}
+        {label: 'Start New', accelerator: 'CmdOrCtrl + N'},
+        {label: 'Save Page', accelerator: 'CmdOrCtrl + S'}
       ]
     },
     {
       type: 'submenu',
       label: '&Edit',
       submenu: [
-        {label: 'Undo', accelerator: 'CommandOrControl + Z'},
-        {label: 'Redo', accelerator: 'CommandOrControl + Shift + Z'},
+        {label: 'Undo', accelerator: 'CmdOrCtrl + Z'},
+        {label: 'Redo', accelerator: 'CmdOrCtrl + Y'},
         {type: 'separator'},
-        {label: 'Clear Page'},
-        {label: 'Add Page'},
-        {label: 'Delete Page'},
+        {label: 'Add Page', accelerator: 'Plus'},
+        {label: 'Clear Page', accelerator: 'Delete'},
+        {label: 'Delete Page', accelerator: 'CmdOrCtrl + Delete'},
         {type: 'separator'},
-        {label: 'Next Page'},
-        {label: 'Previous Page'},
+        {label: 'Next Page', accelerator: 'Right'},
+        {label: 'Previous Page', accelerator: 'Left'},
         {type: 'separator'},
-        {label: 'Color Palette'},
-        {label: 'Brush Tool'},
-        {label: 'Eraser'},
-        {label: 'Line Tool'},
+        {label: 'Color Palette', accelerator: 'CmdOrCtrl + P'},
+        {label: 'Brush Tool', accelerator: 'CmdOrCtrl + 1'},
+        {label: 'Eraser', accelerator: 'CmdOrCtrl + 2'},
+        {label: 'Line Tool', accelerator: 'CmdOrCtrl + 3'},
       ]
     },
     {
@@ -87,8 +87,8 @@ function createMainWindow(splashWin) {
     // Submenu: Edit
     windowMenuTemplate[1].submenu[0].click = () => event.reply('undo');
     windowMenuTemplate[1].submenu[1].click = () => event.reply('redo');
-    windowMenuTemplate[1].submenu[3].click = () => event.reply('clear');
-    windowMenuTemplate[1].submenu[4].click = () => event.reply('add');
+    windowMenuTemplate[1].submenu[3].click = () => event.reply('add');
+    windowMenuTemplate[1].submenu[4].click = () => event.reply('clear');
     windowMenuTemplate[1].submenu[5].click = () => event.reply('delete');
     windowMenuTemplate[1].submenu[7].click = () => event.reply('next');
     windowMenuTemplate[1].submenu[8].click = () => event.reply('prev');

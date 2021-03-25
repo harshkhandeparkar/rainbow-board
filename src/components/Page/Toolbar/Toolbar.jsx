@@ -89,7 +89,7 @@ export class Toolbar extends Component {
   _setHotkeys() {
     this._removeHotkeys();
 
-    ipcHandler.addEventHandler('color-palette', 'colorPaletteHandler', () => this.colorPickerInstance.open());
+    ipcHandler.addEventHandler('color-palette', 'colorPaletteHandler', () => this.colorPickerInstance.isOpen ? this.colorPickerInstance.close() : this.colorPickerInstance.open());
     ipcHandler.addEventHandler('set-tool', 'setToolHandler', (event, args) => this.props._setTool(args.tool));
   }
 

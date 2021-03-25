@@ -136,12 +136,14 @@ export class Pages extends Component {
   }
 
   deletePage = () => {
-    ipcRenderer.send('prompt', {
-      title: 'Delete this page?',
-      message: 'If you delete the page, all the unsaved data will be LOST FOREVER.',
-      buttons: ['Yes', 'No'],
-      event: 'delete'
-    })
+    if (this.state.pagesLength > 1) {
+      ipcRenderer.send('prompt', {
+        title: 'Delete this page?',
+        message: 'If you delete the page, all the unsaved data will be LOST FOREVER.',
+        buttons: ['Yes', 'No'],
+        event: 'delete'
+      })
+    }
   }
 
   _deletePage = () => {
