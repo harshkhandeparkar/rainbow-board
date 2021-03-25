@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import { version } from '../../package.json';
+import { version, discordInvite } from '../../package.json';
 import Download from './Download/Download.jsx';
 
 import { hasSetting, getSetting } from '../util/settings';
@@ -61,7 +61,7 @@ function Main({toggleTheme, getTheme}) {
                 <ul>
                   <li><a href="https://github.com/HarshKhandeparkar/rainbow-board/issues/new/choose" target="_blank" rel="noreferrer">Feedback or Questions</a></li>
                   <li><a href="https://github.com/HarshKhandeparkar/rainbow-board/" target="_blank" rel="noreferrer">Star on Github</a></li>
-                  <li><a href="https://discord.gg/FEpMS43UwR" target="_blank" rel="noreferrer">Chat on Discord</a></li>
+                  <li><a href={discordInvite} target="_blank" rel="noreferrer">Chat on Discord</a></li>
                 </ul>
               </div>
               <div className="row">

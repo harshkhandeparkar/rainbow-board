@@ -7,6 +7,7 @@
   },
   "repository": "https://github.com/HarshKhandeparkar/rainbow-board",
   "description": "Cross-platform Whiteboard app made using React, Electron, SVG Real Renderer!",
+  "discordInvite": "https://discord.gg/FEpMS43UwR",
   "main": "public/electron.js",
   "website": "https://harshkhandeparkar.github.io/rainbow-board",
   "dependencies": {
