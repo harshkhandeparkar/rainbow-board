@@ -1,9 +1,6 @@
   import React, { Component } from 'react';
   import { NavLink } from 'react-router-dom';
 
-  import { setSetting } from '../../util/settings';
-  import { version } from '../../../package.json';
-
   import Grid from '../Grid/Grid';
   import GridItem from '../Grid/GridItem';
 
@@ -33,10 +30,6 @@
   }
 
   export default class WhatsNew extends Component {
-    componentDidMount() {
-      setSetting('lastVersionChangelogShown', version);
-    }
-
     render() {
       return (
         <div>
