@@ -60,7 +60,9 @@ V8: v${process.versions.v8}
       label: '&File',
       submenu: [
         { label: 'Start New', accelerator: 'CmdOrCtrl + N' },
-        { label: 'Save Page', accelerator: 'CmdOrCtrl + S' }
+        { label: 'Save Page', accelerator: 'CmdOrCtrl + S' },
+        { type: 'separator' },
+        { label: 'Quit', accelerator: 'CmdOrCtrl + Q', click: () => win.isClosable() && win.close() }
       ]
     },
     {
@@ -152,8 +154,6 @@ V8: v${process.versions.v8}
 
     win.setMenu(Menu.buildFromTemplate(windowMenuTemplate));
   })
-
-  if (isDev) win.webContents.openDevTools();
 
   win.webContents.setWindowOpenHandler((e, url) => {
     e.preventDefault();

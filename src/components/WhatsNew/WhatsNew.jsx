@@ -56,24 +56,40 @@
             className="container"
           >
             <New
+              title="Desktop App Features"
+              desc="The app has been changed to look more like a desktop app than a web app running in a wrapper.
+              A new menu has been added along with other changes. Starting from now, the web app will not be updated beyond
+              v0.5.4 because maintaining both is not possible. New optimizations and features will be added to the desktop app and the website
+              will be used as an about page.
+              "
+              version="v0.6.0"
+              size={2}
+            />
+            <New
+              title="Hotter Keys"
+              desc="New hotkeys (keyboard shortcuts) have been added to almost every action such as adding pages, changing the page, color palette and choosing the tool.
+              Use the top menu to find out which hotkey does what."
+              version="v0.6.0"
+              size={1}
+            />
+
+            <New
               title="Multiple Pages Bug Fix"
               desc={
                 <span>
-                  There was a bug in multiple pages as reported by AnarcHy on Discord:
-
-                  <blockquote>
-                  1) start a new project
-                  2) write down '1' on first slide
-                  3) create new slide and write down '2'
-                  4) go back to first slide, do not change anything
-                  5) go to slide 2 again, add new slide and write down '3'
-                  6) create new slide and write down '4'
-                  7) go back to the previous slide and see the magic happen. It says '2', although we expect it to say '3'
-
-                  I also found a similar incorrect behaviour in some other scenarios, but this was the simplest one I found that shows it. Guess it will be the same source for the error as in these other scenarios.
-                  Basically, if you go back a single slide from the latest one, then go on to create two new slides and then go back to the first one that was newly created, it does not show what was written down on it, but another one from the series. Which one it shows I did not find the pattern yet.
-                  </blockquote>
-
+                  There was a bug in multiple pages as reported by AnarcHy on Discord:<br />
+                  <br />
+                  1) start a new project <br />
+                  2) write down '1' on first slide<br />
+                  3) create new slide and write down '2'<br />
+                  4) go back to first slide, do not change anything<br />
+                  5) go to slide 2 again, add new slide and write down '3'<br />
+                  6) create new slide and write down '4'<br />
+                  7) go back to the previous slide and see the magic happen. It says '2', although we expect it to say '3'<br />
+                  <br />
+                  I also found a similar incorrect behaviour in some other scenarios, but this was the simplest one I found that shows it. Guess it will be the same source for the error as in these other scenarios.<br />
+                  Basically, if you go back a single slide from the latest one, then go on to create two new slides and then go back to the first one that was newly created, it does not show what was written down on it, but another one from the series. Which one it shows I did not find the pattern yet.<br />
+                  <br />
                   This bug has been fixed.
                 </span>
               }
