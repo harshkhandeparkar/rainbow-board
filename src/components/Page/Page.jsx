@@ -1,12 +1,12 @@
 import React, { Component, createRef } from 'react';
-import './Page.css';
+import { ipcRenderer } from 'electron';
 import { RealDrawBoard } from 'svg-real-renderer';
-import hotkeys from 'hotkeys-js';
 import SVGSaver from 'svgsaver';
+import ipcHandler from '../../util/ipc-handler';
 
 import { Toolbar } from './Toolbar/Toolbar.jsx';
 
-import '../Page/Page.css';
+import './Page.css';
 
 export class Page extends Component {
   constructor(...props) {
@@ -59,16 +59,10 @@ export class Page extends Component {
       }
     })
 
-    window.onbeforeunload = function() {
-      return `Do you want to leave this page? You may lose saved changes.`;
-    }
-
-    this._removeHotkeys();
     this._setHotkeys();
   }
 
   componentWillUnmount() {
-    window.onbeforeunload = () => {};
     this._removeHotkeys();
   }
 
@@ -83,7 +77,12 @@ export class Page extends Component {
   }
 
   _clearBoard() {
-    this.state.boardState.drawBoard.clear();
+    ipcRenderer.send('prompt', {
+      title: 'Clear this page?',
+      message: 'If you clear the page, all the unsaved data will be LOST FOREVER.',
+      buttons: ['Yes', 'No'],
+      event: 'clear'
+    })
   }
 
   _save(type) {
@@ -100,25 +99,32 @@ export class Page extends Component {
     this.svgRef.current.removeAttribute('height');
   }
 
-  _setHotkeys() {
-    hotkeys('ctrl+z, command+z', 'drawboard', () => {
-      this.state.boardState.drawBoard.undo();
-    })
-
-    hotkeys('ctrl+shift+z, command+shift+z', 'drawboard', () => {
-      this.state.boardState.drawBoard.redo();
-    })
-
-    hotkeys('ctrl+s, command+s', 'drawboard', (e) => {
-      e.preventDefault();
-      this.toolbarRef.current.saveBoardModalInstance.open();
-    })
-
-    hotkeys.setScope('drawboard');
+  _removeHotkeys() {
+    ipcHandler.removeEventHandler('undo', 'undoEventHandler');
+    ipcHandler.removeEventHandler('redo', 'redoEventHandler');
+    ipcHandler.removeEventHandler('save', 'saveEventHandler');
+    ipcHandler.removeEventHandler('clear', 'clearEventHandler');
+    ipcHandler.removeEventHandler('prompt-reply', 'clearPagePromptHandler');
   }
 
-  _removeHotkeys() {
-    hotkeys.deleteScope('drawboard');
+  _setHotkeys() {
+    this._removeHotkeys();
+
+    ipcHandler.addEventHandler('undo', 'undoEventHandler', () => {
+      this.state.boardState.drawBoard.undo();
+    })
+    ipcHandler.addEventHandler('redo', 'redoEventHandler', () => {
+      this.state.boardState.drawBoard.redo();
+    })
+    ipcHandler.addEventHandler('save', 'saveEventHandler', () => {
+      this.toolbarRef.current.saveBoardModalInstance.open();
+    })
+    ipcHandler.addEventHandler('clear', 'clearEventHandler', () => {
+      this._clearBoard();
+    })
+    ipcHandler.addEventHandler('prompt-reply', 'clearPagePromptHandler', (event, args) => {
+      if (args.response === 0 && args.event === 'clear') this.state.boardState.drawBoard.clear();
+    })
   }
 
   render() {

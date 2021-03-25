@@ -1,20 +1,18 @@
+import { ipcRenderer } from 'electron';
 import React, { Component, createRef } from 'react';
 
 import Page from '../Page/Page.jsx';
+import ipcHandler from '../../util/ipc-handler';
 
 import './Pages.css';
 
 export class Pages extends Component {
-  constructor(...props) {
-    super(...props);
+  pageRef = createRef();
+  pages = [[]];
 
-    this.state = {
-      currentPage: 0,
-      pagesLength: 1
-    }
-
-    this.pageRef = createRef();
-    this.pages = [[]];
+  state = {
+    currentPage: 0,
+    pagesLength: 1
   }
 
   render() {
@@ -67,9 +65,41 @@ export class Pages extends Component {
     )
   }
 
-  addPage = (e) => {
-    e.preventDefault();
+  _removeHotkeys() {
+    ipcHandler.removeEventHandler('next', 'nextPageHandler');
+    ipcHandler.removeEventHandler('prev', 'prevPageHandler');
+    ipcHandler.removeEventHandler('add', 'addPageHandler');
+    ipcHandler.removeEventHandler('delete', 'deletePageHandler');
+    ipcHandler.removeEventHandler('prompt-reply', 'deletePagePromptHandler');
+  }
 
+  componentDidMount() {
+    this._removeHotkeys();
+
+    ipcHandler.addEventHandler('next', 'nextPageHandler', () => {
+      this.nextPage();
+    })
+    ipcHandler.addEventHandler('prev', 'prevPageHandler', () => {
+      this.lastPage();
+    })
+    ipcHandler.addEventHandler('add', 'addPageHandler', () => {
+      this.addPage();
+    })
+    ipcHandler.addEventHandler('delete', 'deletePageHandler', () => {
+      this.deletePage();
+    })
+    ipcHandler.addEventHandler('prompt-reply', 'deletePagePromptHandler', (event, args) => {
+      if (args.event === 'delete') {
+        this._deletePage();
+      }
+    })
+  }
+
+  componentWillUnmount() {
+    this._removeHotkeys();
+  }
+
+  addPage = () => {
     const board = this.pageRef.current.state.boardState.drawBoard;
     this.pages[this.state.currentPage] = board.exportData();
     board.clear();
@@ -80,51 +110,58 @@ export class Pages extends Component {
     })
   }
 
-  nextPage = (e) => {
-    e.preventDefault();
+  nextPage = () => {
+    if (this.state.currentPage !== this.state.pagesLength - 1) {
+      const board = this.pageRef.current.state.boardState.drawBoard;
+      this.pages[this.state.currentPage] = board.exportData();
+      board.importData(this.pages[this.state.currentPage + 1]);
 
-    const board = this.pageRef.current.state.boardState.drawBoard;
-    this.pages[this.state.currentPage] = board.exportData();
-    board.importData(this.pages[this.state.currentPage + 1]);
+      this.setState({
+        currentPage: this.state.currentPage + 1
+      })
+    }
+  }
 
-    this.setState({
-      currentPage: this.state.currentPage + 1
+  lastPage = () => {
+    if (this.state.currentPage !== 0) {
+      const board = this.pageRef.current.state.boardState.drawBoard;
+      this.pages.push(board.exportData());
+      this.pages[this.state.currentPage] = board.exportData();
+      board.importData(this.pages[this.state.currentPage - 1]);
+
+      this.setState({
+        currentPage: this.state.currentPage - 1
+      })
+    }
+  }
+
+  deletePage = () => {
+    ipcRenderer.send('prompt', {
+      title: 'Delete this page?',
+      message: 'If you delete the page, all the unsaved data will be LOST FOREVER.',
+      buttons: ['Yes', 'No'],
+      event: 'delete'
     })
   }
 
-  lastPage = (e) => {
-    e.preventDefault();
-
-    const board = this.pageRef.current.state.boardState.drawBoard;
-    this.pages.push(board.exportData());
-    this.pages[this.state.currentPage] = board.exportData();
-    board.importData(this.pages[this.state.currentPage - 1]);
-
-    this.setState({
-      currentPage: this.state.currentPage - 1
-    })
-  }
-
-  deletePage = (e) => {
-    e.preventDefault();
-
+  _deletePage = () => {
     if (this.state.pagesLength > 1) {
       const board = this.pageRef.current.state.boardState.drawBoard;
-      this.pages = this.pages.filter((value, index) => index !== this.state.currentPage); // Delete that page
+        this.pages = this.pages.filter((value, index) => index !== this.state.currentPage); // Delete that page
 
-      if (this.state.currentPage === this.state.pagesLength - 1) {
-        board.importData(this.pages[this.state.currentPage - 1]);
-        this.setState({
-          currentPage: this.state.currentPage - 1,
-          pagesLength: this.state.pagesLength - 1
-        })
-      }
-      else {
-        board.importData(this.pages[this.state.currentPage]);
-        this.setState({
-          pagesLength: this.state.pagesLength - 1
-        })
-      }
+        if (this.state.currentPage === this.state.pagesLength - 1) {
+          board.importData(this.pages[this.state.currentPage - 1]);
+          this.setState({
+            currentPage: this.state.currentPage - 1,
+            pagesLength: this.state.pagesLength - 1
+          })
+        }
+        else {
+          board.importData(this.pages[this.state.currentPage]);
+          this.setState({
+            pagesLength: this.state.pagesLength - 1
+          })
+        }
     }
   }
 }

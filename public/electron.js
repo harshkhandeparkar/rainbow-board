@@ -1,4 +1,4 @@
-const { app, BrowserWindow, shell, dialog } = require('electron');
+const { app, BrowserWindow, shell, dialog, ipcMain, Menu } = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev');
 
@@ -36,7 +36,96 @@ function createMainWindow(splashWin) {
   })
 
   win.loadFile(path.join(__dirname, 'index.html'));
-  win.removeMenu();
+
+  const windowMenuTemplate = [
+    {
+      type: 'submenu',
+      label: 'File',
+      submenu: [
+        {
+          label: 'Save Page',
+          accelerator: 'CommandOrControl + S'
+        }
+      ]
+    },
+    {
+      type: 'submenu',
+      label: 'Edit',
+      submenu: [
+        {
+          label: 'Undo',
+          accelerator: 'CommandOrControl + Z'
+        },
+        {
+          label: 'Redo',
+          accelerator: 'CommandOrControl + Shift + Z'
+        },
+        {
+          label: 'Clear Page'
+        },
+        {
+          label: 'Add Page'
+        },
+        {
+          label: 'Delete Page'
+        }
+      ]
+    },
+    {
+      type: 'submenu',
+      label: 'Go',
+      submenu: [
+        {
+          label: 'Home'
+        },
+        {
+          label: 'Next Page'
+        },
+        {
+          label: 'Previous Page'
+        }
+      ]
+    }
+  ]
+
+  win.setMenu(Menu.buildFromTemplate(windowMenuTemplate));
+
+  ipcMain.on('set-hotkeys', (event) => {
+    // Submenu: File
+    windowMenuTemplate[0].submenu[0].click = (e) => {
+      event.reply('save');
+    }
+
+    // Submenu: Edit
+    windowMenuTemplate[1].submenu[0].click = (e) => {
+      event.reply('undo');
+    }
+    windowMenuTemplate[1].submenu[1].click = (e) => {
+      event.reply('redo');
+    }
+    windowMenuTemplate[1].submenu[2].click = (e) => {
+      event.reply('clear');
+    }
+    windowMenuTemplate[1].submenu[3].click = (e) => {
+      event.reply('add');
+    }
+    windowMenuTemplate[1].submenu[4].click = (e) => {
+      event.reply('delete');
+    }
+
+    // Submenu: Go
+    windowMenuTemplate[2].submenu[0].click = (e) => {
+      event.reply('home');
+    }
+    windowMenuTemplate[2].submenu[1].click = (e) => {
+      event.reply('next');
+    }
+    windowMenuTemplate[2].submenu[2].click = (e) => {
+      event.reply('prev');
+    }
+
+    win.setMenu(Menu.buildFromTemplate(windowMenuTemplate));
+  })
 
   if (isDev) win.webContents.openDevTools();
 
@@ -46,6 +135,17 @@ function createMainWindow(splashWin) {
   })
 
   app.showExitPrompt = true;
+
+  ipcMain.on('prompt', (event, args) => {
+    dialog.showMessageBox(win, {
+      type: 'question',
+      buttons: args.buttons,
+      title: args.title,
+      message: args.message
+    }).then(({ response }) => {
+      event.reply('prompt-reply', { event: args.event, response });
+    })
+  })
 
   win.on('close', (e) => {
     if (app.showExitPrompt) {

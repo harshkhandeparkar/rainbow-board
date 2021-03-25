@@ -1,19 +1,17 @@
 import React, { Component, createRef } from 'react';
-import { Link } from 'react-router-dom';
 import M from 'materialize-css';
 import PaintSettings from '../../PaintSettings/PaintSettings.jsx';
 
 import './Toolbar.css';
+import { goHome } from '../../../util/navigation';
 
 export class Toolbar extends Component {
   constructor(...props) {
     super(...props);
 
     // Modals
-    this.clearBoardRef = createRef();
     this.saveBoardRef = createRef();
     this.colorPickerRef = createRef();
-    this.goHomeRef = createRef();
 
     // Ranges
     this.brushSizeRangeRef = createRef();
@@ -34,10 +32,8 @@ export class Toolbar extends Component {
   }
 
   _initializeModal() {
-    if (!this.clearBoardModalInstance) this.clearBoardModalInstance = M.Modal.init(this.clearBoardRef.current);
     if (!this.saveBoardModalInstance) this.saveBoardModalInstance = M.Modal.init(this.saveBoardRef.current);
     if (!this.colorPickerInstance) this.colorPickerInstance = M.Modal.init(this.colorPickerRef.current);
-    if (!this.goHomeInstance) this.goHomeInstance = M.Modal.init(this.goHomeRef.current);
   }
 
 
@@ -135,37 +131,20 @@ export class Toolbar extends Component {
           <button className="btn-flat brand-text" title="Save this slide (Ctrl + S)" onClick={() => this.saveBoardModalInstance.open()}>
             <i className="material-icons ">save</i>
           </button>
-          <button className="btn-flat brand-text" title="Clear the board" onClick={() => this.clearBoardModalInstance.open()}>
+          <button
+            className="btn-flat brand-text"
+            title="Clear the board"
+            onClick={this.props._clearBoard}
+          >
             <i className="fa fa-ban "></i>
           </button>
-          <button className="btn-flat brand-text" title="Go to home" onClick={() => this.goHomeInstance.open()}>
+          <button
+            className="btn-flat brand-text"
+            title="Go to home"
+            onClick={goHome}
+          >
             <i className="material-icons ">home</i>
           </button>
-        </div>
-
-        <div className="modal bottom-sheet" ref={this.goHomeRef}>
-          <div className="modal-content container center">
-            <h4>Are you sure you want to go to the home page?</h4>
-            <p>If you do this, <b>ALL</b> the changes you made will be <b>LOST FOREVER.</b></p>
-          </div>
-          <div className="modal-footer container">
-            <button className="btn green-text right" onClick={e => this.goHomeInstance.close()}>No</button>
-            <Link to="/" className="btn red-text left">Yes</Link>
-          </div>
-        </div>
-
-        <div className="modal bottom-sheet" ref={this.clearBoardRef}>
-          <div className="modal-content container center">
-            <h4>Do you want to clear the board?</h4>
-            <p>If you clear the board, <b>ALL</b> the changes you made will be <b>LOST FOREVER.</b></p>
-          </div>
-          <div className="modal-footer container">
-            <button className="btn green-text right" onClick={e => this.clearBoardModalInstance.close()}>No</button>
-            <button className="btn red-text left" onClick={e => {
-              _clearBoard();
-              this.clearBoardModalInstance.close();
-            }}>Yes</button>
-          </div>
         </div>
 
         <div className="modal" ref={this.saveBoardRef}>

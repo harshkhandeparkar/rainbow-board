@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import { Route, Router } from 'react-router-dom';
 import Main from './components/Main.jsx';
 import Pages from './components/Pages/Pages.jsx';
 import Credits from './components/Credits/Credits.jsx';
 import WhatsNew from './components/WhatsNew/WhatsNew.jsx';
 
 import { setSetting } from './util/settings';
+import history from './util/history';
 
 class App extends Component {
   whiteTheme = {
@@ -56,7 +57,7 @@ class App extends Component {
 
   render() {
     return (
-      <HashRouter>
+      <Router history={history}>
         <style>
           {
             `
@@ -110,7 +111,7 @@ class App extends Component {
         <Route path="/pages" render={() => <Pages getTheme={() => this.getTheme()} />} />
         <Route path="/credits" component={Credits} />
         <Route path="/new" component={WhatsNew} />
-      </HashRouter>
+      </Router>
     )
   }
 }
