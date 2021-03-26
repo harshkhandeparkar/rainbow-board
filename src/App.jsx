@@ -7,7 +7,6 @@ import WhatsNew from './components/WhatsNew/WhatsNew.jsx';
 
 import history from './util/history';
 import themeManager from './util/theme';
-import { pluginGlobalCSS } from './util/plugins';
 
 class App extends Component {
   state = {
@@ -29,7 +28,7 @@ class App extends Component {
         <style>
           {
             `
-            ${pluginGlobalCSS}
+            ${this.state.css.globalCSS}
 
             body, .modal, .modal-footer {
               background-color: ${this.state.css.bgColor} !important;

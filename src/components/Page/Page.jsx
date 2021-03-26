@@ -4,6 +4,7 @@ import { RealDrawBoard } from 'svg-real-renderer';
 import SVGSaver from 'svgsaver';
 import ipcHandler from '../../util/ipc-handler';
 import themeManager from '../../util/theme';
+import { boardPluginExists, boardPlugin } from '../../util/plugins';
 
 import { Toolbar } from './Toolbar/Toolbar.jsx';
 
@@ -21,11 +22,22 @@ export class Page extends Component {
 
     this.svgRef = createRef();
     this.toolbarRef = createRef();
+
+    if (boardPluginExists) {
+      const customBoardOptions = boardPlugin.plugin.customBoardOptions[themeManager.getTheme().theme] || {};
+
+      this.boardOptions = {
+        ...this.boardOptions,
+        ...customBoardOptions,
+        toolSettings: {
+          ...this.boardOptions.toolSettings,
+          ...(customBoardOptions.toolSettings || {})
+        }
+      }
+    }
   }
 
   boardOptions = {
-    xScaleFactor: 1,
-    yScaleFactor: 1,
     drawAxes: false,
     xOffset: 0,
     yOffset: 0,

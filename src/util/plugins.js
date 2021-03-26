@@ -7,6 +7,7 @@ import { ipcRenderer } from 'electron';
  * @property {string} bg2 Level 2 surface color
  * @property {string} highlight Highlight color
  * @property {string} textColor
+ * @property {string} globalCSS
  */
 
 /**
@@ -16,7 +17,7 @@ import { ipcRenderer } from 'electron';
  */
 
 /**
- * @typedef {'CUSTOM_THEME' | 'CUSTOM_GLOBAL_CSS'} PluginModifier
+ * @typedef {'CUSTOM_THEME' | 'CUSTOM_BOARD_OPTIONS'} PluginModifier
  */
 
 /**
@@ -29,6 +30,7 @@ import { ipcRenderer } from 'electron';
  * @typedef {Object} PluginCode
  * @property {ThemeManagerOptions} customThemeCSS?
  * @property {string} customGlobalCSS?
+ * @property {Object} customBoardOptions?
  */
 
 /**
@@ -45,16 +47,10 @@ const plugins = ipcRenderer.sendSync('get-plugins');
 export const themePlugin = plugins.find((plugin) => {
   return plugin.info.modifiers.includes('CUSTOM_THEME');
 })
-
 export const themePluginExists = themePlugin !== undefined;
 
-const globalCSSPlugins = plugins.filter((plugin) => {
-  return plugin.info.modifiers.includes('CUSTOM_GLOBAL_CSS');
+export const boardPlugin = plugins.find((plugin) => {
+  return plugin.info.modifiers.includes('CUSTOM_BOARD_OPTIONS');
 })
 
-let pluginGlobalCSSString = '';
-globalCSSPlugins.forEach((plugin) => {
-  pluginGlobalCSSString += plugin.plugin.customGlobalCSS;
-})
-
-export const pluginGlobalCSS = pluginGlobalCSSString;
+export const boardPluginExists = boardPlugin !== undefined;
