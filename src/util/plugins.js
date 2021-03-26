@@ -16,14 +16,19 @@ import { ipcRenderer } from 'electron';
  */
 
 /**
+ * @typedef {'CUSTOM_THEME' | 'CUSTOM_GLOBAL_CSS'} PluginModifier
+ */
+
+/**
  * @typedef {Object} PluginInfo
  * @property {string} name
- * @property {('CUSTOM_THEME')[]} modifiers
+ * @property {PluginModifier[]} modifiers
  */
 
 /**
  * @typedef {Object} PluginCode
  * @property {ThemeManagerOptions} customThemeCSS?
+ * @property {string} customGlobalCSS?
  */
 
 /**
@@ -43,3 +48,13 @@ export const themePlugin = plugins.find((plugin) => {
 
 export const themePluginExists = themePlugin !== undefined;
 
+const globalCSSPlugins = plugins.filter((plugin) => {
+  return plugin.info.modifiers.includes('CUSTOM_GLOBAL_CSS');
+})
+
+let pluginGlobalCSSString = '';
+globalCSSPlugins.forEach((plugin) => {
+  pluginGlobalCSSString += plugin.plugin.customGlobalCSS;
+})
+
+export const pluginGlobalCSS = pluginGlobalCSSString;
