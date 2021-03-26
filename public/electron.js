@@ -2,6 +2,31 @@ const { app, BrowserWindow, shell, dialog, ipcMain, Menu } = require('electron')
 const path = require('path');
 const isDev = require('electron-is-dev');
 const { website, repository, version, discordInvite } = require('../package.json');
+const { hasSync, getSync, set } = require('electron-settings');
+const { existsSync, mkdirSync } = require('fs');
+
+let plugins = [];
+const pluginsDir = path.join(app.getPath('userData'), 'plugins');
+
+function loadPlugins() {
+  if (hasSync('plugins')) {
+    const pluginNames = getSync('plugins');
+    if (!existsSync(pluginsDir)) {
+      mkdirSync(pluginsDir);
+    }
+
+    pluginNames.forEach((name) => {
+      if (existsSync(path.join(pluginsDir, name))) {
+        plugins.push({
+          name,
+          info: require(path.join(pluginsDir, name, 'plugin.json')),
+          plugin: require(path.join(pluginsDir, name, 'plugin.js'))
+        })
+      }
+    })
+  }
+  else set('plugins', []);
+}
 
 function makeSplashScreen() {
   const splashWin = new BrowserWindow({
@@ -35,6 +60,12 @@ function createMainWindow(splashWin) {
     show: false,
     fullscreenable: true,
     icon: path.join(__dirname, 'icon.png')
+  })
+
+  loadPlugins();
+
+  ipcMain.on('get-plugins', (e) => {
+    e.returnValue = plugins;
   })
 
   win.loadFile(path.join(__dirname, 'index.html'));

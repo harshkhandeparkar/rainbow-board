@@ -1,4 +1,5 @@
 import { setSetting, hasSetting, getSetting } from './settings';
+import { themePlugin } from './plugins';
 
 /**
  * @typedef {Object} ThemeCSS
@@ -118,5 +119,11 @@ class ThemeManager {
   }
 }
 
+/**
+ * @type {ThemeManagerOptions}
+ */
+const options = {};
+if (Object.keys(themePlugin.plugin.customThemeCSS).includes('dark')) options.customDarkThemeCSS = themePlugin.plugin.customThemeCSS.dark;
+if (Object.keys(themePlugin.plugin.customThemeCSS).includes('light')) options.customLightThemeCSS = themePlugin.plugin.customThemeCSS.light;
 
-export default new ThemeManager({});
+export default new ThemeManager(options);
