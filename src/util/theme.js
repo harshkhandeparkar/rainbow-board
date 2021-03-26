@@ -58,6 +58,7 @@ class ThemeManager {
 
       if (themeSetting === 'light') this.theme = themeSetting;
       else if (themeSetting === 'dark') this.theme = themeSetting;
+      else setSetting('theme', this.theme);
     }
   }
 
