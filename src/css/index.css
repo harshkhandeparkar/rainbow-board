@@ -46,10 +46,6 @@ footer a:hover {
   min-height: 100vh;
 }
 
-.brand-text {
-  color: rgb(250, 129, 29) !important;
-}
-
 .logo-text {
   -webkit-user-select: none;
   -moz-user-select: none;

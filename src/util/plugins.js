@@ -7,6 +7,7 @@ import { ipcRenderer } from 'electron';
  * @property {string} bg2 Level 2 surface color
  * @property {string} highlight Highlight color
  * @property {string} textColor
+ * @property {string} highlightTextColor
  * @property {string} globalCSS
  */
 

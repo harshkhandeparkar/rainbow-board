@@ -79,7 +79,6 @@ input[type=range] {
 }
 
 .save-type.selected {
-  border: rgb(250, 129, 29) solid 1px;
   border-radius: 8px;
 
   transition: border 300ms;

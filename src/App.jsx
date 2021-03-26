@@ -30,6 +30,14 @@ class App extends Component {
             `
             ${this.state.css.globalCSS}
 
+            .brand-text, .card .card-action a {
+              color: ${this.state.css.highlightTextColor} !important;
+            }
+
+            .save-type.selected {
+              border: ${this.state.css.highlightTextColor} solid 1px;
+            }
+
             body, .modal, .modal-footer {
               background-color: ${this.state.css.bgColor} !important;
               color: ${this.state.css.textColor} !important;

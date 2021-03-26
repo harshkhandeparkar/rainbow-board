@@ -8,6 +8,7 @@ import { themePlugin, themePluginExists } from './plugins';
  * @property {string} bg2 Level 2 surface color
  * @property {string} highlight Highlight color
  * @property {string} textColor
+ * @property {string} highlightTextColor
  * @property {string} globalCSS
  */
 
@@ -35,6 +36,7 @@ class ThemeManager {
       bg2: 'white',
       highlight: '#e6e6e6',
       textColor: 'black',
+      highlightTextColor: 'rgb(250, 129, 29)',
       globalCSS: ''
     },
     dark: {
@@ -43,6 +45,7 @@ class ThemeManager {
       bg2: '#303030',
       highlight: '#303030',
       textColor: '#f1f1f1',
+      highlightTextColor: 'rgb(250, 129, 29)',
       globalCSS: ''
     }
   }
