@@ -39,5 +39,7 @@ const plugins = ipcRenderer.sendSync('get-plugins');
 
 export const themePlugin = plugins.find((plugin) => {
   return plugin.info.modifiers.includes('CUSTOM_THEME');
-}) || {};
+})
+
+export const themePluginExists = themePlugin !== undefined;
 

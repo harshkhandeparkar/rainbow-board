@@ -8,6 +8,13 @@ const { existsSync, mkdirSync } = require('fs');
 let plugins = [];
 const pluginsDir = path.join(app.getPath('userData'), 'plugins');
 
+if (isDev) {
+  const devUserDataPath = path.join(app.getPath('appData'), 'rainbow-board-dev')
+  if (!existsSync(devUserDataPath)) mkdirSync(devUserDataPath);
+
+  app.setPath('userData', devUserDataPath);
+}
+
 function loadPlugins() {
   if (hasSync('plugins')) {
     const pluginNames = getSync('plugins');
