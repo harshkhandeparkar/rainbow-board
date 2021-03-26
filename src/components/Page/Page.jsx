@@ -3,6 +3,7 @@ import { ipcRenderer } from 'electron';
 import { RealDrawBoard } from 'svg-real-renderer';
 import SVGSaver from 'svgsaver';
 import ipcHandler from '../../util/ipc-handler';
+import themeManager from '../../util/theme';
 
 import { Toolbar } from './Toolbar/Toolbar.jsx';
 
@@ -22,7 +23,7 @@ export class Page extends Component {
     this.toolbarRef = createRef();
   }
 
-  static boardOptions = {
+  boardOptions = {
     xScaleFactor: 1,
     yScaleFactor: 1,
     drawAxes: false,
@@ -32,8 +33,11 @@ export class Page extends Component {
       brushSize: 3,
       lineThickness: 3,
       eraserSize: 30,
-      changeRate: 5
+      changeRate: 5,
+      brushColor: themeManager.getTheme().theme === 'light' ? [0, 0, 0] : [1, 1, 1],
+      lineColor: themeManager.getTheme().theme === 'light' ? [0, 0, 0] : [1, 1, 1]
     },
+    bgColor: themeManager.getTheme().theme === 'light' ? [1, 1, 1] : [0, 0, 0],
     allowUndo: true,
     maxSnapshots: 10
   }
@@ -48,13 +52,7 @@ export class Page extends Component {
             this.svgRef.current.clientWidth,
             this.svgRef.current.clientHeight
           ],
-          ...Page.boardOptions,
-          toolSettings: {
-            ...Page.boardOptions.toolSettings,
-            brushColor: this.props.getTheme() === 'white' ? [0, 0, 0] : [1, 1, 1],
-            lineColor: this.props.getTheme() === 'white' ? [0, 0, 0] : [1, 1, 1],
-          },
-          bgColor: this.props.getTheme() === 'white' ? [1, 1, 1] : [0, 0, 0],
+          ...this.boardOptions
         }).draw().startRender()
       }
     })
@@ -134,9 +132,9 @@ export class Page extends Component {
 
         <Toolbar
           ref={this.toolbarRef}
-          boardOptions={Page.boardOptions}
+          boardOptions={this.boardOptions}
           boardState={this.state.boardState}
-          initialBrushColor={this.props.getTheme() === 'white' ? [0, 0, 0] : [1, 1, 1]}
+          initialBrushColor={this.boardOptions.toolSettings.brushColor}
           _setTool={(tool) => this._setTool(tool)}
           _save={(type) => this._save(type)}
           _clearBoard={() => this._clearBoard()}

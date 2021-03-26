@@ -59,7 +59,6 @@ export class Pages extends Component {
         </div>
         <Page
           ref={this.pageRef}
-          getTheme={this.props.getTheme}
         />
       </div>
     )

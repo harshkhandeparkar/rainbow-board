@@ -4,8 +4,9 @@ import { version, discordInvite } from '../../package.json';
 import Download from './Download/Download.jsx';
 
 import { hasSetting, getSetting } from '../util/settings';
+import themeManager from '../util/theme';
 
-function Main({toggleTheme, getTheme}) {
+function Main() {
   const history = useHistory();
   let doShowChangelog = true;
 
@@ -68,7 +69,7 @@ function Main({toggleTheme, getTheme}) {
                 <div className="switch" title="Change Theme">
                   <label>
                     <i className="fa fa-sun-o brand-text" />
-                    <input type="checkbox" onInput={e => toggleTheme()} defaultChecked={getTheme() === 'dark'} />
+                    <input type="checkbox" onInput={e => themeManager.toggleTheme()} defaultChecked={themeManager.getTheme().theme === 'dark'} />
                     <span className="lever" />
                     <i className="fa fa-moon-o brand-text" />
                   </label>

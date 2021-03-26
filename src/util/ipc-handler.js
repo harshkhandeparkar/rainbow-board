@@ -32,7 +32,6 @@ export class IPCHandler {
   }
 
   constructor() {
-    console.log('constructed')
     for (let eventName in this.eventHandlers) {
       ipcRenderer.on(eventName, (event, args) => {
         for (let handlerName in this.eventHandlers[eventName]) {

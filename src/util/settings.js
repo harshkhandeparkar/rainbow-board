@@ -27,5 +27,5 @@ export function getSetting(key) {
  * @param {string} value
  */
 export function setSetting(key, value) {
-  settings.setSync(key, value);
+  settings.set(key, value);
 }
