@@ -4,9 +4,10 @@ const isDev = require('electron-is-dev');
 const { website, repository, version, discordInvite } = require('../package.json');
 const { hasSync, getSync, set } = require('electron-settings');
 const { existsSync, mkdirSync } = require('fs');
+const { gte } = require('semver');
 
 if (isDev) {
-  const devUserDataPath = path.join(app.getPath('appData'), 'rainbow-board-dev')
+  const devUserDataPath = path.join(app.getPath('appData'), 'rainbow-board-dev');
   if (!existsSync(devUserDataPath)) mkdirSync(devUserDataPath);
 
   app.setPath('userData', devUserDataPath);
@@ -25,11 +26,14 @@ function loadPlugins() {
 
     pluginNames.forEach((name) => {
       if (existsSync(path.join(pluginsDir, name))) {
+        const info = require(path.join(pluginsDir, name, 'plugin.json'));
+        const plugin = require(path.join(pluginsDir, name, 'plugin.js'));
 
         plugins.push({
           name,
-          info: require(path.join(pluginsDir, name, 'plugin.json')),
-          plugin: require(path.join(pluginsDir, name, 'plugin.js'))
+          info,
+          plugin,
+          usable: gte(version, info.minRBVersion)
         })
       }
     })
@@ -74,7 +78,7 @@ function createMainWindow(splashWin) {
   loadPlugins();
 
   ipcMain.on('get-plugins', (e) => {
-    e.returnValue = plugins;
+    e.returnValue = plugins.filter(plugin => plugin.usable);
   })
 
   win.loadFile(path.join(__dirname, 'index.html'));
