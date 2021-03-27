@@ -4,7 +4,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js'
+    filename: 'renderer.bundle.js'
   },
   target: 'electron-renderer',
   module: {
