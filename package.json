@@ -12,7 +12,8 @@
   "website": "https://harshkhandeparkar.github.io/rainbow-board",
   "dependencies": {
     "electron-is-dev": "^2.0.0",
-    "electron-settings": "^4.0.2"
+    "electron-settings": "^4.0.2",
+    "semver": "^7.3.5"
   },
   "scripts": {
     "start": "webpack --mode development && electron .",
@@ -46,7 +47,6 @@
     "react-color": "^2.19.3",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
-    "semver": "^7.3.2",
     "style-loader": "^2.0.0",
     "svg-real-renderer": "^0.1.9",
     "svgsaver": "^0.9.0",
