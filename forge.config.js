@@ -1,10 +1,15 @@
-const { author, name, description, productName, website, version } = require('./package.json');
+const { author, name, description, productName, website, version, dependencies } = require('./package.json');
+
+let deps = '';
+
+for (let dep in dependencies) deps += dep + '|';
+deps = deps.slice(0, deps.length - 1);
 
 module.exports = {
   packagerConfig: {
     ignore: [
       // Thanks to https://regex101.com
-      '^[\/]?node_modules\/(?!electron-is-dev|ms|electron-settings)[a-zA-Z\/\.\\\-]*',
+      `^[\/]?node_modules\/(?!${deps})[a-zA-Z\/\.\\\-]*`,
       '^[\/]?src/[a-zA-Z\/\.\\\-]*',
       '^[\/]?src',
       '^[\/]?img/[a-zA-Z\/\.\\\-]*',
