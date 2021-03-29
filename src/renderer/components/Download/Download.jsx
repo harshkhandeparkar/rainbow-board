@@ -23,7 +23,7 @@ export default class Download extends Component {
     return (
       <div>
         {
-          (gt(latestVersion, version)) &&
+          (gt(this.state.latestVersion, version)) &&
           (
             <div>
               <button className="dropdown-trigger btn center brand-text" data-target="download-dropdown" title="Download New Version">
