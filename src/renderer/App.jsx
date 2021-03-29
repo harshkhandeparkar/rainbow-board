@@ -52,6 +52,10 @@ class App extends Component {
               color: ${this.state.css.textColor};
             }
 
+            .btn, .btn-floating {
+              border: 1px solid ${this.state.css.highlight} !important;
+            }
+
             .color-picker * {
               color: ${this.state.css.textColor} !important;
             }

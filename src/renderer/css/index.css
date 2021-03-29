@@ -53,9 +53,19 @@ footer a:hover {
   font-weight: bold;
 }
 
-.btn {
-  border-radius: 1rem;
+.btn, .btn-flat {
+  border-radius: 0.3rem;
+  box-shadow: none !important;
   margin-right: 0.5rem;
+}
+
+.btn-floating {
+  box-shadow: none !important;
+}
+
+.btn-floating > i {
+  margin-top: -1px;
+  margin-left: -1px;
 }
 
 .dropdown-content {
