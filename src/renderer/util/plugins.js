@@ -1,21 +1,5 @@
 import { ipcRenderer } from 'electron';
-
-/**
- * @typedef {Object} ThemeCSS
- * @property {string} bgColor Background color
- * @property {string} bg1 Level 1 surface color
- * @property {string} bg2 Level 2 surface color
- * @property {string} highlight Highlight color
- * @property {string} textColor
- * @property {string} highlightTextColor
- * @property {string} globalCSS
- */
-
-/**
- * @typedef {Object} ThemeManagerOptions
- * @property {ThemeCSS} customLightThemeCSS?
- * @property {ThemeCSS} customDarkThemeCSS?
- */
+import { ThemeCSS, ThemeManagerOptions } from './theme';
 
 /**
  * @typedef {'CUSTOM_THEME' | 'CUSTOM_BOARD_OPTIONS'} PluginModifier
@@ -48,13 +32,12 @@ import { ipcRenderer } from 'electron';
  */
 const plugins = ipcRenderer.sendSync('get-plugins');
 
-export const themePlugin = plugins.find((plugin) => {
+export const themePlugins = plugins.filter((plugin) => {
   return plugin.info.modifiers.includes('CUSTOM_THEME') && plugin.usable && plugin.use;
 })
-export const themePluginExists = themePlugin !== undefined;
 
-export const boardPlugin = plugins.find((plugin) => {
+export const boardPlugins = plugins.filter((plugin) => {
   return plugin.info.modifiers.includes('CUSTOM_BOARD_OPTIONS') && plugin.usable && plugin.use;
 })
 
-export const boardPluginExists = boardPlugin !== undefined;
+console.log(themePlugins);

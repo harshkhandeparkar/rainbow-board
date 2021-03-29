@@ -4,7 +4,7 @@ import { RealDrawBoard } from 'svg-real-renderer';
 import SVGSaver from 'svgsaver';
 import ipcHandler from '../../util/ipc-handler';
 import themeManager from '../../util/theme';
-import { boardPluginExists, boardPlugin } from '../../util/plugins';
+import { boardPlugins } from '../../util/plugins';
 
 import * as EVENTS from '../../../common/constants/eventNames';
 
@@ -25,8 +25,15 @@ export class Page extends Component {
     this.svgRef = createRef();
     this.toolbarRef = createRef();
 
-    if (boardPluginExists) {
-      const customBoardOptions = boardPlugin.plugin.customBoardOptions[themeManager.getTheme().theme] || {};
+    if (boardPlugins.length > 0) {
+      const currentTheme = themeManager.getTheme().theme;
+      let customBoardOptions = {};
+
+      boardPlugins.forEach((plugin) => {
+        if (Object.keys(plugin.plugin.customBoardOptions).includes(currentTheme)) {
+          customBoardOptions = plugin.plugin.customBoardOptions[currentTheme];
+        }
+      })
 
       this.boardOptions = {
         ...this.boardOptions,

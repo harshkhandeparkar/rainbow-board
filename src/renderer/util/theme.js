@@ -1,5 +1,5 @@
 import { setSetting, hasSetting, getSetting } from './settings';
-import { themePlugin, themePluginExists } from './plugins';
+import { themePlugins } from './plugins';
 
 /**
  * @typedef {Object} ThemeCSS
@@ -13,18 +13,17 @@ import { themePlugin, themePluginExists } from './plugins';
  */
 
 /**
- * @typedef {'light' | 'dark'} Theme
- */
-
-/**
  * @typedef {Object} ThemeManagerOptions
- * @property {ThemeCSS} customLightThemeCSS?
- * @property {ThemeCSS} customDarkThemeCSS?
+ * @property {{[themeName: string]: {name: string, css: ThemeCSS}} customThemes?
  */
 
 class ThemeManager {
-  /** @type {Theme} */
-  theme = 'light'
+  themes = {
+    light: 'Default Light',
+    dark: 'Default Dark'
+  }
+
+  theme = 'light';
 
   /**
    * @type {{light: ThemeCSS, dark: ThemeCSS}}
@@ -57,29 +56,33 @@ class ThemeManager {
    * @param {ThemeManagerOptions} options
    */
   constructor(options) {
-    if (options.customLightThemeCSS) this.themeCSS.light = options.customLightThemeCSS
-    if (options.customDarkThemeCSS) this.themeCSS.dark = options.customDarkThemeCSS;
+    if (options.customThemes) {
+      for (let theme in options.customThemes) {
+        this.themes[theme] = options.customThemes[theme].name;
+        this.themeCSS[theme] = options.customThemes[theme].css;
+      }
+    }
 
     if (hasSetting('theme')) {
       const themeSetting = getSetting('theme');
 
-      if (themeSetting === 'light') this.theme = themeSetting;
-      else if (themeSetting === 'dark') this.theme = themeSetting;
+      if (Object.keys(this.themes).includes(themeSetting)) this.theme = themeSetting;
       else setSetting('theme', this.theme);
     }
   }
 
   themeChanged() {
-    const {theme, css} = this.getTheme();
+    const {theme, name, css} = this.getTheme();
 
     for (let handlerName in this.themeChangeEventListeners) {
-      this.themeChangeEventListeners[handlerName](theme, css);
+      this.themeChangeEventListeners[handlerName](theme, css, name);
     }
   }
 
   getTheme() {
     return {
       theme: this.theme,
+      name: this.themes[this.theme],
       css: this.themeCSS[this.theme]
     }
   }
@@ -99,18 +102,12 @@ class ThemeManager {
    * @param {Theme} theme
    */
   setTheme(theme) {
-    if (theme === 'light') this._setTheme('light');
-    else if (theme === 'dark') this._setTheme('dark');
-  }
-
-  toggleTheme() {
-    if (this.theme === 'light') this._setTheme('dark');
-    else if (this.theme === 'dark') this._setTheme('light');
+    if (Object.keys(this.themes).includes(theme)) this._setTheme(theme);
   }
 
   /**
    * @param {string} handlerName
-   * @param {(theme: Theme, css: ThemeCSS) => void} handler
+   * @param {(theme: Theme, css: ThemeCSS, name: string) => void} handler
    */
   onThemeChange(handlerName, handler) {
     if (!Object.keys(this.themeChangeEventListeners).includes(handlerName)) {
@@ -118,9 +115,13 @@ class ThemeManager {
     }
   }
 
+  /**
+   *
+   * @param {string} handlerName
+   */
   offThemeChange(handlerName) {
     if (Object.keys(this.themeChangeEventListeners).includes(handlerName)) {
-      delete this.themeChangeEventListeners[handlerName]
+      delete this.themeChangeEventListeners[handlerName];
     }
   }
 }
@@ -129,9 +130,11 @@ class ThemeManager {
  * @type {ThemeManagerOptions}
  */
 const options = {};
-if (themePluginExists) {
-  if (Object.keys(themePlugin.plugin.customThemeCSS).includes('dark')) options.customDarkThemeCSS = themePlugin.plugin.customThemeCSS.dark;
-  if (Object.keys(themePlugin.plugin.customThemeCSS).includes('light')) options.customLightThemeCSS = themePlugin.plugin.customThemeCSS.light;
-}
+
+themePlugins.forEach((plugin) => {
+  for (let theme in plugin.plugin.customThemeCSS) {
+    options.customThemes[theme] = plugin.plugin.customThemeCSS[theme];
+  }
+})
 
 export default new ThemeManager(options);
