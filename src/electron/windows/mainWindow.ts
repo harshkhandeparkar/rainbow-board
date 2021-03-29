@@ -35,7 +35,7 @@ export function createMainWindow(
     shell.openExternal(details.url);
 
     return {
-      action: 'allow'
+      action: 'deny'
     }
   })
 
