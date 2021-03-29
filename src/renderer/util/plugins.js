@@ -39,5 +39,3 @@ export const themePlugins = plugins.filter((plugin) => {
 export const boardPlugins = plugins.filter((plugin) => {
   return plugin.info.modifiers.includes('CUSTOM_BOARD_OPTIONS') && plugin.usable && plugin.use;
 })
-
-console.log(themePlugins);

@@ -12,12 +12,16 @@ import { themePlugins } from './plugins';
  * @property {string} globalCSS
  */
 
+
 /**
  * @typedef {Object} ThemeManagerOptions
  * @property {{[themeName: string]: {name: string, css: ThemeCSS}} customThemes?
  */
 
 class ThemeManager {
+  /**
+   * @type {{[themeName: string]: string}}
+   */
   themes = {
     light: 'Default Light',
     dark: 'Default Dark'
@@ -129,7 +133,9 @@ class ThemeManager {
 /**
  * @type {ThemeManagerOptions}
  */
-const options = {};
+const options = {
+  customThemes: {}
+}
 
 themePlugins.forEach((plugin) => {
   for (let theme in plugin.plugin.customThemeCSS) {

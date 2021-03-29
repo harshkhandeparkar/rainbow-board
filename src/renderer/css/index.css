@@ -72,6 +72,11 @@ footer a:hover {
   border-radius: 0.3rem;
 }
 
+.dropdown-content .btn-flat {
+  height: 100%;
+  width: 100%;
+}
+
 .modal {
   border-radius: 0.5rem;
 }

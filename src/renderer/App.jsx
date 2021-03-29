@@ -69,10 +69,6 @@ class App extends Component {
               background-color: ${this.state.css.bg1} !important;
             }
 
-            .dropdown-content a {
-              height: 100%;
-            }
-
             .dropdown-content li:hover {
               background-color: ${this.state.css.highlight} !important;
             }
