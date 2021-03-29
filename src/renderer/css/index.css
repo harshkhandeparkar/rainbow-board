@@ -53,7 +53,7 @@ footer a:hover {
   font-weight: bold;
 }
 
-.btn, .btn-flat {
+.btn {
   border-radius: 0.3rem;
   box-shadow: none !important;
   margin-right: 0.5rem;

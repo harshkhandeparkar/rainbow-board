@@ -147,7 +147,7 @@ export class Toolbar extends Component {
           <button className="btn-flat brand-text" title="Undo (Ctrl + Z)" onClick={() => _onUndo()}>
             <i className="material-icons ">undo</i>
           </button>
-          <button className="btn-flat brand-text" title="Redo (Ctrl + Shift + Z)" onClick={() => _onRedo()}>
+          <button className="btn-flat brand-text" title="Redo (Ctrl + Y)" onClick={() => _onRedo()}>
             <i className="material-icons ">redo</i>
           </button>
           <button className="btn-flat brand-text" title="Save this slide (Ctrl + S)" onClick={() => this.saveBoardModalInstance.open()}>
@@ -192,11 +192,15 @@ export class Toolbar extends Component {
             </div>
           </div>
           <div className="modal-footer container">
-            <button className="btn right" onClick={e => this.saveBoardModalInstance.close()}>Cancel</button>
-            <button className="btn green-text left" onClick={e => {
-              _save(this.state.saveType);
-              this.saveBoardModalInstance.close();
-            }}>Save</button>
+            <button className="btn right" title="Cancel" onClick={e => this.saveBoardModalInstance.close()}>Cancel</button>
+            <button
+              className="btn green-text left"
+              title="Save"
+              onClick={e => {
+                _save(this.state.saveType);
+                this.saveBoardModalInstance.close();
+              }}
+            >Save</button>
           </div>
         </div>
 
@@ -213,7 +217,7 @@ export class Toolbar extends Component {
             />
           </div>
           <div className="modal-footer container">
-            <button className="btn brand-text" onClick={() => this.colorPickerInstance.close()}>Done</button>
+            <button title="Done" className="btn brand-text" onClick={() => this.colorPickerInstance.close()}>Done</button>
           </div>
         </div>
       </div>

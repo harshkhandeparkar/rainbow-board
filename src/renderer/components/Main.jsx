@@ -32,13 +32,13 @@ function Main() {
 
         <div className="row">
           <div className="col offset-s2 s4">
-            <NavLink to="/pages" className="btn center brand-text">
-              <i className="fa fa-paint-brush left" /> Start New
+            <NavLink to="/pages" className="btn center brand-text" title="New Whiteboard Page">
+              <i className="fa fa-paint-brush left" /> New Page
             </NavLink>
           </div>
 
           <div className="col s4">
-            <NavLink to="/new" className="btn center brand-text">
+            <NavLink to="/new" className="btn center brand-text" title="New Changes">
               <i className="material-icons left">new_releases</i> What's New!
             </NavLink>
           </div>
