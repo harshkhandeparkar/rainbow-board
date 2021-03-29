@@ -4,6 +4,8 @@ import React, { Component, createRef } from 'react';
 import Page from '../Page/Page.jsx';
 import ipcHandler from '../../util/ipc-handler';
 
+import * as EVENTS from '../../../common/constants/eventNames';
+
 import './Pages.css';
 
 export class Pages extends Component {
@@ -65,29 +67,29 @@ export class Pages extends Component {
   }
 
   _removeHotkeys() {
-    ipcHandler.removeEventHandler('next', 'nextPageHandler');
-    ipcHandler.removeEventHandler('prev', 'prevPageHandler');
-    ipcHandler.removeEventHandler('add', 'addPageHandler');
-    ipcHandler.removeEventHandler('delete', 'deletePageHandler');
-    ipcHandler.removeEventHandler('prompt-reply', 'deletePagePromptHandler');
+    ipcHandler.removeEventHandler(EVENTS.NEXT_PAGE, 'nextPageHandler');
+    ipcHandler.removeEventHandler(EVENTS.PREVIOUS_PAGE, 'prevPageHandler');
+    ipcHandler.removeEventHandler(EVENTS.ADD_PAGE, 'addPageHandler');
+    ipcHandler.removeEventHandler(EVENTS.DELETE_PAGE, 'deletePageHandler');
+    ipcHandler.removeEventHandler(EVENTS.PROMPT_REPLY, 'deletePagePromptHandler');
   }
 
   componentDidMount() {
     this._removeHotkeys();
 
-    ipcHandler.addEventHandler('next', 'nextPageHandler', () => {
+    ipcHandler.addEventHandler(EVENTS.NEXT_PAGE, 'nextPageHandler', () => {
       this.nextPage();
     })
-    ipcHandler.addEventHandler('prev', 'prevPageHandler', () => {
+    ipcHandler.addEventHandler(EVENTS.PREVIOUS_PAGE, 'prevPageHandler', () => {
       this.lastPage();
     })
-    ipcHandler.addEventHandler('add', 'addPageHandler', () => {
+    ipcHandler.addEventHandler(EVENTS.ADD_PAGE, 'addPageHandler', () => {
       this.addPage();
     })
-    ipcHandler.addEventHandler('delete', 'deletePageHandler', () => {
+    ipcHandler.addEventHandler(EVENTS.DELETE_PAGE, 'deletePageHandler', () => {
       this.deletePage();
     })
-    ipcHandler.addEventHandler('prompt-reply', 'deletePagePromptHandler', (event, args) => {
+    ipcHandler.addEventHandler(EVENTS.PROMPT_REPLY, 'deletePagePromptHandler', (event, args) => {
       if (args.event === 'delete') {
         this._deletePage();
       }

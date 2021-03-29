@@ -1,7 +1,7 @@
-const { BrowserWindow } = require('electron');
-const { splashHTMLFilePath, iconPath } = require('./paths');
+import { BrowserWindow } from 'electron';
+import { splashHTMLFilePath, iconPath } from './paths';
 
-module.exports = function makeSplashScreen() {
+export function makeSplashScreen() {
   const splashWin = new BrowserWindow({
     width: 400,
     height: 400,

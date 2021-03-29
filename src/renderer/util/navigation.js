@@ -18,29 +18,9 @@ export function openLeavePrompt(goTo) {
   })
 }
 
-export function goHome() {
+export function go(to) {
   if (history.location.pathname === '/pages') {
-    openLeavePrompt('/');
+    openLeavePrompt(to);
   }
-  else history.push('/');
-}
-
-export function goWhatsNew() {
-  if (history.location.pathname === '/pages') {
-    openLeavePrompt('/new');
-  }
-  else history.push('/new');
-}
-
-export function goCredits() {
-  if (history.location.pathname === '/pages') {
-    openLeavePrompt('/credits');
-  }
-  else history.push('/credits');
-}
-
-export function goPages() {
-  if (history.location.pathname !== '/pages') {
-    history.push('/pages');
-  }
+  else history.push(to);
 }

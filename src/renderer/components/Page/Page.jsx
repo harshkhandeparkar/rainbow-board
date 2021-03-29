@@ -6,6 +6,8 @@ import ipcHandler from '../../util/ipc-handler';
 import themeManager from '../../util/theme';
 import { boardPluginExists, boardPlugin } from '../../util/plugins';
 
+import * as EVENTS from '../../../common/constants/eventNames';
+
 import { Toolbar } from './Toolbar/Toolbar.jsx';
 
 import './Page.css';
@@ -110,29 +112,29 @@ export class Page extends Component {
   }
 
   _removeHotkeys() {
-    ipcHandler.removeEventHandler('undo', 'undoEventHandler');
-    ipcHandler.removeEventHandler('redo', 'redoEventHandler');
-    ipcHandler.removeEventHandler('save', 'saveEventHandler');
-    ipcHandler.removeEventHandler('clear', 'clearEventHandler');
-    ipcHandler.removeEventHandler('prompt-reply', 'clearPagePromptHandler');
+    ipcHandler.removeEventHandler(EVENTS.UNDO, 'undoEventHandler');
+    ipcHandler.removeEventHandler(EVENTS.REDO, 'redoEventHandler');
+    ipcHandler.removeEventHandler(EVENTS.SAVE_PAGE, 'saveEventHandler');
+    ipcHandler.removeEventHandler(EVENTS.CLEAR_PAGE, 'clearEventHandler');
+    ipcHandler.removeEventHandler(EVENTS.PROMPT_REPLY, 'clearPagePromptHandler');
   }
 
   _setHotkeys() {
     this._removeHotkeys();
 
-    ipcHandler.addEventHandler('undo', 'undoEventHandler', () => {
+    ipcHandler.addEventHandler(EVENTS.UNDO, 'undoEventHandler', () => {
       this.state.boardState.drawBoard.undo();
     })
-    ipcHandler.addEventHandler('redo', 'redoEventHandler', () => {
+    ipcHandler.addEventHandler(EVENTS.REDO, 'redoEventHandler', () => {
       this.state.boardState.drawBoard.redo();
     })
-    ipcHandler.addEventHandler('save', 'saveEventHandler', () => {
+    ipcHandler.addEventHandler(EVENTS.SAVE_PAGE, 'saveEventHandler', () => {
       this.toolbarRef.current.saveBoardModalInstance.open();
     })
-    ipcHandler.addEventHandler('clear', 'clearEventHandler', () => {
+    ipcHandler.addEventHandler(EVENTS.CLEAR_PAGE, 'clearEventHandler', () => {
       this._clearBoard();
     })
-    ipcHandler.addEventHandler('prompt-reply', 'clearPagePromptHandler', (event, args) => {
+    ipcHandler.addEventHandler(EVENTS.PROMPT_REPLY, 'clearPagePromptHandler', (event, args) => {
       if (args.response === 0 && args.event === 'clear') this.state.boardState.drawBoard.clear();
     })
   }

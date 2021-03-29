@@ -3,8 +3,9 @@ import M from 'materialize-css';
 import PaintSettings from '../../PaintSettings/PaintSettings.jsx';
 
 import './Toolbar.css';
-import { goHome } from '../../../util/navigation';
+import { go } from '../../../util/navigation';
 import ipcHandler from '../../../util/ipc-handler.js';
+import * as EVENTS from '../../../../common/constants/eventNames';
 
 export class Toolbar extends Component {
   constructor(...props) {
@@ -82,15 +83,15 @@ export class Toolbar extends Component {
   }
 
   _removeHotkeys() {
-    ipcHandler.removeEventHandler('color-palette', 'colorPaletteHandler');
-    ipcHandler.removeEventHandler('set-tool', 'setToolHandler');
+    ipcHandler.removeEventHandler(EVENTS.TOGGLE_COLOR_PALETTE, 'colorPaletteHandler');
+    ipcHandler.removeEventHandler(EVENTS.SET_TOOL, 'setToolHandler');
   }
 
   _setHotkeys() {
     this._removeHotkeys();
 
-    ipcHandler.addEventHandler('color-palette', 'colorPaletteHandler', () => this.colorPickerInstance.isOpen ? this.colorPickerInstance.close() : this.colorPickerInstance.open());
-    ipcHandler.addEventHandler('set-tool', 'setToolHandler', (event, args) => this.props._setTool(args.tool));
+    ipcHandler.addEventHandler(EVENTS.TOGGLE_COLOR_PALETTE, 'colorPaletteHandler', () => this.colorPickerInstance.isOpen ? this.colorPickerInstance.close() : this.colorPickerInstance.open());
+    ipcHandler.addEventHandler(EVENTS.SET_TOOL, 'setToolHandler', (event, args) => this.props._setTool(args.tool));
   }
 
   componentDidMount() {
@@ -162,7 +163,7 @@ export class Toolbar extends Component {
           <button
             className="btn-flat brand-text"
             title="Go to home"
-            onClick={goHome}
+            onClick={() => go('/')}
           >
             <i className="material-icons ">home</i>
           </button>

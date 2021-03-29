@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import M from 'materialize-css';
 import { gt } from 'semver';
-import { version } from '../../../package.json';
+import { version } from '../../../../package.json';
 
 export default class Download extends Component {
   state = {

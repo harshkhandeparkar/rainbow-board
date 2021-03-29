@@ -7,9 +7,11 @@ import './css/index.css';
 import './css/font-awesome.min.css';
 import 'material-icons/iconfont/material-icons.css';
 
-import { goHome, goPages, goWhatsNew, goCredits } from './util/navigation';
+import { go } from './util/navigation';
 import { ipcRenderer } from 'electron';
 import ipcHandler from './util/ipc-handler';
+
+import * as EVENTS from '../common/constants/eventNames';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,8 +20,5 @@ ReactDOM.render(
   document.getElementById('root')
 )
 
-ipcRenderer.send('set-hotkeys');
-ipcHandler.addEventHandler('go-home', 'goHomeHandler', goHome);
-ipcHandler.addEventHandler('go-whatsnew', 'goNewHandler', goWhatsNew);
-ipcHandler.addEventHandler('go-pages', 'goPagesHandler', goPages);
-ipcHandler.addEventHandler('go-credits', 'goCreditsHandler', goCredits);
+ipcRenderer.send(EVENTS.SET_HOTKEYS);
+ipcHandler.addEventHandler(EVENTS.GO, 'go-handler', ({to}) => go(to));

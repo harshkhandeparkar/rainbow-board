@@ -2,7 +2,7 @@
   import { NavLink } from 'react-router-dom';
 
   import { setSetting } from '../../util/settings';
-  import { version } from '../../../package.json';
+  import { version } from '../../../../package.json';
 
   import Grid from '../Grid/Grid.jsx';
   import GridItem from '../Grid/GridItem.jsx';

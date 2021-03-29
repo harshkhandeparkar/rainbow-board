@@ -36,8 +36,11 @@ import { ipcRenderer } from 'electron';
 
 /**
  * @typedef {Object} Plugin
+ * @property {string} name
  * @property {PluginInfo} info
  * @property {PluginCode} plugin
+ * @property {boolean} usable
+ * @property {boolean} use
  */
 
 /**
@@ -46,12 +49,12 @@ import { ipcRenderer } from 'electron';
 const plugins = ipcRenderer.sendSync('get-plugins');
 
 export const themePlugin = plugins.find((plugin) => {
-  return plugin.info.modifiers.includes('CUSTOM_THEME');
+  return plugin.info.modifiers.includes('CUSTOM_THEME') && plugin.usable && plugin.use;
 })
 export const themePluginExists = themePlugin !== undefined;
 
 export const boardPlugin = plugins.find((plugin) => {
-  return plugin.info.modifiers.includes('CUSTOM_BOARD_OPTIONS');
+  return plugin.info.modifiers.includes('CUSTOM_BOARD_OPTIONS') && plugin.usable && plugin.use;
 })
 
 export const boardPluginExists = boardPlugin !== undefined;

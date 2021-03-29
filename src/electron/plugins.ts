@@ -1,12 +1,14 @@
-const { existsSync, mkdirSync } = require('fs');
-const { hasSync, getSync, set } = require('electron-settings');
-const { version } = require('../package.json');
-const { gte } = require('semver');
-const path = require('path');
+import { existsSync, mkdirSync } from 'fs';
+import { hasSync, getSync, set } from 'electron-settings';
+import { version } from '../../package.json';
+import { gte } from 'semver';
+import * as path from 'path';
+import { pluginsDir } from './paths';
+import { Plugin } from '../renderer/util/plugins';
 
-module.exports = function loadPlugins(plugins, pluginsDir) {
+export function loadPlugins(plugins: Plugin[]) {
   if (hasSync('plugins')) {
-    const pluginNames = getSync('plugins');
+    const pluginNames: string[] = <string[]>getSync('plugins');
 
     if (!existsSync(pluginsDir)) {
       mkdirSync(pluginsDir);
@@ -21,7 +23,8 @@ module.exports = function loadPlugins(plugins, pluginsDir) {
           name,
           info,
           plugin,
-          usable: gte(version, info.minRBVersion)
+          usable: gte(version, info.minRBVersion),
+          use: true
         })
       }
     })
