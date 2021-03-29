@@ -1,8 +1,8 @@
 import { BrowserWindow, shell, dialog, ipcMain } from 'electron';
-import { Plugin } from '../renderer/util/plugins';
-import { indexFilePath, iconPath } from './paths';
-import { createWindowMenu } from './windowMenu';
-import * as EVENTS from '../common/constants/eventNames';
+import { Plugin } from '../../renderer/util/plugins';
+import { indexFilePath, iconPath } from '../constants/paths';
+import { createWindowMenu } from '../windowMenu';
+import * as EVENTS from '../../common/constants/eventNames';
 
 let showExitPrompt = true;
 

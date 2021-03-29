@@ -1,9 +1,9 @@
 import { app, BrowserWindow } from 'electron';
 import isDev from 'electron-is-dev';
 
-import { loadPlugins } from './plugins';
-import { makeSplashScreen } from './splash';
-import { createMainWindow } from './mainWindow';
+import { loadPlugins } from './util/plugins';
+import { makeSplashScreen } from './windows/splash';
+import { createMainWindow } from './windows/mainWindow';
 import { Plugin } from '../renderer/util/plugins';
 
 let plugins: Plugin[] = [];

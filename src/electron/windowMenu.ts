@@ -1,7 +1,7 @@
 import { website, repository, version, discordInvite } from '../../package.json';
 import { shell, ipcMain, Menu, BrowserWindow, MenuItemConstructorOptions } from 'electron';
 
-import { showAboutDialog } from './aboutDialog';
+import { showAboutDialog } from './util/aboutDialog';
 import { menuClickEvents } from './events/menuClickEvents';
 import * as EVENTS from '../common/constants/eventNames';
 

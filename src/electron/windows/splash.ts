@@ -1,5 +1,5 @@
 import { BrowserWindow } from 'electron';
-import { splashHTMLFilePath, iconPath } from './paths';
+import { splashHTMLFilePath, iconPath } from '../constants/paths';
 
 export function makeSplashScreen() {
   const splashWin = new BrowserWindow({
