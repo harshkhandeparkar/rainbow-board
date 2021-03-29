@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import { Icon } from '../Icon/Icon.jsx';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 export default class Settings extends Component {
   render() {
@@ -8,9 +11,9 @@ export default class Settings extends Component {
         <nav>
           <div className="nav-wrapper header container">
             <span className="brand-logo center brand-text header-text">Settings</span>
-            <NavLink to="/" title="Home">
-              <i className="material-icons brand-text">home</i>
-            </NavLink>
+            <Link to="/" title="Home">
+              <Icon icon={faHome} />
+            </Link>
           </div>
         </nav>
       </div>

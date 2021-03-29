@@ -4,6 +4,9 @@ import { NavLink } from 'react-router-dom';
 import Grid from '../Grid/Grid.jsx';
 import GridItem from '../Grid/GridItem.jsx';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+
 function Credit({title, desc, link, size}) {
   return (
     <GridItem options={{width: size ? size : 1}}>
@@ -27,9 +30,9 @@ export default class Credits extends Component {
         <nav>
           <div className="nav-wrapper header container">
             <span className="brand-logo center header-text brand-text">Credits</span>
-            <NavLink to="/" title="Home">
-              <i className="material-icons brand-text">home</i>
-            </NavLink>
+            <Link to="/" title="Home">
+              <FontAwesomeIcon icon={faHome} className="brand-text" size="lg"/>
+            </Link>
           </div>
         </nav>
 

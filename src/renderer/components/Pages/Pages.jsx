@@ -1,6 +1,8 @@
 import { ipcRenderer } from 'electron';
 import React, { Component, createRef } from 'react';
 
+import { Icon } from '../Icon/Icon.jsx';
+import { faPlus, faChevronRight, faChevronLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Page from '../Page/Page.jsx';
 import ipcHandler from '../../util/ipc-handler';
 
@@ -26,7 +28,7 @@ export class Pages extends Component {
             onClick={this.state.currentPage === this.state.pagesLength - 1 ? this.addPage : this.nextPage}
             title={this.state.currentPage === this.state.pagesLength - 1 ? 'Add Page' : 'Next Page'}
           >
-            <i className={`brand-text fa fa-${this.state.currentPage === this.state.pagesLength - 1 ? 'plus' : 'chevron-right'}`} />
+            <Icon icon={this.state.currentPage === this.state.pagesLength - 1 ? faPlus : faChevronRight} />
           </button>
 
           <span
@@ -44,7 +46,7 @@ export class Pages extends Component {
               onClick={this.deletePage}
               title="Delete This Page"
             >
-              <i className="brand-text fa fa-trash" />
+              <Icon icon={faTrash} />
             </button>
           }
 
@@ -55,7 +57,7 @@ export class Pages extends Component {
               onClick={this.lastPage}
               title="Previous page"
             >
-              <i className="fa fa-chevron-left brand-text" />
+              <Icon icon={faChevronLeft} />
             </button>
           }
         </div>

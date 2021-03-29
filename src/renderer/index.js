@@ -4,8 +4,6 @@ import App from './App.jsx';
 import 'materialize-css/dist/css/materialize.min.css';
 
 import './css/index.css';
-import './css/font-awesome.min.css';
-import 'material-icons/iconfont/material-icons.css';
 
 import { go } from './util/navigation';
 import { ipcRenderer } from 'electron';

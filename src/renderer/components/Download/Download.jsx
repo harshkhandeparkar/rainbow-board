@@ -3,6 +3,10 @@ import M from 'materialize-css';
 import { gt } from 'semver';
 import { version } from '../../../../package.json';
 
+import { Icon } from '../Icon/Icon.jsx';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faLinux, faWindows, faApple } from '@fortawesome/free-brands-svg-icons';
+
 export default class Download extends Component {
   state = {
     latestVersion: version,
@@ -19,18 +23,18 @@ export default class Download extends Component {
     return (
       <div>
         {
-          (gt(this.state.latestVersion, version)) &&
+          (true) &&
           (
             <div>
               <button className="dropdown-trigger btn center brand-text" data-target="download-dropdown" title="Download New Version">
-                <i className="fa fa-download left" />
+                <Icon icon={faDownload} rightmargin />
                 Download New Version
               </button>
 
               <ul id="download-dropdown" className="dropdown-content">
                 <li>
                   <a target="_blank" rel="noreferrer" href="https://snapcraft.io/rainbow-board" className="btn-flat brand-text">
-                    <i className="fa fa-linux" />
+                    <Icon icon={faLinux} rightmargin />
                     Linux (snap)
                   </a>
                 </li>
@@ -38,7 +42,7 @@ export default class Download extends Component {
                   this.state.downloadURLs.exe !== '' &&
                   <li>
                     <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.exe} className="btn-flat brand-text">
-                      <i className="fa fa-windows" />
+                      <Icon icon={faWindows} rightmargin />
                       Windows (EXE)
                     </a>
                   </li>
@@ -47,7 +51,7 @@ export default class Download extends Component {
                   this.state.downloadURLs.dmg !== '' &&
                   <li>
                     <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.exe} className="btn-flat brand-text">
-                      <i className="fa fa-apple" />
+                      <Icon icon={faApple} rightmargin />
                       Mac (DMG)
                     </a>
                   </li>
@@ -56,7 +60,7 @@ export default class Download extends Component {
                   this.state.downloadURLs.deb !== '' &&
                   <li>
                     <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.deb} className="btn-flat brand-text">
-                      <i className="fa fa-linux" />
+                      <Icon icon={faLinux} rightmargin />
                       Linux (deb)
                     </a>
                   </li>
@@ -65,7 +69,7 @@ export default class Download extends Component {
                   this.state.downloadURLs.appimg !== '' &&
                   <li>
                     <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.appimg} className="btn-flat brand-text">
-                      <i className="fa fa-linux" />
+                      <Icon icon={faLinux} rightmargin />
                       Linux (portable)
                     </a>
                   </li>
@@ -74,7 +78,7 @@ export default class Download extends Component {
                   this.state.downloadURLs.zip_linux !== '' &&
                   <li>
                     <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.zip_linux} className="btn-flat brand-text">
-                      <i className="fa fa-linux" />
+                      <Icon icon={faLinux} rightmargin />
                       Linux (zip)
                     </a>
                   </li>

@@ -4,7 +4,8 @@ import { version, discordInvite } from '../../../package.json';
 import Download from './Download/Download.jsx';
 
 import { hasSetting, getSetting } from '../util/settings';
-import themeManager from '../util/theme';
+import { Icon } from '../components/Icon/Icon.jsx';
+import { faPaintBrush, faBell, faCog } from '@fortawesome/free-solid-svg-icons';
 
 function Main() {
   const history = useHistory();
@@ -33,13 +34,13 @@ function Main() {
         <div className="row">
           <div className="col offset-s2 s4">
             <NavLink to="/pages" className="btn center brand-text" title="New Whiteboard Page">
-              <i className="fa fa-paint-brush left" /> New Page
+              <Icon icon={faPaintBrush} rightmargin /> New Page
             </NavLink>
           </div>
 
           <div className="col s4">
             <NavLink to="/new" className="btn center brand-text" title="New Changes">
-              <i className="material-icons left">new_releases</i> What's New!
+              <Icon icon={faBell} rightmargin />What's New!
             </NavLink>
           </div>
         </div>
@@ -66,8 +67,8 @@ function Main() {
                 </ul>
               </div>
               <div className="row">
-                <NavLink to="/settings" className="btn-floating" title="Open Settings">
-                  <i className="material-icons brand-text">settings</i>
+                <NavLink to="/settings" className="btn-floating brand-text center" title="Open Settings">
+                  <Icon icon={faCog} />
                 </NavLink>
               </div>
             </div>

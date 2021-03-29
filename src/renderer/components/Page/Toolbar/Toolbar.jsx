@@ -2,6 +2,9 @@ import React, { Component, createRef } from 'react';
 import M from 'materialize-css';
 import PaintSettings from '../../PaintSettings/PaintSettings.jsx';
 
+import { Icon } from '../../Icon/Icon.jsx';
+import { faPaintBrush, faEraser, faGripLines, faPalette, faUndo, faRedo, faSave, faBan, faHome } from '@fortawesome/free-solid-svg-icons';
+
 import './Toolbar.css';
 import { go } from '../../../util/navigation';
 import ipcHandler from '../../../util/ipc-handler.js';
@@ -130,42 +133,42 @@ export class Toolbar extends Component {
 
         <div className="bottom-toolbar z-depth-1">
           <button className={`btn-flat ${boardState.tool === 'brush' ? 'active' : ''} brand-text`} title="Paint Brush" onClick={() => _setTool('brush')}>
-            <i className="fa fa-paint-brush "></i>
+            <Icon icon={faPaintBrush} />
           </button>
           {/* <button className={`btn-flat ${boardState.tool === 'rainbow_brush' ? 'active' : ''} brand-text`} title="Rainbow Brush" onClick={() => _setTool('rainbow_brush')}>
-            <i className="material-icons ">colorize</i>
+            <Icon icon={} />
           </button> */}
           <button className={`btn-flat ${boardState.tool === 'eraser' ? 'active' : ''} brand-text`} title="Eraser" onClick={() => _setTool('eraser')}>
-            <i className="fa fa-eraser "></i>
+            <Icon icon={faEraser} />
           </button>
           <button className={`btn-flat ${boardState.tool === 'line' ? 'active' : ''} brand-text`} title="Line Tool" onClick={() => _setTool('line')}>
-            <i className="material-icons ">timeline</i>
+            <Icon icon={faGripLines} />
           </button>
           <button className="btn-flat brand-text" title="Color Palette" onClick={() => this.colorPickerInstance.open()}>
-            <i className="material-icons ">palette</i>
+            <Icon icon={faPalette} />
           </button>
           <button className="btn-flat brand-text" title="Undo (Ctrl + Z)" onClick={() => _onUndo()}>
-            <i className="material-icons ">undo</i>
+            <Icon icon={faUndo} />
           </button>
           <button className="btn-flat brand-text" title="Redo (Ctrl + Y)" onClick={() => _onRedo()}>
-            <i className="material-icons ">redo</i>
+            <Icon icon={faRedo} />
           </button>
           <button className="btn-flat brand-text" title="Save this slide (Ctrl + S)" onClick={() => this.saveBoardModalInstance.open()}>
-            <i className="material-icons ">save</i>
+            <Icon icon={faSave} />
           </button>
           <button
             className="btn-flat brand-text"
             title="Clear the board"
             onClick={_clearBoard}
           >
-            <i className="fa fa-ban "></i>
+            <Icon icon={faBan} />
           </button>
           <button
             className="btn-flat brand-text"
             title="Go to home"
             onClick={() => go('/')}
           >
-            <i className="material-icons ">home</i>
+            <Icon icon={faHome} />
           </button>
         </div>
 
