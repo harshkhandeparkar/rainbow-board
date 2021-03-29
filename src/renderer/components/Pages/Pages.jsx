@@ -90,7 +90,7 @@ export class Pages extends Component {
       this.deletePage();
     })
     ipcHandler.addEventHandler(EVENTS.PROMPT_REPLY, 'deletePagePromptHandler', (event, args) => {
-      if (args.event === 'delete') {
+      if (args.event === 'delete' && args.response === 1) {
         this._deletePage();
       }
     })
@@ -138,12 +138,15 @@ export class Pages extends Component {
 
   deletePage = () => {
     if (this.state.pagesLength > 1) {
-      ipcRenderer.send('prompt', {
-        title: 'Delete this page?',
-        message: 'If you delete the page, all the unsaved data will be LOST FOREVER.',
-        buttons: ['Yes', 'No'],
-        event: 'delete'
-      })
+      if (this.pageRef.current.state.boardState.drawBoard._strokeIndex > 0) { // If nothing is written, directly delete
+        ipcRenderer.send('prompt', {
+          title: 'Delete this page?',
+          message: 'If you delete the page, all the unsaved data will be LOST FOREVER.',
+          buttons: ['No', 'Yes'],
+          event: 'delete'
+        })
+      }
+      else this._deletePage();
     }
   }
 

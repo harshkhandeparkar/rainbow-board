@@ -46,7 +46,7 @@ export function createMainWindow(
       title: args.title,
       message: args.message
     }).then(({ response }) => {
-      event.reply(EVENTS.PROMPT_REPLY, { event: args.event, response, options: args.options });
+      event.reply(EVENTS.PROMPT_REPLY, { event: args.event, response, options: args.options || {} });
     })
   })
 
@@ -56,11 +56,11 @@ export function createMainWindow(
         e.preventDefault(); // Prevents the window from closing
         dialog.showMessageBox(win, {
           type: 'question',
-          buttons: ['Yes', 'No'],
+          buttons: ['No', 'Yes'],
           title: 'Quit?',
           message: 'Unsaved data will be lost. Are you sure you want to quit?'
         }).then(({ response }) => {
-          if (response === 0) { // Runs the following if 'Yes' is clicked
+          if (response === 1) { // Runs the following if 'Yes' is clicked
             showExitPrompt = false;
             win.close();
           }

@@ -89,12 +89,14 @@ export class Page extends Component {
   }
 
   _clearBoard() {
-    ipcRenderer.send('prompt', {
-      title: 'Clear this page?',
-      message: 'If you clear the page, all the unsaved data will be LOST FOREVER.',
-      buttons: ['Yes', 'No'],
-      event: 'clear'
-    })
+    if (this.state.boardState.drawBoard._strokeIndex > 0) {
+      ipcRenderer.send('prompt', {
+        title: 'Clear this page?',
+        message: 'If you clear the page, all the unsaved data will be LOST FOREVER.',
+        buttons: ['No', 'Yes'],
+        event: 'clear'
+      })
+    }
   }
 
   _save(type) {
@@ -135,7 +137,7 @@ export class Page extends Component {
       this._clearBoard();
     })
     ipcHandler.addEventHandler(EVENTS.PROMPT_REPLY, 'clearPagePromptHandler', (event, args) => {
-      if (args.response === 0 && args.event === 'clear') this.state.boardState.drawBoard.clear();
+      if (args.response === 1 && args.event === 'clear') this.state.boardState.drawBoard.clear();
     })
   }
 
