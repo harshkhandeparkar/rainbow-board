@@ -21,4 +21,4 @@ ReactDOM.render(
 )
 
 ipcRenderer.send(EVENTS.SET_HOTKEYS);
-ipcHandler.addEventHandler(EVENTS.GO, 'go-handler', ({to}) => go(to));
+ipcHandler.addEventHandler(EVENTS.GO, 'go-handler', (e, {to}) => go(to))

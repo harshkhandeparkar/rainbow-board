@@ -94,7 +94,8 @@ export function createWindowMenu(win: BrowserWindow, isDev: boolean) {
 
   ipcMain.on('set-hotkeys', (event) => {
     // Submenu: File
-    menuClickEvents.on(EVENTS.ADD_PAGE, 'hotkey-handler', () => event.reply(EVENTS.GO, {to: '/pages'}));
+    menuClickEvents.on(EVENTS.NEW_PAGE, 'hotkey-handler', () => event.reply(EVENTS.GO, {to: '/pages'}))
+    menuClickEvents.on(EVENTS.ADD_PAGE, 'hotkey-handler', () => event.reply(EVENTS.ADD_PAGE));
     menuClickEvents.on(EVENTS.SAVE_PAGE, 'hotkey-handler', () => event.reply(EVENTS.SAVE_PAGE));
 
     // Submenu: Edit

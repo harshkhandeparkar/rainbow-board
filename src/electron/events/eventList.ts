@@ -4,8 +4,8 @@ export class EventList<EventTypes> {
   events: {[eventName: string]: Event} = {};
 
   constructor(eventsList: EventTypes[]) {
-    for (let eventName in eventsList) {
-      this.events[eventName] = new Event(eventName);
+    for (let eventName of eventsList) {
+      this.events[<string><unknown>eventName] = new Event(<string><unknown>eventName);
     }
   }
 
@@ -32,6 +32,8 @@ export class EventList<EventTypes> {
     eventName: EventTypes,
     options: any
   ) {
-    if (Object.keys(this.events).includes(<string><unknown>eventName)) this.events[<string><unknown>eventName].fire(options);
+    if (Object.keys(this.events).includes(<string><unknown>eventName)) {
+      this.events[<string><unknown>eventName].fire(options);
+    }
   }
 }
