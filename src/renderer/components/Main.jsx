@@ -20,7 +20,7 @@ function Main() {
     <div id="main">
       <nav>
         <div className="nav-wrapper header">
-          <span className="logo-text brand-logo center brand-text">Rainbow Board</span>
+          <span className="header-text brand-logo center brand-text">Rainbow Board</span>
         </div>
       </nav>
       <div className="container center">

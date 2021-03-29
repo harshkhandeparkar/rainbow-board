@@ -26,7 +26,7 @@ export default class Credits extends Component {
       <div>
         <nav>
           <div className="nav-wrapper header container">
-            <span className="brand-logo center styled-text brand-text">Credits</span>
+            <span className="brand-logo center header-text brand-text">Credits</span>
             <NavLink to="/" title="Home">
               <i className="material-icons brand-text">home</i>
             </NavLink>

@@ -7,7 +7,7 @@ export default class Settings extends Component {
       <div>
         <nav>
           <div className="nav-wrapper header container">
-            <span className="brand-logo center styled-text brand-text">Settings</span>
+            <span className="brand-logo center brand-text header-text">Settings</span>
             <NavLink to="/" title="Home">
               <i className="material-icons brand-text">home</i>
             </NavLink>

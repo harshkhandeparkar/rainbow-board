@@ -42,7 +42,7 @@
         <div>
           <nav>
             <div className="nav-wrapper header container">
-              <span className="brand-logo center styled-text brand-text">What's New</span>
+              <span className="brand-logo center header-text brand-text">What's New</span>
               <NavLink to="/" title="Home">
                 <i className="material-icons brand-text">home</i>
               </NavLink>
