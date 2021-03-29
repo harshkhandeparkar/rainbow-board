@@ -14,6 +14,8 @@ export function createWindowMenu(win: BrowserWindow, isDev: boolean) {
         { label: 'Start New', accelerator: 'CmdOrCtrl + N', click: () => menuClickEvents.fire(EVENTS.NEW_PAGE, {}) },
         { label: 'Save Page', accelerator: 'CmdOrCtrl + S', click: () => menuClickEvents.fire(EVENTS.SAVE_PAGE, {}) },
         { type: 'separator' },
+        { label: 'Settings', accelerator: 'CmdOrCtrl + ,', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/settings'}) },
+        { type: 'separator' },
         { label: 'Quit', accelerator: 'CmdOrCtrl + Q', click: () => win.isClosable() && win.close() }
       ]
     },
@@ -54,7 +56,8 @@ export function createWindowMenu(win: BrowserWindow, isDev: boolean) {
       submenu: [
         { label: 'Home', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/'}) },
         { label: `What's New`, click: () => menuClickEvents.fire(EVENTS.GO, {to: '/new'}) },
-        { label: 'Credits', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/credits'}) }
+        { label: 'Credits', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/credits'}) },
+        { label: 'Settings', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/settings'}) }
       ]
     },
     {

@@ -66,14 +66,9 @@ function Main() {
                 </ul>
               </div>
               <div className="row">
-                <div className="switch" title="Change Theme">
-                  <label>
-                    <i className="fa fa-sun-o brand-text" />
-                    <input type="checkbox" onInput={e => themeManager.toggleTheme()} defaultChecked={themeManager.getTheme().theme === 'dark'} />
-                    <span className="lever" />
-                    <i className="fa fa-moon-o brand-text" />
-                  </label>
-                </div>
+                <NavLink to="/settings" className="btn-floating" title="Open Settings">
+                  <i className="material-icons brand-text">settings</i>
+                </NavLink>
               </div>
             </div>
             <div className="col s6">

@@ -4,6 +4,7 @@ import Main from './components/Main.jsx';
 import Pages from './components/Pages/Pages.jsx';
 import Credits from './components/Credits/Credits.jsx';
 import WhatsNew from './components/WhatsNew/WhatsNew.jsx';
+import Settings from './components/Settings/Settings.jsx';
 
 import history from './util/history';
 import themeManager from './util/theme';
@@ -92,6 +93,7 @@ class App extends Component {
         <Route path="/pages" component={Pages} />
         <Route path="/credits" component={Credits} />
         <Route path="/new" component={WhatsNew} />
+        <Route path="/settings" component={Settings} />
       </Router>
     )
   }
