@@ -33,50 +33,70 @@ class ThemeManager {
    */
   themes = {
     light: 'Default Light',
-    dark: 'Default Dark'
+    dark: 'Default Dark',
+    'dark-whiteboard': 'Dark Whiteboard',
+    'light-blackboard': 'Light Blackboard'
   }
 
   theme = 'light';
 
   /**
+   * @type {ThemeCSS}
+   */
+  static lightThemeCSS = {
+    bgColor: 'white',
+    bg1: 'white',
+    bg2: 'white',
+    highlight: '#e6e6e6',
+    textColor: 'black',
+    highlightTextColor: 'rgb(250, 129, 29)',
+    globalCSS: ''
+  }
+
+  /**
+   * @type {ThemeCSS}
+   */
+  static darkThemeCSS = {
+    bgColor: '#121212',
+    bg1: '#202020',
+    bg2: '#303030',
+    highlight: '#303030',
+    textColor: '#f1f1f1',
+    highlightTextColor: 'rgb(250, 129, 29)',
+    globalCSS: ''
+  }
+
+  /**
    * @type {{light: ThemeCSS, dark: ThemeCSS}}
    */
   themeCSS = {
-    light: {
-      bgColor: 'white',
-      bg1: 'white',
-      bg2: 'white',
-      highlight: '#e6e6e6',
-      textColor: 'black',
-      highlightTextColor: 'rgb(250, 129, 29)',
-      globalCSS: ''
-    },
-    dark: {
-      bgColor: '#121212',
-      bg1: '#202020',
-      bg2: '#303030',
-      highlight: '#303030',
-      textColor: '#f1f1f1',
-      highlightTextColor: 'rgb(250, 129, 29)',
-      globalCSS: ''
+    light: ThemeManager.lightThemeCSS,
+    dark: ThemeManager.darkThemeCSS,
+    'dark-whiteboard': ThemeManager.darkThemeCSS,
+    'light-blackboard': ThemeManager.lightThemeCSS
+  }
+
+  static lightThemeBoardOptions = {
+    bgColor: [1, 1, 1],
+    toolSettings: {
+      brushColor: [0, 0, 0],
+      lineColor: [0, 0, 0]
+    }
+  }
+
+  static darkThemeBoardOptions = {
+    bgColor: [0, 0, 0],
+    toolSettings: {
+      brushColor: [1, 1, 1],
+      lineColor: [1, 1, 1]
     }
   }
 
   themeCustomBoardOptions = {
-    light: {
-      bgColor: [1, 1, 1],
-      toolSettings: {
-        brushColor: [0, 0, 0],
-        lineColor: [0, 0, 0]
-      }
-    },
-    dark: {
-      bgColor: [0, 0, 0],
-      toolSettings: {
-        brushColor: [1, 1, 1],
-        lineColor: [1, 1, 1]
-      }
-    }
+    light: ThemeManager.lightThemeBoardOptions,
+    dark: ThemeManager.darkThemeBoardOptions,
+    'dark-whiteboard': ThemeManager.lightThemeBoardOptions,
+    'light-blackboard': ThemeManager.darkThemeBoardOptions
   }
 
   themeChangeEventListeners = {};
