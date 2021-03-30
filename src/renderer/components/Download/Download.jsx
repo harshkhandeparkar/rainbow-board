@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import M from 'materialize-css';
 import { gt } from 'semver';
-import { version } from '../../../../package.json';
+import packageFile from '../../../../package.json';
 
 import { Icon } from '../Icon/Icon.jsx';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { faLinux, faWindows, faApple } from '@fortawesome/free-brands-svg-icons';
+
+const { version } = packageFile;
 
 export default class Download extends Component {
   state = {
@@ -23,7 +25,7 @@ export default class Download extends Component {
     return (
       <div>
         {
-          (true) &&
+          (gt(this.state.latestVersion, version)) &&
           (
             <div>
               <button className="dropdown-trigger btn center brand-text" data-target="download-dropdown" title="Download New Version">

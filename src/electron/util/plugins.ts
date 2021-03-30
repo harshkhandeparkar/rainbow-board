@@ -1,10 +1,12 @@
 import { existsSync, mkdirSync } from 'fs';
 import { hasSync, getSync, set } from 'electron-settings';
-import { version } from '../../../package.json';
+import packageFile from '../../../package.json';
 import { gte } from 'semver';
 import * as path from 'path';
 import { pluginsDir } from '../constants/paths';
 import { Plugin } from '../../renderer/util/plugins';
+
+const { version } = packageFile;
 
 export function loadPlugins(plugins: Plugin[]) {
   if (hasSync('plugins')) {

@@ -1,5 +1,7 @@
 import { BrowserWindow, dialog } from 'electron';
-import { version } from '../../../package.json';
+import packageFile from '../../../package.json';
+
+const { version }  = packageFile;
 
 export function showAboutDialog(win: BrowserWindow) {
   dialog.showMessageBox(win, {

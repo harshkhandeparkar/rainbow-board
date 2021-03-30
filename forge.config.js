@@ -1,4 +1,5 @@
-const { author, name, description, productName, website, version, dependencies } = require('./package.json');
+const packageFile = require('./package.json');
+const { author, name, description, productName, website, version, dependencies } = packageFile;
 
 let deps = '';
 

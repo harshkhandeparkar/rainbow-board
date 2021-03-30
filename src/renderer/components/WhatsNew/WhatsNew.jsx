@@ -4,10 +4,12 @@ import { Icon } from '../Icon/Icon.jsx';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 import { setSetting } from '../../util/settings';
-import { version } from '../../../../package.json';
+import packageFile from '../../../../package.json';
 
 import Grid from '../Grid/Grid.jsx';
 import GridItem from '../Grid/GridItem.jsx';
+
+const { version } = packageFile;
 
 function New({title, desc, version, link, size}) {
   return (

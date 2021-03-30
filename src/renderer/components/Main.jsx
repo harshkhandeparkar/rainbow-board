@@ -1,11 +1,13 @@
 import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import { version, discordInvite } from '../../../package.json';
+import packageFile from '../../../package.json';
 import Download from './Download/Download.jsx';
 
 import { hasSetting, getSetting } from '../util/settings';
 import { Icon } from '../components/Icon/Icon.jsx';
 import { faPaintBrush, faBell, faCog } from '@fortawesome/free-solid-svg-icons';
+
+const { version, discordInvite } = packageFile;
 
 function Main() {
   const history = useHistory();
