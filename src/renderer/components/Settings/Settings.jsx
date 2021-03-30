@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Select } from '../Select/Select.jsx';
 import themeManager from '../../util/theme';
 import M from 'materialize-css';
 
@@ -18,29 +19,20 @@ export default class Settings extends Component {
             </Link>
           </div>
         </nav>
-        <div className="container center">
-          <div>
-            <button className="dropdown-trigger btn center brand-text" data-target="theme-settings-dropdown" title="Change Theme">
-              Theme: {themeManager.getTheme().name} v
-            </button>
-
-            <ul id="theme-settings-dropdown" className="dropdown-content">
-              {
-                Object.keys(themeManager.themes).map((theme) => {
-                  return (
-                    <li
-                      className="brand-text center"
-                      onClick={() => themeManager.setTheme(theme)}
-                      key={theme}
-                    >
-                      {themeManager.themes[theme]}
-                    </li>
-                  )
-                })
-              }
-            </ul>
-          </div>
-
+        <div className="container">
+          <Select
+            label="Theme:"
+            defaultValue={themeManager.getTheme().theme}
+            onInput={(value) => themeManager.setTheme(value)}
+            options={
+              Object.keys(themeManager.themes).map((theme) => {
+                return {
+                  value: theme,
+                  label: themeManager.themes[theme]
+                }
+              })
+            }
+          />
         </div>
       </div>
     )

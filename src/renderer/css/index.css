@@ -38,6 +38,26 @@ footer {
   box-shadow: 0px -1px 3px rgba(0,0,0,0.2);
 }
 
+select {
+  display: block;
+  border-radius: 0.3rem;
+  margin-top: 1rem;
+  height: 3rem;
+}
+
+.select-label-col {
+  height: 3rem;
+  margin-top: 1rem;
+}
+
+.select-label-col label {
+  margin-left: auto;
+}
+
+select:focus {
+  outline: none;
+}
+
 footer a:hover {
   font-weight: bold;
 }

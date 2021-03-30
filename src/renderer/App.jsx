@@ -48,12 +48,12 @@ class App extends Component {
               background-color: ${this.state.css.bg1} !important;
             }
 
-            button, .btn, .btn-flat, .btn-floating, .card, .color-picker, .bottom-toolbar, .top-toolbar {
+            button, .btn, .btn-flat, .btn-floating, .card, .color-picker, .bottom-toolbar, .top-toolbar, select {
               background-color: ${this.state.css.bg1} !important;
               color: ${this.state.css.textColor};
             }
 
-            .btn, .btn-floating {
+            .btn, .btn-floating, select {
               border: 1px solid ${this.state.css.highlight} !important;
             }
 
