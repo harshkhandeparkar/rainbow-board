@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    themeManager.onThemeChange('app-component-handler', (theme, css) => {
+    themeManager.onThemeChange('app-component-handler', ({theme, css}) => {
       this.setState({
         theme,
         css

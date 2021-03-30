@@ -4,7 +4,6 @@ import { RealDrawBoard } from 'svg-real-renderer';
 import SVGSaver from 'svgsaver';
 import ipcHandler from '../../util/ipc-handler';
 import themeManager from '../../util/theme';
-import { boardPlugins } from '../../util/plugins';
 
 import * as EVENTS from '../../../common/constants/eventNames';
 
@@ -25,23 +24,14 @@ export class Page extends Component {
     this.svgRef = createRef();
     this.toolbarRef = createRef();
 
-    if (boardPlugins.length > 0) {
-      const currentTheme = themeManager.getTheme().theme;
-      let customBoardOptions = {};
+    const { boardOptions: customBoardOptions } = themeManager.getTheme();
 
-      boardPlugins.forEach((plugin) => {
-        if (Object.keys(plugin.plugin.customBoardOptions).includes(currentTheme)) {
-          customBoardOptions = plugin.plugin.customBoardOptions[currentTheme];
-        }
-      })
-
-      this.boardOptions = {
-        ...this.boardOptions,
-        ...customBoardOptions,
-        toolSettings: {
-          ...this.boardOptions.toolSettings,
-          ...(customBoardOptions.toolSettings || {})
-        }
+    this.boardOptions = {
+      ...this.boardOptions,
+      ...customBoardOptions,
+      toolSettings: {
+        ...this.boardOptions.toolSettings,
+        ...(customBoardOptions.toolSettings || {})
       }
     }
   }
@@ -55,10 +45,7 @@ export class Page extends Component {
       lineThickness: 3,
       eraserSize: 30,
       changeRate: 5,
-      brushColor: themeManager.getTheme().theme === 'light' ? [0, 0, 0] : [1, 1, 1],
-      lineColor: themeManager.getTheme().theme === 'light' ? [0, 0, 0] : [1, 1, 1]
     },
-    bgColor: themeManager.getTheme().theme === 'light' ? [1, 1, 1] : [0, 0, 0],
     allowUndo: true,
     maxSnapshots: 10
   }

@@ -1,5 +1,5 @@
 import { setSetting, hasSetting, getSetting } from './settings';
-import { themePlugins } from './plugins';
+import { themePlugins, boardPlugins } from './plugins';
 
 /**
  * @typedef {Object} ThemeCSS
@@ -16,6 +16,15 @@ import { themePlugins } from './plugins';
 /**
  * @typedef {Object} ThemeManagerOptions
  * @property {{[themeName: string]: {name: string, css: ThemeCSS}} customThemes?
+ * @property {{[themeName: string]: {options: Object}} customBoardOptions?
+ */
+
+/**
+ * @typedef {Object} Theme
+ * @property {string} theme The theme name
+ * @property {string} name The theme display name
+ * @property {ThemeCSS} css The theme CSS
+ * @property {Object} boardOptions The theme custom board options
  */
 
 class ThemeManager {
@@ -53,6 +62,23 @@ class ThemeManager {
     }
   }
 
+  themeCustomBoardOptions = {
+    light: {
+      bgColor: [1, 1, 1],
+      toolSettings: {
+        brushColor: [0, 0, 0],
+        lineColor: [0, 0, 0]
+      }
+    },
+    dark: {
+      bgColor: [0, 0, 0],
+      toolSettings: {
+        brushColor: [1, 1, 1],
+        lineColor: [1, 1, 1]
+      }
+    }
+  }
+
   themeChangeEventListeners = {};
 
   /**
@@ -67,6 +93,12 @@ class ThemeManager {
       }
     }
 
+    if (options.customBoardOptions) {
+      for (let theme in options.customBoardOptions) {
+        this.themeCustomBoardOptions[theme] = options.customBoardOptions[theme];
+      }
+    }
+
     if (hasSetting('theme')) {
       const themeSetting = getSetting('theme');
 
@@ -76,18 +108,23 @@ class ThemeManager {
   }
 
   themeChanged() {
-    const {theme, name, css} = this.getTheme();
+    const currentTheme = this.getTheme();
 
     for (let handlerName in this.themeChangeEventListeners) {
-      this.themeChangeEventListeners[handlerName](theme, css, name);
+      this.themeChangeEventListeners[handlerName](currentTheme);
     }
   }
 
+  /**
+   *
+   * @returns {Theme}
+   */
   getTheme() {
     return {
       theme: this.theme,
       name: this.themes[this.theme],
-      css: this.themeCSS[this.theme]
+      css: this.themeCSS[this.theme],
+      boardOptions: this.themeCustomBoardOptions[this.theme] || {}
     }
   }
 
@@ -111,7 +148,7 @@ class ThemeManager {
 
   /**
    * @param {string} handlerName
-   * @param {(theme: Theme, css: ThemeCSS, name: string) => void} handler
+   * @param {(newTheme: Theme) => void} handler
    */
   onThemeChange(handlerName, handler) {
     if (!Object.keys(this.themeChangeEventListeners).includes(handlerName)) {
@@ -134,12 +171,19 @@ class ThemeManager {
  * @type {ThemeManagerOptions}
  */
 const options = {
-  customThemes: {}
+  customThemes: {},
+  customBoardOptions: {}
 }
 
 themePlugins.forEach((plugin) => {
   for (let theme in plugin.plugin.customThemeCSS) {
     options.customThemes[theme] = plugin.plugin.customThemeCSS[theme];
+  }
+})
+
+boardPlugins.forEach((plugin) => {
+  for (let theme in plugin.plugin.customBoardOptions) {
+    options.customBoardOptions[theme] = plugin.plugin.customBoardOptions[theme];
   }
 })
 
