@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import packageFile from '../../../package.json';
 import Download from './Download/Download';
+import Grid from './Grid/Grid';
+import GridItem from './Grid/GridItem';
 
 import { hasSetting, getSetting } from '../util/settings';
 import { Icon } from './Icon/Icon';
@@ -33,25 +35,43 @@ function Main() {
           </p>
         </div>
 
-        <div className="row">
-          <div className="col offset-s2 s4">
-            <NavLink to="/pages" className="btn center brand-text" title="New Whiteboard Page">
+        <Grid
+          options={{
+            numColumns: 6
+          }}
+        >
+          <GridItem />
+          <GridItem
+            options={{
+              width: 2
+            }}
+          >
+            <NavLink to="/pages" className="btn center brand-text full-width" title="New Whiteboard Page">
               <Icon options={{icon: faPaintBrush}} rightMargin={true} /> New Page
             </NavLink>
-          </div>
+          </GridItem>
 
-          <div className="col s4">
-            <NavLink to="/new" className="btn center brand-text" title="New Changes">
+          <GridItem
+            options={{
+              width: 2
+            }}
+          >
+            <NavLink to="/new" className="btn center brand-text full-width" title="New Changes">
               <Icon options={{icon: faBell}} rightMargin={true} />What's New!
             </NavLink>
-          </div>
-        </div>
+          </GridItem>
+          <GridItem />
 
-        <div className="row">
-          <div className="col s12">
+          <GridItem />
+          <GridItem
+            options={{
+              width: 4
+            }}
+          >
             <Download />
-          </div>
-        </div>
+          </GridItem>
+          <GridItem />
+        </Grid>
       </div>
 
       <footer className="page-footer">

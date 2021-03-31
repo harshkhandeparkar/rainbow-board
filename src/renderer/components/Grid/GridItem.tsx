@@ -1,13 +1,13 @@
 import React from 'react';
 
 export interface IGridItemProps {
-  options: {
+  options?: {
     width?: number,
   },
-  children: Element | HTMLCollection | React.ReactNode
+  children?: Element | HTMLCollection | React.ReactNode
 }
 
-export default function GridItem({ children, options }: IGridItemProps) {
+export default function GridItem({ children, options = {} }: IGridItemProps) {
   const width = options.width || 1;
 
   return (

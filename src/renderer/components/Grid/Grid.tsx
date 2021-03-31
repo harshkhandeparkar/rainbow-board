@@ -1,16 +1,16 @@
 import React from 'react';
 
 export interface IGridProps {
-  options: {
+  options?: {
     numColumns?: number,
     gap?: string
   },
-  className: string,
-  children: Element | HTMLCollection | React.ReactNode
+  className?: string,
+  children?: Element | HTMLCollection | React.ReactNode
 }
 
 export default function Grid(
-  { children, options, className }: IGridProps
+  { children, options = {}, className = '' }: IGridProps
 ) {
   let numColumns = options.numColumns || 3;
   let gridTemplateColumns = '';
