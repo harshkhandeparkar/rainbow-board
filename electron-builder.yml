@@ -1,0 +1,25 @@
+appId: rainbow.board
+productName: Rainbow Board
+directories:
+  output: out
+  buildResources: public
+files:
+  - build/**/*
+  - public/*
+win:
+  icon: public/logo512.png
+  publisherName: Harsh Khandeparkar
+linux:
+  target:
+    - AppImage
+    - snap
+  executableName: rainbow-board
+  icon: public/logo512.png
+  category: Utility
+mac:
+  category: public.app-category.utilities
+  target: dmg
+  icon: public/logo512.png
+publish:
+  provider: github
+  releaseType: prerelease
