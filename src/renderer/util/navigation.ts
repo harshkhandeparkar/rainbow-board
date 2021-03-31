@@ -6,7 +6,7 @@ ipcHandler.addEventHandler('prompt-reply', 'leavePagesPromptEventHandler', (even
   if (args.response === 1 && args.event === 'leave-pages') history.push(args.options.goTo);
 })
 
-export function openLeavePrompt(goTo) {
+export function openLeavePrompt(goTo: string) {
   ipcRenderer.send('prompt', {
     title: 'Leave Whiteboard?',
     message: 'If you leave the whiteboard, all the unsaved data will be LOST FOREVER.',
@@ -18,7 +18,7 @@ export function openLeavePrompt(goTo) {
   })
 }
 
-export function go(to) {
+export function go(to: string) {
   if (history.location.pathname === '/pages') {
     openLeavePrompt(to);
   }

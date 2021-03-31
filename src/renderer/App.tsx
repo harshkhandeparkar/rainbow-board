@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Route, Router } from 'react-router-dom';
 import Main from './components/Main';
-import Pages from './components/Pages/Pages.jsx';
-import Credits from './components/Credits/Credits.jsx';
-import WhatsNew from './components/WhatsNew/WhatsNew.jsx';
-import Settings from './components/Settings/Settings.jsx';
+import Pages from './components/Pages/Pages';
+import Credits from './components/Credits/Credits';
+import WhatsNew from './components/WhatsNew/WhatsNew';
+import Settings from './components/Settings/Settings';
 
 import history from './util/history';
 import themeManager from './util/theme';

@@ -1,6 +1,16 @@
 import React from 'react';
 
-export function Select(props) {
+export interface ISelectProps {
+  label: string,
+  onInput: (value: string) => void,
+  defaultValue: string,
+  options: {
+    value: string,
+    label: string
+  }[]
+}
+
+export function Select(props: ISelectProps) {
   const { label, onInput, defaultValue, options } = props;
 
   return (
@@ -12,7 +22,7 @@ export function Select(props) {
         <select
           name="theme-select"
           className="brand-text"
-          onInput={(e) => onInput(e.target.value)}
+          onInput={(e) => onInput((e.target as HTMLSelectElement).value)}
           defaultValue={defaultValue}
         >
           {

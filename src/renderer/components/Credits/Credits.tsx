@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import Grid from '../Grid/Grid.jsx';
-import GridItem from '../Grid/GridItem.jsx';
+import Grid from '../Grid/Grid';
+import GridItem from '../Grid/GridItem';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 
-function Credit({title, desc, link, size}) {
+function Credit(
+  {title, desc, link, size = 1}: {
+    title: string | JSX.Element,
+    desc: string | JSX.Element,
+    link: string,
+    size?: number
+  }
+) {
   return (
-    <GridItem options={{width: size ? size : 1}}>
+    <GridItem options={{width: size}}>
       <div className="card full-height-card center">
         <div className="card-content">
           <span className="card-title styled-text brand-text">{title}</span>

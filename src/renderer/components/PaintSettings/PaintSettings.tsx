@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { CompactPicker } from 'react-color';
+import { CompactPicker, ColorResult, Color } from 'react-color';
 
 import './PaintSettings.css';
 
-export default class PaintSettings extends Component {
+export interface IPaintSettingsProps {
+  initialColor: Color,
+  onPickColor: (color: ColorResult) => void
+}
+
+export default class PaintSettings extends Component<IPaintSettingsProps> {
   state = {
     selected: this.props.initialColor,
   }
 
-  handleChangeComplete = (color) => {
+  handleChangeComplete = (color: ColorResult) => {
     this.props.onPickColor(color);
     this.setState({ selected: color });
   }

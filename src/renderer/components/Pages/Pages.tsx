@@ -3,16 +3,25 @@ import React, { Component, createRef } from 'react';
 
 import { Icon } from '../Icon/Icon';
 import { faPlus, faChevronRight, faChevronLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
-import Page from '../Page/Page.jsx';
+import Page from '../Page/Page';
 import ipcHandler from '../../util/ipc-handler';
 
 import * as EVENTS from '../../../common/constants/eventNames';
 
 import './Pages.css';
+import { GraphDimensions, StrokeExport } from 'svg-real-renderer/build/src/types/RealRendererTypes';
 
 export class Pages extends Component {
-  pageRef = createRef();
-  pages = [[]];
+  pageRef: React.RefObject<Page> = createRef();
+  pages: {
+    exportData: StrokeExport[],
+    strokeIndex: number,
+    dimensions: GraphDimensions
+  }[] = [{
+    exportData: [], // dummy data
+    strokeIndex: 0,
+    dimensions: [0, 0]
+  }]
 
   state = {
     currentPage: 0,
@@ -28,7 +37,7 @@ export class Pages extends Component {
             onClick={this.state.currentPage === this.state.pagesLength - 1 ? this.addPage : this.nextPage}
             title={this.state.currentPage === this.state.pagesLength - 1 ? 'Add Page' : 'Next Page'}
           >
-            <Icon icon={this.state.currentPage === this.state.pagesLength - 1 ? faPlus : faChevronRight} />
+            <Icon options={{icon: this.state.currentPage === this.state.pagesLength - 1 ? faPlus : faChevronRight}} />
           </button>
 
           <span
@@ -46,7 +55,7 @@ export class Pages extends Component {
               onClick={this.deletePage}
               title="Delete This Page"
             >
-              <Icon icon={faTrash} />
+              <Icon options={{icon: faTrash}} />
             </button>
           }
 
@@ -57,7 +66,7 @@ export class Pages extends Component {
               onClick={this.lastPage}
               title="Previous page"
             >
-              <Icon icon={faChevronLeft} />
+              <Icon options={{icon: faChevronLeft}} />
             </button>
           }
         </div>

@@ -29,14 +29,14 @@ export default class Download extends Component {
           (
             <div>
               <button className="dropdown-trigger btn center brand-text" data-target="download-dropdown" title="Download New Version">
-                <Icon icon={faDownload} rightmargin />
+                <Icon options={{icon: faDownload}} rightMargin={true} />
                 Download New Version
               </button>
 
               <ul id="download-dropdown" className="dropdown-content">
                 <li>
                   <a target="_blank" rel="noreferrer" href="https://snapcraft.io/rainbow-board" className="btn-flat brand-text">
-                    <Icon icon={faLinux} rightmargin />
+                    <Icon options={{icon: faLinux}} rightMargin={true} />
                     Linux (snap)
                   </a>
                 </li>
@@ -44,7 +44,7 @@ export default class Download extends Component {
                   this.state.downloadURLs.exe !== '' &&
                   <li>
                     <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.exe} className="btn-flat brand-text">
-                      <Icon icon={faWindows} rightmargin />
+                      <Icon options={{icon: faWindows}} rightMargin={true} />
                       Windows (EXE)
                     </a>
                   </li>
@@ -53,7 +53,7 @@ export default class Download extends Component {
                   this.state.downloadURLs.dmg !== '' &&
                   <li>
                     <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.exe} className="btn-flat brand-text">
-                      <Icon icon={faApple} rightmargin />
+                      <Icon options={{icon: faApple}} rightMargin={true} />
                       Mac (DMG)
                     </a>
                   </li>
@@ -62,7 +62,7 @@ export default class Download extends Component {
                   this.state.downloadURLs.deb !== '' &&
                   <li>
                     <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.deb} className="btn-flat brand-text">
-                      <Icon icon={faLinux} rightmargin />
+                      <Icon options={{icon: faLinux}} rightMargin={true} />
                       Linux (deb)
                     </a>
                   </li>
@@ -71,7 +71,7 @@ export default class Download extends Component {
                   this.state.downloadURLs.appimg !== '' &&
                   <li>
                     <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.appimg} className="btn-flat brand-text">
-                      <Icon icon={faLinux} rightmargin />
+                      <Icon options={{icon: faLinux}} rightMargin={true} />
                       Linux (portable)
                     </a>
                   </li>
@@ -80,7 +80,7 @@ export default class Download extends Component {
                   this.state.downloadURLs.zip_linux !== '' &&
                   <li>
                     <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.zip_linux} className="btn-flat brand-text">
-                      <Icon icon={faLinux} rightmargin />
+                      <Icon options={{icon: faLinux}} rightMargin={true} />
                       Linux (zip)
                     </a>
                   </li>
@@ -105,7 +105,7 @@ export default class Download extends Component {
     const xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = () => {
       if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-        const releaseInfo = JSON.parse(xmlHttp.responseText);
+        const releaseInfo: {assets: { name: string, browser_download_url: string }[], tag_name: string} = JSON.parse(xmlHttp.responseText);
 
         const debAsset = releaseInfo.assets.find((asset) => asset.name.includes('.deb'));
         const zipLinuxAsset = releaseInfo.assets.find((asset) => asset.name.includes('.zip') && asset.name.includes('linux'));

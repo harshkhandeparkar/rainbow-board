@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import packageFile from '../../../package.json';
-import Download from './Download/Download.jsx';
+import Download from './Download/Download';
 
 import { hasSetting, getSetting } from '../util/settings';
 import { Icon } from './Icon/Icon';

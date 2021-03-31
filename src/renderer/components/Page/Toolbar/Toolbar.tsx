@@ -1,35 +1,52 @@
-import React, { Component, createRef } from 'react';
-import M from 'materialize-css';
-import PaintSettings from '../../PaintSettings/PaintSettings.jsx';
+import React, { Component, createRef, RefObject } from 'react';
+import M, { Modal } from 'materialize-css';
+import PaintSettings from '../../PaintSettings/PaintSettings';
 
 import { Icon } from '../../Icon/Icon';
 import { faPaintBrush, faEraser, faGripLines, faPalette, faUndo, faRedo, faSave, faBan, faHome } from '@fortawesome/free-solid-svg-icons';
 
 import './Toolbar.css';
 import { go } from '../../../util/navigation';
-import ipcHandler from '../../../util/ipc-handler.js';
+import ipcHandler from '../../../util/ipc-handler';
 import * as EVENTS from '../../../../common/constants/eventNames';
+import { RealDrawBoard, RealDrawBoardTypes } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/RealDrawBoard';
+import { Tool, ToolSettings } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/tools/tools';
+import { Color } from 'svg-real-renderer/build/src/types/RealRendererTypes';
 
-export class Toolbar extends Component {
-  constructor(...props) {
-    super(...props);
+export interface IToolbarProps {
+  boardOptions: RealDrawBoardTypes.RealDrawBoardOptions,
+  _changeToolSetting: (setting: keyof ToolSettings, value: number) => void,
+  _setTool: (tool: Tool) => void,
+  initialBrushColor: Color,
+  boardState: {
+    drawBoard: RealDrawBoard,
+    tool: Tool
+  },
+  _clearBoard: () => void,
+  _save: (saveType: string) => void,
+  _onUndo: () => void,
+  _onRedo: () => void
+}
 
-    // Modals
-    this.saveBoardRef = createRef();
-    this.colorPickerRef = createRef();
+export class Toolbar extends Component<IToolbarProps> {
+  // Modals
+  saveBoardRef: RefObject<HTMLDivElement> = createRef();
+  colorPickerRef: RefObject<HTMLDivElement> = createRef();
 
-    // Ranges
-    this.brushSizeRangeRef = createRef();
-    this.eraserSizeRangeRef = createRef();
-    this.changeRateRangeRef = createRef();
-    this.lineThicknessRangeRef = createRef();
-    this.lineColorRangeRef = createRef();
-  }
+  // Ranges
+  brushSizeRangeRef: RefObject<HTMLInputElement> = createRef();
+  eraserSizeRangeRef: RefObject<HTMLInputElement> = createRef();
+  changeRateRangeRef: RefObject<HTMLInputElement> = createRef();
+  lineThicknessRangeRef: RefObject<HTMLInputElement> = createRef();
+  lineColorRangeRef: RefObject<HTMLInputElement> = createRef();
+
+  saveBoardModalInstance: Modal;
+  colorPickerInstance: Modal;
 
   state = {
     brushSize: this.props.boardOptions.toolSettings.brushSize,
     eraserSize: this.props.boardOptions.toolSettings.eraserSize,
-    changeRate: this.props.boardOptions.toolSettings.changeRate,
+    // changeRate: this.props.boardOptions.toolSettings.changeRate,
     lineThickness: this.props.boardOptions.toolSettings.lineThickness,
     lineColor: this.props.boardOptions.toolSettings.lineColor,
     saveType: 'png',
@@ -39,11 +56,6 @@ export class Toolbar extends Component {
   _initializeModal() {
     if (!this.saveBoardModalInstance) this.saveBoardModalInstance = M.Modal.init(this.saveBoardRef.current);
     if (!this.colorPickerInstance) this.colorPickerInstance = M.Modal.init(this.colorPickerRef.current);
-  }
-
-
-  componentDidMount() {
-    this._initializeModal();
   }
 
   componentDidUpdate() {
@@ -57,12 +69,12 @@ export class Toolbar extends Component {
     })
   }
 
-  onColorRateChange = () => {
-    this.props._changeToolSetting('changeRate', Number(this.changeRateRangeRef.current.value));
-    this.setState({
-      changeRate: Number(this.changeRateRangeRef.current.value)
-    })
-  }
+  // onColorRateChange = () => {
+  //   this.props._changeToolSetting('changeRate', Number(this.changeRateRangeRef.current.value));
+  //   this.setState({
+  //     changeRate: Number(this.changeRateRangeRef.current.value)
+  //   })
+  // }
 
   onLineColorChange = () => {
     this.props._changeToolSetting('lineColor', Number(this.lineColorRangeRef.current.value));
@@ -111,15 +123,15 @@ export class Toolbar extends Component {
 
     return (
       <div className="toolbar">
-        <div className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'brush' ? '' : boardState.tool === 'rainbow_brush' ? 'left' : 'hide'}`}>
+        <div className={`top-toolbar z-depth-1 valign-wrapper`}> {/* boardState.tool === 'rainbow_brush' ? 'left' : 'hide'}`}>*/}
           <label>Brush Size</label>
           <input type="range" min="2" max="100" value={this.state.brushSize} ref={this.brushSizeRangeRef} onChange={this.onBrushSizeChange} />
         </div>
 
-        <div className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'rainbow_brush' ? 'right' : 'hide'}`}>
+        {/* <div className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'rainbow_brush' ? 'right' : 'hide'}`}>
           <label>Color Change Rate</label>
           <input type="range" min="1" max="50" value={this.state.changeRate} ref={this.changeRateRangeRef} onChange={this.onColorRateChange} />
-        </div>
+        </div> */}
 
         <div className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'eraser' ? '' : 'hide'}`}>
           <label>Eraser Size</label>
@@ -133,42 +145,42 @@ export class Toolbar extends Component {
 
         <div className="bottom-toolbar z-depth-1">
           <button className={`btn-flat ${boardState.tool === 'brush' ? 'active' : ''} brand-text`} title="Paint Brush" onClick={() => _setTool('brush')}>
-            <Icon icon={faPaintBrush} />
+            <Icon options={{icon: faPaintBrush}} />
           </button>
           {/* <button className={`btn-flat ${boardState.tool === 'rainbow_brush' ? 'active' : ''} brand-text`} title="Rainbow Brush" onClick={() => _setTool('rainbow_brush')}>
-            <Icon icon={} />
+            <Icon options={{icon:} />
           </button> */}
           <button className={`btn-flat ${boardState.tool === 'eraser' ? 'active' : ''} brand-text`} title="Eraser" onClick={() => _setTool('eraser')}>
-            <Icon icon={faEraser} />
+            <Icon options={{icon: faEraser}} />
           </button>
           <button className={`btn-flat ${boardState.tool === 'line' ? 'active' : ''} brand-text`} title="Line Tool" onClick={() => _setTool('line')}>
-            <Icon icon={faGripLines} />
+            <Icon options={{icon: faGripLines}} />
           </button>
           <button className="btn-flat brand-text" title="Color Palette" onClick={() => this.colorPickerInstance.open()}>
-            <Icon icon={faPalette} />
+            <Icon options={{icon :faPalette}} />
           </button>
           <button className="btn-flat brand-text" title="Undo (Ctrl + Z)" onClick={() => _onUndo()}>
-            <Icon icon={faUndo} />
+            <Icon options={{icon: faUndo}} />
           </button>
           <button className="btn-flat brand-text" title="Redo (Ctrl + Y)" onClick={() => _onRedo()}>
-            <Icon icon={faRedo} />
+            <Icon options={{icon: faRedo}} />
           </button>
           <button className="btn-flat brand-text" title="Save this slide (Ctrl + S)" onClick={() => this.saveBoardModalInstance.open()}>
-            <Icon icon={faSave} />
+            <Icon options={{icon: faSave}} />
           </button>
           <button
             className="btn-flat brand-text"
             title="Clear the board"
             onClick={_clearBoard}
           >
-            <Icon icon={faBan} />
+            <Icon options={{icon: faBan}} />
           </button>
           <button
             className="btn-flat brand-text"
             title="Go to home"
             onClick={() => go('/')}
           >
-            <Icon icon={faHome} />
+            <Icon options={{icon: faHome}} />
           </button>
         </div>
 
@@ -213,7 +225,7 @@ export class Toolbar extends Component {
               initialColor={`rgb(${r * 255}, ${g * 255}, ${b * 255})`}
               onPickColor={color => {
                 if(boardState.tool === 'brush' || boardState.tool === 'line'){
-                  boardState.drawBoard.changeToolSetting(`${boardState.tool}Color`,[color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255]);
+                  boardState.drawBoard.changeToolSetting(`${boardState.tool}Color` as keyof ToolSettings, [color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255]);
                 }
                 else return;
               }}

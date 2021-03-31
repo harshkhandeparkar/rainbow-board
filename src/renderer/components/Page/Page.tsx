@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component, createRef, RefObject } from 'react';
 import { ipcRenderer } from 'electron';
 import { RealDrawBoard } from 'svg-real-renderer';
 import SVGSaver from 'svgsaver';
@@ -7,22 +7,31 @@ import themeManager from '../../util/theme';
 
 import * as EVENTS from '../../../common/constants/eventNames';
 
-import { Toolbar } from './Toolbar/Toolbar.jsx';
+import { Toolbar } from './Toolbar/Toolbar';
 
 import './Page.css';
+import { Tool } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/tools/tools';
+import { RealDrawBoardTypes } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/RealDrawBoard';
+
+export interface IPageState {
+  boardState: {
+    tool: Tool,
+    drawBoard?: RealDrawBoard
+  }
+}
 
 export class Page extends Component {
-  constructor(...props) {
-    super(...props);
-
-    this.state = {
-      boardState: {
-        tool: 'brush'
-      }
+  state: IPageState = {
+    boardState: {
+      tool: 'brush' as Tool
     }
+  }
 
-    this.svgRef = createRef();
-    this.toolbarRef = createRef();
+  svgRef: RefObject<SVGSVGElement> = createRef();
+  toolbarRef: RefObject<Toolbar> = createRef();
+
+  constructor(props: any) {
+    super(props);
 
     const { boardOptions: customBoardOptions } = themeManager.getTheme();
 
@@ -36,18 +45,18 @@ export class Page extends Component {
     }
   }
 
-  boardOptions = {
+  boardOptions: RealDrawBoardTypes.RealDrawBoardOptions = {
     drawAxes: false,
     xOffset: 0,
     yOffset: 0,
     toolSettings: {
       brushSize: 3,
       lineThickness: 3,
-      eraserSize: 30,
-      changeRate: 5,
+      eraserSize: 30
+      // changeRate: 5,
     },
     allowUndo: true,
-    maxSnapshots: 10
+    maxUndos: 10
   }
 
   componentDidMount() {
@@ -72,7 +81,7 @@ export class Page extends Component {
     this._removeHotkeys();
   }
 
-  _setTool(tool) {
+  _setTool(tool: Tool) {
     this.state.boardState.drawBoard.changeTool(tool);
     this.setState({
       boardState: {
@@ -93,7 +102,7 @@ export class Page extends Component {
     }
   }
 
-  _save(type) {
+  _save(type: string) {
     const svgSaver = new SVGSaver();
 
     this.state.boardState.drawBoard.clearPreview();
@@ -143,15 +152,13 @@ export class Page extends Component {
         <Toolbar
           ref={this.toolbarRef}
           boardOptions={this.boardOptions}
-          boardState={this.state.boardState}
+          boardState={{ drawBoard: this.state.boardState.drawBoard, tool: this.state.boardState.tool }}
           initialBrushColor={this.boardOptions.toolSettings.brushColor}
           _setTool={(tool) => this._setTool(tool)}
           _save={(type) => this._save(type)}
           _clearBoard={() => this._clearBoard()}
           _onUndo={() => this.state.boardState.drawBoard.undo()}
           _onRedo={() => this.state.boardState.drawBoard.redo()}
-          onBrushSizeChange={(size) => this.state.boardState.drawBoard.changeBrushSize(size)}
-          onEraserSizeChange={(size) => this.state.boardState.drawBoard.changeEraserSize(size)}
           _changeToolSetting={(property, newValue) => this.state.boardState.drawBoard.changeToolSetting(property, newValue)}
         />
       </div>
