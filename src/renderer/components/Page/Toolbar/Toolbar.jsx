@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react';
 import M from 'materialize-css';
 import PaintSettings from '../../PaintSettings/PaintSettings.jsx';
 
-import { Icon } from '../../Icon/Icon.jsx';
+import { Icon } from '../../Icon/Icon';
 import { faPaintBrush, faEraser, faGripLines, faPalette, faUndo, faRedo, faSave, faBan, faHome } from '@fortawesome/free-solid-svg-icons';
 
 import './Toolbar.css';

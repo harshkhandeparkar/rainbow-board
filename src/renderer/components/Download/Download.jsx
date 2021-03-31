@@ -3,7 +3,7 @@ import M from 'materialize-css';
 import { gt } from 'semver';
 import packageFile from '../../../../package.json';
 
-import { Icon } from '../Icon/Icon.jsx';
+import { Icon } from '../Icon/Icon';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { faLinux, faWindows, faApple } from '@fortawesome/free-brands-svg-icons';
 

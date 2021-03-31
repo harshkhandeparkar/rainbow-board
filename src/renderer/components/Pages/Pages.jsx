@@ -1,7 +1,7 @@
 import { ipcRenderer } from 'electron';
 import React, { Component, createRef } from 'react';
 
-import { Icon } from '../Icon/Icon.jsx';
+import { Icon } from '../Icon/Icon';
 import { faPlus, faChevronRight, faChevronLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Page from '../Page/Page.jsx';
 import ipcHandler from '../../util/ipc-handler';

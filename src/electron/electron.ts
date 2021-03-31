@@ -4,9 +4,9 @@ import isDev from 'electron-is-dev';
 import { loadPlugins } from './util/plugins';
 import { makeSplashScreen } from './windows/splash';
 import { createMainWindow } from './windows/mainWindow';
-import { Plugin } from '../renderer/util/plugins';
+import { IPlugin } from '../common/types/plugins';
 
-let plugins: Plugin[] = [];
+let plugins: IPlugin[] = [];
 
 loadPlugins(plugins);
 

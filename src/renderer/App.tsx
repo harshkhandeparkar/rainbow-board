@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Router } from 'react-router-dom';
-import Main from './components/Main.jsx';
+import Main from './components/Main';
 import Pages from './components/Pages/Pages.jsx';
 import Credits from './components/Credits/Credits.jsx';
 import WhatsNew from './components/WhatsNew/WhatsNew.jsx';

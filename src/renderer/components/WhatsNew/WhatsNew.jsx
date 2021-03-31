@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Icon } from '../Icon/Icon.jsx';
+import { Icon } from '../Icon/Icon';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 import { setSetting } from '../../util/settings';

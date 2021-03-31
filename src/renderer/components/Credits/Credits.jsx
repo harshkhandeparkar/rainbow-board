@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Grid from '../Grid/Grid.jsx';
 import GridItem from '../Grid/GridItem.jsx';

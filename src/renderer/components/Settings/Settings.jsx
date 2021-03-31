@@ -4,7 +4,7 @@ import { Select } from '../Select/Select.jsx';
 import themeManager from '../../util/theme';
 import M from 'materialize-css';
 
-import { Icon } from '../Icon/Icon.jsx';
+import { Icon } from '../Icon/Icon';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 export default class Settings extends Component {

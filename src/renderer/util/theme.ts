@@ -1,37 +1,19 @@
 import { setSetting, hasSetting, getSetting } from './settings';
 import { themePlugins, boardPlugins } from './plugins';
+import { ITheme, IThemeStylingOptions, ThemeCSS } from '../../common/types/theme';
+import { RealDrawBoardTypes } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/RealDrawBoard';
 
-/**
- * @typedef {Object} ThemeCSS
- * @property {string} bgColor Background color
- * @property {string} bg1 Level 1 surface color
- * @property {string} bg2 Level 2 surface color
- * @property {string} highlight Highlight color
- * @property {string} textColor
- * @property {string} highlightTextColor
- * @property {string} globalCSS
- */
+export interface IThemeManagerOptions {
+  customThemes?: {[themeName: string]: IThemeStylingOptions},
+  customBoardOptions?: {[themeName: string]: RealDrawBoardTypes.RealDrawBoardOptions}
+}
 
-
-/**
- * @typedef {Object} ThemeManagerOptions
- * @property {{[themeName: string]: {name: string, css: ThemeCSS}} customThemes?
- * @property {{[themeName: string]: {options: Object}} customBoardOptions?
- */
-
-/**
- * @typedef {Object} Theme
- * @property {string} theme The theme name
- * @property {string} name The theme display name
- * @property {ThemeCSS} css The theme CSS
- * @property {Object} boardOptions The theme custom board options
- */
+export type ThemeChangeEventListener = (newTheme: ITheme) => void;
 
 class ThemeManager {
-  /**
-   * @type {{[themeName: string]: string}}
-   */
-  themes = {
+  themes: {
+    [themeName: string]: string
+  } = {
     light: 'Default Light',
     dark: 'Default Dark',
     'dark-whiteboard': 'Dark Whiteboard',
@@ -40,10 +22,7 @@ class ThemeManager {
 
   theme = 'light';
 
-  /**
-   * @type {ThemeCSS}
-   */
-  static lightThemeCSS = {
+  static lightThemeCSS: ThemeCSS = {
     bgColor: 'white',
     bg1: 'white',
     bg2: 'white',
@@ -53,10 +32,7 @@ class ThemeManager {
     globalCSS: ''
   }
 
-  /**
-   * @type {ThemeCSS}
-   */
-  static darkThemeCSS = {
+  static darkThemeCSS: ThemeCSS = {
     bgColor: '#121212',
     bg1: '#202020',
     bg2: '#303030',
@@ -66,17 +42,17 @@ class ThemeManager {
     globalCSS: ''
   }
 
-  /**
-   * @type {{light: ThemeCSS, dark: ThemeCSS}}
-   */
-  themeCSS = {
+
+  themeCSS: {
+    [themeName: string]: ThemeCSS
+  } = {
     light: ThemeManager.lightThemeCSS,
     dark: ThemeManager.darkThemeCSS,
     'dark-whiteboard': ThemeManager.darkThemeCSS,
     'light-blackboard': ThemeManager.lightThemeCSS
   }
 
-  static lightThemeBoardOptions = {
+  static lightThemeBoardOptions: RealDrawBoardTypes.RealDrawBoardOptions = {
     bgColor: [1, 1, 1],
     toolSettings: {
       brushColor: [0, 0, 0],
@@ -84,7 +60,7 @@ class ThemeManager {
     }
   }
 
-  static darkThemeBoardOptions = {
+  static darkThemeBoardOptions: RealDrawBoardTypes.RealDrawBoardOptions = {
     bgColor: [0, 0, 0],
     toolSettings: {
       brushColor: [1, 1, 1],
@@ -92,20 +68,18 @@ class ThemeManager {
     }
   }
 
-  themeCustomBoardOptions = {
+  themeCustomBoardOptions: {
+    [themeName: string]: RealDrawBoardTypes.RealDrawBoardOptions
+  } = {
     light: ThemeManager.lightThemeBoardOptions,
     dark: ThemeManager.darkThemeBoardOptions,
     'dark-whiteboard': ThemeManager.lightThemeBoardOptions,
     'light-blackboard': ThemeManager.darkThemeBoardOptions
   }
 
-  themeChangeEventListeners = {};
+  themeChangeEventListeners: {[handlerName: string]: ThemeChangeEventListener} = {};
 
-  /**
-   *
-   * @param {ThemeManagerOptions} options
-   */
-  constructor(options) {
+  constructor(options: IThemeManagerOptions) {
     if (options.customThemes) {
       for (let theme in options.customThemes) {
         this.themes[theme] = options.customThemes[theme].name;
@@ -120,14 +94,14 @@ class ThemeManager {
     }
 
     if (hasSetting('theme')) {
-      const themeSetting = getSetting('theme');
+      const themeSetting: string = <string>getSetting('theme');
 
       if (Object.keys(this.themes).includes(themeSetting)) this.theme = themeSetting;
       else setSetting('theme', this.theme);
     }
   }
 
-  themeChanged() {
+  private _themeChanged() {
     const currentTheme = this.getTheme();
 
     for (let handlerName in this.themeChangeEventListeners) {
@@ -135,11 +109,7 @@ class ThemeManager {
     }
   }
 
-  /**
-   *
-   * @returns {Theme}
-   */
-  getTheme() {
+  getTheme(): ITheme {
     return {
       theme: this.theme,
       name: this.themes[this.theme],
@@ -148,62 +118,43 @@ class ThemeManager {
     }
   }
 
-  /**
-   *
-   * @param {Theme} theme
-   */
-  _setTheme(theme) {
+  private _setTheme(theme: string) {
     this.theme = theme;
     setSetting('theme', theme);
-    this.themeChanged();
+    this._themeChanged();
   }
 
-  /**
-   *
-   * @param {Theme} theme
-   */
-  setTheme(theme) {
+  setTheme(theme: string) {
     if (Object.keys(this.themes).includes(theme)) this._setTheme(theme);
   }
 
-  /**
-   * @param {string} handlerName
-   * @param {(newTheme: Theme) => void} handler
-   */
-  onThemeChange(handlerName, handler) {
+  onThemeChange(handlerName: string, handler: ThemeChangeEventListener) {
     if (!Object.keys(this.themeChangeEventListeners).includes(handlerName)) {
       this.themeChangeEventListeners[handlerName] = handler;
     }
   }
 
-  /**
-   *
-   * @param {string} handlerName
-   */
-  offThemeChange(handlerName) {
+  offThemeChange(handlerName: string) {
     if (Object.keys(this.themeChangeEventListeners).includes(handlerName)) {
       delete this.themeChangeEventListeners[handlerName];
     }
   }
 }
 
-/**
- * @type {ThemeManagerOptions}
- */
-const options = {
+const options: IThemeManagerOptions = {
   customThemes: {},
   customBoardOptions: {}
 }
 
 themePlugins.forEach((plugin) => {
-  for (let theme in plugin.plugin.customThemeCSS) {
-    options.customThemes[theme] = plugin.plugin.customThemeCSS[theme];
+  for (let theme in plugin.code.customThemeCSS) {
+    options.customThemes[theme] = plugin.code.customThemeCSS[theme];
   }
 })
 
 boardPlugins.forEach((plugin) => {
-  for (let theme in plugin.plugin.customBoardOptions) {
-    options.customBoardOptions[theme] = plugin.plugin.customBoardOptions[theme];
+  for (let theme in plugin.code.customBoardOptions) {
+    options.customBoardOptions[theme] = plugin.code.customBoardOptions[theme];
   }
 })
 

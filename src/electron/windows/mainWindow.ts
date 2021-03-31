@@ -1,14 +1,14 @@
 import { BrowserWindow, shell, dialog, ipcMain } from 'electron';
-import { Plugin } from '../../renderer/util/plugins';
 import { indexFilePath, iconPath } from '../constants/paths';
 import { createWindowMenu } from '../windowMenu';
 import * as EVENTS from '../../common/constants/eventNames';
+import { IPlugin } from '../../common/types/plugins';
 
 let showExitPrompt = true;
 
 export function createMainWindow(
   isDev: boolean,
-  plugins: Plugin[],
+  plugins: IPlugin[],
   splashWin: BrowserWindow | null
 ) {
   const win = new BrowserWindow({

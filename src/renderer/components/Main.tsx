@@ -4,7 +4,7 @@ import packageFile from '../../../package.json';
 import Download from './Download/Download.jsx';
 
 import { hasSetting, getSetting } from '../util/settings';
-import { Icon } from '../components/Icon/Icon.jsx';
+import { Icon } from './Icon/Icon';
 import { faPaintBrush, faBell, faCog } from '@fortawesome/free-solid-svg-icons';
 
 const { version, discordInvite } = packageFile;
@@ -36,13 +36,13 @@ function Main() {
         <div className="row">
           <div className="col offset-s2 s4">
             <NavLink to="/pages" className="btn center brand-text" title="New Whiteboard Page">
-              <Icon icon={faPaintBrush} rightmargin /> New Page
+              <Icon options={{icon: faPaintBrush}} rightMargin={true} /> New Page
             </NavLink>
           </div>
 
           <div className="col s4">
             <NavLink to="/new" className="btn center brand-text" title="New Changes">
-              <Icon icon={faBell} rightmargin />What's New!
+              <Icon options={{icon: faBell}} rightMargin={true} />What's New!
             </NavLink>
           </div>
         </div>
@@ -70,7 +70,7 @@ function Main() {
               </div>
               <div className="row">
                 <NavLink to="/settings" className="btn-floating brand-text center" title="Open Settings">
-                  <Icon icon={faCog} />
+                  <Icon options={{icon: faCog}} />
                 </NavLink>
               </div>
             </div>
