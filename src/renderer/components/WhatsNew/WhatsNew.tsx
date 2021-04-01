@@ -65,6 +65,23 @@ export default class WhatsNew extends Component {
           className="container"
         >
           <New
+            title="UI Cleanup And Redesign"
+            desc={<span>
+              The UI has been cleaned up. Reduced shadows and transitions. Uses cleaner borders and the themes are more consistent
+              New icons from <a href="https://fontawesome.com">FontAwesome v5</a>. The new UI tries to follow the <a href="https://developer.gnome.org/hig/stable/">GNOME Human Interface Guidelines</a>.
+              There are tooltips to most buttons with shortcut keys displayed. The top menu only displays what is necessary and some new items have been added to it.
+            </span>}
+            version="v0.7.0"
+            size={2}
+          />
+          <New
+            title="Themes And Settings"
+            desc="Instead of just two themes - Light and Dark, a settings page has been added where the theme can be choses. Two new themes have also been added -
+            Dark Whiteboard (Board is white but UI dark) and Light Blackboard (Board is dark but UI light)."
+            version="v0.7.0"
+            size={1}
+          />
+          <New
             title="Desktop App Features"
             desc="The app has been changed to look more like a desktop app than a web app running in a wrapper.
             A new menu has been added along with other changes. Starting from now, the web app will not be updated beyond

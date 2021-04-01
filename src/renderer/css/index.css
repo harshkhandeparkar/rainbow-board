@@ -81,7 +81,7 @@ footer {
   border-bottom-right-radius: 0.3rem !important;
 }
 
-.card-action a:hover {
+.card a:hover, .save-type a:hover {
   text-decoration: underline;
 }
 
