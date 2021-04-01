@@ -74,7 +74,8 @@ export function createWindowMenu(win: BrowserWindow, isDev: boolean) {
         { label: 'Latest Release', click: () => shell.openExternal(repository + '/releases/latest') },
         { label: 'All Releases', click: () => shell.openExternal(repository + '/releases') },
         { type: 'separator' },
-        { label: 'About', click: () => showAboutDialog(win) }
+        { label: 'About', click: () => showAboutDialog(win) },
+        { label: 'Credits', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/credits'}) }
       ]
     }
   ]

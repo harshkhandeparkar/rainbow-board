@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { repository } from '../../../../package.json';
 
 import Grid from '../Grid/Grid';
 import GridItem from '../Grid/GridItem';
@@ -114,7 +115,13 @@ export default class Credits extends Component {
             link="https://gimp.org"
           />
           <Credit
-            size={3}
+            size={2}
+            title="Contributors"
+            desc="Code Contributors."
+            link={repository + '/graphs/contributors'}
+          />
+          <Credit
+            size={1}
             title="Full List of Libraries"
             desc="Complete list of dependencies used."
             link="https://github.com/HarshKhandeparkar/rainbow-board/network/dependencies"
