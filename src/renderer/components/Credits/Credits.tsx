@@ -33,7 +33,7 @@ function Credit(
 export default class Credits extends Component {
   render() {
     return (
-      <div>
+      <div style={{paddingBottom: '2rem'}}>
         <nav>
           <div className="nav-wrapper header container">
             <span className="brand-logo center header-text brand-text">Credits</span>

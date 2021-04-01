@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Select } from '../Select/Select';
+import { VersionFooter } from '../VersionFooter/VersionFooter';
 import themeManager from '../../util/theme';
 import packageFile from '../../../../package.json';
 import M from 'materialize-css';
@@ -38,11 +39,7 @@ export default class Settings extends Component {
           />
         </div>
 
-        <footer className="container-fluid center z-depth-2">
-          <p className="center brand-text" style={{width: '100%'}}>
-            v{version}
-          </p>
-        </footer>
+        <VersionFooter />
       </div>
     )
   }

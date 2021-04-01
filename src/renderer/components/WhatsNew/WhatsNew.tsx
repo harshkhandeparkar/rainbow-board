@@ -8,6 +8,7 @@ import packageFile from '../../../../package.json';
 
 import Grid from '../Grid/Grid';
 import GridItem from '../Grid/GridItem';
+import { VersionFooter } from '../VersionFooter/VersionFooter';
 
 const { version } = packageFile;
 
@@ -48,7 +49,7 @@ export default class WhatsNew extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{paddingBottom: '2rem'}}>
         <nav>
           <div className="nav-wrapper header container">
             <span className="brand-logo center header-text brand-text">What's New</span>

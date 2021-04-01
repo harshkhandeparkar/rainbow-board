@@ -4,6 +4,7 @@ import packageFile from '../../../package.json';
 import Download from './Download/Download';
 import Grid from './Grid/Grid';
 import GridItem from './Grid/GridItem';
+import { VersionFooter } from './VersionFooter/VersionFooter';
 
 import { hasSetting, getSetting } from '../util/settings';
 import { Icon } from './Icon/Icon';
@@ -77,11 +78,7 @@ function Main() {
         </Grid>
       </div>
 
-      <footer className="container-fluid center z-depth-2">
-        <p className="center brand-text" style={{width: '100%'}}>
-          v{version}
-        </p>
-      </footer>
+      <VersionFooter />
     </div>
   )
 }

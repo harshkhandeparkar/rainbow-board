@@ -98,11 +98,6 @@ class App extends Component {
               color: ${this.state.css.textColor} !important;
               background-color: ${this.state.css.bg1} !important;
             }
-
-            .footer-copyright {
-              color: ${this.state.css.textColor} !important;
-              background-color: ${this.state.css.bg2} !important;
-            }
             `
           }
         </style>
