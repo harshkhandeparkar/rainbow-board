@@ -29,6 +29,7 @@ class ThemeManager {
     highlight: '#e6e6e6',
     textColor: 'black',
     highlightTextColor: 'rgb(250, 129, 29)',
+    borderColor: '#a6a6a6',
     globalCSS: ''
   }
 
@@ -39,6 +40,7 @@ class ThemeManager {
     highlight: '#303030',
     textColor: '#f1f1f1',
     highlightTextColor: 'rgb(250, 129, 29)',
+    borderColor: '#404040',
     globalCSS: ''
   }
 

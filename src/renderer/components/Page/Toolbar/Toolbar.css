@@ -43,43 +43,37 @@
 
 .top-toolbar label {
   width: 30%;
-}
-
-input[type=range]::-webkit-slider-thumb {
-  background-color: rgb(91, 68, 219) !important;
-}
-
-input[type=range]::-moz-range-thumb {
-  background-color: rgb(91, 68, 219) !important;
-}
-
-input[type=range]::-ms-thumb {
-  background-color: rgb(91, 68, 219) !important;
+  user-select: none;
 }
 
 input[type=range] {
   border: none !important;
 }
 
-.thumb {
-  background-color: rgb(91, 68, 219) !important;
-  border-bottom-color: rgb(91, 68, 219) !important;
-}
-
 .save-type {
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
-  padding: 0.3rem;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  transition: border 300ms;
 }
 
+.save-type h6 {
+  margin: 0;
+}
 
 .save-row .col {
   min-height: 100% !important;
 }
 
-.save-type.selected {
-  border-radius: 8px;
-
-  transition: border 300ms;
+.separator-line {
+  display: inline-block;
+  width: 0;
+  padding: none;
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+  vertical-align: middle;
+  height: 75%;
 }
+

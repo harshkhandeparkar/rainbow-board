@@ -35,8 +35,25 @@ class App extends Component {
               color: ${this.state.css.highlightTextColor} !important;
             }
 
-            .save-type.selected {
+            input[type=range]::-webkit-slider-thumb {
+              background-color: ${this.state.css.highlightTextColor} !important;
+            }
+
+            .thumb {
+              background-color: ${this.state.css.highlightTextColor} !important;
+              border-bottom-color: ${this.state.css.highlightTextColor} !important;
+            }
+
+            .color-picker input:focus, .color-picker input:active {
+              box-shadow: 0 1px 0 ${this.state.css.highlightTextColor} !important;
+            }
+
+            .save-type.selected, .save-type:hover {
               border: ${this.state.css.highlightTextColor} solid 1px;
+            }
+
+            .save-type {
+              border: ${this.state.css.borderColor} solid 1px;
             }
 
             body, .modal, .modal-footer {
@@ -48,13 +65,13 @@ class App extends Component {
               background-color: ${this.state.css.bg1} !important;
             }
 
-            button, .btn, .btn-flat, .btn-floating, .card, .color-picker, .bottom-toolbar, .top-toolbar, select {
+            button, .btn, .btn-flat, .btn-floating, .card, .bottom-toolbar, .top-toolbar, select {
               background-color: ${this.state.css.bg1} !important;
               color: ${this.state.css.textColor};
             }
 
-            .btn, .btn-floating, select {
-              border: 1px solid ${this.state.css.highlight} !important;
+            .btn, .btn-floating, select, .color-picker, .bottom-toolbar, .top-toolbar, .page, .separator-line {
+              border: 1px solid ${this.state.css.borderColor} !important;
             }
 
             .color-picker * {

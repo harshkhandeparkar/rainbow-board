@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { CompactPicker, ColorResult, Color } from 'react-color';
+import themeManager from '../../util/theme';
 
 import './PaintSettings.css';
 
@@ -16,6 +17,14 @@ export default class PaintSettings extends Component<IPaintSettingsProps> {
   handleChangeComplete = (color: ColorResult) => {
     this.props.onPickColor(color);
     this.setState({ selected: color });
+  }
+
+  componentDidMount() {
+    const colorPickerWrapper = document.querySelector('.color-picker').parentNode.parentNode as HTMLDivElement;
+    const theme = themeManager.getTheme();
+
+    // CSS is mad science
+    (colorPickerWrapper.querySelector('div') as HTMLDivElement).remove();
   }
 
   render () {

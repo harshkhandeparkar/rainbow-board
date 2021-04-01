@@ -123,7 +123,7 @@ export class Toolbar extends Component<IToolbarProps> {
 
     return (
       <div className="toolbar">
-        <div className={`top-toolbar z-depth-1 valign-wrapper`}> {/* boardState.tool === 'rainbow_brush' ? 'left' : 'hide'}`}>*/}
+        <div className={`top-toolbar valign-wrapper`}> {/* boardState.tool === 'rainbow_brush' ? 'left' : 'hide'}`}>*/}
           <label>Brush Size</label>
           <input type="range" min="2" max="100" value={this.state.brushSize} ref={this.brushSizeRangeRef} onChange={this.onBrushSizeChange} />
         </div>
@@ -143,7 +143,8 @@ export class Toolbar extends Component<IToolbarProps> {
           <input type="range" min="2" max="100" value={this.state.lineThickness} ref={this.lineThicknessRangeRef} onChange={this.onLineThicknessChange} />
         </div>
 
-        <div className="bottom-toolbar z-depth-1">
+        <div className="bottom-toolbar">
+          {/* Tools */}
           <button className={`btn-flat ${boardState.tool === 'brush' ? 'active' : ''} brand-text`} title="Paint Brush" onClick={() => _setTool('brush')}>
             <Icon options={{icon: faPaintBrush}} />
           </button>
@@ -156,6 +157,11 @@ export class Toolbar extends Component<IToolbarProps> {
           <button className={`btn-flat ${boardState.tool === 'line' ? 'active' : ''} brand-text`} title="Line Tool" onClick={() => _setTool('line')}>
             <Icon options={{icon: faGripLines}} />
           </button>
+          {/* /Tools */}
+
+          <div className="separator-line" />
+
+          {/* Board Manipulation */}
           <button className="btn-flat brand-text" title="Color Palette" onClick={() => this.colorPickerInstance.open()}>
             <Icon options={{icon :faPalette}} />
           </button>
@@ -165,6 +171,11 @@ export class Toolbar extends Component<IToolbarProps> {
           <button className="btn-flat brand-text" title="Redo (Ctrl + Y)" onClick={() => _onRedo()}>
             <Icon options={{icon: faRedo}} />
           </button>
+          {/* /Board Manipulation */}
+
+          <div className="separator-line" />
+
+          {/* Others */}
           <button className="btn-flat brand-text" title="Save this slide (Ctrl + S)" onClick={() => this.saveBoardModalInstance.open()}>
             <Icon options={{icon: faSave}} />
           </button>
@@ -182,6 +193,7 @@ export class Toolbar extends Component<IToolbarProps> {
           >
             <Icon options={{icon: faHome}} />
           </button>
+          {/* /Others */}
         </div>
 
         <div className="modal" ref={this.saveBoardRef}>
@@ -190,7 +202,7 @@ export class Toolbar extends Component<IToolbarProps> {
             <div className="container">
               <div className="row">
                 <div className="col s12">
-                  <div className={`save-type card ${this.state.saveType === 'png' ? 'selected' : ''}`} onClick={() => this.setState({ saveType: 'png', saveModalOn: true })}>
+                  <div className={`save-type ${this.state.saveType === 'png' ? 'selected' : ''}`} onClick={() => this.setState({ saveType: 'png', saveModalOn: true })}>
                     <h6>PNG</h6>
                     Saves as a normal image. Loads and works everywhere. Default and recommended for most users.
                   </div>
@@ -198,7 +210,7 @@ export class Toolbar extends Component<IToolbarProps> {
               </div>
               <div className="row">
                 <div className="col s12">
-                  <div  className={`save-type card ${this.state.saveType === 'svg' ? 'selected' : ''}`} onClick={() => {this.setState({ saveType: 'svg', saveModalOn: true })}}>
+                  <div  className={`save-type ${this.state.saveType === 'svg' ? 'selected' : ''}`} onClick={() => {this.setState({ saveType: 'svg', saveModalOn: true })}}>
                     <h6>SVG</h6>
                     Saves the file as an <a href="https://en.wikipedia.org/wiki/SVG" rel="noreferrer" style={{display: 'inline'}} target="_blank">SVG</a>. Use it if you know what it is.
                   </div>
@@ -209,7 +221,7 @@ export class Toolbar extends Component<IToolbarProps> {
           <div className="modal-footer container">
             <button className="btn right" title="Cancel" onClick={e => this.saveBoardModalInstance.close()}>Cancel</button>
             <button
-              className="btn green-text left"
+              className="btn brand-text left"
               title="Save"
               onClick={e => {
                 _save(this.state.saveType);

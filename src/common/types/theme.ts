@@ -13,6 +13,8 @@ export type ThemeCSS = {
   textColor: string,
   /** Highlight/accent text color */
   highlightTextColor: string,
+  /** Border color */
+  borderColor: string,
   /** Extra CSS globally */
   globalCSS: string
 }
