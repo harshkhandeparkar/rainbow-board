@@ -1,0 +1,20 @@
+select {
+  display: block;
+  border-radius: 0.3rem;
+  margin-top: 1rem !important;
+  height: 3rem;
+  width: 100%;
+}
+
+.select-label-col {
+  height: 3rem;
+  margin-top: 1rem;
+}
+
+.select-label-col label {
+  margin-left: auto;
+}
+
+select:focus {
+  outline: none;
+}

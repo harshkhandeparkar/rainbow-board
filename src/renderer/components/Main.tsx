@@ -10,7 +10,7 @@ import { hasSetting, getSetting } from '../util/settings';
 import { Icon } from './Icon/Icon';
 import { faPaintBrush, faBell, faCog } from '@fortawesome/free-solid-svg-icons';
 
-const { version, discordInvite, description } = packageFile;
+const { version, description } = packageFile;
 
 function Main() {
   const history = useHistory();

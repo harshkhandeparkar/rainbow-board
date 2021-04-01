@@ -35,12 +35,11 @@ class App extends Component {
               color: ${this.state.css.highlightTextColor} !important;
             }
 
-            input[type=range]::-webkit-slider-thumb {
+            input[type=range]::-webkit-slider-thumb, .thumb {
               background-color: ${this.state.css.highlightTextColor} !important;
             }
 
             .thumb {
-              background-color: ${this.state.css.highlightTextColor} !important;
               border-bottom-color: ${this.state.css.highlightTextColor} !important;
             }
 

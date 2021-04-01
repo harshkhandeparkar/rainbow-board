@@ -52,8 +52,6 @@ input[type=range] {
 
 .save-type {
   user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
   padding: 1rem;
   border-radius: 0.3rem;
   transition: border 300ms;

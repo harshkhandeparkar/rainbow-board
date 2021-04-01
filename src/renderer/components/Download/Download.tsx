@@ -6,8 +6,26 @@ import packageFile from '../../../../package.json';
 import { Icon } from '../Icon/Icon';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { faLinux, faWindows, faApple } from '@fortawesome/free-brands-svg-icons';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const { version } = packageFile;
+
+function DownloadDropdownOption(
+  { link, label, icon }: {
+    link: string,
+    label: string,
+    icon: IconProp
+  }
+) {
+  return (
+    <li>
+      <a target="_blank" rel="noreferrer" href={link} className="btn-flat brand-text">
+        <Icon options={{icon}} rightMargin={true} />
+        {label}
+      </a>
+    </li>
+  )
+}
 
 export default class Download extends Component {
   state = {
@@ -34,56 +52,50 @@ export default class Download extends Component {
               </button>
 
               <ul id="download-dropdown" className="dropdown-content">
-                <li>
-                  <a target="_blank" rel="noreferrer" href="https://snapcraft.io/rainbow-board" className="btn-flat brand-text">
-                    <Icon options={{icon: faLinux}} rightMargin={true} />
-                    Linux (snap)
-                  </a>
-                </li>
+                <DownloadDropdownOption
+                  link="https://snapcraft.io/rainbow-board"
+                  label="Linux (snap)"
+                  icon={faLinux}
+                />
                 {
                   this.state.downloadURLs.exe !== '' &&
-                  <li>
-                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.exe} className="btn-flat brand-text">
-                      <Icon options={{icon: faWindows}} rightMargin={true} />
-                      Windows (EXE)
-                    </a>
-                  </li>
+                  <DownloadDropdownOption
+                    link={this.state.downloadURLs.exe}
+                    label="Windows (EXE)"
+                    icon={faWindows}
+                  />
                 }
                 {
                   this.state.downloadURLs.dmg !== '' &&
-                  <li>
-                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.exe} className="btn-flat brand-text">
-                      <Icon options={{icon: faApple}} rightMargin={true} />
-                      Mac (DMG)
-                    </a>
-                  </li>
+                  <DownloadDropdownOption
+                    link={this.state.downloadURLs.dmg}
+                    label="Mac (DMG)"
+                    icon={faApple}
+                  />
                 }
                 {
                   this.state.downloadURLs.deb !== '' &&
-                  <li>
-                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.deb} className="btn-flat brand-text">
-                      <Icon options={{icon: faLinux}} rightMargin={true} />
-                      Linux (deb)
-                    </a>
-                  </li>
+                  <DownloadDropdownOption
+                    link={this.state.downloadURLs.deb}
+                    label="Linux (DEB)"
+                    icon={faLinux}
+                  />
                 }
                 {
                   this.state.downloadURLs.appimg !== '' &&
-                  <li>
-                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.appimg} className="btn-flat brand-text">
-                      <Icon options={{icon: faLinux}} rightMargin={true} />
-                      Linux (portable)
-                    </a>
-                  </li>
+                  <DownloadDropdownOption
+                    link={this.state.downloadURLs.appimg}
+                    label="Linux (Portable)"
+                    icon={faLinux}
+                  />
                 }
                 {
                   this.state.downloadURLs.zip_linux !== '' &&
-                  <li>
-                    <a target="_blank" rel="noreferrer" href={this.state.downloadURLs.zip_linux} className="btn-flat brand-text">
-                      <Icon options={{icon: faLinux}} rightMargin={true} />
-                      Linux (zip)
-                    </a>
-                  </li>
+                  <DownloadDropdownOption
+                    link={this.state.downloadURLs.zip_linux}
+                    label="Linux (ZIP)"
+                    icon={faLinux}
+                  />
                 }
               </ul>
             </div>
@@ -93,14 +105,17 @@ export default class Download extends Component {
     )
   }
 
-  componentDidUpdate() {
+  _initDropdown() {
     const elems = document.querySelectorAll('.dropdown-trigger');
     M.Dropdown.init(elems);
   }
 
+  componentDidUpdate() {
+    this._initDropdown();
+  }
+
   componentDidMount() {
-    const elems = document.querySelectorAll('.dropdown-trigger');
-    M.Dropdown.init(elems);
+    this._initDropdown();
 
     const xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = () => {

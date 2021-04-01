@@ -8,7 +8,6 @@ import packageFile from '../../../../package.json';
 
 import Grid from '../Grid/Grid';
 import GridItem from '../Grid/GridItem';
-import { VersionFooter } from '../VersionFooter/VersionFooter';
 
 const { version } = packageFile;
 

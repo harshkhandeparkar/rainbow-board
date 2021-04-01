@@ -20,14 +20,9 @@
   font-family: 'Finger Paint';
 }
 
-html {
+html, body {
   margin: 0;
   padding: 0;
-}
-
-body {
-  padding: 0;
-  margin: 0;
 }
 
 footer {
@@ -38,34 +33,12 @@ footer {
   box-shadow: 0px -1px 3px rgba(0,0,0,0.2);
 }
 
-select {
-  display: block;
-  border-radius: 0.3rem;
-  margin-top: 1rem;
-  height: 3rem;
-  width: 100%;
-}
-
-.select-label-col {
-  height: 3rem;
-  margin-top: 1rem;
-}
-
-.select-label-col label {
-  margin-left: auto;
-}
-
-select:focus {
-  outline: none;
-}
-
 #pages {
   min-height: 100vh;
 }
 
 .header-text {
-  -webkit-user-select: none;
-  -moz-user-select: none;
+  user-select: none;
   font-size: xx-large;
   font-weight: bold;
 }
