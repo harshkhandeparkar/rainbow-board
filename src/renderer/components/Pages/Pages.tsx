@@ -7,6 +7,7 @@ import Page from '../Page/Page';
 import ipcHandler from '../../util/ipc-handler';
 
 import * as EVENTS from '../../../common/constants/eventNames';
+import { ADD_PAGE, NEXT_PAGE, DELETE_PAGE, PREV_PAGE } from '../../../common/constants/shortcuts';
 
 import './Pages.css';
 import { GraphDimensions, StrokeExport } from 'svg-real-renderer/build/src/types/RealRendererTypes';
@@ -35,7 +36,7 @@ export class Pages extends Component {
           <button
             className="btn-floating right page-btn"
             onClick={this.state.currentPage === this.state.pagesLength - 1 ? this.addPage : this.nextPage}
-            title={this.state.currentPage === this.state.pagesLength - 1 ? 'Add Page' : 'Next Page'}
+            title={this.state.currentPage === this.state.pagesLength - 1 ? `Add Page (${ADD_PAGE.platformFormattedString})` : `Next Page (${NEXT_PAGE.platformFormattedString})`}
           >
             <Icon options={{icon: this.state.currentPage === this.state.pagesLength - 1 ? faPlus : faChevronRight}} />
           </button>
@@ -53,7 +54,7 @@ export class Pages extends Component {
             <button
               className="btn-floating page-btn top-right"
               onClick={this.deletePage}
-              title="Delete This Page"
+              title={`Delete Page (${DELETE_PAGE.platformFormattedString})`}
             >
               <Icon options={{icon: faTrash}} />
             </button>
@@ -64,7 +65,7 @@ export class Pages extends Component {
             <button
               className="btn-floating left page-btn"
               onClick={this.lastPage}
-              title="Previous page"
+              title={`Previous Page (${PREV_PAGE.platformFormattedString})`}
             >
               <Icon options={{icon: faChevronLeft}} />
             </button>

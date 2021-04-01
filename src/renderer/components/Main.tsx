@@ -10,6 +10,8 @@ import { hasSetting, getSetting } from '../util/settings';
 import { Icon } from './Icon/Icon';
 import { faPaintBrush, faBell, faCog } from '@fortawesome/free-solid-svg-icons';
 
+import { SETTINGS, START_NEW } from '../../common/constants/shortcuts';
+
 const { version, description } = packageFile;
 
 function Main() {
@@ -26,7 +28,7 @@ function Main() {
     <div id="main">
       <nav>
         <div className="nav-wrapper header container">
-          <NavLink to="/settings" className="btn-floating brand-text center" title="Open Settings">
+          <NavLink to="/settings" className="btn-floating brand-text center" title={`Open Settings (${SETTINGS.platformFormattedString})`}>
             <Icon options={{icon: faCog}} />
           </NavLink>
           <span className="header-text brand-logo center brand-text">Rainbow Board</span>
@@ -50,8 +52,8 @@ function Main() {
               width: 2
             }}
           >
-            <NavLink to="/pages" className="btn center brand-text full-width" title="New Whiteboard Page">
-              <Icon options={{icon: faPaintBrush}} rightMargin={true} /> New Page
+            <NavLink to="/pages" className="btn center brand-text full-width" title={`Start New (${START_NEW.platformFormattedString})`}>
+              <Icon options={{icon: faPaintBrush}} rightMargin={true} /> New ({START_NEW.platformFormattedString})
             </NavLink>
           </GridItem>
 

@@ -1,9 +1,10 @@
 import packageFile from '../../package.json';
-import { shell, ipcMain, Menu, BrowserWindow, MenuItemConstructorOptions } from 'electron';
+import { shell, ipcMain, Menu, BrowserWindow, MenuItemConstructorOptions, globalShortcut } from 'electron';
 
 import { showAboutDialog } from './util/aboutDialog';
 import { menuClickEvents } from './events/menuClickEvents';
 import * as EVENTS from '../common/constants/eventNames';
+import * as SHORTCUTS from '../common/constants/shortcuts';
 
 const { website, repository, version, discordInvite } = packageFile;
 
@@ -13,32 +14,47 @@ export function createWindowMenu(win: BrowserWindow, isDev: boolean) {
       type: 'submenu',
       label: '&File',
       submenu: [
-        { label: 'Start New', accelerator: 'CmdOrCtrl + N', click: () => menuClickEvents.fire(EVENTS.NEW_PAGE, {}) },
-        { label: 'Save Page', accelerator: 'CmdOrCtrl + S', click: () => menuClickEvents.fire(EVENTS.SAVE_PAGE, {}) },
+        { label: 'Start New', accelerator: SHORTCUTS.START_NEW.accelerator, click: () => menuClickEvents.fire(EVENTS.NEW_PAGE, {}) },
+        // { label: 'Save', accelerator: 'CmdOrCtrl + E', click: () => menuClickEvents.fire(EVENTS.SAVE_PAGE, {}) },
+        {
+          label: 'Export Page...',
+          accelerator: SHORTCUTS.EXPORT_PAGE.accelerator,
+          type: 'submenu',
+          submenu: [
+            {
+              label: 'PNG',
+              click: () => menuClickEvents.fire(EVENTS.EXPORT_PAGE, { type: 'png' })
+            },
+            {
+              label: 'SVG',
+              click: () => menuClickEvents.fire(EVENTS.EXPORT_PAGE, { type: 'svg' })
+            }
+          ]
+        },
         { type: 'separator' },
-        { label: 'Settings', accelerator: 'CmdOrCtrl + ,', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/settings'}) },
+        { label: 'Settings', accelerator: SHORTCUTS.SETTINGS.accelerator, click: () => menuClickEvents.fire(EVENTS.GO, {to: '/settings'}) },
         { type: 'separator' },
-        { label: 'Quit', accelerator: 'CmdOrCtrl + Q', click: () => win.isClosable() && win.close() }
+        { label: 'Quit', accelerator: SHORTCUTS.QUIT.accelerator, click: () => win.isClosable() && win.close() }
       ]
     },
     {
       type: 'submenu',
       label: '&Edit',
       submenu: [
-        { label: 'Undo', accelerator: 'CmdOrCtrl + Z', click: () => menuClickEvents.fire(EVENTS.UNDO, {}) },
-        { label: 'Redo', accelerator: 'CmdOrCtrl + Y', click: () => menuClickEvents.fire(EVENTS.REDO, {}) },
+        { label: 'Undo', accelerator: SHORTCUTS.UNDO.accelerator, click: () => menuClickEvents.fire(EVENTS.UNDO, {}) },
+        { label: 'Redo', accelerator: SHORTCUTS.REDO.accelerator, click: () => menuClickEvents.fire(EVENTS.REDO, {}) },
         { type: 'separator' },
-        { label: 'Add Page', accelerator: 'Plus', click: () => menuClickEvents.fire(EVENTS.ADD_PAGE, {}) },
-        { label: 'Clear Page', accelerator: 'Delete', click: () => menuClickEvents.fire(EVENTS.CLEAR_PAGE, {}) },
-        { label: 'Delete Page', accelerator: 'CmdOrCtrl + Delete', click: () => menuClickEvents.fire(EVENTS.DELETE_PAGE, {}) },
+        { label: 'Add Page', accelerator: SHORTCUTS.ADD_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.ADD_PAGE, {}) },
+        { label: 'Clear Page', accelerator: SHORTCUTS.CLEAR_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.CLEAR_PAGE, {}) },
+        { label: 'Delete Page', accelerator: SHORTCUTS.DELETE_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.DELETE_PAGE, {}) },
         { type: 'separator' },
-        { label: 'Next Page', accelerator: 'Right', click: () => menuClickEvents.fire(EVENTS.NEXT_PAGE, {}) },
-        { label: 'Previous Page', accelerator: 'Left', click: () => menuClickEvents.fire(EVENTS.PREVIOUS_PAGE, {}) },
+        { label: 'Next Page', accelerator: SHORTCUTS.NEXT_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.NEXT_PAGE, {}) },
+        { label: 'Previous Page', accelerator: SHORTCUTS.PREV_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.PREVIOUS_PAGE, {}) },
         { type: 'separator' },
-        { label: 'Color Palette', accelerator: 'CmdOrCtrl + P', click: () => menuClickEvents.fire(EVENTS.TOGGLE_COLOR_PALETTE, {}) },
-        { label: 'Brush Tool', accelerator: 'CmdOrCtrl + 1', click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'brush'}) },
-        { label: 'Eraser', accelerator: 'CmdOrCtrl + 2', click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'eraser'}) },
-        { label: 'Line Tool', accelerator: 'CmdOrCtrl + 3', click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'line'}) },
+        { label: 'Color Palette', accelerator: SHORTCUTS.COLOR_PALETTE.accelerator, click: () => menuClickEvents.fire(EVENTS.TOGGLE_COLOR_PALETTE, {}) },
+        { label: 'Brush Tool', accelerator: SHORTCUTS.BRUSH_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'brush'}) },
+        { label: 'Eraser', accelerator: SHORTCUTS.ERASER_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'eraser'}) },
+        { label: 'Line Tool', accelerator: SHORTCUTS.LINE_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'line'}) },
       ]
     },
     {
@@ -47,7 +63,7 @@ export function createWindowMenu(win: BrowserWindow, isDev: boolean) {
       submenu: [
         {
           label: 'Toggle Fullscreen',
-          accelerator: 'F11',
+          accelerator: SHORTCUTS.FULLSCREEN.accelerator,
           click: () => win.setFullScreen(!win.isFullScreen())
         }
       ]
@@ -74,8 +90,8 @@ export function createWindowMenu(win: BrowserWindow, isDev: boolean) {
         { label: 'Latest Release', click: () => shell.openExternal(repository + '/releases/latest') },
         { label: 'All Releases', click: () => shell.openExternal(repository + '/releases') },
         { type: 'separator' },
-        { label: 'About', click: () => showAboutDialog(win) },
-        { label: 'Credits', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/credits'}) }
+        { label: 'Credits', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/credits'}) },
+        { label: 'About', click: () => showAboutDialog(win) }
       ]
     }
   ]
@@ -84,8 +100,8 @@ export function createWindowMenu(win: BrowserWindow, isDev: boolean) {
     type: 'submenu',
     label: 'Developer',
     submenu: [
-      { label: 'Toggle Dev Tools', accelerator: 'CmdOrCtrl + Shift + I', click: () => win.webContents.toggleDevTools() },
-      { label: 'Reload', accelerator: 'CmdOrCtrl + R', click: () => win.webContents.reload() }
+      { label: 'Toggle Dev Tools', accelerator: SHORTCUTS.DEV_TOOLS.accelerator, click: () => win.webContents.toggleDevTools() },
+      { label: 'Reload', accelerator: SHORTCUTS.RELOAD.accelerator, click: () => win.webContents.reload() }
     ]
   })
 
@@ -102,7 +118,10 @@ export function createWindowMenu(win: BrowserWindow, isDev: boolean) {
     // Submenu: File
     menuClickEvents.on(EVENTS.NEW_PAGE, 'hotkey-handler', () => event.reply(EVENTS.GO, {to: '/pages'}))
     menuClickEvents.on(EVENTS.ADD_PAGE, 'hotkey-handler', () => event.reply(EVENTS.ADD_PAGE));
-    menuClickEvents.on(EVENTS.SAVE_PAGE, 'hotkey-handler', () => event.reply(EVENTS.SAVE_PAGE));
+    menuClickEvents.on(EVENTS.EXPORT_PAGE, 'hotkey-handler', ({type}) => event.reply(EVENTS.EXPORT_PAGE, {type}));
+    globalShortcut.register(SHORTCUTS.EXPORT_PAGE.accelerator, () => {
+      event.reply(EVENTS.EXPORT_PAGE_DIALOG);
+    })
 
     // Submenu: Edit
     menuClickEvents.on(EVENTS.UNDO, 'hotkey-handler', () => event.reply(EVENTS.UNDO));

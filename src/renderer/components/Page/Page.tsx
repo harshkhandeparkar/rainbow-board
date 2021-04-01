@@ -102,15 +102,15 @@ export class Page extends Component {
     }
   }
 
-  _save(type: string) {
+  _save(type: 'svg' | 'png') {
     const svgSaver = new SVGSaver();
 
     this.state.boardState.drawBoard.clearPreview();
     this.svgRef.current.setAttribute('width', this.state.boardState.drawBoard.dimensions[0].toString());
     this.svgRef.current.setAttribute('height', this.state.boardState.drawBoard.dimensions[1].toString());
 
-    if (type === 'svg') svgSaver.asSvg(this.svgRef.current, 'slide.svg');
-    else svgSaver.asPng(this.svgRef.current, 'slide');
+    if (type === 'svg') svgSaver.asSvg(this.svgRef.current, 'page.svg');
+    else svgSaver.asPng(this.svgRef.current, 'page');
 
     this.svgRef.current.removeAttribute('width');
     this.svgRef.current.removeAttribute('height');
@@ -119,7 +119,8 @@ export class Page extends Component {
   _removeHotkeys() {
     ipcHandler.removeEventHandler(EVENTS.UNDO, 'undoEventHandler');
     ipcHandler.removeEventHandler(EVENTS.REDO, 'redoEventHandler');
-    ipcHandler.removeEventHandler(EVENTS.SAVE_PAGE, 'saveEventHandler');
+    ipcHandler.removeEventHandler(EVENTS.EXPORT_PAGE, 'exportEventHandler');
+    ipcHandler.removeEventHandler(EVENTS.EXPORT_PAGE_DIALOG, 'exportDialogEventHandler');
     ipcHandler.removeEventHandler(EVENTS.CLEAR_PAGE, 'clearEventHandler');
     ipcHandler.removeEventHandler(EVENTS.PROMPT_REPLY, 'clearPagePromptHandler');
   }
@@ -133,7 +134,10 @@ export class Page extends Component {
     ipcHandler.addEventHandler(EVENTS.REDO, 'redoEventHandler', () => {
       this.state.boardState.drawBoard.redo();
     })
-    ipcHandler.addEventHandler(EVENTS.SAVE_PAGE, 'saveEventHandler', () => {
+    ipcHandler.addEventHandler(EVENTS.EXPORT_PAGE, 'exportEventHandler', (e, {type}: {type: 'svg' | 'png'}) => {
+      this._save(type);
+    })
+    ipcHandler.addEventHandler(EVENTS.EXPORT_PAGE_DIALOG, 'exportDialogEventHandler', () => {
       this.toolbarRef.current.saveBoardModalInstance.open();
     })
     ipcHandler.addEventHandler(EVENTS.CLEAR_PAGE, 'clearEventHandler', () => {

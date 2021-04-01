@@ -1,6 +1,7 @@
 export const ADD_PAGE = 'add-page';
 export const NEW_PAGE = 'new-page';
-export const SAVE_PAGE = 'save-page';
+export const EXPORT_PAGE = 'export-page';
+export const EXPORT_PAGE_DIALOG = 'export-page-dialog';
 export const NEXT_PAGE = 'next-page';
 export const PREVIOUS_PAGE = 'prev-page';
 export const CLEAR_PAGE = 'clear-page';

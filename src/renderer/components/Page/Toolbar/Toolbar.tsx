@@ -8,10 +8,12 @@ import { faPaintBrush, faEraser, faGripLines, faPalette, faUndo, faRedo, faSave,
 import './Toolbar.css';
 import { go } from '../../../util/navigation';
 import ipcHandler from '../../../util/ipc-handler';
-import * as EVENTS from '../../../../common/constants/eventNames';
 import { RealDrawBoard, RealDrawBoardTypes } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/RealDrawBoard';
 import { Tool, ToolSettings } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/tools/tools';
 import { Color } from 'svg-real-renderer/build/src/types/RealRendererTypes';
+
+import * as EVENTS from '../../../../common/constants/eventNames';
+import { BRUSH_TOOL, LINE_TOOL, ERASER_TOOL, COLOR_PALETTE, UNDO, REDO, EXPORT_PAGE, CLEAR_PAGE } from '../../../../common/constants/shortcuts';
 
 export interface IToolbarProps {
   boardOptions: RealDrawBoardTypes.RealDrawBoardOptions,
@@ -23,7 +25,7 @@ export interface IToolbarProps {
     tool: Tool
   },
   _clearBoard: () => void,
-  _save: (saveType: string) => void,
+  _save: (saveType: 'svg' | 'png') => void,
   _onUndo: () => void,
   _onRedo: () => void
 }
@@ -43,7 +45,14 @@ export class Toolbar extends Component<IToolbarProps> {
   saveBoardModalInstance: Modal;
   colorPickerInstance: Modal;
 
-  state = {
+  state: {
+    brushSize: number,
+    eraserSize: number,
+    lineThickness: number,
+    lineColor: Color,
+    saveType: 'svg' | 'png',
+    saveModalOn: boolean
+  } = {
     brushSize: this.props.boardOptions.toolSettings.brushSize,
     eraserSize: this.props.boardOptions.toolSettings.eraserSize,
     // changeRate: this.props.boardOptions.toolSettings.changeRate,
@@ -145,16 +154,16 @@ export class Toolbar extends Component<IToolbarProps> {
 
         <div className="bottom-toolbar">
           {/* Tools */}
-          <button className={`btn-flat ${boardState.tool === 'brush' ? 'active' : ''} brand-text`} title="Paint Brush" onClick={() => _setTool('brush')}>
+          <button className={`btn-flat ${boardState.tool === 'brush' ? 'active' : ''} brand-text`} title={`Brush (${BRUSH_TOOL.platformFormattedString})`} onClick={() => _setTool('brush')}>
             <Icon options={{icon: faPaintBrush}} />
           </button>
           {/* <button className={`btn-flat ${boardState.tool === 'rainbow_brush' ? 'active' : ''} brand-text`} title="Rainbow Brush" onClick={() => _setTool('rainbow_brush')}>
             <Icon options={{icon:} />
           </button> */}
-          <button className={`btn-flat ${boardState.tool === 'eraser' ? 'active' : ''} brand-text`} title="Eraser" onClick={() => _setTool('eraser')}>
+          <button className={`btn-flat ${boardState.tool === 'eraser' ? 'active' : ''} brand-text`} title={`Eraser (${ERASER_TOOL.platformFormattedString})`} onClick={() => _setTool('eraser')}>
             <Icon options={{icon: faEraser}} />
           </button>
-          <button className={`btn-flat ${boardState.tool === 'line' ? 'active' : ''} brand-text`} title="Line Tool" onClick={() => _setTool('line')}>
+          <button className={`btn-flat ${boardState.tool === 'line' ? 'active' : ''} brand-text`} title={`Line Tool (${LINE_TOOL.platformFormattedString})`} onClick={() => _setTool('line')}>
             <Icon options={{icon: faGripLines}} />
           </button>
           {/* /Tools */}
@@ -162,13 +171,13 @@ export class Toolbar extends Component<IToolbarProps> {
           <div className="separator-line" />
 
           {/* Board Manipulation */}
-          <button className="btn-flat brand-text" title="Color Palette" onClick={() => this.colorPickerInstance.open()}>
+          <button className="btn-flat brand-text" title={`Color Palette (${COLOR_PALETTE.platformFormattedString})`} onClick={() => this.colorPickerInstance.open()}>
             <Icon options={{icon :faPalette}} />
           </button>
-          <button className="btn-flat brand-text" title="Undo (Ctrl + Z)" onClick={() => _onUndo()}>
+          <button className="btn-flat brand-text" title={`Undo (${UNDO.platformFormattedString})`} onClick={() => _onUndo()}>
             <Icon options={{icon: faUndo}} />
           </button>
-          <button className="btn-flat brand-text" title="Redo (Ctrl + Y)" onClick={() => _onRedo()}>
+          <button className="btn-flat brand-text" title={`Redo (${REDO.platformFormattedString})`} onClick={() => _onRedo()}>
             <Icon options={{icon: faRedo}} />
           </button>
           {/* /Board Manipulation */}
@@ -176,19 +185,19 @@ export class Toolbar extends Component<IToolbarProps> {
           <div className="separator-line" />
 
           {/* Others */}
-          <button className="btn-flat brand-text" title="Save this slide (Ctrl + S)" onClick={() => this.saveBoardModalInstance.open()}>
+          <button className="btn-flat brand-text" title={`Export Page (${EXPORT_PAGE.platformFormattedString})`} onClick={() => this.saveBoardModalInstance.open()}>
             <Icon options={{icon: faSave}} />
           </button>
           <button
             className="btn-flat brand-text"
-            title="Clear the board"
+            title={`Clear Page (${CLEAR_PAGE.platformFormattedString})`}
             onClick={_clearBoard}
           >
             <Icon options={{icon: faBan}} />
           </button>
           <button
             className="btn-flat brand-text"
-            title="Go to home"
+            title="Go to Home"
             onClick={() => go('/')}
           >
             <Icon options={{icon: faHome}} />
@@ -198,7 +207,8 @@ export class Toolbar extends Component<IToolbarProps> {
 
         <div className="modal" ref={this.saveBoardRef}>
           <div className="modal-content container-fluid">
-            <h3>Save Slide</h3>
+            <h3>Export Page</h3>
+            <p>Export the current page as an image.</p>
             <div className="container">
               <div className="row">
                 <div className="col s12">
@@ -235,6 +245,7 @@ export class Toolbar extends Component<IToolbarProps> {
           <div className="modal-content">
             <PaintSettings
               initialColor={`rgb(${r * 255}, ${g * 255}, ${b * 255})`}
+              tool={boardState.tool}
               onPickColor={color => {
                 if(boardState.tool === 'brush' || boardState.tool === 'line'){
                   boardState.drawBoard.changeToolSetting(`${boardState.tool}Color` as keyof ToolSettings, [color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255]);
