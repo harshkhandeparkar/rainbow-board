@@ -59,10 +59,6 @@ select:focus {
   outline: none;
 }
 
-footer a:hover {
-  font-weight: bold;
-}
-
 #pages {
   min-height: 100vh;
 }

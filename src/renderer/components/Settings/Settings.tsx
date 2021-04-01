@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Select } from '../Select/Select';
 import themeManager from '../../util/theme';
+import packageFile from '../../../../package.json';
 import M from 'materialize-css';
 
 import { Icon } from '../Icon/Icon';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
+
+const { version } = packageFile;
 
 export default class Settings extends Component {
   render() {
@@ -34,6 +37,12 @@ export default class Settings extends Component {
             }
           />
         </div>
+
+        <footer className="container-fluid center z-depth-2">
+          <p className="center brand-text" style={{width: '100%'}}>
+            v{version}
+          </p>
+        </footer>
       </div>
     )
   }
