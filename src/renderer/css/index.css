@@ -102,13 +102,14 @@ footer a:hover {
   border-radius: 0.5rem;
 }
 
-.card, .card-content, .card-action {
-  border-radius: 8px !important;
+.card, .card-content {
+  border-radius: 0.3rem !important;
+  box-shadow: none;
 }
 
-.card:hover {
-  transition: transform 0.1s;
-  transform: scale(1.05);
+.card-action {
+  border-bottom-left-radius: 0.3rem !important;
+  border-bottom-right-radius: 0.3rem !important;
 }
 
 .full-height-card {

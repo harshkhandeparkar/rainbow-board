@@ -70,8 +70,12 @@ class App extends Component {
               color: ${this.state.css.textColor};
             }
 
-            .btn, .btn-floating, select, .color-picker, .bottom-toolbar, .top-toolbar, .page, .separator-line {
+            .btn, .btn-floating, select, .color-picker, .bottom-toolbar, .top-toolbar, .page, .separator-line, .card {
               border: 1px solid ${this.state.css.borderColor} !important;
+            }
+
+            .card-action {
+              border-top: 1px solid ${this.state.css.borderColor} !important;
             }
 
             .color-picker * {
