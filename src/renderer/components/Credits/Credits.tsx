@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { repository } from '../../../../package.json';
+import packageFile from '../../../../package.json';
 
 import Grid from '../Grid/Grid';
 import GridItem from '../Grid/GridItem';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
+
+const { repository } = packageFile;
 
 function Credit(
   {title, desc, link, size = 1}: {
