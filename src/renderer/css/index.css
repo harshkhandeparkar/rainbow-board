@@ -81,6 +81,10 @@ footer {
   border-bottom-right-radius: 0.3rem !important;
 }
 
+.card-action a:hover {
+  text-decoration: underline;
+}
+
 .full-height-card {
   height: 100%;
 }
