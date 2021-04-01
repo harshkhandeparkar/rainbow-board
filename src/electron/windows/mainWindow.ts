@@ -1,6 +1,7 @@
 import { BrowserWindow, shell, dialog, ipcMain } from 'electron';
 import { indexFilePath, iconPath } from '../constants/paths';
-import { createWindowMenu } from '../windowMenu';
+import { setWindowMenu } from '../util/windowMenu';
+import { setHotkeys } from '../util/hotkeys';
 import * as EVENTS from '../../common/constants/eventNames';
 import { IPlugin } from '../../common/types/plugins';
 
@@ -29,7 +30,20 @@ export function createMainWindow(
 
   win.loadFile(indexFilePath);
 
-  createWindowMenu(win, isDev);
+  setWindowMenu(win, isDev, '/');
+  setHotkeys();
+
+  ipcMain.on(EVENTS.LOCATION_CHANGED, (e, {path}: {path: string}) => {
+    setWindowMenu(win, isDev, path);
+  })
+
+  win.on('enter-full-screen', () => {
+    win.setMenuBarVisibility(false);
+  })
+
+  win.on('leave-full-screen', () => {
+    win.setMenuBarVisibility(true);
+  })
 
   win.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url);

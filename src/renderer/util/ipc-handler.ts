@@ -16,6 +16,7 @@ export type IPCEventName =
   typeof EVENTS.TOGGLE_COLOR_PALETTE |
   typeof EVENTS.SET_TOOL |
   typeof EVENTS.GO |
+  typeof EVENTS.LOCATION_CHANGED |
   typeof EVENTS.PROMPT_REPLY;
 
 export type IPCEventHandler = (event: IpcRendererEvent, args: any) => void;
@@ -39,6 +40,7 @@ export class IPCHandler {
     [EVENTS.TOGGLE_COLOR_PALETTE]: {},
     [EVENTS.SET_TOOL]: {},
     [EVENTS.GO]: {},
+    [EVENTS.LOCATION_CHANGED]: {},
     [EVENTS.PROMPT_REPLY]: {}
   }
 

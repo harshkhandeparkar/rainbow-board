@@ -7,7 +7,6 @@ import { createMainWindow } from './windows/mainWindow';
 import { IPlugin } from '../common/types/plugins';
 
 let plugins: IPlugin[] = [];
-
 loadPlugins(plugins);
 
 app.setName('Rainbow Board');

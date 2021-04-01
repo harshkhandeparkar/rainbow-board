@@ -1,9 +1,14 @@
 import { ipcRenderer } from 'electron';
 import ipcHandler from './ipc-handler';
 import history from './history';
+import { LOCATION_CHANGED } from '../../common/constants/eventNames';
 
 ipcHandler.addEventHandler('prompt-reply', 'leavePagesPromptEventHandler', (event, args) => {
   if (args.response === 1 && args.event === 'leave-pages') history.push(args.options.goTo);
+})
+
+history.listen((location) => {
+  ipcRenderer.send(LOCATION_CHANGED, { path: location.pathname });
 })
 
 export function openLeavePrompt(goTo: string) {

@@ -1,24 +1,31 @@
-import packageFile from '../../package.json';
-import { shell, ipcMain, Menu, BrowserWindow, MenuItemConstructorOptions, globalShortcut } from 'electron';
+import packageFile from '../../../package.json';
+import { shell, Menu, BrowserWindow, MenuItemConstructorOptions } from 'electron';
 
-import { showAboutDialog } from './util/aboutDialog';
-import { menuClickEvents } from './events/menuClickEvents';
-import * as EVENTS from '../common/constants/eventNames';
-import * as SHORTCUTS from '../common/constants/shortcuts';
+import { showAboutDialog } from './aboutDialog';
+import { menuClickEvents } from '../events/menuClickEvents';
+import * as EVENTS from '../../common/constants/eventNames';
+import * as SHORTCUTS from '../../common/constants/shortcuts';
 
 const { website, repository, version, discordInvite } = packageFile;
 
-export function createWindowMenu(win: BrowserWindow, isDev: boolean) {
+export function setWindowMenu(
+  win: BrowserWindow,
+  isDev: boolean,
+  path: string
+) {
   const windowMenuTemplate: MenuItemConstructorOptions[] = [
     {
       type: 'submenu',
       label: '&File',
       submenu: [
-        { label: 'Start New', accelerator: SHORTCUTS.START_NEW.accelerator, click: () => menuClickEvents.fire(EVENTS.NEW_PAGE, {}) },
+        { label: 'Start New', accelerator: SHORTCUTS.START_NEW.accelerator, click: () => menuClickEvents.fire(EVENTS.NEW_PAGE, {}), enabled: path !== '/pages', visible: path !== '/pages' },
         // { label: 'Save', accelerator: 'CmdOrCtrl + E', click: () => menuClickEvents.fire(EVENTS.SAVE_PAGE, {}) },
         {
           label: 'Export Page...',
           accelerator: SHORTCUTS.EXPORT_PAGE.accelerator,
+          registerAccelerator: false,
+          visible: path === '/pages',
+          enabled: path === '/pages',
           type: 'submenu',
           submenu: [
             {
@@ -40,6 +47,8 @@ export function createWindowMenu(win: BrowserWindow, isDev: boolean) {
     {
       type: 'submenu',
       label: '&Edit',
+      visible: path === '/pages',
+      enabled: path === '/pages',
       submenu: [
         { label: 'Undo', accelerator: SHORTCUTS.UNDO.accelerator, click: () => menuClickEvents.fire(EVENTS.UNDO, {}) },
         { label: 'Redo', accelerator: SHORTCUTS.REDO.accelerator, click: () => menuClickEvents.fire(EVENTS.REDO, {}) },
@@ -96,6 +105,11 @@ export function createWindowMenu(win: BrowserWindow, isDev: boolean) {
     }
   ]
 
+  // Due to a bug in electron: https://github.com/electron/electron/issues/2895
+  if (path !== '/pages') {
+    delete windowMenuTemplate[windowMenuTemplate.findIndex((menuItem) => menuItem.label.toLowerCase() === '&edit')];
+  }
+
   if (isDev) windowMenuTemplate.push({
     type: 'submenu',
     label: 'Developer',
@@ -106,37 +120,4 @@ export function createWindowMenu(win: BrowserWindow, isDev: boolean) {
   })
 
   win.setMenu(Menu.buildFromTemplate(windowMenuTemplate));
-
-  win.on('enter-full-screen', () => {
-    win.setMenuBarVisibility(false);
-  })
-  win.on('leave-full-screen', () => {
-    win.setMenuBarVisibility(true);
-  })
-
-  ipcMain.on('set-hotkeys', (event) => {
-    // Submenu: File
-    menuClickEvents.on(EVENTS.NEW_PAGE, 'hotkey-handler', () => event.reply(EVENTS.GO, {to: '/pages'}))
-    menuClickEvents.on(EVENTS.ADD_PAGE, 'hotkey-handler', () => event.reply(EVENTS.ADD_PAGE));
-    menuClickEvents.on(EVENTS.EXPORT_PAGE, 'hotkey-handler', ({type}) => event.reply(EVENTS.EXPORT_PAGE, {type}));
-    globalShortcut.register(SHORTCUTS.EXPORT_PAGE.accelerator, () => {
-      event.reply(EVENTS.EXPORT_PAGE_DIALOG);
-    })
-
-    // Submenu: Edit
-    menuClickEvents.on(EVENTS.UNDO, 'hotkey-handler', () => event.reply(EVENTS.UNDO));
-    menuClickEvents.on(EVENTS.REDO, 'hotkey-handler', () => event.reply(EVENTS.REDO));
-    menuClickEvents.on(EVENTS.ADD_PAGE, 'hotkey-handler', () => event.reply(EVENTS.ADD_PAGE));
-    menuClickEvents.on(EVENTS.NEXT_PAGE, 'hotkey-handler', () => event.reply(EVENTS.NEXT_PAGE));
-    menuClickEvents.on(EVENTS.PREVIOUS_PAGE, 'hotkey-handler', () => event.reply(EVENTS.PREVIOUS_PAGE));
-    menuClickEvents.on(EVENTS.CLEAR_PAGE, 'hotkey-handler', () => event.reply(EVENTS.CLEAR_PAGE));
-    menuClickEvents.on(EVENTS.DELETE_PAGE, 'hotkey-handler', () => event.reply(EVENTS.DELETE_PAGE));
-    menuClickEvents.on(EVENTS.TOGGLE_COLOR_PALETTE, 'hotkey-handler', () => event.reply(EVENTS.TOGGLE_COLOR_PALETTE));
-    menuClickEvents.on(EVENTS.SET_TOOL, 'hotkey-handler', ({tool}) => event.reply(EVENTS.SET_TOOL, {tool}));
-
-    // Submenu: Go
-    menuClickEvents.on(EVENTS.GO, 'hotkey-handler', ({to}) => event.reply(EVENTS.GO, {to}));
-
-    win.setMenu(Menu.buildFromTemplate(windowMenuTemplate));
-  })
 }

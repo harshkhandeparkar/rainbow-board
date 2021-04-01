@@ -14,6 +14,7 @@ export const TOGGLE_COLOR_PALETTE = 'toggle-color-palette';
 export const SET_TOOL = 'set-tool';
 
 export const GO = 'go';
+export const LOCATION_CHANGED = 'location-changed';
 
 export const PROMPT = 'prompt';
 export const PROMPT_REPLY = 'prompt-reply';
