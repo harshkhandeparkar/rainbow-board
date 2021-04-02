@@ -26,6 +26,8 @@ export class Shortcut {
 // Menu: File
 /** Start New Page */
 export const START_NEW = new Shortcut('CmdOrCtrl + N');
+/** Open .rainbow File */
+export const OPEN = new Shortcut('CmdOrCtrl + O');
 /** Export the current page, old shortcut */
 export const EXPORT_PAGE = new Shortcut('CmdOrCtrl + S');
 /** Save as .rainbow file */

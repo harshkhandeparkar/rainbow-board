@@ -1,5 +1,6 @@
 import { ipcRenderer } from 'electron';
 import React, { Component, createRef } from 'react';
+import { writeFile } from 'fs';
 
 import { Icon } from '../Icon/Icon';
 import { faPlus, faChevronRight, faChevronLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -84,6 +85,7 @@ export class Pages extends Component {
     ipcHandler.removeEventHandler(EVENTS.ADD_PAGE, 'addPageHandler');
     ipcHandler.removeEventHandler(EVENTS.DELETE_PAGE, 'deletePageHandler');
     ipcHandler.removeEventHandler(EVENTS.PROMPT_REPLY, 'deletePagePromptHandler');
+    ipcHandler.removeEventHandler(EVENTS.SAVE, 'saveWhiteboardHandler');
   }
 
   componentDidMount() {
@@ -106,6 +108,16 @@ export class Pages extends Component {
         this._deletePage();
       }
     })
+    ipcHandler.addEventHandler(EVENTS.SAVE, 'saveWhiteboardHandler', (e, {finalFilePath}: {finalFilePath: string}) => {
+      this._saveWhiteboard(finalFilePath);
+    })
+  }
+
+  _saveWhiteboard(path: string) {
+    const board = this.pageRef.current.state.boardState.drawBoard;
+    this.pages[this.state.currentPage] = board.exportData();
+
+    writeFile(path, JSON.stringify(this.pages), console.log);
   }
 
   componentWillUnmount() {
