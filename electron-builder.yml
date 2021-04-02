@@ -6,6 +6,12 @@ directories:
 files:
   - build/**/*
   - public/*
+fileAssociations:
+  -
+    ext: rainbow
+    name: Rainbow File
+    description: A Rainbow Board Whiteboard File.
+    mimeType: text/rainbow
 win:
   icon: public/logo512.png
   publisherName: Harsh Khandeparkar
@@ -13,6 +19,8 @@ linux:
   target:
     - AppImage
     - snap
+    - deb
+    - zip
   executableName: rainbow-board
   icon: public/logo512.png
   category: Utility
