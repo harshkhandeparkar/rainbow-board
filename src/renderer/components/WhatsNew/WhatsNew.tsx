@@ -65,6 +65,19 @@ export default class WhatsNew extends Component {
           className="container"
         >
           <New
+            title="Save And Load"
+            desc="You can now save the whole whiteboard as a .rainbow file and load it."
+            version="v0.7.0"
+            size={1}
+          />
+          <New
+            title="Themes And Settings"
+            desc="Instead of just two themes - Light and Dark, a settings page has been added where the theme can be choses. Two new themes have also been added -
+            Dark Whiteboard (Board is white but UI dark) and Light Blackboard (Board is dark but UI light)."
+            version="v0.7.0"
+            size={2}
+          />
+          <New
             title="UI Cleanup And Redesign"
             desc={<span>
               The UI has been cleaned up. Reduced shadows and transitions. Uses cleaner borders and the themes are more consistent
@@ -72,14 +85,7 @@ export default class WhatsNew extends Component {
               There are tooltips to most buttons with shortcut keys displayed. The top menu only displays what is necessary and some new items have been added to it.
             </span>}
             version="v0.7.0"
-            size={2}
-          />
-          <New
-            title="Themes And Settings"
-            desc="Instead of just two themes - Light and Dark, a settings page has been added where the theme can be choses. Two new themes have also been added -
-            Dark Whiteboard (Board is white but UI dark) and Light Blackboard (Board is dark but UI light)."
-            version="v0.7.0"
-            size={1}
+            size={3}
           />
           <New
             title="Desktop App Features"
