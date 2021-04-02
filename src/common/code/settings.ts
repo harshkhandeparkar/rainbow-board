@@ -8,7 +8,8 @@ export class SettingManager<SettingType> {
     defaultValue: SettingType
   ) {
     this.key = key;
-    if (!hasSync(key)) set(defaultValue as any);
+
+    if (!hasSync(key)) this.set(defaultValue as any);
   }
 
   get(): SettingType {
@@ -16,6 +17,6 @@ export class SettingManager<SettingType> {
   }
 
   set(value: SettingType) {
-    set(value as any);
+    set(this.key, value as any);
   }
 }

@@ -9,7 +9,6 @@ export interface IThemeManagerOptions {
 }
 
 export type ThemeChangeEventListener = (newTheme: ITheme) => void;
-export const defaultTheme = 'light';
 
 class ThemeManager {
   themes: {
@@ -21,7 +20,7 @@ class ThemeManager {
     'light-blackboard': 'Light Blackboard'
   }
 
-  theme = defaultTheme;
+  theme = 'light';
 
   static lightThemeCSS: ThemeCSS = {
     bgColor: 'white',
