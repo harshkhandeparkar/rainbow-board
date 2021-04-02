@@ -51,7 +51,8 @@ export class Toolbar extends Component<IToolbarProps> {
     lineThickness: number,
     lineColor: Color,
     saveType: 'svg' | 'png',
-    saveModalOn: boolean
+    saveModalOn: boolean,
+    previousTool: Tool
   } = {
     brushSize: this.props.boardOptions.toolSettings.brushSize,
     eraserSize: this.props.boardOptions.toolSettings.eraserSize,
@@ -59,7 +60,8 @@ export class Toolbar extends Component<IToolbarProps> {
     lineThickness: this.props.boardOptions.toolSettings.lineThickness,
     lineColor: this.props.boardOptions.toolSettings.lineColor,
     saveType: 'png',
-    saveModalOn: false
+    saveModalOn: false,
+    previousTool: this.props.boardOptions.tool
   }
 
   _initializeModal() {
@@ -115,7 +117,17 @@ export class Toolbar extends Component<IToolbarProps> {
     this._removeHotkeys();
 
     ipcHandler.addEventHandler(EVENTS.TOGGLE_COLOR_PALETTE, 'colorPaletteHandler', () => this.colorPickerInstance.isOpen ? this.colorPickerInstance.close() : this.colorPickerInstance.open());
-    ipcHandler.addEventHandler(EVENTS.SET_TOOL, 'setToolHandler', (event, args) => this.props._setTool(args.tool));
+    ipcHandler.addEventHandler(EVENTS.SET_TOOL, 'setToolHandler', (event, args) => this._setTool(args.tool));
+    ipcHandler.addEventHandler(EVENTS.PREV_TOOL, 'prevToolHandler', (event, args) => this._setTool(this.state.previousTool));
+  }
+
+  private _setTool(tool: Tool) {
+    if (tool !== this.props.boardState.tool) {
+      this.setState({
+        previousTool: this.props.boardState.tool
+      })
+      this.props._setTool(tool);
+    }
   }
 
   componentDidMount() {
@@ -127,7 +139,7 @@ export class Toolbar extends Component<IToolbarProps> {
   }
 
   render() {
-    const { initialBrushColor, boardState, _setTool, _clearBoard, _save, _onUndo, _onRedo } = this.props;
+    const { initialBrushColor, boardState, _clearBoard, _save, _onUndo, _onRedo } = this.props;
     const [r, g, b] = initialBrushColor;
 
     return (
@@ -154,16 +166,16 @@ export class Toolbar extends Component<IToolbarProps> {
 
         <div className="bottom-toolbar">
           {/* Tools */}
-          <button className={`btn-flat ${boardState.tool === 'brush' ? 'active' : ''} brand-text`} title={`Brush (${BRUSH_TOOL.platformFormattedString})`} onClick={() => _setTool('brush')}>
+          <button className={`btn-flat ${boardState.tool === 'brush' ? 'active' : ''} brand-text`} title={`Brush (${BRUSH_TOOL.platformFormattedString})`} onClick={() => this._setTool('brush')}>
             <Icon options={{icon: faPaintBrush}} />
           </button>
-          {/* <button className={`btn-flat ${boardState.tool === 'rainbow_brush' ? 'active' : ''} brand-text`} title="Rainbow Brush" onClick={() => _setTool('rainbow_brush')}>
+          {/* <button className={`btn-flat ${boardState.tool === 'rainbow_brush' ? 'active' : ''} brand-text`} title="Rainbow Brush" onClick={() => this._setTool('rainbow_brush')}>
             <Icon options={{icon:} />
           </button> */}
-          <button className={`btn-flat ${boardState.tool === 'eraser' ? 'active' : ''} brand-text`} title={`Eraser (${ERASER_TOOL.platformFormattedString})`} onClick={() => _setTool('eraser')}>
+          <button className={`btn-flat ${boardState.tool === 'eraser' ? 'active' : ''} brand-text`} title={`Eraser (${ERASER_TOOL.platformFormattedString})`} onClick={() => this._setTool('eraser')}>
             <Icon options={{icon: faEraser}} />
           </button>
-          <button className={`btn-flat ${boardState.tool === 'line' ? 'active' : ''} brand-text`} title={`Line Tool (${LINE_TOOL.platformFormattedString})`} onClick={() => _setTool('line')}>
+          <button className={`btn-flat ${boardState.tool === 'line' ? 'active' : ''} brand-text`} title={`Line Tool (${LINE_TOOL.platformFormattedString})`} onClick={() => this._setTool('line')}>
             <Icon options={{icon: faGripLines}} />
           </button>
           {/* /Tools */}

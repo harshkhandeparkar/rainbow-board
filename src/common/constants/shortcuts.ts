@@ -60,6 +60,8 @@ export const BRUSH_TOOL = new Shortcut('CmdOrCtrl + 1');
 export const ERASER_TOOL = new Shortcut('CmdOrCtrl + 2');
 /** Use Line Tool */
 export const LINE_TOOL = new Shortcut('CmdOrCtrl + 3');
+/** Switch to previous tool */
+export const PREV_TOOL = new Shortcut('CmdOrCtrl + Space');
 
 // Menu: View
 /** Toggle Fullscreen */

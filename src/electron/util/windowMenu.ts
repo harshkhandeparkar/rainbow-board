@@ -62,6 +62,8 @@ export function setWindowMenu(
         { label: 'Previous Page', accelerator: SHORTCUTS.PREV_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.PREVIOUS_PAGE, {}) },
         { type: 'separator' },
         { label: 'Color Palette', accelerator: SHORTCUTS.COLOR_PALETTE.accelerator, click: () => menuClickEvents.fire(EVENTS.TOGGLE_COLOR_PALETTE, {}) },
+        { label: 'Previous Tool', accelerator: SHORTCUTS.PREV_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.PREV_TOOL, {}) },
+        { type: 'separator' },
         { label: 'Brush Tool', accelerator: SHORTCUTS.BRUSH_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'brush'}) },
         { label: 'Eraser', accelerator: SHORTCUTS.ERASER_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'eraser'}) },
         { label: 'Line Tool', accelerator: SHORTCUTS.LINE_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'line'}) },

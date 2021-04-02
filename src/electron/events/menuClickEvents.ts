@@ -15,6 +15,7 @@ type EventTypes =
   typeof EVENTS.REDO |
   typeof EVENTS.TOGGLE_COLOR_PALETTE |
   typeof EVENTS.SET_TOOL |
+  typeof EVENTS.PREV_TOOL |
   typeof EVENTS.GO;
 
 const eventNames: EventTypes[] = [
@@ -31,6 +32,7 @@ const eventNames: EventTypes[] = [
   EVENTS.REDO,
   EVENTS.TOGGLE_COLOR_PALETTE,
   EVENTS.SET_TOOL,
+  EVENTS.PREV_TOOL,
   EVENTS.GO
 ]
 

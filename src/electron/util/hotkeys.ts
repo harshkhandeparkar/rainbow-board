@@ -29,6 +29,7 @@ export function setHotkeys(win: BrowserWindow) {
     menuClickEvents.on(EVENTS.DELETE_PAGE, 'hotkey-handler', () => event.reply(EVENTS.DELETE_PAGE));
     menuClickEvents.on(EVENTS.TOGGLE_COLOR_PALETTE, 'hotkey-handler', () => event.reply(EVENTS.TOGGLE_COLOR_PALETTE));
     menuClickEvents.on(EVENTS.SET_TOOL, 'hotkey-handler', ({tool}) => event.reply(EVENTS.SET_TOOL, {tool}));
+    menuClickEvents.on(EVENTS.PREV_TOOL, 'hotkey-handler', () => event.reply(EVENTS.PREV_TOOL));
 
     // Submenu: Go
     menuClickEvents.on(EVENTS.GO, 'hotkey-handler', ({to}) => event.reply(EVENTS.GO, {to}));

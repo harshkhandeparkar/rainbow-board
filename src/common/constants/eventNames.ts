@@ -14,6 +14,7 @@ export const REDO = 'redo';
 
 export const TOGGLE_COLOR_PALETTE = 'toggle-color-palette';
 export const SET_TOOL = 'set-tool';
+export const PREV_TOOL = 'prev-tool';
 
 export const GO = 'go';
 export const LOCATION_CHANGED = 'location-changed';
