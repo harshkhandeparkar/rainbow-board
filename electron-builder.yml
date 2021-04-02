@@ -13,6 +13,11 @@ fileAssociations:
     description: A Rainbow Board Whiteboard File.
     mimeType: text/rainbow
 win:
+  target:
+    - nsis
+    - portable
+    - msi
+    - zip
   icon: public/logo512.png
   publisherName: Harsh Khandeparkar
 linux:
