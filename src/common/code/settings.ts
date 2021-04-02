@@ -1,4 +1,4 @@
-import { hasSync, getSync, set } from 'electron-settings';
+import { hasSync, getSync, setSync } from 'electron-settings';
 
 export class SettingManager<SettingType> {
   key: string;
@@ -17,6 +17,6 @@ export class SettingManager<SettingType> {
   }
 
   set(value: SettingType) {
-    set(this.key, value as any);
+    setSync(this.key, value as any);
   }
 }

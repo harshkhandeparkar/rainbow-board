@@ -5,6 +5,7 @@ import { setHotkeys } from '../util/hotkeys';
 import * as EVENTS from '../../common/constants/eventNames';
 import { IPlugin } from '../../common/types/plugins';
 import { openDialog } from '../util/open';
+import { startFullscreenSetting, startMaximizedSetting, showMenuBarWhenFullscreenSetting } from '../util/settings';
 
 let showExitPrompt = true;
 
@@ -22,10 +23,11 @@ export function createMainWindow(
     },
     show: false,
     fullscreenable: true,
+    fullscreen: startFullscreenSetting.get(),
     icon: iconPath
   })
 
-  win.maximize();
+  if(startMaximizedSetting.get()) win.maximize();
 
   ipcMain.on('get-plugins', (e) => {
     e.returnValue = plugins.filter(plugin => plugin.usable);
@@ -44,8 +46,9 @@ export function createMainWindow(
     openDialog(win, e);
   })
 
+  const showMenuBarInFullscreen = showMenuBarWhenFullscreenSetting.get();
   win.on('enter-full-screen', () => {
-    win.setMenuBarVisibility(false);
+    win.setMenuBarVisibility(showMenuBarInFullscreen);
   })
 
   win.on('leave-full-screen', () => {
