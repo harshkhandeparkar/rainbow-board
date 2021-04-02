@@ -31,6 +31,15 @@ class App extends Component {
             `
             ${this.state.css.globalCSS}
 
+            .checkbox .checkmark {
+              border: 1px solid ${this.state.css.borderColor};
+              background-color: ${this.state.css.bg1}
+            }
+
+            .checkbox input:checked ~ .checkmark:after {
+              border-color: ${this.state.css.highlightTextColor};
+            }
+
             *::-webkit-scrollbar {
               width: 12px;
             }

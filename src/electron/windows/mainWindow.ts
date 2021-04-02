@@ -5,7 +5,7 @@ import { setHotkeys } from '../util/hotkeys';
 import * as EVENTS from '../../common/constants/eventNames';
 import { IPlugin } from '../../common/types/plugins';
 import { openDialog } from '../util/open';
-import { startFullscreenSetting, startMaximizedSetting, showMenuBarWhenFullscreenSetting } from '../util/settings';
+import { startFullscreenSetting, startMaximizedSetting, showMenuBarWhenFullscreenSetting } from '../../common/code/settings';
 
 let showExitPrompt = true;
 
@@ -46,9 +46,8 @@ export function createMainWindow(
     openDialog(win, e);
   })
 
-  const showMenuBarInFullscreen = showMenuBarWhenFullscreenSetting.get();
   win.on('enter-full-screen', () => {
-    win.setMenuBarVisibility(showMenuBarInFullscreen);
+    win.setMenuBarVisibility(showMenuBarWhenFullscreenSetting.get());
   })
 
   win.on('leave-full-screen', () => {

@@ -16,10 +16,10 @@ export function Select(props: ISelectProps) {
 
   return (
     <div className="row">
-      <div className="col s2 valign-wrapper select-label-col">
+      <div className="col s4 valign-wrapper select-label-col">
         <label>{label}</label>
       </div>
-      <div className="col s10">
+      <div className="col s6">
         <select
           name="theme-select"
           className="brand-text"

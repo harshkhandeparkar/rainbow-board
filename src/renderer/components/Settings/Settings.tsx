@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Select } from '../Select/Select';
+import { Select } from '../Form/Select/Select';
+import { Checkbox } from '../Form/Checkbox/Checkbox';
 import { VersionFooter } from '../VersionFooter/VersionFooter';
 import themeManager from '../../util/theme';
-import M from 'materialize-css';
+import {
+  showMenuBarWhenFullscreenSetting,
+  startFullscreenSetting,
+  startMaximizedSetting
+} from '../../../common/code/settings';
 
 import { Icon } from '../Icon/Icon';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
@@ -34,20 +39,28 @@ export default class Settings extends Component {
               })
             }
           />
+
+          <Checkbox
+            label="Start Maximized:"
+            defaultValue={startMaximizedSetting.get()}
+            onInput={(val) => startMaximizedSetting.set(val)}
+          />
+
+          <Checkbox
+            label="Start Fullscreen:"
+            defaultValue={startFullscreenSetting.get()}
+            onInput={(val) => startFullscreenSetting.set(val)}
+          />
+
+          <Checkbox
+            label="Fullscreen Menubar:"
+            defaultValue={showMenuBarWhenFullscreenSetting.get()}
+            onInput={(val) => showMenuBarWhenFullscreenSetting.set(val)}
+          />
         </div>
 
         <VersionFooter />
       </div>
     )
-  }
-
-  componentDidUpdate() {
-    const elems = document.querySelectorAll('.dropdown-trigger');
-    M.Dropdown.init(elems);
-  }
-
-  componentDidMount() {
-    const elems = document.querySelectorAll('.dropdown-trigger');
-    M.Dropdown.init(elems);
   }
 }
