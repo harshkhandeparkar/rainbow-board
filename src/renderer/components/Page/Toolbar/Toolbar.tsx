@@ -214,7 +214,7 @@ export class Toolbar extends Component<IToolbarProps> {
                 <div className="col s12">
                   <div className={`save-type ${this.state.saveType === 'png' ? 'selected' : ''}`} onClick={() => this.setState({ saveType: 'png', saveModalOn: true })}>
                     <h6>PNG</h6>
-                    Saves as a normal image. Loads and works everywhere. Default and recommended for most users.
+                    Saves as a normal image. Works everywhere. Default and recommended for most users.
                   </div>
                 </div>
               </div>

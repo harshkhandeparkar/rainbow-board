@@ -1,4 +1,5 @@
 import React from 'react';
+import { ipcRenderer } from 'electron';
 import { NavLink, useHistory } from 'react-router-dom';
 import packageFile from '../../../package.json';
 import Download from './Download/Download';
@@ -8,9 +9,10 @@ import { VersionFooter } from './VersionFooter/VersionFooter';
 
 import { hasSetting, getSetting } from '../util/settings';
 import { Icon } from './Icon/Icon';
-import { faPaintBrush, faBell, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faPaintBrush, faBell, faCog, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 
-import { SETTINGS, START_NEW } from '../../common/constants/shortcuts';
+import { OPEN, SETTINGS, START_NEW } from '../../common/constants/shortcuts';
+import { OPEN as OPEN_EVENT } from '../../common/constants/eventNames';
 
 const { version, description } = packageFile;
 
@@ -34,7 +36,7 @@ function Main() {
           <span className="header-text brand-logo center brand-text">Rainbow Board</span>
         </div>
       </nav>
-      <div className="container center">
+      <div className="container-fluid center">
         <div className="row">
           <p>
             {description}
@@ -43,7 +45,7 @@ function Main() {
 
         <Grid
           options={{
-            numColumns: 6
+            numColumns: 8
           }}
         >
           <GridItem />
@@ -62,21 +64,37 @@ function Main() {
               width: 2
             }}
           >
+            <button
+              className="btn center brand-text full-width"
+              title={`Open File (${OPEN.platformFormattedString})`}
+              onClick={() => {
+                ipcRenderer.send(OPEN_EVENT);
+              }}
+            >
+              <Icon options={{icon: faFolderOpen}} rightMargin={true} /> Open ({OPEN.platformFormattedString})
+            </button>
+          </GridItem>
+
+          <GridItem
+            options={{
+              width: 2
+            }}
+          >
             <NavLink to="/new" className="btn center brand-text full-width" title="New Changes">
               <Icon options={{icon: faBell}} rightMargin={true} />What's New!
             </NavLink>
           </GridItem>
           <GridItem />
 
-          <GridItem />
+          <GridItem options={{width: 3}} />
           <GridItem
             options={{
-              width: 4
+              width: 2
             }}
           >
             <Download />
           </GridItem>
-          <GridItem />
+          <GridItem options={{width: 3}} />
         </Grid>
       </div>
 

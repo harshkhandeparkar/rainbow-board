@@ -4,6 +4,7 @@ import { setWindowMenu } from '../util/windowMenu';
 import { setHotkeys } from '../util/hotkeys';
 import * as EVENTS from '../../common/constants/eventNames';
 import { IPlugin } from '../../common/types/plugins';
+import { openDialog } from '../util/open';
 
 let showExitPrompt = true;
 
@@ -37,6 +38,10 @@ export function createMainWindow(
 
   ipcMain.on(EVENTS.LOCATION_CHANGED, (e, {path}: {path: string}) => {
     setWindowMenu(win, isDev, path);
+  })
+
+  ipcMain.on(EVENTS.OPEN, (e) => {
+    openDialog(win, e);
   })
 
   win.on('enter-full-screen', () => {
