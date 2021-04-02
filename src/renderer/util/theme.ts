@@ -1,4 +1,4 @@
-import { setSetting, hasSetting, getSetting } from './settings';
+import { themeSetting } from './settings';
 import { themePlugins, boardPlugins } from './plugins';
 import { ITheme, IThemeStylingOptions, ThemeCSS } from '../../common/types/theme';
 import { RealDrawBoardTypes } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/RealDrawBoard';
@@ -9,6 +9,7 @@ export interface IThemeManagerOptions {
 }
 
 export type ThemeChangeEventListener = (newTheme: ITheme) => void;
+export const defaultTheme = 'light';
 
 class ThemeManager {
   themes: {
@@ -20,7 +21,7 @@ class ThemeManager {
     'light-blackboard': 'Light Blackboard'
   }
 
-  theme = 'light';
+  theme = defaultTheme;
 
   static lightThemeCSS: ThemeCSS = {
     bgColor: 'white',
@@ -95,12 +96,7 @@ class ThemeManager {
       }
     }
 
-    if (hasSetting('theme')) {
-      const themeSetting: string = <string>getSetting('theme');
-
-      if (Object.keys(this.themes).includes(themeSetting)) this.theme = themeSetting;
-      else setSetting('theme', this.theme);
-    }
+    this.theme = themeSetting.get();
   }
 
   private _themeChanged() {
@@ -122,7 +118,7 @@ class ThemeManager {
 
   private _setTheme(theme: string) {
     this.theme = theme;
-    setSetting('theme', theme);
+    themeSetting.set(this.theme);
     this._themeChanged();
   }
 

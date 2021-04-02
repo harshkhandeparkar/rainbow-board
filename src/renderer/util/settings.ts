@@ -1,16 +1,7 @@
-import settings from 'electron-settings';
+import packageFile from '../../../package.json';
+import { SettingManager } from '../../common/code/settings';
+import { THEME_SETTING, THEME_SETTING_KEY, CHANGELOG_SETTING, CHANGELOG_SETTING_KEY } from '../../common/constants/settings';
+import { defaultTheme } from './theme';
 
-export function hasSetting(key: string) {
-  return settings.hasSync(key);
-}
-
-export function getSetting(key: string) {
-  if (hasSetting(key)) {
-    return settings.getSync(key);
-  }
-  else return new Error(`Setting doesn't exist.`);
-}
-
-export function setSetting(key: string, value: any) {
-  settings.set(key, value);
-}
+export const themeSetting = new SettingManager<THEME_SETTING>(THEME_SETTING_KEY, defaultTheme);
+export const changelogSetting = new SettingManager<CHANGELOG_SETTING>(CHANGELOG_SETTING_KEY, packageFile.version);

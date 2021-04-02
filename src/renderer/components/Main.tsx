@@ -7,7 +7,7 @@ import Grid from './Grid/Grid';
 import GridItem from './Grid/GridItem';
 import { VersionFooter } from './VersionFooter/VersionFooter';
 
-import { hasSetting, getSetting } from '../util/settings';
+import { changelogSetting } from '../util/settings';
 import { Icon } from './Icon/Icon';
 import { faPaintBrush, faBell, faCog, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 
@@ -20,9 +20,7 @@ function Main() {
   const history = useHistory();
   let doShowChangelog = true;
 
-  if (hasSetting('lastVersionChangelogShown')) {
-    if (getSetting('lastVersionChangelogShown') === version) doShowChangelog = false;
-  }
+  if (changelogSetting.get() === version) doShowChangelog = false;
 
   if (doShowChangelog) history.push('/new');
 

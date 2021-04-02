@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Icon } from '../Icon/Icon';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 
-import { setSetting } from '../../util/settings';
+import { changelogSetting } from '../../util/settings';
 import packageFile from '../../../../package.json';
 
 import Grid from '../Grid/Grid';
@@ -43,7 +43,7 @@ function New(
 
 export default class WhatsNew extends Component {
   componentDidMount() {
-    setSetting('lastVersionChangelogShown', version);
+    changelogSetting.set(version);
   }
 
   render() {
