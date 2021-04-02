@@ -20,13 +20,18 @@ export interface IPageState {
   }
 }
 
-export class Page extends Component {
+export interface IPageProps {
+  onDrawBoard: (board: RealDrawBoard) => void
+}
+
+export class Page extends Component<IPageProps> {
   state: IPageState = {
     boardState: {
       tool: 'brush' as Tool
     }
   }
 
+  onDrawBoardFired = false;
   svgRef: RefObject<SVGSVGElement> = createRef();
   toolbarRef: RefObject<Toolbar> = createRef();
 
@@ -60,17 +65,24 @@ export class Page extends Component {
   }
 
   componentDidMount() {
+    const drawBoard = new RealDrawBoard({
+      svg: this.svgRef.current,
+      dimensions: [
+        this.svgRef.current.clientWidth,
+        this.svgRef.current.clientHeight
+      ],
+      ...this.boardOptions
+    }).draw().startRender();
+
+    if (!this.onDrawBoardFired) {
+      this.props.onDrawBoard(drawBoard);
+      this.onDrawBoardFired = true;
+    }
+
     this.setState({
       boardState: {
         ...this.state.boardState,
-        drawBoard: new RealDrawBoard({
-          svg: this.svgRef.current,
-          dimensions: [
-            this.svgRef.current.clientWidth,
-            this.svgRef.current.clientHeight
-          ],
-          ...this.boardOptions
-        }).draw().startRender()
+        drawBoard
       }
     })
 

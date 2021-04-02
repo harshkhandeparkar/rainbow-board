@@ -12,6 +12,16 @@ import { ADD_PAGE, NEXT_PAGE, DELETE_PAGE, PREV_PAGE } from '../../../common/con
 
 import './Pages.css';
 import { GraphDimensions, StrokeExport } from 'svg-real-renderer/build/src/types/RealRendererTypes';
+import history from '../../util/history';
+import { RealDrawBoard } from 'svg-real-renderer';
+
+export interface IHistoryStateWithOpen {
+  open?: {
+    exportData: StrokeExport[],
+    strokeIndex: number,
+    dimensions: GraphDimensions
+  }[]
+}
 
 export class Pages extends Component {
   pageRef: React.RefObject<Page> = createRef();
@@ -74,6 +84,19 @@ export class Pages extends Component {
         </div>
         <Page
           ref={this.pageRef}
+          onDrawBoard={(board: RealDrawBoard) => {
+            // open a .rainbow file
+            if (history.location.state) {
+              if ('open' in (history.location.state as IHistoryStateWithOpen)) {
+                this.pages = (history.location.state as IHistoryStateWithOpen).open;
+                board.importData(this.pages[0]);
+                this.setState({
+                  currentPage: 0,
+                  pagesLength: this.pages.length
+                })
+              }
+            }
+          }}
         />
       </div>
     )
@@ -117,7 +140,7 @@ export class Pages extends Component {
     const board = this.pageRef.current.state.boardState.drawBoard;
     this.pages[this.state.currentPage] = board.exportData();
 
-    writeFile(path, JSON.stringify(this.pages), console.log);
+    writeFile(path, JSON.stringify(this.pages), () => {});
   }
 
   componentWillUnmount() {

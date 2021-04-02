@@ -5,6 +5,7 @@ type EventTypes =
   typeof EVENTS.ADD_PAGE |
   typeof EVENTS.NEW_PAGE |
   typeof EVENTS.EXPORT_PAGE |
+  typeof EVENTS.OPEN |
   typeof EVENTS.SAVE |
   typeof EVENTS.NEXT_PAGE |
   typeof EVENTS.PREVIOUS_PAGE |
@@ -20,6 +21,7 @@ const eventNames: EventTypes[] = [
   EVENTS.ADD_PAGE,
   EVENTS.NEW_PAGE,
   EVENTS.EXPORT_PAGE,
+  EVENTS.OPEN,
   EVENTS.SAVE,
   EVENTS.NEXT_PAGE,
   EVENTS.PREVIOUS_PAGE,

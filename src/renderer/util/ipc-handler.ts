@@ -8,6 +8,7 @@ export type IPCEventName =
   typeof EVENTS.EXPORT_PAGE |
   typeof EVENTS.EXPORT_PAGE_DIALOG |
   typeof EVENTS.SAVE |
+  typeof EVENTS.OPEN |
   typeof EVENTS.NEXT_PAGE |
   typeof EVENTS.PREVIOUS_PAGE |
   typeof EVENTS.CLEAR_PAGE |
@@ -33,6 +34,7 @@ export class IPCHandler {
     [EVENTS.EXPORT_PAGE]: {},
     [EVENTS.EXPORT_PAGE_DIALOG]: {},
     [EVENTS.SAVE]: {},
+    [EVENTS.OPEN]: {},
     [EVENTS.NEXT_PAGE]: {},
     [EVENTS.PREVIOUS_PAGE]: {},
     [EVENTS.CLEAR_PAGE]: {},

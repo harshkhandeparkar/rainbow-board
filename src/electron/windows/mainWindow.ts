@@ -24,6 +24,8 @@ export function createMainWindow(
     icon: iconPath
   })
 
+  win.maximize();
+
   ipcMain.on('get-plugins', (e) => {
     e.returnValue = plugins.filter(plugin => plugin.usable);
   })
@@ -31,7 +33,7 @@ export function createMainWindow(
   win.loadFile(indexFilePath);
 
   setWindowMenu(win, isDev, '/');
-  setHotkeys();
+  setHotkeys(win);
 
   ipcMain.on(EVENTS.LOCATION_CHANGED, (e, {path}: {path: string}) => {
     setWindowMenu(win, isDev, path);
