@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 export interface IGridProps {
   options?: {
@@ -6,11 +6,12 @@ export interface IGridProps {
     gap?: string
   },
   className?: string,
-  children?: Element | HTMLCollection | React.ReactNode
+  children?: Element | HTMLCollection | React.ReactNode,
+  style?: CSSProperties
 }
 
 export default function Grid(
-  { children, options = {}, className = '' }: IGridProps
+  { children, options = {}, className = '', style = {} }: IGridProps
 ) {
   let numColumns = options.numColumns || 3;
   let gridTemplateColumns = '';
@@ -20,9 +21,10 @@ export default function Grid(
   return (
     <div
       style={{
+        ...style,
         display: 'grid',
         gridTemplateColumns,
-        gap: options.gap || '50px 50px'
+        gap: options.gap || '50px 50px',
       }}
       className={`grid-container ${className}`}
     >

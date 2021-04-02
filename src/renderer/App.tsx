@@ -31,6 +31,19 @@ class App extends Component {
             `
             ${this.state.css.globalCSS}
 
+            *::-webkit-scrollbar {
+              width: 12px;
+            }
+
+            *::-webkit-scrollbar-track {
+              background: ${this.state.css.bgColor};
+            }
+
+            *::-webkit-scrollbar-thumb {
+              background-color: ${this.state.css.highlight};
+              border-radius: 0;
+            }
+
             .brand-text, .card .card-action a {
               color: ${this.state.css.highlightTextColor} !important;
             }
