@@ -72,7 +72,7 @@ export default class WhatsNew extends Component {
           />
           <New
             title="Themes And Settings"
-            desc="Instead of just two themes - Light and Dark, a settings page has been added where the theme can be choses. Two new themes have also been added -
+            desc="Instead of just two themes - Light and Dark, a settings page has been added where the theme can be chosen. Two new themes have also been added -
             Dark Whiteboard (Board is white but UI dark) and Light Blackboard (Board is dark but UI light)."
             version="v0.7.0"
             size={2}
