@@ -111,7 +111,7 @@ export default class WhatsNew extends Component {
                 The new UI tries to follow the <a href="https://developer.gnome.org/hig/stable/">GNOME Human Interface Guidelines</a> <br />
                 The UI has been cleaned up. Reduced shadows and transitions. Uses cleaner borders and the themes are more consistent. New icons from <a href="https://fontawesome.com">FontAwesome v5</a>. <br />
                 There are tooltips to most buttons with shortcut keys displayed. The top menu only displays what is necessary and some new items have been added to it. <br />
-                The brush and line colors are displayed as a thin line under the tool's button (Suggested by Pffft on the <a href={packageFile.discordInvite}>Discord Server</a>). The scrollbar has also been tweaked to look consistent with the theme.
+                The brush and line colors are displayed as a dot in the tool's button (Suggested by Pffft on the <a href={packageFile.discordInvite}>Discord Server</a>). The scrollbar has also been tweaked to look consistent with the theme.
               </span>
             }
             version="v0.7.0"

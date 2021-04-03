@@ -76,3 +76,11 @@ input[type=range] {
   height: 75%;
 }
 
+.color-circle {
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  left: calc(50% - 2.5px);
+  border-radius: 50%;
+  bottom: 2px;
+}

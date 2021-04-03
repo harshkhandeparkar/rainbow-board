@@ -167,9 +167,15 @@ export class Toolbar extends Component<IToolbarProps> {
             title={`Brush (${BRUSH_TOOL.platformFormattedString})`}
             onClick={() => this._setTool('brush')}
             style={{
-              borderBottom: `2px solid ${getRGBColorString(this.state.brushColor)}`
+              position: 'relative'
             }}
           >
+            <div
+              className="color-circle"
+              style={{
+                background: getRGBColorString(this.state.brushColor)
+              }}
+            />
             <Icon options={{icon: faPaintBrush}} />
           </button>
           {/* <button className={`btn-flat ${boardState.tool === 'rainbow_brush' ? 'active' : ''} brand-text`} title="Rainbow Brush" onClick={() => this._setTool('rainbow_brush')}>
@@ -180,9 +186,15 @@ export class Toolbar extends Component<IToolbarProps> {
             title={`Line Tool (${LINE_TOOL.platformFormattedString})`}
             onClick={() => this._setTool('line')}
             style={{
-              borderBottom: `2px solid ${getRGBColorString(this.state.lineColor)}`
+              position: 'relative'
             }}
           >
+            <div
+              className="color-circle"
+              style={{
+                background: getRGBColorString(this.state.lineColor),
+              }}
+            />
             <Icon options={{icon: faGripLines}} />
           </button>
           <button className={`btn-flat ${boardState.tool === 'eraser' ? 'active' : ''} brand-text`} title={`Eraser (${ERASER_TOOL.platformFormattedString})`} onClick={() => this._setTool('eraser')}>
