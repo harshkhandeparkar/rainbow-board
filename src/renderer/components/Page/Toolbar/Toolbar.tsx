@@ -9,6 +9,7 @@ import './Toolbar.css';
 import { go } from '../../../util/navigation';
 import ipcHandler from '../../../util/ipc-handler';
 import { RealDrawBoard, RealDrawBoardTypes } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/RealDrawBoard';
+import { getRGBColorString } from 'svg-real-renderer/build/src/util/getRGBColorString';
 import { Tool, ToolSettings } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/tools/tools';
 import { Color } from 'svg-real-renderer/build/src/types/RealRendererTypes';
 
@@ -50,6 +51,7 @@ export class Toolbar extends Component<IToolbarProps> {
     eraserSize: number,
     lineThickness: number,
     lineColor: Color,
+    brushColor: Color,
     saveType: 'svg' | 'png',
     saveModalOn: boolean,
     previousTool: Tool
@@ -59,6 +61,7 @@ export class Toolbar extends Component<IToolbarProps> {
     // changeRate: this.props.boardOptions.toolSettings.changeRate,
     lineThickness: this.props.boardOptions.toolSettings.lineThickness,
     lineColor: this.props.boardOptions.toolSettings.lineColor,
+    brushColor: this.props.boardOptions.toolSettings.brushColor,
     saveType: 'png',
     saveModalOn: false,
     previousTool: this.props.boardOptions.tool
@@ -86,13 +89,6 @@ export class Toolbar extends Component<IToolbarProps> {
   //     changeRate: Number(this.changeRateRangeRef.current.value)
   //   })
   // }
-
-  onLineColorChange = () => {
-    this.props._changeToolSetting('lineColor', Number(this.lineColorRangeRef.current.value));
-    this.setState({
-      lineColor: Number(this.eraserSizeRangeRef.current.value)
-    })
-  }
 
   onEraserSizeChange = () => {
     this.props._changeToolSetting('eraserSize', Number(this.eraserSizeRangeRef.current.value));
@@ -166,17 +162,31 @@ export class Toolbar extends Component<IToolbarProps> {
 
         <div className="bottom-toolbar">
           {/* Tools */}
-          <button className={`btn-flat ${boardState.tool === 'brush' ? 'active' : ''} brand-text`} title={`Brush (${BRUSH_TOOL.platformFormattedString})`} onClick={() => this._setTool('brush')}>
+          <button
+            className={`btn-flat ${boardState.tool === 'brush' ? 'active' : ''} brand-text`}
+            title={`Brush (${BRUSH_TOOL.platformFormattedString})`}
+            onClick={() => this._setTool('brush')}
+            style={{
+              borderBottom: `2px solid ${getRGBColorString(this.state.brushColor)}`
+            }}
+          >
             <Icon options={{icon: faPaintBrush}} />
           </button>
           {/* <button className={`btn-flat ${boardState.tool === 'rainbow_brush' ? 'active' : ''} brand-text`} title="Rainbow Brush" onClick={() => this._setTool('rainbow_brush')}>
             <Icon options={{icon:} />
           </button> */}
+          <button
+            className={`btn-flat ${boardState.tool === 'line' ? 'active' : ''} brand-text`}
+            title={`Line Tool (${LINE_TOOL.platformFormattedString})`}
+            onClick={() => this._setTool('line')}
+            style={{
+              borderBottom: `2px solid ${getRGBColorString(this.state.lineColor)}`
+            }}
+          >
+            <Icon options={{icon: faGripLines}} />
+          </button>
           <button className={`btn-flat ${boardState.tool === 'eraser' ? 'active' : ''} brand-text`} title={`Eraser (${ERASER_TOOL.platformFormattedString})`} onClick={() => this._setTool('eraser')}>
             <Icon options={{icon: faEraser}} />
-          </button>
-          <button className={`btn-flat ${boardState.tool === 'line' ? 'active' : ''} brand-text`} title={`Line Tool (${LINE_TOOL.platformFormattedString})`} onClick={() => this._setTool('line')}>
-            <Icon options={{icon: faGripLines}} />
           </button>
           {/* /Tools */}
 
@@ -256,11 +266,16 @@ export class Toolbar extends Component<IToolbarProps> {
         <div className="modal" ref={this.colorPickerRef}>
           <div className="modal-content">
             <PaintSettings
-              initialColor={`rgb(${r * 255}, ${g * 255}, ${b * 255})`}
+              color={getRGBColorString(boardState.tool === 'line' ? this.state.lineColor : this.state.brushColor)}
               tool={boardState.tool}
               onPickColor={color => {
                 if(boardState.tool === 'brush' || boardState.tool === 'line'){
-                  boardState.drawBoard.changeToolSetting(`${boardState.tool}Color` as keyof ToolSettings, [color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255]);
+                  const colorArr: Color = [color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255];
+
+                  boardState.drawBoard.changeToolSetting(`${boardState.tool}Color` as keyof ToolSettings, colorArr);
+                  this.setState({
+                    [`${boardState.tool}Color`]: colorArr
+                  })
                 }
                 else return;
               }}
