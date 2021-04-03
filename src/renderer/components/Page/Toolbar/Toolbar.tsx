@@ -145,17 +145,17 @@ export class Toolbar extends Component<IToolbarProps> {
           <input type="range" min="2" max="100" value={this.state.brushSize} ref={this.brushSizeRangeRef} onChange={this.onBrushSizeChange} />
         </div>
 
-        {/* <div className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'rainbow_brush' ? 'right' : 'hide'}`}>
+        {/* <div className={`top-toolbar valign-wrapper ${boardState.tool === 'rainbow_brush' ? 'right' : 'hide'}`}>
           <label>Color Change Rate</label>
           <input type="range" min="1" max="50" value={this.state.changeRate} ref={this.changeRateRangeRef} onChange={this.onColorRateChange} />
         </div> */}
 
-        <div className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'eraser' ? '' : 'hide'}`}>
+        <div className={`top-toolbar valign-wrapper ${boardState.tool === 'eraser' ? '' : 'hide'}`}>
           <label>Eraser Size</label>
           <input type="range" min="2" max="100" value={this.state.eraserSize} ref={this.eraserSizeRangeRef} onChange={this.onEraserSizeChange} />
         </div>
 
-        <div className={`top-toolbar z-depth-1 valign-wrapper ${boardState.tool === 'line' ? '' : 'hide'}`}>
+        <div className={`top-toolbar valign-wrapper ${boardState.tool === 'line' ? '' : 'hide'}`}>
           <label>Line Thickness</label>
           <input type="range" min="2" max="100" value={this.state.lineThickness} ref={this.lineThicknessRangeRef} onChange={this.onLineThicknessChange} />
         </div>
