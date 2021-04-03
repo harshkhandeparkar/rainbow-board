@@ -15,7 +15,6 @@ fileAssociations:
 win:
   target:
     - nsis
-    - portable
     - msi
     - zip
   icon: public/logo512.png

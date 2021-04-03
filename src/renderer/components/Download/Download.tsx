@@ -31,10 +31,17 @@ export default class Download extends Component {
   state = {
     latestVersion: version,
     downloadURLs: {
+      // linux
       deb: '',
-      exe: '',
       zip_linux: '',
       appimg: '',
+
+      // windows
+      exe: '',
+      msi: '',
+      zip_windows: '',
+
+      // macos
       dmg: ''
     }
   }
@@ -58,10 +65,10 @@ export default class Download extends Component {
                   icon={faLinux}
                 />
                 {
-                  this.state.downloadURLs.exe !== '' &&
+                  this.state.downloadURLs.msi !== '' &&
                   <DownloadDropdownOption
-                    link={this.state.downloadURLs.exe}
-                    label="Windows (EXE)"
+                    link={this.state.downloadURLs.msi}
+                    label="Windows (MSI)"
                     icon={faWindows}
                   />
                 }
@@ -90,11 +97,27 @@ export default class Download extends Component {
                   />
                 }
                 {
+                  this.state.downloadURLs.zip_windows !== '' &&
+                  <DownloadDropdownOption
+                    link={this.state.downloadURLs.zip_windows}
+                    label="Windows (ZIP)"
+                    icon={faWindows}
+                  />
+                }
+                {
                   this.state.downloadURLs.zip_linux !== '' &&
                   <DownloadDropdownOption
                     link={this.state.downloadURLs.zip_linux}
                     label="Linux (ZIP)"
                     icon={faLinux}
+                  />
+                }
+                {
+                  this.state.downloadURLs.exe !== '' &&
+                  <DownloadDropdownOption
+                    link={this.state.downloadURLs.exe}
+                    label="Windows (EXE)"
+                    icon={faWindows}
                   />
                 }
               </ul>
@@ -122,19 +145,33 @@ export default class Download extends Component {
       if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
         const releaseInfo: {assets: { name: string, browser_download_url: string }[], tag_name: string} = JSON.parse(xmlHttp.responseText);
 
+        // linux assets
         const debAsset = releaseInfo.assets.find((asset) => asset.name.includes('.deb'));
         const zipLinuxAsset = releaseInfo.assets.find((asset) => asset.name.includes('.zip') && asset.name.includes('linux'));
-        const exeAsset = releaseInfo.assets.find((asset) => asset.name.includes('.exe'));
         const appimgAsset = releaseInfo.assets.find((asset) => asset.name.toLowerCase().includes('.appimage'));
+
+        // windows assets
+        const exeAsset = releaseInfo.assets.find((asset) => asset.name.includes('.exe'));
+        const msiAsset = releaseInfo.assets.find((asset) => asset.name.includes('.msi'));
+        const zipWindowsAsset = releaseInfo.assets.find((asset) => asset.name.includes('.zip') && asset.name.includes('win'));
+
+        // macos assets
         const dmgAsset = releaseInfo.assets.find((asset) => asset.name.toLowerCase().includes('.dmg'));
 
         this.setState({
           latestVersion: releaseInfo.tag_name,
           downloadURLs: {
+            // linux
             deb: debAsset ? debAsset.browser_download_url : '',
             zip_linux: zipLinuxAsset ? zipLinuxAsset.browser_download_url : '',
-            exe: exeAsset ? exeAsset.browser_download_url : '',
             appimg: appimgAsset ? appimgAsset.browser_download_url : '',
+
+            // windows
+            exe: exeAsset ? exeAsset.browser_download_url : '',
+            msi: msiAsset ? msiAsset.browser_download_url : '',
+            zip_windows: zipWindowsAsset ? zipWindowsAsset.browser_download_url : '',
+
+            // macos
             dmg: dmgAsset ? dmgAsset.browser_download_url : ''
           }
         })
