@@ -17,7 +17,7 @@ win:
     - nsis
     - msi
     - zip
-  icon: public/logo512.png
+  icon: public/icon.ico
   publisherName: Harsh Khandeparkar
 linux:
   target:
