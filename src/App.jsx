@@ -3,7 +3,6 @@ import { HashRouter, Route } from 'react-router-dom';
 import Main from './components/Main.jsx';
 import Pages from './components/Pages/Pages.jsx';
 import Credits from './components/Credits/Credits';
-import WhatsNew from './components/WhatsNew/WhatsNew';
 
 import { setSetting } from './util/settings';
 
@@ -109,7 +108,6 @@ class App extends Component {
         <Route exact path="/" render={() => <Main getTheme={() => this.getTheme()} setTheme={(theme) => this.setTheme(theme)} toggleTheme={() => this.toggleTheme()} />} />
         <Route path="/pages" render={() => <Pages getTheme={() => this.getTheme()} />} />
         <Route path="/credits" component={Credits} />
-        <Route path="/new" component={WhatsNew} />
       </HashRouter>
     )
   }
