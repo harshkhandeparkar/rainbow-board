@@ -25,6 +25,11 @@ img {
     height: 16rem;
 }
 
+.resp-img {
+    width: 11rem;
+    height: 11rem;
+}
+
 @media screen and (max-width: 370px) {
     
     #top-section {
