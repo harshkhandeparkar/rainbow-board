@@ -36,17 +36,17 @@ class Main extends Component {
               </button>
             </div>
 
-            <div className="col s4">
+            <div className="row">
+              <div className="col s4">
+                <Download />
+              </div>
+            </div>
+
+            {/* <div className="col s4">
               <NavLink to="/new" className="btn center brand-text">
                 <i className="material-icons left">new_releases</i> What's New!
               </NavLink>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col s12">
-              <Download />
-            </div>
+            </div> */}
           </div>
         </div>
 
