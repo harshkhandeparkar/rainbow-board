@@ -2,3 +2,26 @@
     background: linear-gradient(to left top, #6396e3, #00abde, #00b7ba, #50bc88, #9fb962) !important;
     height: 18rem;
 }
+
+#top-section div {
+    margin: 0.8rem 0;
+}
+
+#top-section div span {
+    margin: 0 0.2rem;
+}
+
+.custom-btn {
+    border-radius: 8px;
+}
+
+#download-tag {
+    font-size: 2rem;
+    color: #222;
+}
+
+img {
+    width: 16rem;
+    height: 16rem;
+}
+
