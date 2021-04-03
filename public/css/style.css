@@ -56,4 +56,21 @@ img {
     #top-section div span:nth-child(1) {
         order: 2;
     }
+
+    .row {
+        text-align: center;
+    }
+
+    #window-download {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #window-download div:nth-child(1) {
+        order:2;
+    }
+
+    #window-download div:nth-child(2) {
+        order:1;
+    }
 }
