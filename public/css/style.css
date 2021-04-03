@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,300;1,400&display=swap');
+
 #top-section {
     background: linear-gradient(to left top, #6396e3, #00abde, #00b7ba, #50bc88, #9fb962) !important;
     height: 18rem;
@@ -18,6 +20,7 @@
 #download-tag {
     font-size: 2rem;
     color: #222;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 img {
