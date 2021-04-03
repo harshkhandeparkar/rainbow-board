@@ -13,6 +13,7 @@ import {
 
 export class SettingManager<SettingType> {
   key: string;
+  value: SettingType;
 
   constructor(
     key: string,
@@ -21,13 +22,15 @@ export class SettingManager<SettingType> {
     this.key = key;
 
     if (!hasSync(key)) this.set(defaultValue as any);
+    this.value = <unknown>getSync(this.key) as SettingType;
   }
 
   get(): SettingType {
-    return <unknown>getSync(this.key) as SettingType;
+    return this.value;
   }
 
   set(value: SettingType) {
+    this.value = value;
     setSync(this.key, value as any);
   }
 }
