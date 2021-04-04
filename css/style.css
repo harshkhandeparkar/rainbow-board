@@ -2,7 +2,7 @@
 
 #top-section {
     background: linear-gradient(to left top, #6396e3, #00abde, #00b7ba, #50bc88, #9fb962) !important;
-    height: 18rem;
+    min-height: 18rem;
 }
 
 #top-section div {
