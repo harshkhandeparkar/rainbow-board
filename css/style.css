@@ -24,6 +24,14 @@
     background-color: rgb(250, 129, 29);
 }
 
+.custom-btn:hover {
+    background-color: rgb(247, 153, 76) !important;
+}
+
+.custom-btn:focus {
+    background-color: rgb(253, 84, 135) !important;
+}
+
 #download-tag {
     font-size: 2rem;
     color: #222;
@@ -51,7 +59,7 @@ img {
 }
 
 #features {
-    background: linear-gradient(to left top, #6396e3, #00abde, #00b7ba, #50bc88, #9fb962) !important;
+    background: #fdfbfb;
 }
 
 @media screen and (max-width: 370px) {
