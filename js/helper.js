@@ -6,4 +6,11 @@ $(document).ready(function(){
         e.preventDefault();
     });
     $('.dropdown-trigger').dropdown();
+    $('.carousel.carousel-slider').carousel({
+        indicators:true,
+        fullWidth:true
+    });
+    setInterval(function(){
+        $('.carousel').carousel('next');
+    },3000);
 });
