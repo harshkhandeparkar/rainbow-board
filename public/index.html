@@ -60,26 +60,37 @@
         <div>
           <a href="#" class="btn">
             <i class="material-icons left">file_download</i>
-            MacOS
+            MacOS (DMG)
           </a>
         </div>
       </div>
       <div class="col s12 m4 l4">
         <img src="../img/platforms/winows.png" alt="MacOS" class="responsive-img resp-img">
         <div>
-          <a href="#" class="btn">
+          <a href="#" class="dropdown-trigger btn" data-target="windows-dropdown">
             <i class="material-icons left">file_download</i>
             Windows
           </a>
+          <ul id="windows-dropdown" class="dropdown-content">
+            <li><a href="#!">Windows (EXE)</a></li>
+            <li><a href="#!">Windows (MSI)</a></li>
+            <li><a href="#!">Windows (ZIP)</a></li>
+          </ul>
         </div>
       </div>
       <div class="col s12 m4 l4">
         <img src="../img/platforms/linux.png" alt="MacOS" class="responsive-img resp-img">
         <div>
-          <a href="#" class="btn">
+          <a href="#" class="dropdown-trigger btn" data-target="linux-dropdown">
             <i class="material-icons left">file_download</i>
             Linux
           </a>
+          <ul id="linux-dropdown" class="dropdown-content">
+            <li><a href="#!">Linux (DEB)</a></li>
+            <li><a href="#!">Linux (Snap)</a></li>
+            <li><a href="#!">Linux (Portable)</a></li>
+            <li><a href="#!">Linux (ZIP)</a></li>
+          </ul>
         </div>
       </div>
     </div>
