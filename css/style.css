@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,300;1,400&display=swap');
 
 #top-section {
-    background: linear-gradient(to left top, #e36396, #d9638b, #cf6281, #c46278, #b96270) !important;
+    background: linear-gradient(to left top, #dd6e42, #e2614e, #e4545d, #e34a6d, #dd427e) !important;
     min-height: 18rem;
 }
 
@@ -21,6 +21,7 @@
 
 .custom-btn {
     border-radius: 8px;
+    background-color: rgb(250, 129, 29);
 }
 
 #download-tag {
@@ -35,8 +36,9 @@ img {
 }
 
 .resp-img {
-    width: 11rem;
-    height: 11rem;
+    width: 7rem;
+    height: 7rem;
+    margin: 2rem 3rem;
 }
 
 .card {
