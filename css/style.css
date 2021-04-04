@@ -1,8 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,300;1,400&display=swap');
 
 #top-section {
-    background: linear-gradient(to left top, #6396e3, #00abde, #00b7ba, #50bc88, #9fb962) !important;
+    background: linear-gradient(to left top, #e36396, #d9638b, #cf6281, #c46278, #b96270) !important;
     min-height: 18rem;
+}
+
+#logo-image {
+    height: 3.2rem;
+    width: 3.2rem;
+    margin-top: 0.4rem;;
 }
 
 #download-btns {
@@ -35,6 +41,19 @@ img {
 .resp-img {
     width: 11rem;
     height: 11rem;
+}
+
+.card {
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    background: #607d8b !important;
+}
+
+#features {
+    background: linear-gradient(to left top, #6396e3, #00abde, #00b7ba, #50bc88, #9fb962) !important;
 }
 
 @media screen and (max-width: 370px) {
