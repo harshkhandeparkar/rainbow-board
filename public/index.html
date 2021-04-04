@@ -113,6 +113,136 @@
       </div>
     </div>
   </div>
+  <div id="features">
+    <div class="container section">
+      <div class="center flow-text blue-text text-darken-2">
+        Features & What's New
+      </div>
+      <div class="row section">
+        <div class="col s12 m7 l7">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Desktop App Features</span>
+              <p>The app has been changed to look more like a desktop app than a web app running in a wrapper.
+                A new menu has been added along with other changes. Starting from now, the web app will not be updated beyond v0.5.4 bcoz maintaining both isn't possible. New optimizations and features will be added to the desktop app and the website will be used as an about page.
+              </p>
+            </div>
+            <div class="card-action center">
+              <a href="#">version - v0.6.0</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m5 l5">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Hotter Keys</span>
+              <p>New hotkeys (keyboard shortcuts) have been added to almost every action such as adding pages, changing the page, color palette and choosing the tool.
+                Use the top menu to find out which hotkey does what.
+              </p>
+            </div>
+            <div class="card-action center">
+              <a href="#">version - v0.6.0</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m12 l12">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Multiple Pages Bug Fix</span>
+              <span class="teal-text accent-3">There was a bug in multiple pages as reported by AnarcHy on Discord:</span>
+              <p> 1) start a new project<br>
+                2) write down '1' on first slide<br>
+                3) create new slide and write down '2'<br>
+                4) go back to first slide, do not change anything<br>
+                5) go to slide 2 again, add new slide and write down '3'<br>
+                6) create new slide and write down '4'<br>
+                7) go back to the previous slide and see the magic happen. It says '2', although we expect it to say '3'<br>
+                <br>
+                I also found a similar incorrect behaviour in some other scenarios, but this was the simplest one I found that shows it. Guess it will be the same source for the error as in these other scenarios.
+                Basically, if you go back a single slide from the latest one, then go on to create two new slides and then go back to the first one that was newly created, it does not show what was written down on it, but another one from the series. Which one it shows I did not find the pattern yet.
+              </p>
+              <span class="teal-text accent-3">This bug has been fixed.</span>
+            </div>
+            <div class="card-action center">
+              <a href="#">version - v0.5.4</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m5 l5">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Better Load</span>
+              <p>The app starts with a splash screen and loads only when ready.
+              </p>
+            </div>
+            <div class="card-action center">
+              <a href="#">version - v0.5.3</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m7 l7">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Better Save</span>
+              <p>The saved SVG slide now has a background color. Also, preview for the tool is not included in the saved image.
+              </p>
+            </div>
+            <div class="card-action center">
+              <a href="#">version - v0.5.3</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m4 l4">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Delete Page</span>
+              <p>You can delete the current page using the button at the top right corner. Also the current page number and total pages are displayed at the top left corner. Thanks to AnarcHy on Discord for the feedback.
+              </p>
+            </div>
+            <div class="card-action center">
+              <a href="#">version - v0.5.3</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m4 l4">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">SVG</span>
+              <p>Rainbow Board new uses <b>svg</b> instead of <b>canvas</b> which means that now you can save the slide as SVG, the whiteboard is faster, resizing is better and we will add new tools such as text tool in the future.
+              </p>
+            </div>
+            <div class="card-action center">
+              <a href="#">version - v0.5.0</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m4 l4">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Multiple Pages</span>
+              <p>You can now add multiple pages and switch between them by using the buttons at the left and right edges of the screen.<br>so you can work on multiple pages simultaneously.
+              </p>
+            </div>
+            <div class="card-action center">
+              <a href="#">version - v0.5.1</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m8 l8">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Save Settings</span>
+              <p>Your settings such as theme will be saved and the same theme will be used on restart.
+              </p>
+            </div>
+            <div class="card-action center">
+              <a href="#">version - v0.5.2</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <footer class="page-footer section grey darken-3 scrollspy" id="more">
     <div class="container">
       <div class="row">
