@@ -5,6 +5,10 @@
     min-height: 18rem;
 }
 
+#download-btns {
+    display: none;
+}
+
 #top-section div {
     margin: 0.8rem 0;
 }
