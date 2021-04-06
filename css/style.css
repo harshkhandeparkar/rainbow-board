@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,300;1,400&display=swap');
+* {
+    font-family: 'Oxygen', sans-serif;
+}
 
 #top-section {
     background: linear-gradient(to left top, #dd6e42, #e2614e, #e4545d, #e34a6d, #dd427e) !important;
@@ -35,7 +37,6 @@
 #download-tag {
     font-size: 2rem;
     color: #222;
-    font-family: 'Ubuntu', sans-serif;
 }
 
 img {
@@ -63,7 +64,7 @@ img {
 }
 
 @media screen and (max-width: 370px) {
-    
+
     #top-section {
         height: 24rem;
     }
