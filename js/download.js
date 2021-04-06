@@ -1,5 +1,5 @@
-var os = null;
-var info = {
+let os = null;
+const info = {
     latestVersion : null,
     downloadURLs: {
         //Linux
@@ -18,25 +18,20 @@ var info = {
 }
 
 if (navigator) {
-    let userAgent = navigator.userAgent.toLocaleLowerCase();
-    if(userAgent.indexOf('linux') !== -1) {
-        os = 'linux'
-    }
-    else if(userAgent.indexOf('windows') !== -1) {
-        os = 'windows'
-    }
-    else if(userAgent.indexOf('mac') !== -1) {
-        os = 'mac'
-    }
+    let userAgent = navigator.userAgent.toLowerCase();
+
+    if(userAgent.includes('linux')) os = 'linux';
+    else if(userAgent.includes('windows')) os = 'windows';
+    else if(userAgent.includes('mac')) os = 'mac';
 }
 
 const xmlHttp = new XMLHttpRequest();
 xmlHttp.onreadystatechange = () => {
     if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
         const releaseInfo =  {
-            assets: { 
+            assets: {
                 name: string,
-                browser_download_url: string 
+                browser_download_url: string
             },
             tag_name: string
         } = JSON.parse(xmlHttp.responseText);
@@ -54,7 +49,7 @@ xmlHttp.onreadystatechange = () => {
         // macos assets
         const dmgAsset = releaseInfo.assets.find((asset) => asset.name.toLowerCase().includes('.dmg'));
 
-            
+
         info['latestVersion'] = releaseInfo.tag_name;
 
         info['downloadURLs'] = {
@@ -74,8 +69,6 @@ xmlHttp.onreadystatechange = () => {
         }
     }
 }
-
-// console.log(info, os)
 
 // true for asynchronous
 xmlHttp.open('GET', 'https://api.github.com/repos/HarshKhandeparkar/rainbow-board/releases/latest', true);
