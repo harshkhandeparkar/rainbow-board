@@ -2,6 +2,14 @@
     font-family: 'Oxygen', sans-serif;
 }
 
+a {
+    color: rgb(231, 182, 22);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 .gradient {
     /** Thanks to cssgradient.io */
     background: rgb(35,87,198);
@@ -10,6 +18,7 @@
 
 #top-section {
     min-height: 25rem;
+    padding-bottom: 2rem;
 }
 
 #logo-image {
@@ -37,17 +46,6 @@
 
 #download-tag {
     font-size: 2rem;
-}
-
-img {
-    width: 16rem;
-    height: 16rem;
-}
-
-.resp-img {
-    width: 7rem;
-    height: 7rem;
-    margin: 2rem 3rem;
 }
 
 .card {
