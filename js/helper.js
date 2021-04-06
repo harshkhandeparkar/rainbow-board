@@ -1,4 +1,4 @@
-$(document).on('ready', function(){
+$(document).on('DOMContentLoaded', function(){
     $('.sidenav').sidenav();
     $('.btn').on('click', function(e){
         e.preventDefault();
