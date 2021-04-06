@@ -1,8 +1,6 @@
-$(document).ready(function(){
+$(document).on('ready', function(){
     $('.sidenav').sidenav();
-    $('.materialboxed').materialbox();
-    $('.scrollspy').scrollSpy();
-    $('.btn').click(function(e){
+    $('.btn').on('click', function(e){
         e.preventDefault();
     });
     $('.dropdown-trigger').dropdown();
