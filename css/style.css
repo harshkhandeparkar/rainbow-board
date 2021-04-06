@@ -3,7 +3,9 @@
 }
 
 #top-section {
-    background: linear-gradient(to left top, #dd6e42, #e2614e, #e4545d, #e34a6d, #dd427e) !important;
+    /** Thanks to cssgradient.io */
+    background: rgb(35,87,198);
+    background: linear-gradient(-135deg, rgba(35,87,198,1) 0%, rgba(176,56,151,1) 0%, rgba(252,139,69,1) 100%);
     min-height: 18rem;
 }
 
