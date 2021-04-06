@@ -15,10 +15,6 @@
     margin-top: 0.4rem;;
 }
 
-#top-section div {
-    margin: 0.8rem 0;
-}
-
 #top-section div span {
     margin: 0 0.2rem;
 }
@@ -38,7 +34,6 @@
 
 #download-tag {
     font-size: 2rem;
-    color: #222;
 }
 
 img {
