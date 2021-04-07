@@ -48,12 +48,18 @@ const showDownloadPage = () => {
       windowsElement.style.display = 'block';
       macElement.style.display = 'none';
       noDownloadElement.style.display = 'none';
+
+      windowsElement.querySelector('#exe-link').setAttribute('href', info.downloadURLs.exe);
+      windowsElement.querySelector('#msi-link').setAttribute('href', info.downloadURLs.msi);
+      windowsElement.querySelector('#zip-win-link').setAttribute('href', info.downloadURLs.zip_windows);
       break;
     case 'mac':
       linuxElement.style.display = 'none';
       windowsElement.style.display = 'none';
       macElement.style.display = 'block';
       noDownloadElement.style.display = 'none';
+
+      macElement.querySelector('#dmg-link').setAttribute('href', info.downloadURLs.dmg);
       break;
     default:
       linuxElement.style.display = 'none';
