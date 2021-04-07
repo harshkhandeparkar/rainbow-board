@@ -10,5 +10,5 @@ $(document).on('DOMContentLoaded', function(){
     });
     setInterval(function(){
         $('.carousel').carousel('next');
-    },3000);
+    }, 10000);
 });
