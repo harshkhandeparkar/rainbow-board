@@ -27,78 +27,77 @@ a:hover {
 }
 
 #top-section div span {
-    margin: 0 0.2rem;
+  margin: 0 0.2rem;
 }
 
 .custom-btn {
-    border-radius: 8px;
-    color: rgb(250, 129, 29);
-    background-color: white;
+  border-radius: 0.5rem;
+  color: rgb(250, 129, 29) !important;
+  background-color: white;
 }
 
 .custom-btn:hover {
-    background-color: #e1e1e1 !important;
+  background-color: #e1e1e1 !important;
 }
 
 .custom-btn:focus {
-    background-color: white;
+  background-color: white;
 }
 
 #download-tag {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 .card {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .card:hover {
-    transform: scale(1.02);
-    background: #607d8b !important;
+  transform: scale(1.02);
+  background: #607d8b !important;
 }
 
 #features {
-    background: #fdfbfb;
+  background: #fdfbfb;
 }
 
 @media screen and (max-width: 370px) {
+  #top-section {
+    height: 24rem;
+  }
 
-    #top-section {
-        height: 24rem;
-    }
+  #top-section div span {
+    display: block;
+    margin: 1rem 1rem;
+  }
 
-    #top-section div span {
-        display: block;
-        margin: 1rem 1rem;
-    }
+  #top-section div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+  }
 
-    #top-section div:nth-child(2) {
-        display: flex;
-        flex-direction: column;
-    }
+  #top-section div span:nth-child(2) {
+    order: 1;
+  }
 
-    #top-section div span:nth-child(2) {
-        order: 1;
-    }
+  #top-section div span:nth-child(1) {
+    order: 2;
+  }
 
-    #top-section div span:nth-child(1) {
-        order: 2;
-    }
+  .row {
+    text-align: center;
+  }
 
-    .row {
-        text-align: center;
-    }
+  #window-download {
+    display: flex;
+    flex-direction: column;
+  }
 
-    #window-download {
-        display: flex;
-        flex-direction: column;
-    }
+  #window-download div:nth-child(1) {
+    order: 2;
+  }
 
-    #window-download div:nth-child(1) {
-        order:2;
-    }
-
-    #window-download div:nth-child(2) {
-        order:1;
-    }
+  #window-download div:nth-child(2) {
+    order: 1;
+  }
 }
