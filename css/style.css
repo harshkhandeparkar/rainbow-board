@@ -6,6 +6,10 @@ a {
   color: rgb(231, 182, 22);
 }
 
+html, body {
+  scroll-behavior: smooth;
+}
+
 a:hover {
   text-decoration: underline;
 }
