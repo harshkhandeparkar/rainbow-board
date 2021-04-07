@@ -23,6 +23,11 @@ a:hover {
   padding-right: 10rem;
 }
 
+.feature img {
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
 .feature:nth-child(odd) {
   text-align: right;
 }
