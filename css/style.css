@@ -1,29 +1,29 @@
 * {
-    font-family: 'Oxygen', sans-serif;
+  font-family: 'Oxygen', sans-serif;
 }
 
 a {
-    color: rgb(231, 182, 22);
+  color: rgb(231, 182, 22);
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .gradient {
-    /** Thanks to cssgradient.io */
-    background: rgb(35,87,198);
-    background: linear-gradient(-135deg, rgba(35,87,198,1) 0%, rgba(176,56,151,1) 0%, rgba(252,139,69,1) 100%);
+  /** Thanks to cssgradient.io */
+  background: rgb(35,87,198);
+  background: linear-gradient(-135deg, rgba(176,56,151,1) 0%, rgba(252,139,69,1) 100%);
 }
 
 #top-section {
-    padding-bottom: 2rem;
+  padding-bottom: 2rem;
 }
 
 #logo-image {
-    height: 3.2rem;
-    width: 3.2rem;
-    margin-top: 0.4rem;;
+  height: 3.2rem;
+  width: 3.2rem;
+  margin-top: 0.4rem;;
 }
 
 #top-section div span {
