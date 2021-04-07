@@ -32,15 +32,16 @@ a:hover {
 
 .custom-btn {
     border-radius: 8px;
-    background-color: rgb(250, 129, 29);
+    color: rgb(250, 129, 29);
+    background-color: white;
 }
 
 .custom-btn:hover {
-    background-color: rgb(247, 153, 76) !important;
+    background-color: #e1e1e1 !important;
 }
 
 .custom-btn:focus {
-    background-color: rgb(253, 84, 135) !important;
+    background-color: white;
 }
 
 #download-tag {
