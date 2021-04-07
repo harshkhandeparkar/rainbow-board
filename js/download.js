@@ -25,9 +25,12 @@ const noDownloadElement = document.querySelector('#download #no-dwl');
 if (navigator) {
   let userAgent = navigator.userAgent.toLowerCase();
 
-  if(userAgent.includes('linux')) os = 'linux';
-  else if(userAgent.includes('windows')) os = 'windows';
-  else if(userAgent.includes('mac')) os = 'mac';
+  if (!userAgent.includes('mobile')) {
+    if(userAgent.includes('linux')) os = 'linux';
+    else if(userAgent.includes('windows')) os = 'windows';
+    else if(userAgent.includes('mac')) os = 'mac';
+    else os = 'other';
+  }
   else os = 'other';
 }
 
