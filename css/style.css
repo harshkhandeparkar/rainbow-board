@@ -86,34 +86,8 @@ a:hover {
     display: block;
     margin: 1rem 1rem;
   }
-
-  #top-section div:nth-child(2) {
-    display: flex;
-    flex-direction: column;
-  }
-
-  #top-section div span:nth-child(2) {
-    order: 1;
-  }
-
-  #top-section div span:nth-child(1) {
-    order: 2;
-  }
-
+  
   .row {
     text-align: center;
-  }
-
-  #window-download {
-    display: flex;
-    flex-direction: column;
-  }
-
-  #window-download div:nth-child(1) {
-    order: 2;
-  }
-
-  #window-download div:nth-child(2) {
-    order: 1;
   }
 }
