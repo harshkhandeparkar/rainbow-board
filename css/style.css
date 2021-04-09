@@ -51,6 +51,10 @@ a:hover {
   padding-bottom: 2rem;
 }
 
+.dropdown-content {
+  border-radius: 0.5rem;
+}
+
 #logo-image {
   height: 3.2rem;
   width: 3.2rem;

@@ -60,7 +60,7 @@ const showDownloadPage = () => {
     case 'mac':
       macElement.style.display = 'block';
 
-      macElement.querySelector('#dmg-link').setAttribute('href', info.downloadURLs.dmg);
+      macElement.querySelector('.dmg-link').setAttribute('href', info.downloadURLs.dmg);
       break;
     default:
       noDownloadElement.style.display = 'block';
