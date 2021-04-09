@@ -45,27 +45,30 @@ const showDownloadPage = () => {
   switch(os) {
     case 'linux':
       linuxElement.style.display = 'block';
-
-      linuxElement.querySelector('#appimg-link').setAttribute('href', info.downloadURLs.appimg);
-      linuxElement.querySelector('#deb-link').setAttribute('href', info.downloadURLs.deb);
-      linuxElement.querySelector('#zip-lin-link').setAttribute('href', info.downloadURLs.zip_linux);
       break;
     case 'windows':
       windowsElement.style.display = 'block';
-
-      windowsElement.querySelector('#exe-link').setAttribute('href', info.downloadURLs.exe);
-      windowsElement.querySelector('#msi-link').setAttribute('href', info.downloadURLs.msi);
-      windowsElement.querySelector('#zip-win-link').setAttribute('href', info.downloadURLs.zip_windows);
       break;
     case 'mac':
-      macElement.style.display = 'block';
-
-      macElement.querySelector('.dmg-link').setAttribute('href', info.downloadURLs.dmg);
+      macElement.style.display = 'block'
       break;
     default:
       noDownloadElement.style.display = 'block';
       break;
   }
+
+  // linux links
+  document.querySelectorAll('.appimg-link').forEach((ele) => ele.setAttribute('href', info.downloadURLs.appimg));
+  document.querySelectorAll('.deb-link').forEach((ele) => ele.setAttribute('href', info.downloadURLs.deb));
+  document.querySelectorAll('.zip-lin-link').forEach((ele) => ele.setAttribute('href', info.downloadURLs.zip_linux));
+
+  // windows links
+  document.querySelectorAll('.exe-link').forEach((ele) => ele.setAttribute('href', info.downloadURLs.exe));
+  document.querySelectorAll('.msi-link').forEach((ele) => ele.setAttribute('href', info.downloadURLs.msi));
+  document.querySelectorAll('.zip-win-link').forEach((ele) => ele.setAttribute('href', info.downloadURLs.zip_windows));
+
+  // mac links
+  document.querySelectorAll('.dmg-link').forEach((ele) => ele.setAttribute('href', info.downloadURLs.dmg));
 }
 
 const xmlHttp = new XMLHttpRequest();

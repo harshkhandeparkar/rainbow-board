@@ -104,9 +104,9 @@
                   Download For Windows
                 </button>
                 <ul id="windows-dropdown" class="dropdown-content">
-                  <li><a id="msi-link" href="#!" class="custom-btn">Windows (MSI)</a></li>
-                  <li><a id="exe-link" href="#!" class="custom-btn">Windows (EXE)</a></li>
-                  <li><a id="zip-win-link" href="#!" class="custom-btn">Windows (ZIP)</a></li>
+                  <li><a href="#!" class="custom-btn msi-link">Windows (MSI)</a></li>
+                  <li><a href="#!" class="custom-btn exe-link">Windows (EXE)</a></li>
+                  <li><a href="#!" class="custom-btn zip-win-link">Windows (ZIP)</a></li>
                 </ul>
               </div>
 
@@ -118,9 +118,9 @@
                 <ul id="linux-dropdown" class="dropdown-content">
                   <li><a id="snap-link" href="https://snapcraft.io/rainbow-board" class="custom-btn">Linux (Snap)</a>
                   </li>
-                  <li><a id="appimg-link" href="#!" class="custom-btn">Linux (Portable)</a></li>
-                  <li><a id="deb-link" href="#!" class="custom-btn">Linux (DEB)</a></li>
-                  <li><a id="zip-lin-link" href="#!" class="custom-btn">Linux (ZIP)</a></li>
+                  <li><a href="#!" class="custom-btn appimg-link">Linux (Portable)</a></li>
+                  <li><a href="#!" class="custom-btn deb-link">Linux (DEB)</a></li>
+                  <li><a href="#!" class="custom-btn zip-lin-link">Linux (ZIP)</a></li>
                 </ul>
               </div>
 
@@ -195,19 +195,19 @@
       <div class="col s12 m4 l4">
         <img src="./img/platforms/winows.png" alt="Windows" class="responsive-img resp-img">
         <div>
-          <a href="#" class="dropdown-trigger btn custom-btn" data-target="windows-dropdown">
+          <button class="dropdown-trigger btn custom-btn" data-target="windows-dropdown">
             <i class="material-icons left">file_download</i>
             Windows
-          </a>
+          </button>
         </div>
       </div>
       <div class="col s12 m4 l4">
         <img src="./img/platforms/linux.png" alt="Linux" class="responsive-img resp-img">
         <div>
-          <a href="#" class="dropdown-trigger btn custom-btn" data-target="linux-dropdown">
+          <button href="#" class="dropdown-trigger btn custom-btn" data-target="linux-dropdown">
             <i class="material-icons left">file_download</i>
             Linux
-          </a>
+          </button>
         </div>
       </div>
     </div>
