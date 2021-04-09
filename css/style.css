@@ -90,4 +90,11 @@ a:hover {
   .row {
     text-align: center;
   }
+  
+}
+
+@media only screen and (max-width: 650px)  { 
+  .feature div:nth-child(2) h4 {
+    text-align: center;
+  }
 }
