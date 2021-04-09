@@ -5,10 +5,10 @@ $(document).on('DOMContentLoaded', function(){
     });
     $('.dropdown-trigger').dropdown();
     $('.carousel.carousel-slider').carousel({
-        indicators:true,
-        fullWidth:true
+        indicators: false,
+        fullWidth: true
     });
     setInterval(function(){
         $('.carousel').carousel('next');
-    }, 5000);
+    }, 6000);
 });
