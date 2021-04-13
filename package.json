@@ -7,7 +7,10 @@
     "email": "shadowwarriorpro3003@gmail.com"
   },
   "repository": "https://github.com/HarshKhandeparkar/rainbow-board",
-  "sideEffects": ["*.css", "*scss"],
+  "sideEffects": [
+    "*.css",
+    "*scss"
+  ],
   "description": "22nd Century Whiteboard App For Linux, Windows and Mac.",
   "discordInvite": "https://discord.gg/FEpMS43UwR",
   "main": "build/main.bundle.js",
@@ -52,7 +55,7 @@
     "sass": "^1.32.8",
     "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0",
-    "svg-real-renderer": "^0.1.10",
+    "svg-real-renderer": "^0.3.0",
     "svgsaver": "^0.9.0",
     "ts-loader": "^8.1.0",
     "typescript": "^4.2.3",
