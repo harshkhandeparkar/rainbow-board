@@ -57,31 +57,30 @@ export class Page extends Component<IPageProps> {
         lineThickness: 3,
         eraserSize: 30,
         ...('toolSettings' in customBoardOptions ? customBoardOptions.toolSettings : {})
-      },
+      }
     }
+
+    this.state.boardState.drawBoard = new RealDrawBoard({
+      svg: this.svgRef.current,
+      ...this.boardOptions,
+    })
   }
 
   componentDidMount() {
-    const drawBoard = new RealDrawBoard({
-      svg: this.svgRef.current,
-      ...this.boardOptions,
-      dimensions: [
+    const drawBoard = this.state.boardState.drawBoard;
+
+    drawBoard.attach(
+      this.svgRef.current,
+      [
         this.svgRef.current.clientWidth,
         this.svgRef.current.clientHeight
-      ],
-    }).draw().startRender();
+      ]
+    ).draw().startRender();
 
     if (!this.onDrawBoardFired) {
       this.props.onDrawBoard(drawBoard);
       this.onDrawBoardFired = true;
     }
-
-    this.setState({
-      boardState: {
-        ...this.state.boardState,
-        drawBoard
-      }
-    })
 
     this._setHotkeys();
   }

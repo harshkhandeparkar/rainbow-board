@@ -127,6 +127,13 @@ export class Toolbar extends Component<IToolbarProps> {
 
   componentDidMount() {
     this._setHotkeys();
+
+    this.props.boardState.drawBoard.on('tool-setting-change', 'toolbar-setting-change', ({settingName, newValue}) => {
+      console.log('setting change', settingName, newValue)
+      this.setState({
+        [settingName]: newValue
+      })
+    })
   }
 
   componentWillUnmount() {
