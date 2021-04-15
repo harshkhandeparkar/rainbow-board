@@ -3218,10 +3218,10 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-svg-real-renderer@^0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/svg-real-renderer/-/svg-real-renderer-0.3.4.tgz#146a7a8af3363ff6b21cfa4bee25d378da03f3b2"
-  integrity sha512-qZ8+vOADhTrygvCgInDvLQD+/3j3QgNR0rmGSfmhslRY8f8j4kkWrEg3AO0aoqz5VhR7hU0MSMHb8Mtf5MwfFw==
+svg-real-renderer@^0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/svg-real-renderer/-/svg-real-renderer-0.3.5.tgz#8fbae113446383361fe03a9b10b4d793969381e8"
+  integrity sha512-VJKA1XITyH5vbECx88qiKERkXtxjQ61l5g1blruJTnglTRus2bp7NsSo0PwR1w8kbuIDq5/CTykUCOmbBkPZMg==
 
 svgsaver@^0.9.0:
   version "0.9.0"
