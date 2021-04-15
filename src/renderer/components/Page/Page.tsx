@@ -11,7 +11,7 @@ import { Toolbar } from './Toolbar/Toolbar';
 
 import './Page.css';
 import { Tool } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/tools/tools';
-import { RealDrawBoardTypes } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/RealDrawBoard';
+import { RealDrawBoardDefaults, RealDrawBoardTypes } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/RealDrawBoard';
 
 export interface IPageState {
   boardState: {
@@ -35,43 +35,40 @@ export class Page extends Component<IPageProps> {
   svgRef: RefObject<SVGSVGElement> = createRef();
   toolbarRef: RefObject<Toolbar> = createRef();
 
+  boardOptions: RealDrawBoardTypes.IRealDrawBoardParametersSettings;
+
   constructor(props: any) {
     super(props);
 
     const { boardOptions: customBoardOptions } = themeManager.getTheme();
 
     this.boardOptions = {
-      ...this.boardOptions,
+      ...RealDrawBoardDefaults,
+      allowUndo: true,
+      maxUndos: 10,
+      tool: 'brush',
+      bgType: {
+        type: 'none'
+      },
       ...customBoardOptions,
       toolSettings: {
-        ...this.boardOptions.toolSettings,
-        ...(customBoardOptions.toolSettings || {})
-      }
+        ...RealDrawBoardDefaults.toolSettings,
+        brushSize: 3,
+        lineThickness: 3,
+        eraserSize: 30,
+        ...('toolSettings' in customBoardOptions ? customBoardOptions.toolSettings : {})
+      },
     }
-  }
-
-  boardOptions: RealDrawBoardTypes.RealDrawBoardOptions = {
-    drawAxes: false,
-    xOffset: 0,
-    yOffset: 0,
-    toolSettings: {
-      brushSize: 3,
-      lineThickness: 3,
-      eraserSize: 30
-      // changeRate: 5,
-    },
-    allowUndo: true,
-    maxUndos: 10
   }
 
   componentDidMount() {
     const drawBoard = new RealDrawBoard({
       svg: this.svgRef.current,
+      ...this.boardOptions,
       dimensions: [
         this.svgRef.current.clientWidth,
         this.svgRef.current.clientHeight
       ],
-      ...this.boardOptions
     }).draw().startRender();
 
     if (!this.onDrawBoardFired) {
@@ -169,7 +166,6 @@ export class Page extends Component<IPageProps> {
           ref={this.toolbarRef}
           boardOptions={this.boardOptions}
           boardState={{ drawBoard: this.state.boardState.drawBoard, tool: this.state.boardState.tool }}
-          initialBrushColor={this.boardOptions.toolSettings.brushColor}
           _setTool={(tool) => this._setTool(tool)}
           _save={(type) => this._save(type)}
           _clearBoard={() => this._clearBoard()}

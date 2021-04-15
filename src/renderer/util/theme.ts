@@ -54,7 +54,7 @@ class ThemeManager {
     'light-blackboard': ThemeManager.lightThemeCSS
   }
 
-  static lightThemeBoardOptions: RealDrawBoardTypes.RealDrawBoardOptions = {
+  static lightThemeBoardOptions: RealDrawBoardTypes.RealDrawBoardParameters = {
     bgColor: [1, 1, 1],
     toolSettings: {
       brushColor: [0, 0, 0],
@@ -62,7 +62,7 @@ class ThemeManager {
     }
   }
 
-  static darkThemeBoardOptions: RealDrawBoardTypes.RealDrawBoardOptions = {
+  static darkThemeBoardOptions: RealDrawBoardTypes.RealDrawBoardParameters = {
     bgColor: [0, 0, 0],
     toolSettings: {
       brushColor: [1, 1, 1],
@@ -71,7 +71,7 @@ class ThemeManager {
   }
 
   themeCustomBoardOptions: {
-    [themeName: string]: RealDrawBoardTypes.RealDrawBoardOptions
+    [themeName: string]:  RealDrawBoardTypes.RealDrawBoardParameters
   } = {
     light: ThemeManager.lightThemeBoardOptions,
     dark: ThemeManager.darkThemeBoardOptions,

@@ -30,5 +30,5 @@ export interface IThemeStylingOptions {
 
 export interface ITheme extends IThemeStylingOptions {
   /** Custom whiteboard options */
-  boardOptions: RealDrawBoardTypes.RealDrawBoardOptions
+  boardOptions: RealDrawBoardTypes.RealDrawBoardParameters;
 }

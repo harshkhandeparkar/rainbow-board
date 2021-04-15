@@ -17,10 +17,9 @@ import * as EVENTS from '../../../../common/constants/eventNames';
 import { BRUSH_TOOL, LINE_TOOL, ERASER_TOOL, COLOR_PALETTE, UNDO, REDO, EXPORT_PAGE, CLEAR_PAGE } from '../../../../common/constants/shortcuts';
 
 export interface IToolbarProps {
-  boardOptions: RealDrawBoardTypes.RealDrawBoardOptions,
+  boardOptions: RealDrawBoardTypes.IRealDrawBoardParametersSettings,
   _changeToolSetting: (setting: keyof ToolSettings, value: number) => void,
   _setTool: (tool: Tool) => void,
-  initialBrushColor: Color,
   boardState: {
     drawBoard: RealDrawBoard,
     tool: Tool
@@ -135,8 +134,7 @@ export class Toolbar extends Component<IToolbarProps> {
   }
 
   render() {
-    const { initialBrushColor, boardState, _clearBoard, _save, _onUndo, _onRedo } = this.props;
-    const [r, g, b] = initialBrushColor;
+    const { boardState, _clearBoard, _save, _onUndo, _onRedo } = this.props;
 
     return (
       <div className="toolbar">
