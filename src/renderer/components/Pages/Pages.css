@@ -1,5 +1,5 @@
-#main {
-  min-height: 100vh;
+#pages {
+  position: relative;
 }
 
 .page-btn {

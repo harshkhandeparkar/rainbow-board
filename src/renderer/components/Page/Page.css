@@ -1,16 +1,6 @@
 .page {
-  height: 95vh;
   width: 95vw;
 
   margin-top: 2vh;
   border-radius: 0.3rem;
-}
-
-.undo-redo-btns {
-  position: fixed;
-  height: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
 }
