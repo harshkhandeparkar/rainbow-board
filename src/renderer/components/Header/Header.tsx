@@ -39,6 +39,7 @@ export class Header extends Component<IHeaderProps> {
             {
               isCustomHeader &&
               <button
+                title="Close"
                 className="btn-floating center"
                 onClick={(e) => {
                   e.preventDefault();
@@ -51,6 +52,7 @@ export class Header extends Component<IHeaderProps> {
             {
               isCustomHeader &&
               <button
+                title="Minimize"
                 className="btn-floating center"
                 onClick={(e) => {
                   e.preventDefault();
@@ -63,6 +65,7 @@ export class Header extends Component<IHeaderProps> {
             {
               isCustomHeader &&
               <button
+                title={this.state.isMaximized ? 'Unmaximize' : 'Maximize'}
                 className="btn-floating center"
                 onClick={(e) => {
                   e.preventDefault();
