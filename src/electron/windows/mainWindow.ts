@@ -43,13 +43,25 @@ export function createMainWindow(
     setWindowMenu(win, isDev, path);
   })
 
-  ipcMain.on('restart', () => {
+  ipcMain.on(EVENTS.RESTART, () => {
     app.relaunch();
     app.quit();
   })
 
   ipcMain.on(EVENTS.OPEN, (e) => {
     openDialog(win, e);
+  })
+
+  ipcMain.on(EVENTS.MAXIMIZE_UNMAXIMIZE, (e) => {
+    win.isMaximized() ? win.unmaximize() : win.maximize();
+  })
+
+  ipcMain.on(EVENTS.QUIT, (e) => {
+    app.quit();
+  })
+
+  ipcMain.on(EVENTS.MINIMIZE, (e) => {
+    win.minimize();
   })
 
   win.on('enter-full-screen', () => {

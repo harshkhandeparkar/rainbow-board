@@ -9,6 +9,7 @@ import {
   startMaximizedSetting,
   useGnomeStyleHeaderbarSetting
 } from '../../../common/code/settings';
+import { RESTART } from '../../../common/constants/eventNames';
 
 import { ipcRenderer } from 'electron';
 import { Header } from '../Header/Header';
@@ -58,7 +59,7 @@ export default class Settings extends Component {
             defaultValue={useGnomeStyleHeaderbarSetting.get()}
             onInput={(val) => {
               useGnomeStyleHeaderbarSetting.set(val);
-              ipcRenderer.send('restart');
+              ipcRenderer.send(RESTART);
             }}
           />
         </div>

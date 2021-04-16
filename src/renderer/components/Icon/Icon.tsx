@@ -3,10 +3,11 @@ import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontaw
 export function Icon(
   props: {
     options: FontAwesomeIconProps,
+    customColor?: boolean
     rightMargin?: boolean
   }
 ): JSX.Element {
-  props.options.className = (props.options.className || '') + ' brand-text';
+  props.options.className = (props.options.className || '') + (props.customColor ? '' : ' brand-text');
   props.options.size = props.options.size || 'lg';
   props.options.style = props.options.style || {};
 

@@ -23,3 +23,9 @@ export const PROMPT = 'prompt';
 export const PROMPT_REPLY = 'prompt-reply';
 
 export const SET_HOTKEYS = 'set-hotkeys';
+
+export const RESTART = 'restart';
+
+export const MAXIMIZE_UNMAXIMIZE = 'maximize-unmaximize';
+export const QUIT = 'quit';
+export const MINIMIZE = 'minimize';
