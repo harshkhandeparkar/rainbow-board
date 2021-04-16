@@ -15,7 +15,8 @@ type IMenuItem = 'settings' | 'home';
 interface IHeaderProps {
   title: string | JSX.Element,
   onlyDisplayIfCustom?: boolean,
-  leftMenu: IMenuItem[]
+  leftMenu: IMenuItem[],
+  rightMenu: JSX.Element[]
 }
 
 export class Header extends Component<IHeaderProps> {
@@ -26,6 +27,7 @@ export class Header extends Component<IHeaderProps> {
   render() {
     const onlyDisplayIfCustom = this.props.onlyDisplayIfCustom || false;
     const isCustomHeader = useGnomeStyleHeaderbarSetting.get();
+    const rightMenu = this.props.rightMenu || [];
 
     const doDisplay = !onlyDisplayIfCustom || onlyDisplayIfCustom && isCustomHeader;
 
@@ -85,6 +87,9 @@ export class Header extends Component<IHeaderProps> {
                 <Icon options={{icon: faHome, size: isCustomHeader ? 'sm': 'lg'}} />
               </Link>
             }
+            </div>
+            <div className="right">
+              {rightMenu}
             </div>
             <span className="header-text brand-logo center brand-text">{this.props.title}</span>
           </div>
