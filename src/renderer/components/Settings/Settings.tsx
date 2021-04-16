@@ -55,7 +55,7 @@ export default class Settings extends Component {
           />
 
           <Checkbox
-            label={<span><a href="https://gnome.org">GNOME</a> Style Toolbar:</span>}
+            label={<span><a href="https://gnome.org">GNOME</a> Style Headerbar:</span>}
             defaultValue={useGnomeStyleHeaderbarSetting.get()}
             onInput={(val) => {
               useGnomeStyleHeaderbarSetting.set(val);

@@ -32,7 +32,7 @@ export class Header extends Component<IHeaderProps> {
       <nav className={isCustomHeader ? 'custom-header': ''}>
         {
           doDisplay &&
-          <div className="nav-wrapper header container">
+          <div className={`nav-wrapper header ${isCustomHeader ? 'container-fluid' : 'container'}`}>
             {
               isCustomHeader &&
               <button
