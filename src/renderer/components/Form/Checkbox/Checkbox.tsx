@@ -2,7 +2,7 @@ import React from 'react';
 import './Checkbox.css';
 
 export interface ICheckboxProps {
-  label: string,
+  label: string | JSX.Element,
   onInput: (value: boolean) => void,
   defaultValue: boolean
 }

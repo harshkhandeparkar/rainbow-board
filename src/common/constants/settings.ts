@@ -24,3 +24,7 @@ export const SHOW_MENU_BAR_WHEN_FULLSCREEN_SETTING_KEY = 'showMenuBarWhenFullscr
 export type SHOW_MENU_BAR_WHEN_FULLSCREEN_SETTING = boolean;
 export const SHOW_MENU_BAR_WHEN_FULLSCREEN_SETTING_DEFAULT = true;
 
+export const USE_GNOME_STYLE_HEADERBAR_SETTING_KEY = 'useGnomeStyleHeaderbar';
+export type USE_GNOME_STYLE_HEADERBAR_SETTING = boolean;
+export const USE_GNOME_STYLE_HEADERBAR_SETTING_DEFAULT = false;
+

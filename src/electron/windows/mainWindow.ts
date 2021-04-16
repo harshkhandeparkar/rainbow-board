@@ -1,11 +1,11 @@
-import { BrowserWindow, shell, dialog, ipcMain } from 'electron';
+import { BrowserWindow, shell, dialog, ipcMain, app } from 'electron';
 import { indexFilePath, iconPath } from '../constants/paths';
 import { setWindowMenu } from '../util/windowMenu';
 import { setHotkeys } from '../util/hotkeys';
 import * as EVENTS from '../../common/constants/eventNames';
 import { IPlugin } from '../../common/types/plugins';
 import { openDialog } from '../util/open';
-import { startFullscreenSetting, startMaximizedSetting, showMenuBarWhenFullscreenSetting } from '../../common/code/settings';
+import { startFullscreenSetting, startMaximizedSetting, showMenuBarWhenFullscreenSetting, useGnomeStyleToolbarSetting } from '../../common/code/settings';
 
 let showExitPrompt = true;
 
@@ -23,6 +23,7 @@ export function createMainWindow(
     },
     show: false,
     fullscreenable: true,
+    frame: !useGnomeStyleToolbarSetting.get(),
     fullscreen: startFullscreenSetting.get(),
     icon: iconPath
   })
@@ -40,6 +41,11 @@ export function createMainWindow(
 
   ipcMain.on(EVENTS.LOCATION_CHANGED, (e, {path}: {path: string}) => {
     setWindowMenu(win, isDev, path);
+  })
+
+  ipcMain.on('restart', () => {
+    app.relaunch();
+    app.quit();
   })
 
   ipcMain.on(EVENTS.OPEN, (e) => {
