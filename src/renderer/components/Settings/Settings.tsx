@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Select } from '../Form/Select/Select';
 import { Checkbox } from '../Form/Checkbox/Checkbox';
 import { VersionFooter } from '../VersionFooter/VersionFooter';
@@ -11,22 +10,16 @@ import {
   useGnomeStyleHeaderbarSetting
 } from '../../../common/code/settings';
 
-import { Icon } from '../Icon/Icon';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { ipcRenderer } from 'electron';
+import { Header } from '../Header/Header';
 
 export default class Settings extends Component {
   render() {
     return (
       <div>
-        <nav>
-          <div className="nav-wrapper header container">
-            <span className="brand-logo center brand-text header-text">Settings</span>
-            <Link to="/" title="Home">
-              <Icon options={{icon: faHome}} />
-            </Link>
-          </div>
-        </nav>
+        <Header
+          title="Settings"
+        />
         <div className="container">
           <Select
             label="Theme:"

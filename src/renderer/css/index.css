@@ -37,12 +37,6 @@ footer {
   min-height: 100vh;
 }
 
-.header-text {
-  user-select: none;
-  font-size: xx-large;
-  font-weight: bold;
-}
-
 .btn {
   border-radius: 0.3rem;
   box-shadow: none !important;

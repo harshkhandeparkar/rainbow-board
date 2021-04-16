@@ -1,0 +1,26 @@
+.custom-header {
+  -webkit-app-region: drag;
+  height: 2rem;
+  line-height: 2rem;
+}
+
+.custom-header a {
+  -webkit-app-region: no-drag;
+}
+
+.custom-header .brand-logo {
+  line-height: 2rem;
+  font-size: 1rem;
+}
+
+.custom-header .btn-floating {
+  height: 1.5rem;
+  width: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.header-text {
+  user-select: none;
+  font-size: xx-large;
+  font-weight: bold;
+}

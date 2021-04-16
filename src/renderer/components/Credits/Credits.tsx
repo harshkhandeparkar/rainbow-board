@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import packageFile from '../../../../package.json';
 
 import Grid from '../Grid/Grid';
 import GridItem from '../Grid/GridItem';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { Header } from '../Header/Header';
 
 const { repository } = packageFile;
 
@@ -37,14 +35,9 @@ export default class Credits extends Component {
   render() {
     return (
       <div style={{paddingBottom: '2rem'}}>
-        <nav>
-          <div className="nav-wrapper header container">
-            <span className="brand-logo center header-text brand-text">Credits</span>
-            <Link to="/" title="Home">
-              <FontAwesomeIcon icon={faHome} className="brand-text" size="lg"/>
-            </Link>
-          </div>
-        </nav>
+        <Header
+          title="Credits"
+        />
 
         <Grid
           className="container"

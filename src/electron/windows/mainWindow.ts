@@ -5,7 +5,7 @@ import { setHotkeys } from '../util/hotkeys';
 import * as EVENTS from '../../common/constants/eventNames';
 import { IPlugin } from '../../common/types/plugins';
 import { openDialog } from '../util/open';
-import { startFullscreenSetting, startMaximizedSetting, showMenuBarWhenFullscreenSetting, useGnomeStyleToolbarSetting } from '../../common/code/settings';
+import { startFullscreenSetting, startMaximizedSetting, showMenuBarWhenFullscreenSetting, useGnomeStyleHeaderbarSetting } from '../../common/code/settings';
 
 let showExitPrompt = true;
 
@@ -23,7 +23,7 @@ export function createMainWindow(
     },
     show: false,
     fullscreenable: true,
-    frame: !useGnomeStyleToolbarSetting.get(),
+    frame: !useGnomeStyleHeaderbarSetting.get(),
     fullscreen: startFullscreenSetting.get(),
     icon: iconPath
   })

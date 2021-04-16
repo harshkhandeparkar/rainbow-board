@@ -9,10 +9,11 @@ import { VersionFooter } from './VersionFooter/VersionFooter';
 
 import { changelogSetting } from '../util/settings';
 import { Icon } from './Icon/Icon';
-import { faPaintBrush, faBell, faCog, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
+import { faPaintBrush, faBell, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 
-import { OPEN, SETTINGS, START_NEW } from '../../common/constants/shortcuts';
+import { OPEN, START_NEW } from '../../common/constants/shortcuts';
 import { OPEN as OPEN_EVENT } from '../../common/constants/eventNames';
+import { Header } from './Header/Header';
 
 const { version, description } = packageFile;
 
@@ -26,14 +27,11 @@ function Main() {
 
   return (
     <div id="main">
-      <nav>
-        <div className="nav-wrapper header container">
-          <NavLink to="/settings" className="btn-floating brand-text center" title={`Open Settings (${SETTINGS.platformFormattedString})`}>
-            <Icon options={{icon: faCog}} />
-          </NavLink>
-          <span className="header-text brand-logo center brand-text">Rainbow Board</span>
-        </div>
-      </nav>
+      <Header
+        title="Rainbow Board"
+        isHome={true}
+      />
+
       <div className="container-fluid center">
         <div className="row">
           <p>

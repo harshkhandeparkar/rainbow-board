@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Icon } from '../Icon/Icon';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 import { changelogSetting } from '../../util/settings';
 import packageFile from '../../../../package.json';
 
 import Grid from '../Grid/Grid';
 import GridItem from '../Grid/GridItem';
+
+import { Header } from '../Header/Header';
 
 const { version } = packageFile;
 
@@ -49,14 +48,9 @@ export default class WhatsNew extends Component {
   render() {
     return (
       <div style={{paddingBottom: '2rem'}}>
-        <nav>
-          <div className="nav-wrapper header container">
-            <span className="brand-logo center header-text brand-text">What's New</span>
-            <Link to="/" title="Home">
-              <Icon options={{icon: faHome}} />
-            </Link>
-          </div>
-        </nav>
+        <Header
+          title="What's New"
+        />
 
         <Grid
           options={{
