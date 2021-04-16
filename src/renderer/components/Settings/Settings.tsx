@@ -20,6 +20,7 @@ export default class Settings extends Component {
       <div>
         <Header
           title="Settings"
+          leftMenu={['home']}
         />
         <div className="container">
           <Select

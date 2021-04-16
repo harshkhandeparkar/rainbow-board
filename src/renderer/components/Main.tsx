@@ -29,7 +29,7 @@ function Main() {
     <div id="main">
       <Header
         title="Rainbow Board"
-        isHome={true}
+        leftMenu={['settings']}
       />
 
       <div className="container-fluid center">

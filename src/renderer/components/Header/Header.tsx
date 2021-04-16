@@ -10,10 +10,12 @@ import { MAXIMIZE_UNMAXIMIZE, QUIT, MINIMIZE } from '../../../common/constants/e
 import './Header.css';
 import { ipcRenderer } from 'electron';
 
+type IMenuItem = 'settings' | 'home';
+
 interface IHeaderProps {
   title: string | JSX.Element,
-  isHome?: boolean,
-  onlyDisplayIfCustom?: boolean
+  onlyDisplayIfCustom?: boolean,
+  leftMenu: IMenuItem[]
 }
 
 export class Header extends Component<IHeaderProps> {
@@ -22,17 +24,16 @@ export class Header extends Component<IHeaderProps> {
   }
 
   render() {
-    const isHome = this.props.isHome || false;
     const onlyDisplayIfCustom = this.props.onlyDisplayIfCustom || false;
     const isCustomHeader = useGnomeStyleHeaderbarSetting.get();
 
     const doDisplay = !onlyDisplayIfCustom || onlyDisplayIfCustom && isCustomHeader;
 
     return (
+      doDisplay ?
       <nav className={isCustomHeader ? 'custom-header': ''}>
-        {
-          doDisplay &&
-          <div className={`nav-wrapper header ${isCustomHeader ? 'container-fluid' : 'container'}`}>
+        <div className={`nav-wrapper header ${isCustomHeader ? 'container-fluid' : 'container'}`}>
+          <div className="left">
             {
               isCustomHeader &&
               <button
@@ -73,18 +74,22 @@ export class Header extends Component<IHeaderProps> {
               </button>
             }
             {
-              isHome ?
+              this.props.leftMenu.includes('settings') &&
               <Link to="/settings" className="btn-floating center" title={`Open Settings (${SETTINGS.platformFormattedString})`}>
                 <Icon options={{icon: faCog, size: isCustomHeader ? 'sm': 'lg'}} />
-              </Link> :
+              </Link>
+            }
+            {
+              this.props.leftMenu.includes('home') &&
               <Link to="/" className="btn-floating center" title="Home">
                 <Icon options={{icon: faHome, size: isCustomHeader ? 'sm': 'lg'}} />
               </Link>
             }
+            </div>
             <span className="header-text brand-logo center brand-text">{this.props.title}</span>
           </div>
-        }
-      </nav>
+        </nav> :
+        <div />
     )
   }
 }

@@ -49,16 +49,17 @@ export class Pages extends Component {
         <Header
           title="Whiteboard"
           onlyDisplayIfCustom={true}
+          leftMenu={[]}
         />
 
         <style>
           {`
             .page {
-              height: ${useGnomeStyleHeaderbarSetting ? 'calc(95vh - 2rem)' : '95vh'}
+              height: ${useGnomeStyleHeaderbarSetting.get() ? 'calc(95vh - 2rem)' : '95vh'}
             }
 
             #pages {
-              height: ${useGnomeStyleHeaderbarSetting ? 'calc(100vh - 2rem)' : '100vh'}
+              height: ${useGnomeStyleHeaderbarSetting.get() ? 'calc(100vh - 2rem)' : '100vh'}
             }
           `}
         </style>

@@ -50,6 +50,7 @@ export default class WhatsNew extends Component {
       <div style={{paddingBottom: '2rem'}}>
         <Header
           title="What's New"
+          leftMenu={['home']}
         />
 
         <Grid

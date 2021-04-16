@@ -37,6 +37,7 @@ export default class Credits extends Component {
       <div style={{paddingBottom: '2rem'}}>
         <Header
           title="Credits"
+          leftMenu={['home']}
         />
 
         <Grid
