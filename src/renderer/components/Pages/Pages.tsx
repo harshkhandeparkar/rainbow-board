@@ -9,7 +9,7 @@ import Page from '../Page/Page';
 import ipcHandler from '../../util/ipc-handler';
 
 import * as EVENTS from '../../../common/constants/eventNames';
-import { ADD_PAGE, NEXT_PAGE, DELETE_PAGE, PREV_PAGE } from '../../../common/constants/shortcuts';
+import { ADD_PAGE, NEXT_PAGE, DELETE_PAGE, PREV_PAGE, SAVE } from '../../../common/constants/shortcuts';
 
 import './Pages.css';
 import { RealExport } from 'svg-real-renderer/build/src/types/RealRendererTypes';
@@ -56,6 +56,7 @@ export class Pages extends Component {
             <button
               className="btn brand-text"
               key={1}
+              title={SAVE.platformFormattedString}
               onClick={() => {
                 if (this.state.fileOpened) this._saveWhiteboard(this.state.location);
                 else ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SAVE, options: {}});
