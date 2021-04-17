@@ -4,12 +4,31 @@ import { writeFile } from 'fs';
 import { basename } from 'path';
 
 import { Icon } from '../Icon/Icon';
-import { faPlus, faChevronRight, faChevronLeft, faTrash, faBars } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPlus,
+  faChevronRight,
+  faChevronLeft,
+  faTrash,
+  faBars,
+  faEraser,
+  faGripLines,
+  faPaintBrush,
+  faToolbox
+} from '@fortawesome/free-solid-svg-icons';
 import Page from '../Page/Page';
 import ipcHandler from '../../util/ipc-handler';
 
 import * as EVENTS from '../../../common/constants/eventNames';
-import { ADD_PAGE, NEXT_PAGE, DELETE_PAGE, PREV_PAGE, SAVE } from '../../../common/constants/shortcuts';
+import {
+  ADD_PAGE,
+  NEXT_PAGE,
+  DELETE_PAGE,
+  PREV_PAGE,
+  SAVE,
+  BRUSH_TOOL,
+  LINE_TOOL,
+  ERASER_TOOL
+} from '../../../common/constants/shortcuts';
 
 import './Pages.css';
 import { RealExport } from 'svg-real-renderer/build/src/types/RealRendererTypes';
@@ -66,6 +85,55 @@ export class Pages extends Component {
             </button>,
             <Dropdown
               key={2}
+              getTriggerBtn={(ref) => {
+                return (
+                  <button ref={ref} className="btn" title="Select Tool">
+                    <Icon
+                      options={{
+                        icon: faToolbox,
+                        size: 'sm'
+                      }}
+                    />
+                  </button>
+                )
+              }}
+            >
+              <button
+                className="btn"
+                onClick={() => ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SET_TOOL, options: {tool: 'brush'}})}
+                title={`Brush (${BRUSH_TOOL.platformFormattedString})`}
+              >
+                <Icon
+                  options={{
+                    icon: faPaintBrush
+                  }}
+                />
+              </button>
+              <button
+                className="btn"
+                onClick={() => ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SET_TOOL, options: {tool: 'line'}})}
+                title={`Line Tool (${LINE_TOOL.platformFormattedString})`}
+              >
+                <Icon
+                  options={{
+                    icon: faGripLines
+                  }}
+                />
+              </button>
+              <button
+                className="btn"
+                onClick={() => ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SET_TOOL, options: {tool: 'eraser'}})}
+                title={`Eraser (${ERASER_TOOL.platformFormattedString})`}
+              >
+                <Icon
+                  options={{
+                    icon: faEraser
+                  }}
+                />
+              </button>
+            </Dropdown>,
+            <Dropdown
+              key={3}
               getTriggerBtn={(ref) => {
                 return (
                   <button ref={ref} className="btn">

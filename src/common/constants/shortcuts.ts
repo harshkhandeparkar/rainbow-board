@@ -27,11 +27,11 @@ export class Shortcut {
 /** Start New Page */
 export const START_NEW = new Shortcut('CmdOrCtrl + N');
 /** Save as .rainbow file */
-export const SAVE = new Shortcut('CmdOrCtrl + E');
+export const SAVE = new Shortcut('CmdOrCtrl + S');
 /** Open .rainbow File */
 export const OPEN = new Shortcut('CmdOrCtrl + O');
 /** Export the current page, old shortcut */
-export const EXPORT_PAGE = new Shortcut('CmdOrCtrl + S');
+export const EXPORT_PAGE = new Shortcut('CmdOrCtrl + E');
 /** Open Settings */
 export const SETTINGS = new Shortcut('CmdOrCtrl + ,');
 /** Quit App */

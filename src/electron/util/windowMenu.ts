@@ -20,7 +20,7 @@ export function setWindowMenu(
       submenu: [
         { label: 'Start New', accelerator: SHORTCUTS.START_NEW.accelerator, click: () => menuClickEvents.fire(EVENTS.NEW_PAGE, {}), enabled: path !== '/pages', visible: path !== '/pages' },
         { label: 'Open File...', accelerator: SHORTCUTS.OPEN.accelerator, click: () => menuClickEvents.fire(EVENTS.OPEN, {}), enabled: path !== '/pages', visible: path !== '/pages' },
-        { label: 'Save File...', accelerator: 'CmdOrCtrl + E', click: () => menuClickEvents.fire(EVENTS.SAVE, {}), visible: path === '/pages', enabled: path === '/pages' },
+        { label: 'Save File...', accelerator: SHORTCUTS.SAVE.accelerator, click: () => menuClickEvents.fire(EVENTS.SAVE, {}), visible: path === '/pages', enabled: path === '/pages' },
         {
           label: 'Export Page...',
           accelerator: SHORTCUTS.EXPORT_PAGE.accelerator,
