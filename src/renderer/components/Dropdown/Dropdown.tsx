@@ -24,8 +24,6 @@ export class Dropdown extends Component<IDropdownProps> {
     const arrowLeft = btnRect.left - (arrowRect.width - btnRect.width) / 2;
     const arrowTop = dropdownTop - arrowRect.height / (2 * Math.sqrt(2)); // sqrt(2) to handle 45deg rotation
 
-    console.log(arrowRect, btnRect, dropdownRect, arrowLeft)
-
     this.dropdownRef.current.style.setProperty('left', `${dropdownLeft.toString()}px`);
     this.dropdownRef.current.style.setProperty('top', `${dropdownTop.toString()}px`);
     this.arrowRef.current.style.setProperty('top', `${arrowTop.toString()}px`);
