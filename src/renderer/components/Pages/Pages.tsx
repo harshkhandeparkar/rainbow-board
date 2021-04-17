@@ -17,6 +17,7 @@ import { RealDrawBoard } from 'svg-real-renderer';
 import { Header } from '../Header/Header';
 
 import { useGnomeStyleHeaderbarSetting } from '../../../common/code/settings';
+import { Dropdown } from '../Dropdown/Dropdown';
 
 export interface IHistoryStateWithOpen {
   open?: {
@@ -54,7 +55,10 @@ export class Pages extends Component {
             <button className="btn brand-text" key={1}>Save</button>,
             <button className="btn brand-text" key={2}>
               <Icon options={{icon: faBars}} />
-            </button>
+            </button>,
+            // <Dropdown key={3} btnLabel="Drop It Down">
+            //   Lol
+            // </Dropdown>
           ]}
         />
 
