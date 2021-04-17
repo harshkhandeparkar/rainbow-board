@@ -21,6 +21,7 @@ export class Dropdown extends Component<IDropdownProps> {
 
     let dropdownLeft = btnRect.left - (dropdownRect.width - btnRect.width) / 2;
     const dropdownTop = btnRect.top + btnRect.height + arrowRect.height / 2;
+
     let arrowLeft = btnRect.left - (arrowRect.width / Math.sqrt(2) - btnRect.width) / (2);
     const arrowTop = dropdownTop - arrowRect.height / (2 * Math.sqrt(2)); // sqrt(2) to handle 45deg rotation
 
@@ -28,7 +29,7 @@ export class Dropdown extends Component<IDropdownProps> {
     dropdownLeft = Math.max(5, dropdownLeft); // 5 px padding on the left
 
     arrowLeft = Math.min(arrowLeft, dropdownLeft + dropdownRect.width - arrowRect.width / Math.sqrt(2)); // padding to the right of dropdown
-    arrowLeft = Math.min(arrowLeft, dropdownLeft + arrowRect.width / Math.sqrt(2)); // padding to the left of dropdown
+    arrowLeft = Math.max(arrowLeft, dropdownLeft + arrowRect.width / Math.sqrt(2)); // padding to the left of dropdown
 
     this.dropdownRef.current.style.setProperty('left', `${dropdownLeft.toString()}px`);
     this.dropdownRef.current.style.setProperty('top', `${dropdownTop.toString()}px`);
@@ -51,6 +52,7 @@ export class Dropdown extends Component<IDropdownProps> {
   }
 
   componentDidMount() {
+    this.adjustPosition();
     this.btnRef.current.addEventListener('click', this._onClick);
     window.addEventListener('resize', this._onResize);
   }

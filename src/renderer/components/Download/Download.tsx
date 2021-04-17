@@ -51,7 +51,7 @@ export default class Download extends Component {
     return (
       <div>
         {
-          (gt(this.state.latestVersion, version)) &&
+          // (gt(this.state.latestVersion, version)) &&
           (
             <Dropdown
               getTriggerBtn={(ref) =>
