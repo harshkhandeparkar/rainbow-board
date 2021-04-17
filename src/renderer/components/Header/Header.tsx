@@ -14,6 +14,7 @@ type IMenuItem = 'settings' | 'home';
 
 interface IHeaderProps {
   title: string | JSX.Element,
+  subtitle?: string,
   onlyDisplayIfCustom?: boolean,
   leftMenu: IMenuItem[],
   rightMenu?: JSX.Element[]
@@ -94,7 +95,8 @@ export class Header extends Component<IHeaderProps> {
             <div className="right">
               {rightMenu}
             </div>
-            <span className="header-text brand-logo center brand-text">{this.props.title}</span>
+            <span className={`header-text brand-logo center brand-text ${this.props.subtitle ? 'has-subtitle' : ''}`}>{this.props.title}</span>
+            {this.props.subtitle && <span className="header-subtitle-text brand-logo center">{this.props.subtitle}</span>}
           </div>
         </nav> :
         <div />

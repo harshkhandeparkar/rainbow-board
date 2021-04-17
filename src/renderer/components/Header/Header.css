@@ -35,6 +35,18 @@
 
 .header-text {
   user-select: none;
-  font-size: xx-large;
   font-weight: bold;
+}
+
+.header-text.has-subtitle {
+  margin-top: 0;
+  line-height: 1.1rem;
+}
+
+.header-subtitle-text {
+  user-select: none;
+  font-size: 0.8rem !important;
+  color: grey !important;
+  margin-top: 0.5rem;
+  line-height: 2rem !important;
 }

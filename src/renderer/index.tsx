@@ -12,6 +12,7 @@ import history from './util/history';
 
 import * as EVENTS from '../common/constants/eventNames';
 import { readFile } from 'fs';
+import { basename } from 'path';
 
 ReactDOM.render(
   <App />,
@@ -26,7 +27,11 @@ ipcHandler.addEventHandler(EVENTS.OPEN, 'open-handler', (e, {path}: {path: strin
       history.push({
         pathname: '/pages',
         state: {
-          open: JSON.parse(data.toString())
+          open: {
+            data: JSON.parse(data.toString()),
+            location: path,
+            fileName: basename(path)
+          }
         }
       })
     }

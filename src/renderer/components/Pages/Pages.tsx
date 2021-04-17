@@ -11,7 +11,7 @@ import * as EVENTS from '../../../common/constants/eventNames';
 import { ADD_PAGE, NEXT_PAGE, DELETE_PAGE, PREV_PAGE } from '../../../common/constants/shortcuts';
 
 import './Pages.css';
-import { GraphDimensions, StrokeExport } from 'svg-real-renderer/build/src/types/RealRendererTypes';
+import { GraphDimensions, RealExport, StrokeExport } from 'svg-real-renderer/build/src/types/RealRendererTypes';
 import history from '../../util/history';
 import { RealDrawBoard } from 'svg-real-renderer';
 import { Header } from '../Header/Header';
@@ -21,19 +21,15 @@ import { Dropdown } from '../Dropdown/Dropdown';
 
 export interface IHistoryStateWithOpen {
   open?: {
-    exportData: StrokeExport[],
-    strokeIndex: number,
-    dimensions: GraphDimensions
-  }[]
+    data: RealExport[],
+    fileName: string,
+    location: string
+  }
 }
 
 export class Pages extends Component {
   pageRef: React.RefObject<Page> = createRef();
-  pages: {
-    exportData: StrokeExport[],
-    strokeIndex: number,
-    dimensions: GraphDimensions
-  }[] = [{
+  pages: RealExport[] = [{
     exportData: [], // dummy data
     strokeIndex: 0,
     dimensions: [0, 0]
@@ -41,14 +37,18 @@ export class Pages extends Component {
 
   state = {
     currentPage: 0,
-    pagesLength: 1
+    pagesLength: 1,
+    fileName: '',
+    location: '',
+    fileOpened: false
   }
 
   render() {
     return (
       <div>
         <Header
-          title="Whiteboard"
+          title={this.state.fileOpened ? this.state.fileName : 'Untitled Whiteboard*'}
+          subtitle={this.state.fileOpened ? this.state.location : 'Unsaved Changes'}
           onlyDisplayIfCustom={true}
           leftMenu={[]}
           rightMenu={[
@@ -56,7 +56,8 @@ export class Pages extends Component {
               className="btn brand-text"
               key={1}
               onClick={() => {
-                ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SAVE, options: {}})
+                if (this.state.fileOpened) this._saveWhiteboard(this.state.location);
+                else ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SAVE, options: {}});
               }}
             >
               Save
@@ -136,11 +137,15 @@ export class Pages extends Component {
               // open a .rainbow file
               if (history.location.state) {
                 if ('open' in (history.location.state as IHistoryStateWithOpen)) {
-                  this.pages = (history.location.state as IHistoryStateWithOpen).open;
+                  this.pages = (history.location.state as IHistoryStateWithOpen).open.data;
                   board.importData(this.pages[0]);
+
                   this.setState({
                     currentPage: 0,
-                    pagesLength: this.pages.length
+                    pagesLength: this.pages.length,
+                    fileOpened: true,
+                    fileName: (history.location.state as IHistoryStateWithOpen).open.fileName,
+                    location: (history.location.state as IHistoryStateWithOpen).open.location
                   })
                 }
               }
