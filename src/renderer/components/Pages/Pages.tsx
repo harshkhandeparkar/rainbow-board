@@ -52,7 +52,12 @@ export class Pages extends Component {
           onlyDisplayIfCustom={true}
           leftMenu={[]}
           rightMenu={[
-            <button className="btn brand-text" key={1}>Save</button>,
+            <button
+              className="btn brand-text"
+              key={1}
+            >
+              Save
+            </button>,
             <Dropdown
               key={2}
               getTriggerBtn={(ref) => {
@@ -63,7 +68,9 @@ export class Pages extends Component {
                 )
               }}
             >
-              Lol
+              <div className="container-fluid">
+                luul
+              </div>
             </Dropdown>
           ]}
         />
