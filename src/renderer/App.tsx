@@ -91,7 +91,7 @@ class App extends Component {
               color: ${this.state.css.textColor};
             }
 
-            .btn, .btn-floating, select, .color-picker, .bottom-toolbar, .top-toolbar, .page, .separator-line, .card {
+            .btn, .btn-floating, select, .color-picker, .bottom-toolbar, .top-toolbar, .page, .separator-line, .card, .dropdown-content, .dropdown-arrow {
               border: 1px solid ${this.state.css.borderColor} !important;
             }
 
@@ -107,7 +107,7 @@ class App extends Component {
               background-color: ${this.state.css.highlight} !important;
             }
 
-            .dropdown-content {
+            .dropdown-content, .dropdown-arrow {
               background-color: ${this.state.css.bg1} !important;
             }
 

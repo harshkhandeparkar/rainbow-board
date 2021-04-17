@@ -61,7 +61,7 @@ export default class Download extends Component {
                 </button>
               }
             >
-              <div className="dropdown-content">
+              <div>
                 <ul>
                   <DownloadDropdownOption
                     link="https://snapcraft.io/rainbow-board"
