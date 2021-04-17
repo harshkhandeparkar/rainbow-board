@@ -1,5 +1,6 @@
 .dropdown-content {
   border-radius: 0.3rem;
+  z-index: 1;
 }
 
 .dropdown-content ul {

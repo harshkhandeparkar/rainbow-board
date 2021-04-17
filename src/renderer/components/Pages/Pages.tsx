@@ -53,12 +53,18 @@ export class Pages extends Component {
           leftMenu={[]}
           rightMenu={[
             <button className="btn brand-text" key={1}>Save</button>,
-            <button className="btn brand-text" key={2}>
-              <Icon options={{icon: faBars}} />
-            </button>,
-            // <Dropdown key={3} btnLabel="Drop It Down">
-            //   Lol
-            // </Dropdown>
+            <Dropdown
+              key={2}
+              getTriggerBtn={(ref) => {
+                return (
+                  <button ref={ref} className="btn">
+                    <Icon options={{icon: faBars}} />
+                  </button>
+                )
+              }}
+            >
+              Lol
+            </Dropdown>
           ]}
         />
 

@@ -13,9 +13,10 @@
   height: 1.5rem;
   line-height: 1.5rem;
   margin-bottom: 0.25rem;
+  margin-right: 0.2rem;
+  margin-left: 0.2rem;
   padding-left: 5px;
   padding-right: 5px;
-  padding-bottom: auto;
 }
 
 .custom-header .brand-logo {
@@ -28,6 +29,7 @@
   width: 1.5rem;
   line-height: 1.5rem;
   margin-right: 0.2rem;
+  margin-left: 0.2rem;
   margin-bottom: 0.25rem;
 }
 
