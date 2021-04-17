@@ -6,6 +6,7 @@ import * as EVENTS from '../../common/constants/eventNames';
 import { IPlugin } from '../../common/types/plugins';
 import { openDialog } from '../util/open';
 import { startFullscreenSetting, startMaximizedSetting, showMenuBarWhenFullscreenSetting, useGnomeStyleHeaderbarSetting } from '../../common/code/settings';
+import { menuClickEvents, EventTypes } from '../events/menuClickEvents';
 
 let showExitPrompt = true;
 
@@ -50,6 +51,10 @@ export function createMainWindow(
 
   ipcMain.on(EVENTS.OPEN, (e) => {
     openDialog(win, e);
+  })
+
+  ipcMain.on(EVENTS.FIRE_MENU_EVENT, (e, {eventName, options}: {eventName: EventTypes, options: any}) => {
+    menuClickEvents.fire(eventName, options);
   })
 
   ipcMain.on(EVENTS.MAXIMIZE_UNMAXIMIZE, (e) => {

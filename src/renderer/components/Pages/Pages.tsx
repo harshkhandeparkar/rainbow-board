@@ -55,6 +55,9 @@ export class Pages extends Component {
             <button
               className="btn brand-text"
               key={1}
+              onClick={() => {
+                ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SAVE, options: {}})
+              }}
             >
               Save
             </button>,

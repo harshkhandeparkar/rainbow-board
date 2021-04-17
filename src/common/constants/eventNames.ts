@@ -29,3 +29,5 @@ export const RESTART = 'restart';
 export const MAXIMIZE_UNMAXIMIZE = 'maximize-unmaximize';
 export const QUIT = 'quit';
 export const MINIMIZE = 'minimize';
+
+export const FIRE_MENU_EVENT = 'fire-menu-event'; // For custom headerbar
