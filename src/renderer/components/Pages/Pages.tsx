@@ -50,6 +50,9 @@ export class Pages extends Component {
           title="Whiteboard"
           onlyDisplayIfCustom={true}
           leftMenu={[]}
+          rightMenu={[
+            <button className="btn brand-text" key={1}>Save</button>
+          ]}
         />
 
         <style>

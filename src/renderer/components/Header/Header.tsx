@@ -16,7 +16,7 @@ interface IHeaderProps {
   title: string | JSX.Element,
   onlyDisplayIfCustom?: boolean,
   leftMenu: IMenuItem[],
-  rightMenu: JSX.Element[]
+  rightMenu?: JSX.Element[]
 }
 
 export class Header extends Component<IHeaderProps> {

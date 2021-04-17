@@ -2,10 +2,17 @@
   -webkit-app-region: drag;
   height: 2rem;
   line-height: 2rem;
+  padding-bottom: 0.25rem;
 }
 
 .custom-header a, .custom-header button {
   -webkit-app-region: no-drag;
+}
+
+.custom-header .btn {
+  height: 1.5rem;
+  line-height: 1.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .custom-header .brand-logo {
@@ -18,6 +25,7 @@
   width: 1.5rem;
   line-height: 1.5rem;
   margin-right: 0.2rem;
+  margin-bottom: 0.25rem;
 }
 
 .header-text {
