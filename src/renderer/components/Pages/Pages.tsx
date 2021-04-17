@@ -3,7 +3,7 @@ import React, { Component, createRef } from 'react';
 import { writeFile } from 'fs';
 
 import { Icon } from '../Icon/Icon';
-import { faPlus, faChevronRight, faChevronLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faChevronRight, faChevronLeft, faTrash, faBars } from '@fortawesome/free-solid-svg-icons';
 import Page from '../Page/Page';
 import ipcHandler from '../../util/ipc-handler';
 
@@ -51,7 +51,10 @@ export class Pages extends Component {
           onlyDisplayIfCustom={true}
           leftMenu={[]}
           rightMenu={[
-            <button className="btn brand-text" key={1}>Save</button>
+            <button className="btn brand-text" key={1}>Save</button>,
+            <button className="btn brand-text" key={2}>
+              <Icon options={{icon: faBars}} />
+            </button>
           ]}
         />
 
