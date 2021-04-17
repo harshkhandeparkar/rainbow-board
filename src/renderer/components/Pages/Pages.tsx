@@ -1,6 +1,7 @@
 import { ipcRenderer } from 'electron';
 import React, { Component, createRef } from 'react';
 import { writeFile } from 'fs';
+import { basename } from 'path';
 
 import { Icon } from '../Icon/Icon';
 import { faPlus, faChevronRight, faChevronLeft, faTrash, faBars } from '@fortawesome/free-solid-svg-icons';
@@ -11,7 +12,7 @@ import * as EVENTS from '../../../common/constants/eventNames';
 import { ADD_PAGE, NEXT_PAGE, DELETE_PAGE, PREV_PAGE } from '../../../common/constants/shortcuts';
 
 import './Pages.css';
-import { GraphDimensions, RealExport, StrokeExport } from 'svg-real-renderer/build/src/types/RealRendererTypes';
+import { RealExport } from 'svg-real-renderer/build/src/types/RealRendererTypes';
 import history from '../../util/history';
 import { RealDrawBoard } from 'svg-real-renderer';
 import { Header } from '../Header/Header';
@@ -195,6 +196,12 @@ export class Pages extends Component {
     this.pages[this.state.currentPage] = board.exportData();
 
     writeFile(path, JSON.stringify(this.pages), () => {});
+
+    this.setState({
+      fileOpened: true,
+      fileName: basename(path),
+      location: path
+    })
   }
 
   componentWillUnmount() {
