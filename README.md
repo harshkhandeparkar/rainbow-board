@@ -12,7 +12,7 @@ Ask any questions or give feedback [here](https://github.com/HarshKhandeparkar/r
 Discord Server: https://discord.gg/FEpMS43UwR
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/HarshKhandeparkar/rainbow-board/master/public/icon.png" />
+  <img src="https://raw.githubusercontent.com/HarshKhandeparkar/rainbow-board/master/public/logo-no-shadow.png" />
 </p>
 
 ![ss1](img/screenshot-1.png)
