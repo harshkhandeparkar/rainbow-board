@@ -3,7 +3,7 @@ import M, { Modal } from 'materialize-css';
 import PaintSettings from '../../PaintSettings/PaintSettings';
 
 import { Icon } from '../../Icon/Icon';
-import { faPaintBrush, faEraser, faGripLines, faPalette, faUndo, faRedo, faSave, faBan, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faPaintBrush, faEraser, faGripLines, faPalette, faUndo, faRedo, faSave, faBan, faHome, faBorderAll, faAlignJustify, faSquare } from '@fortawesome/free-solid-svg-icons';
 
 import './Toolbar.css';
 import { go } from '../../../util/navigation';
@@ -46,14 +46,15 @@ export class Toolbar extends Component<IToolbarProps> {
   colorPickerInstance: Modal;
 
   state: {
-    brushSize: number,
-    eraserSize: number,
-    lineThickness: number,
-    lineColor: Color,
-    brushColor: Color,
-    saveType: 'svg' | 'png',
-    saveModalOn: boolean,
-    previousTool: Tool
+    brushSize: number;
+    eraserSize: number;
+    lineThickness: number;
+    lineColor: Color;
+    brushColor: Color;
+    saveType: 'svg' | 'png';
+    saveModalOn: boolean;
+    previousTool: Tool;
+    bgType: 'none' | 'ruled' | 'grid';
   } = {
     brushSize: this.props.boardOptions.toolSettings.brushSize,
     eraserSize: this.props.boardOptions.toolSettings.eraserSize,
@@ -63,7 +64,8 @@ export class Toolbar extends Component<IToolbarProps> {
     brushColor: this.props.boardOptions.toolSettings.brushColor,
     saveType: 'png',
     saveModalOn: false,
-    previousTool: this.props.boardOptions.tool
+    previousTool: this.props.boardOptions.tool,
+    bgType: 'none'
   }
 
   _initializeModal() {
@@ -137,6 +139,43 @@ export class Toolbar extends Component<IToolbarProps> {
 
   componentWillUnmount() {
     this._removeHotkeys();
+  }
+
+  _setBG(type: 'ruled' | 'grid' | 'none') {
+    switch(type) {
+      case 'none':
+        this.props.boardState.drawBoard.changeBackground({
+          type: 'none'
+        })
+
+        this.setState({bgType: type})
+        break;
+
+      case 'grid':
+        this.props.boardState.drawBoard.changeBackground({
+          type: 'grid',
+          xSpacing: 15,
+          ySpacing: 15,
+          lineColor: [0.5, 0.5, 0.5]
+        })
+
+        this.setState({bgType: type});
+        break;
+
+      case 'ruled':
+        this.props.boardState.drawBoard.changeBackground({
+          type: 'ruled',
+          spacing: 15,
+          orientation: 'horizontal',
+          lineColor: [0.5, 0.5, 0.5]
+        })
+
+        this.setState({bgType: type});
+        break;
+
+      default:
+        break;
+    }
   }
 
   render() {
@@ -219,6 +258,20 @@ export class Toolbar extends Component<IToolbarProps> {
             <Icon options={{icon: faRedo}} />
           </button>
           {/* /Board Manipulation */}
+
+          <div className="vertical-separator-line" />
+
+          {/* BG */}
+          <button className={`btn-flat ${this.state.bgType === 'grid' ? 'active' : ''} brand-text`} title="Grid Background" onClick={() => this._setBG('grid')}>
+            <Icon options={{icon: faBorderAll}} />
+          </button>
+          <button className={`btn-flat ${this.state.bgType === 'ruled' ? 'active' : ''} brand-text`} title="Ruled Background" onClick={() => this._setBG('ruled')}>
+            <Icon options={{icon: faAlignJustify}} />
+          </button>
+          <button className={`btn-flat ${this.state.bgType === 'none' ? 'active' : ''} brand-text`} title="Blank Background" onClick={() => this._setBG('none')}>
+            <Icon options={{icon: faSquare}} />
+          </button>
+          {/* /BG */}
 
           <div className="vertical-separator-line" />
 
