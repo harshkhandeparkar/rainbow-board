@@ -5,7 +5,7 @@ import { faCog, faHome, faTimes, faMinus } from '@fortawesome/free-solid-svg-ico
 import { faSquare } from '@fortawesome/free-regular-svg-icons';
 import { SETTINGS } from '../../../common/constants/shortcuts';
 import { useGnomeStyleHeaderbarSetting } from '../../../common/code/settings';
-import { MAXIMIZE_UNMAXIMIZE, QUIT, MINIMIZE } from '../../../common/constants/eventNames';
+import { MAXIMIZE_UNMAXIMIZE, QUIT, MINIMIZE, SET_WINDOW_TITLE } from '../../../common/constants/eventNames';
 
 import './Header.css';
 import { ipcRenderer } from 'electron';
@@ -21,24 +21,39 @@ interface IHeaderProps {
 }
 
 export class Header extends Component<IHeaderProps> {
+  isCustomHeader: boolean = false;
   state = {
     isMaximized: false
   }
 
+  _setWindowTitle() {
+    if (!this.isCustomHeader) {
+      ipcRenderer.send(SET_WINDOW_TITLE, this.props.title);
+    }
+  }
+
+  componentDidMount() {
+    this._setWindowTitle();
+  }
+
+  componentDidUpdate() {
+    this._setWindowTitle();
+  }
+
   render() {
     const onlyDisplayIfCustom = this.props.onlyDisplayIfCustom || false;
-    const isCustomHeader = useGnomeStyleHeaderbarSetting.get();
+    this.isCustomHeader = useGnomeStyleHeaderbarSetting.get();
     const rightMenu = this.props.rightMenu || [];
 
-    const doDisplay = !onlyDisplayIfCustom || onlyDisplayIfCustom && isCustomHeader;
+    const doDisplay = !onlyDisplayIfCustom || onlyDisplayIfCustom && this.isCustomHeader;
 
     return (
       doDisplay ?
-      <nav className={isCustomHeader ? 'custom-header': ''}>
-        <div className={`nav-wrapper header ${isCustomHeader ? 'container-fluid' : 'container'}`}>
+      <nav className={this.isCustomHeader ? 'custom-header': ''}>
+        <div className={`nav-wrapper header ${this.isCustomHeader ? 'container-fluid' : 'container'}`}>
           <div className="left">
             {
-              isCustomHeader &&
+              this.isCustomHeader &&
               <button
                 title="Close"
                 className="btn-floating center"
@@ -47,11 +62,11 @@ export class Header extends Component<IHeaderProps> {
                   ipcRenderer.send(QUIT);
                 }}
               >
-                <Icon customColor={true} options={{icon: faTimes, size: isCustomHeader ? 'sm': 'lg', color: '#f44336'}} />
+                <Icon customColor={true} options={{icon: faTimes, size: this.isCustomHeader ? 'sm': 'lg', color: '#f44336'}} />
               </button>
             }
             {
-              isCustomHeader &&
+              this.isCustomHeader &&
               <button
                 title="Minimize"
                 className="btn-floating center"
@@ -60,11 +75,11 @@ export class Header extends Component<IHeaderProps> {
                   ipcRenderer.send(MINIMIZE);
                 }}
               >
-                <Icon customColor={true} options={{icon: faMinus, size: isCustomHeader ? 'sm': 'lg', color: '#4CAF50'}} />
+                <Icon customColor={true} options={{icon: faMinus, size: this.isCustomHeader ? 'sm': 'lg', color: '#4CAF50'}} />
               </button>
             }
             {
-              isCustomHeader &&
+              this.isCustomHeader &&
               <button
                 title={this.state.isMaximized ? 'Unmaximize' : 'Maximize'}
                 className="btn-floating center"
@@ -76,19 +91,19 @@ export class Header extends Component<IHeaderProps> {
                   })
                 }}
               >
-                <Icon customColor={true} options={{icon: faSquare, size: isCustomHeader ? 'sm': 'lg', color: '#FDD835'}} />
+                <Icon customColor={true} options={{icon: faSquare, size: this.isCustomHeader ? 'sm': 'lg', color: '#FDD835'}} />
               </button>
             }
             {
               this.props.leftMenu.includes('settings') &&
               <Link to="/settings" className="btn-floating center" title={`Open Settings (${SETTINGS.platformFormattedString})`}>
-                <Icon options={{icon: faCog, size: isCustomHeader ? 'sm': 'lg'}} />
+                <Icon options={{icon: faCog, size: this.isCustomHeader ? 'sm': 'lg'}} />
               </Link>
             }
             {
               this.props.leftMenu.includes('home') &&
               <Link to="/" className="btn-floating center" title="Home">
-                <Icon options={{icon: faHome, size: isCustomHeader ? 'sm': 'lg'}} />
+                <Icon options={{icon: faHome, size: this.isCustomHeader ? 'sm': 'lg'}} />
               </Link>
             }
             </div>
