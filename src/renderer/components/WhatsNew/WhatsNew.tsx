@@ -86,6 +86,12 @@ export default class WhatsNew extends Component {
             version="v0.7.1"
             size={1}
           />
+          <New
+            title="Background Type"
+            desc="You can now select a background for the whiteboard - Ruled, Grid or Blank - using the buttons in te botton toolbar."
+            version="v0.7.1"
+            size={1}
+          />
         </Grid>
       </div>
     )
