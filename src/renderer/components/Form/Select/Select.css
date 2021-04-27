@@ -15,6 +15,6 @@ select {
   margin-left: auto;
 }
 
-select:focus {
+select:focus, button:focus {
   outline: none;
 }

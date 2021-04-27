@@ -206,7 +206,7 @@ export class Toolbar extends Component<IToolbarProps> {
           </button>
           {/* /Tools */}
 
-          <div className="separator-line" />
+          <div className="vertical-separator-line" />
 
           {/* Board Manipulation */}
           <button className="btn-flat brand-text" title={`Color Palette (${COLOR_PALETTE.platformFormattedString})`} onClick={() => this.colorPickerInstance.open()}>
@@ -220,7 +220,7 @@ export class Toolbar extends Component<IToolbarProps> {
           </button>
           {/* /Board Manipulation */}
 
-          <div className="separator-line" />
+          <div className="vertical-separator-line" />
 
           {/* Others */}
           <button className="btn-flat brand-text" title={`Export Page (${EXPORT_PAGE.platformFormattedString})`} onClick={() => this.saveBoardModalInstance.open()}>

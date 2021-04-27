@@ -91,7 +91,7 @@ class App extends Component {
               color: ${this.state.css.textColor};
             }
 
-            .btn, .btn-floating, select, .color-picker, .bottom-toolbar, .top-toolbar, .page, .separator-line, .card, .dropdown-content, .dropdown-arrow {
+            .btn, .btn-floating, select, .color-picker, .bottom-toolbar, .top-toolbar, .page, .vertical-separator-line, .horizontal-separator-line, .card, .dropdown-content, .dropdown-arrow {
               border: 1px solid ${this.state.css.borderColor} !important;
             }
 

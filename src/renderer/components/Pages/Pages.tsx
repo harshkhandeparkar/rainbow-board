@@ -13,7 +13,8 @@ import {
   faEraser,
   faGripLines,
   faPaintBrush,
-  faToolbox
+  faToolbox,
+  faPalette
 } from '@fortawesome/free-solid-svg-icons';
 import Page from '../Page/Page';
 import ipcHandler from '../../util/ipc-handler';
@@ -27,7 +28,8 @@ import {
   SAVE,
   BRUSH_TOOL,
   LINE_TOOL,
-  ERASER_TOOL
+  ERASER_TOOL,
+  COLOR_PALETTE
 } from '../../../common/constants/shortcuts';
 
 import './Pages.css';
@@ -38,6 +40,9 @@ import { Header } from '../Header/Header';
 
 import { useGnomeStyleHeaderbarSetting } from '../../../common/code/settings';
 import { Dropdown } from '../Dropdown/Dropdown';
+
+import Grid from '../Grid/Grid';
+import GridItem from '../Grid/GridItem';
 
 export interface IHistoryStateWithOpen {
   open?: {
@@ -142,8 +147,23 @@ export class Pages extends Component {
                 )
               }}
             >
-              <div className="container-fluid">
-                luul
+              <div style={{lineHeight: '1.5rem', minWidth: '10rem', paddingTop: '0.5rem', paddingBottom: '0.5rem'}}>
+                <Grid
+                  options={{
+                    numColumns: 3,
+                    gap: '0'
+                  }}
+                >
+                  <GridItem className="center">
+                    <button
+                      title={`Color Palette (${COLOR_PALETTE.platformFormattedString})`}
+                      className="btn"
+                      onClick={() => ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.TOGGLE_COLOR_PALETTE, options: {}})}
+                    >
+                      <Icon options={{icon: faPalette, size: 'sm'}}></Icon>
+                    </button>
+                  </GridItem>
+                </Grid>
               </div>
             </Dropdown>
           ]}

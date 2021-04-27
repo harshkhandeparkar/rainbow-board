@@ -50,3 +50,20 @@
   margin-top: 0.5rem;
   line-height: 2rem !important;
 }
+
+.menu-item {
+  height: 1.5rem;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  line-height: 1.5rem;
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.menu-item .sublabel {
+  float: right;
+  font-size: 0.8rem;
+  color: grey;
+}

@@ -67,7 +67,7 @@ input[type=range] {
   min-height: 100% !important;
 }
 
-.separator-line {
+.vertical-separator-line {
   display: inline-block;
   width: 0;
   padding: none;

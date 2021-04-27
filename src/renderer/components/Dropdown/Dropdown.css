@@ -18,3 +18,11 @@
   height: 10px;
   width: 10px;
 }
+
+.horizontal-separator-line {
+  display: inline-block;
+  height: 0;
+  padding: none;
+  width: 100%;
+  line-height: 2px;
+}
