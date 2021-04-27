@@ -10,6 +10,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { Dropdown } from '../Dropdown/Dropdown';
 
 const { version } = packageFile;
+const platform: 'linux' | 'darwin' | 'win32' = process.platform as 'linux' | 'darwin' | 'win32';
 
 function DownloadDropdownOption(
   { link, label, icon }: {
@@ -63,13 +64,16 @@ export default class Download extends Component {
             >
               <div>
                 <ul>
-                  <DownloadDropdownOption
-                    link="https://snapcraft.io/rainbow-board"
-                    label="Linux (snap)"
-                    icon={faLinux}
-                  />
                   {
-                    this.state.downloadURLs.msi !== '' &&
+                    platform === 'linux' &&
+                    <DownloadDropdownOption
+                      link="https://snapcraft.io/rainbow-board"
+                      label="Linux (snap)"
+                      icon={faLinux}
+                    />
+                  }
+                  {
+                    (this.state.downloadURLs.msi !== '' && platform === 'win32') &&
                     <DownloadDropdownOption
                       link={this.state.downloadURLs.msi}
                       label="Windows (MSI)"
@@ -77,7 +81,7 @@ export default class Download extends Component {
                     />
                   }
                   {
-                    this.state.downloadURLs.dmg !== '' &&
+                    (this.state.downloadURLs.dmg !== '' && platform === 'darwin') &&
                     <DownloadDropdownOption
                       link={this.state.downloadURLs.dmg}
                       label="Mac (DMG)"
@@ -85,7 +89,7 @@ export default class Download extends Component {
                     />
                   }
                   {
-                    this.state.downloadURLs.deb !== '' &&
+                    (this.state.downloadURLs.deb !== '' && platform === 'linux') &&
                     <DownloadDropdownOption
                       link={this.state.downloadURLs.deb}
                       label="Linux (DEB)"
@@ -93,7 +97,7 @@ export default class Download extends Component {
                     />
                   }
                   {
-                    this.state.downloadURLs.appimg !== '' &&
+                    (this.state.downloadURLs.appimg !== '' && platform === 'linux') &&
                     <DownloadDropdownOption
                       link={this.state.downloadURLs.appimg}
                       label="Linux (Portable)"
@@ -101,7 +105,7 @@ export default class Download extends Component {
                     />
                   }
                   {
-                    this.state.downloadURLs.zip_windows !== '' &&
+                    (this.state.downloadURLs.zip_windows !== '' && platform === 'win32') &&
                     <DownloadDropdownOption
                       link={this.state.downloadURLs.zip_windows}
                       label="Windows (ZIP)"
@@ -109,7 +113,7 @@ export default class Download extends Component {
                     />
                   }
                   {
-                    this.state.downloadURLs.zip_linux !== '' &&
+                    (this.state.downloadURLs.zip_linux !== '' && platform === 'linux') &&
                     <DownloadDropdownOption
                       link={this.state.downloadURLs.zip_linux}
                       label="Linux (ZIP)"
@@ -117,7 +121,7 @@ export default class Download extends Component {
                     />
                   }
                   {
-                    this.state.downloadURLs.exe !== '' &&
+                    (this.state.downloadURLs.exe !== '' && platform === 'win32') &&
                     <DownloadDropdownOption
                       link={this.state.downloadURLs.exe}
                       label="Windows (EXE)"
