@@ -6,12 +6,9 @@ import themeManager from '../../util/theme';
 import {
   showMenuBarWhenFullscreenSetting,
   startFullscreenSetting,
-  startMaximizedSetting,
-  useGnomeStyleHeaderbarSetting
+  startMaximizedSetting
 } from '../../../common/code/settings';
-import { RESTART } from '../../../common/constants/eventNames';
 
-import { ipcRenderer } from 'electron';
 import { Header } from '../Header/Header';
 
 export default class Settings extends Component {
@@ -54,7 +51,7 @@ export default class Settings extends Component {
             defaultValue={showMenuBarWhenFullscreenSetting.get()}
             onInput={(val) => showMenuBarWhenFullscreenSetting.set(val)}
           />
-
+{/*
           <Checkbox
             label={<span><a href="https://gnome.org">GNOME</a> Style Headerbar:</span>}
             defaultValue={useGnomeStyleHeaderbarSetting.get()}
@@ -62,7 +59,7 @@ export default class Settings extends Component {
               useGnomeStyleHeaderbarSetting.set(val);
               ipcRenderer.send(RESTART);
             }}
-          />
+          /> */}
         </div>
 
         <VersionFooter />
