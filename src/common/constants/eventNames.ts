@@ -31,3 +31,5 @@ export const QUIT = 'quit';
 export const MINIMIZE = 'minimize';
 
 export const FIRE_MENU_EVENT = 'fire-menu-event'; // For custom headerbar
+
+export const SET_WINDOW_TITLE = 'set-window-title';

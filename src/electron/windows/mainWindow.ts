@@ -69,6 +69,10 @@ export function createMainWindow(
     win.minimize();
   })
 
+  ipcMain.on(EVENTS.SET_WINDOW_TITLE, (e, title: string) => {
+    win.setTitle(title);
+  })
+
   win.on('enter-full-screen', () => {
     win.setMenuBarVisibility(showMenuBarWhenFullscreenSetting.get());
   })
