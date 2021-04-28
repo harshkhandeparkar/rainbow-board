@@ -77,12 +77,6 @@ export class Toolbar extends Component<IToolbarProps> {
 
   componentDidUpdate() {
     this._initializeModal();
-
-    this.props.boardState.drawBoard.on('import', 'bgtype-handler', (params) => {
-      this.setState({
-        bgType: params.import.bgType.type as RBBGType
-      })
-    })
   }
 
   onBrushSizeChange = () => {
@@ -142,6 +136,14 @@ export class Toolbar extends Component<IToolbarProps> {
       this.setState({
         [settingName]: newValue
       })
+    })
+
+    this.props.boardState.drawBoard.on('import', 'bgtype-handler', (params) => {
+      if (params.import.bgType) {
+        this.setState({
+          bgType: params.import.bgType.type as RBBGType
+        })
+      }
     })
   }
 
