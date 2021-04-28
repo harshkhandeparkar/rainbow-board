@@ -92,6 +92,12 @@ export default class WhatsNew extends Component {
             version="v0.7.1"
             size={1}
           />
+          <New
+            title="System Font"
+            desc="Rainbow Board now uses the operating system's default font to make it look more consistent."
+            version="v0.7.1"
+            size={1}
+          />
         </Grid>
       </div>
     )
