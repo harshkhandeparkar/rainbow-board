@@ -17,18 +17,20 @@ import * as EVENTS from '../../../../common/constants/eventNames';
 import { BRUSH_TOOL, LINE_TOOL, ERASER_TOOL, COLOR_PALETTE, UNDO, REDO, EXPORT_PAGE, CLEAR_PAGE } from '../../../../common/constants/shortcuts';
 
 export interface IToolbarProps {
-  boardOptions: RealDrawBoardTypes.IRealDrawBoardParametersSettings,
-  _changeToolSetting: (setting: keyof ToolSettings, value: number) => void,
-  _setTool: (tool: Tool) => void,
+  boardOptions: RealDrawBoardTypes.IRealDrawBoardParametersSettings;
+  _changeToolSetting: (setting: keyof ToolSettings, value: number) => void;
+  _setTool: (tool: Tool) => void;
   boardState: {
     drawBoard: RealDrawBoard,
     tool: Tool
-  },
-  _clearBoard: () => void,
-  _save: (saveType: 'svg' | 'png') => void,
-  _onUndo: () => void,
-  _onRedo: () => void
+  };
+  _clearBoard: () => void;
+  _save: (saveType: 'svg' | 'png') => void;
+  _onUndo: () => void;
+  _onRedo: () => void;
 }
+
+export type RBBGType = 'ruled' | 'grid' | 'none';
 
 export class Toolbar extends Component<IToolbarProps> {
   // Modals
@@ -54,7 +56,7 @@ export class Toolbar extends Component<IToolbarProps> {
     saveType: 'svg' | 'png';
     saveModalOn: boolean;
     previousTool: Tool;
-    bgType: 'none' | 'ruled' | 'grid';
+    bgType: RBBGType;
   } = {
     brushSize: this.props.boardOptions.toolSettings.brushSize,
     eraserSize: this.props.boardOptions.toolSettings.eraserSize,
@@ -65,7 +67,7 @@ export class Toolbar extends Component<IToolbarProps> {
     saveType: 'png',
     saveModalOn: false,
     previousTool: this.props.boardOptions.tool,
-    bgType: 'none'
+    bgType: this.props.boardState.drawBoard.bgType.type as RBBGType
   }
 
   _initializeModal() {
@@ -75,6 +77,12 @@ export class Toolbar extends Component<IToolbarProps> {
 
   componentDidUpdate() {
     this._initializeModal();
+
+    this.props.boardState.drawBoard.on('import', 'bgtype-handler', (params) => {
+      this.setState({
+        bgType: params.import.bgType.type as RBBGType
+      })
+    })
   }
 
   onBrushSizeChange = () => {

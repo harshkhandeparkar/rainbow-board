@@ -57,7 +57,10 @@ export class Pages extends Component {
   pages: RealExport[] = [{
     exportData: [], // dummy data
     strokeIndex: 0,
-    dimensions: [0, 0]
+    dimensions: [0, 0],
+    bgType: {
+      type: 'none'
+    }
   }]
 
   state = {
