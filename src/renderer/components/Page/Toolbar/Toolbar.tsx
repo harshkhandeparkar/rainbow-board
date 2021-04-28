@@ -131,6 +131,7 @@ export class Toolbar extends Component<IToolbarProps> {
 
   componentDidMount() {
     this._setHotkeys();
+    this._initializeModal();
 
     this.props.boardState.drawBoard.on('tool-setting-change', 'toolbar-setting-change', ({settingName, newValue}) => {
       this.setState({
