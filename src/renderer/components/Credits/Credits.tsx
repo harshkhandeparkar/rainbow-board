@@ -95,11 +95,6 @@ export default class Credits extends Component {
             link="https://github.com/Hypercubed/svgsaver"
           />
           <Credit
-            title="Oxygen Font"
-            desc="The default font used."
-            link="https://fonts.google.com/specimen/Oxygen"
-          />
-          <Credit
             title="Finger Paint Font"
             desc="The paint-brush styled font used on this page."
             link="https://fonts.google.com/specimen/Finger+Paint"
