@@ -81,12 +81,11 @@ export function createMainWindow(
     win.setMenuBarVisibility(true);
   })
 
-  win.webContents.setWindowOpenHandler((details) => {
-    shell.openExternal(details.url);
+  // this is deprecated but setWindowOpenHandler was not working
+  win.webContents.on('new-window', (e, url) => {
+    e.preventDefault();
 
-    return {
-      action: 'deny'
-    }
+    if (!url.includes(indexFilePath)) shell.openExternal(url);
   })
 
   ipcMain.on(EVENTS.PROMPT, (event, args) => {
