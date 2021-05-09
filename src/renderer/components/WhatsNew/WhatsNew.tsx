@@ -9,7 +9,7 @@ import GridItem from '../Grid/GridItem';
 
 import { Header } from '../Header/Header';
 
-const { version } = packageFile;
+const { version, discordInvite, repository } = packageFile;
 
 function New(
   {title, desc, version, link, size = 1}: {
@@ -60,6 +60,35 @@ export default class WhatsNew extends Component {
           }}
           className="container"
         >
+          <New
+            title="That Annoying Bug Is Gone"
+            desc={
+              <span>
+                Line tool used to leave circles behind after using. These circles are now gone. <br />
+                This bug was there for 12 whole days! v0.7.1 was released 12 days ago! <br />
+                No one reported this until I found it myself. If you don't know, you can always report the bugs in our Discord server or on Github Issues using the following links: <br />
+                <a href={discordInvite} target="_blank" rel="noreferrer">Discord Server</a>. <br/>
+                <a href={repository + '/issues'} target="_blank" rel="noreferrer">Github Issues</a>. <br/>
+              </span>
+            }
+            version="v0.7.2"
+            size={3}
+          />
+          <New
+            title="Mouse Magick"
+            desc={
+              <span>
+                Your mouse coupled with the keyboard can do magick. It can now be used to change the size of the brush, zoom and pan.
+                <br /><br />
+                Just moving the scroll wheel will change the brush size.<br />
+                But if you hold control key on the keyboard, you can do the following:<br />
+                <b>Ctrl + Scroll</b>: Zoom in/out of the whiteboard.<br />
+                <b>Ctrl + Drag the board with mouse</b>: Will move (pan) a zoomed in whiteboard.<br />
+              </span>
+            }
+            version="v0.7.1"
+            size={2}
+          />
           <New
             title="Changed Shortcuts"
             desc={`${SAVE.platformFormattedString} is now used to save the whiteboard as a ".rainbow" file and ${EXPORT_PAGE.platformFormattedString} to export a single page as an image.`}
