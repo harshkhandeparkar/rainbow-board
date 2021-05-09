@@ -5,7 +5,7 @@
 ### Rainbow Board
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/rainbow-board)
 
-Cross-platform Whiteboard app made using [React](https://reactjs.org), [Electron](https://electronjs.org), and [SVG Real Renderer](https://harshkhandeparkar.github.io/svg-real-renderer)! Also works in the browser.
+Cross-platform Whiteboard app made using [React](https://reactjs.org), [Electron](https://electronjs.org), and [SVG Real Renderer](https://harshkhandeparkar.github.io/svg-real-renderer)!
 
 Download from https://harshkhandeparkar.github.io/rainbow-board.
 Ask any questions or give feedback [here](https://github.com/HarshKhandeparkar/rainbow-board/issues/new/choose).
