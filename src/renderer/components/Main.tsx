@@ -23,7 +23,10 @@ function Main() {
 
   if (changelogSetting.get() === version) doShowChangelog = false;
 
-  if (doShowChangelog) history.push('/new');
+  if (doShowChangelog) {
+    changelogSetting.set(version);
+    history.push('/new');
+  }
 
   return (
     <div id="main">

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { SAVE, EXPORT_PAGE } from '../../../common/constants/shortcuts';
 
-import { changelogSetting } from '../../util/settings';
 import packageFile from '../../../../package.json';
 
 import Grid from '../Grid/Grid';
@@ -42,10 +41,6 @@ function New(
 }
 
 export default class WhatsNew extends Component {
-  componentDidMount() {
-    changelogSetting.set(version);
-  }
-
   render() {
     return (
       <div style={{paddingBottom: '2rem'}}>
