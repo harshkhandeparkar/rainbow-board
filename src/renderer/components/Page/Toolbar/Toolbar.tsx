@@ -211,7 +211,7 @@ export class Toolbar extends Component<IToolbarProps> {
 
     return (
       <div className="toolbar">
-        <div className={`top-toolbar valign-wrapper`}> {/* boardState.tool === 'rainbow_brush' ? 'left' : 'hide'}`}>*/}
+        <div className={`top-toolbar valign-wrapper`} title="Brush Size (SCROLL)"> {/* boardState.tool === 'rainbow_brush' ? 'left' : 'hide'}`}>*/}
           <label>Brush Size</label>
           <input type="range" min="2" max="100" value={this.state.brushSize} ref={this.brushSizeRangeRef} onChange={this.onBrushSizeChange} />
         </div>
@@ -221,12 +221,12 @@ export class Toolbar extends Component<IToolbarProps> {
           <input type="range" min="1" max="50" value={this.state.changeRate} ref={this.changeRateRangeRef} onChange={this.onColorRateChange} />
         </div> */}
 
-        <div className={`top-toolbar valign-wrapper ${boardState.tool === 'eraser' ? '' : 'hide'}`}>
+        <div className={`top-toolbar valign-wrapper ${boardState.tool === 'eraser' ? '' : 'hide'}`} title="Eraser Size (SCROLL)">
           <label>Eraser Size</label>
           <input type="range" min="2" max="100" value={this.state.eraserSize} ref={this.eraserSizeRangeRef} onChange={this.onEraserSizeChange} />
         </div>
 
-        <div className={`top-toolbar valign-wrapper ${boardState.tool === 'line' ? '' : 'hide'}`}>
+        <div className={`top-toolbar valign-wrapper ${boardState.tool === 'line' ? '' : 'hide'}`} title="Line Thickness (SCROLL)">
           <label>Line Thickness</label>
           <input type="range" min="2" max="100" value={this.state.lineThickness} ref={this.lineThicknessRangeRef} onChange={this.onLineThicknessChange} />
         </div>
