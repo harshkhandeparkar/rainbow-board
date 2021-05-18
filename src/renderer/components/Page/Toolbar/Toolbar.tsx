@@ -17,7 +17,8 @@ import {
   faBorderAll,
   faAlignJustify,
   faSquare,
-  faEllipsisV
+  faEllipsisV,
+  faFileImage
 } from '@fortawesome/free-solid-svg-icons';
 
 import './Toolbar.css';
@@ -29,7 +30,7 @@ import { Tool, ToolSettings } from 'svg-real-renderer/build/src/renderers/RealDr
 import { Color } from 'svg-real-renderer/build/src/types/RealRendererTypes';
 
 import * as EVENTS from '../../../../common/constants/eventNames';
-import { BRUSH_TOOL, LINE_TOOL, ERASER_TOOL, COLOR_PALETTE, UNDO, REDO, EXPORT_PAGE, CLEAR_PAGE } from '../../../../common/constants/shortcuts';
+import { BRUSH_TOOL, LINE_TOOL, ERASER_TOOL, COLOR_PALETTE, UNDO, REDO, EXPORT_PAGE, CLEAR_PAGE, SAVE } from '../../../../common/constants/shortcuts';
 
 export interface IToolbarProps {
   boardOptions: RealDrawBoardTypes.IRealDrawBoardParametersSettings;
@@ -40,7 +41,8 @@ export interface IToolbarProps {
     tool: Tool
   };
   _clearBoard: () => void;
-  _save: (saveType: 'svg' | 'png') => void;
+  _export: (saveType: 'svg' | 'png') => void;
+  _save: () => void;
   _onUndo: () => void;
   _onRedo: () => void;
 }
@@ -205,7 +207,7 @@ export class Toolbar extends Component<IToolbarProps> {
   }
 
   render() {
-    const { boardState, _clearBoard, _save, _onUndo, _onRedo } = this.props;
+    const { boardState, _clearBoard, _export, _onUndo, _onRedo } = this.props;
 
     return (
       <div className="toolbar">
@@ -324,8 +326,11 @@ export class Toolbar extends Component<IToolbarProps> {
             vertical={true}
             fixedPosn={true}
           >
-            <button className="btn-flat brand-text" title={`Export Page (${EXPORT_PAGE.platformFormattedString})`} onClick={() => this.saveBoardModalInstance.open()}>
+            <button className="btn-flat brand-text" title={`Save Whiteboard (${SAVE.platformFormattedString})`} onClick={() => this.props._save()}>
               <Icon options={{icon: faSave}} />
+            </button>
+            <button className="btn-flat brand-text" title={`Export Page (${EXPORT_PAGE.platformFormattedString})`} onClick={() => this.saveBoardModalInstance.open()}>
+              <Icon options={{icon: faFileImage}} />
             </button>
             <button
               className="btn-flat brand-text"
@@ -367,7 +372,7 @@ export class Toolbar extends Component<IToolbarProps> {
               className="btn brand-text left"
               title="Save"
               onClick={e => {
-                _save(this.state.saveType);
+                _export(this.state.saveType);
                 this.saveBoardModalInstance.close();
               }}
             >Save</button>

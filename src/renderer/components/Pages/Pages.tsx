@@ -85,8 +85,7 @@ export class Pages extends Component {
               key={1}
               title={SAVE.platformFormattedString}
               onClick={() => {
-                if (this.state.fileOpened) this._saveWhiteboard(this.state.location);
-                else ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SAVE, options: {}});
+                this.save();
               }}
             >
               Save
@@ -226,6 +225,7 @@ export class Pages extends Component {
           </div>
           <Page
             ref={this.pageRef}
+            _save={() => this.save()}
             onDrawBoard={(board: RealDrawBoard) => {
               // open a .rainbow file
               if (history.location.state) {
@@ -294,6 +294,11 @@ export class Pages extends Component {
       fileName: basename(path),
       location: path
     })
+  }
+
+  save() {
+    if (this.state.fileOpened) this._saveWhiteboard(this.state.location);
+    else ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SAVE, options: {}});
   }
 
   componentWillUnmount() {

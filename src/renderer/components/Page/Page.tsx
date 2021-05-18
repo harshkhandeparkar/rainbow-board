@@ -21,7 +21,8 @@ export interface IPageState {
 }
 
 export interface IPageProps {
-  onDrawBoard: (board: RealDrawBoard) => void
+  onDrawBoard: (board: RealDrawBoard) => void;
+  _save: () => void;
 }
 
 export class Page extends Component<IPageProps> {
@@ -110,7 +111,7 @@ export class Page extends Component<IPageProps> {
     }
   }
 
-  _save(type: 'svg' | 'png') {
+  _export(type: 'svg' | 'png') {
     const svgSaver = new SVGSaver();
 
     this.state.boardState.drawBoard.clearPreview();
@@ -143,7 +144,7 @@ export class Page extends Component<IPageProps> {
       this.state.boardState.drawBoard.redo();
     })
     ipcHandler.addEventHandler(EVENTS.EXPORT_PAGE, 'exportEventHandler', (e, {type}: {type: 'svg' | 'png'}) => {
-      this._save(type);
+      this._export(type);
     })
     ipcHandler.addEventHandler(EVENTS.EXPORT_PAGE_DIALOG, 'exportDialogEventHandler', () => {
       this.toolbarRef.current.saveBoardModalInstance.open();
@@ -166,7 +167,8 @@ export class Page extends Component<IPageProps> {
           boardOptions={this.boardOptions}
           boardState={{ drawBoard: this.state.boardState.drawBoard, tool: this.state.boardState.tool }}
           _setTool={(tool) => this._setTool(tool)}
-          _save={(type) => this._save(type)}
+          _export={(type) => this._export(type)}
+          _save={() => this.props._save()}
           _clearBoard={() => this._clearBoard()}
           _onUndo={() => this.state.boardState.drawBoard.undo()}
           _onRedo={() => this.state.boardState.drawBoard.redo()}
