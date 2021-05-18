@@ -88,8 +88,8 @@ export class Toolbar extends Component<IToolbarProps> {
   }
 
   _initializeModal() {
-    if (!this.saveBoardModalInstance) this.saveBoardModalInstance = M.Modal.init(this.saveBoardRef.current);
-    if (!this.colorPickerInstance) this.colorPickerInstance = M.Modal.init(this.colorPickerRef.current);
+    if (!this.saveBoardModalInstance) this.saveBoardModalInstance = M.Modal.init(this.saveBoardRef.current, { inDuration: 0, outDuration: 0, dismissible: false });
+    if (!this.colorPickerInstance) this.colorPickerInstance = M.Modal.init(this.colorPickerRef.current, { inDuration: 0, outDuration: 0, dismissible: false });
   }
 
   componentDidUpdate() {
@@ -127,6 +127,7 @@ export class Toolbar extends Component<IToolbarProps> {
   _removeHotkeys() {
     ipcHandler.removeEventHandler(EVENTS.TOGGLE_COLOR_PALETTE, 'colorPaletteHandler');
     ipcHandler.removeEventHandler(EVENTS.SET_TOOL, 'setToolHandler');
+    ipcHandler.removeEventHandler(EVENTS.PREV_TOOL, 'prevToolHandler');
   }
 
   _setHotkeys() {

@@ -73,7 +73,7 @@ class App extends Component {
               border: ${this.state.css.highlightTextColor} solid 1px;
             }
 
-            .save-type {
+            .save-type, .modal {
               border: ${this.state.css.borderColor} solid 1px;
             }
 
