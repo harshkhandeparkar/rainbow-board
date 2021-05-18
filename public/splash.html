@@ -9,6 +9,7 @@
       background-color: #121212;
       color: white;
       padding: auto;
+      -webkit-app-region: drag;
     }
 
     @keyframes painting {
@@ -31,8 +32,10 @@
     }
 
     #logo {
-      width: 60%;
-      height: 60%;
+      width: 50%;
+      height: 50%;
+      margin-top: 10%;
+      margin-bottom: 10%;
     }
 
     #painting {
@@ -40,7 +43,7 @@
     }
   </style>
 </head>
-<body style="-webkit-app-region: drag;">
+<body>
   <img id="logo" class="center" src="./icon.png">
   <h1 class="center">Rainbow Board</h1>
   <h3 class="center" id="painting">Painting...</h3>
