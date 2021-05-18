@@ -2,13 +2,17 @@ import React, { Component, createRef, RefObject } from 'react';
 import './Dropdown.css'
 
 interface IDropdownProps {
-  getTriggerBtn: (ref: RefObject<HTMLButtonElement>) => React.ReactElement<HTMLButtonElement>
+  getTriggerBtn: (ref: RefObject<HTMLButtonElement>) => React.ReactElement<HTMLButtonElement>;
+  vertical?: boolean;
+  fixedPosn?: boolean;
 }
 
 export class Dropdown extends Component<IDropdownProps> {
   btnRef: RefObject<HTMLButtonElement> = createRef();
   dropdownRef: RefObject<HTMLDivElement> = createRef();
   arrowRef: RefObject<HTMLDivElement> = createRef();
+  vertical = this.props.vertical || false;
+  fixed = this.props.fixedPosn || false;
 
   state = {
     dropped: false
@@ -20,16 +24,25 @@ export class Dropdown extends Component<IDropdownProps> {
     const arrowRect = this.arrowRef.current.getBoundingClientRect();
 
     let dropdownLeft = btnRect.left - (dropdownRect.width - btnRect.width) / 2;
-    const dropdownTop = btnRect.top + btnRect.height + arrowRect.height / 2;
-
     let arrowLeft = btnRect.left - (arrowRect.width / Math.sqrt(2) - btnRect.width) / (2);
-    const arrowTop = dropdownTop - arrowRect.height / (2 * Math.sqrt(2)); // sqrt(2) to handle 45deg rotation
+
+    let dropdownTop: number;
+    let arrowTop: number;
 
     dropdownLeft = Math.min(document.body.clientWidth - dropdownRect.width - 5, dropdownLeft); // 5 px padding on the right
     dropdownLeft = Math.max(5, dropdownLeft); // 5 px padding on the left
 
     arrowLeft = Math.min(arrowLeft, dropdownLeft + dropdownRect.width - arrowRect.width / Math.sqrt(2)); // padding to the right of dropdown
     arrowLeft = Math.max(arrowLeft, dropdownLeft + arrowRect.width / Math.sqrt(2)); // padding to the left of dropdown
+
+    if (!this.vertical) {
+      dropdownTop = btnRect.top + btnRect.height + arrowRect.height / 2;
+      arrowTop = dropdownTop - arrowRect.height / (2 * Math.sqrt(2)); // sqrt(2) to handle 45deg rotation
+    }
+    else {
+      dropdownTop = btnRect.top - dropdownRect.height - arrowRect.height / 2;
+      arrowTop = dropdownTop + dropdownRect.height - arrowRect.height / (2 * Math.sqrt(2)); // sqrt(2) to handle 45deg rotation
+    }
 
     this.dropdownRef.current.style.setProperty('left', `${dropdownLeft.toString()}px`);
     this.dropdownRef.current.style.setProperty('top', `${dropdownTop.toString()}px`);
@@ -71,7 +84,7 @@ export class Dropdown extends Component<IDropdownProps> {
           className="dropdown-arrow"
           style={{
             visibility: this.state.dropped ? 'visible' : 'hidden',
-            position: 'absolute'
+            position: this.fixed ? 'fixed' : 'absolute'
           }}
         />
         <div
@@ -80,7 +93,7 @@ export class Dropdown extends Component<IDropdownProps> {
           style={
             {
               visibility: this.state.dropped ? 'visible' : 'hidden',
-              position: 'absolute'
+              position: this.fixed ? 'fixed' : 'absolute'
             }
           }
         >

@@ -1,9 +1,24 @@
 import React, { Component, createRef, RefObject } from 'react';
 import M, { Modal } from 'materialize-css';
 import PaintSettings from '../../PaintSettings/PaintSettings';
+import { Dropdown } from '../../Dropdown/Dropdown';
 
 import { Icon } from '../../Icon/Icon';
-import { faPaintBrush, faEraser, faGripLines, faPalette, faUndo, faRedo, faSave, faBan, faHome, faBorderAll, faAlignJustify, faSquare } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPaintBrush,
+  faEraser,
+  faGripLines,
+  faPalette,
+  faUndo,
+  faRedo,
+  faSave,
+  faBan,
+  faHome,
+  faBorderAll,
+  faAlignJustify,
+  faSquare,
+  faEllipsisV
+} from '@fortawesome/free-solid-svg-icons';
 
 import './Toolbar.css';
 import { go } from '../../../util/navigation';
@@ -273,23 +288,29 @@ export class Toolbar extends Component<IToolbarProps> {
           <div className="vertical-separator-line" />
 
           {/* BG */}
-          <button className={`btn-flat ${this.state.bgType === 'grid' ? 'active' : ''} brand-text`} title="Grid Background" onClick={() => this._setBG('grid')}>
-            <Icon options={{icon: faBorderAll}} />
-          </button>
-          <button className={`btn-flat ${this.state.bgType === 'ruled' ? 'active' : ''} brand-text`} title="Ruled Background" onClick={() => this._setBG('ruled')}>
-            <Icon options={{icon: faAlignJustify}} />
-          </button>
-          <button className={`btn-flat ${this.state.bgType === 'none' ? 'active' : ''} brand-text`} title="Blank Background" onClick={() => this._setBG('none')}>
-            <Icon options={{icon: faSquare}} />
-          </button>
+          <Dropdown
+            getTriggerBtn={
+              (ref) =>
+              <button ref={ref} className="btn-flat brand-text" title="Set Background...">
+                <Icon options={{icon: this.state.bgType === 'grid' ? faBorderAll : this.state.bgType === 'ruled' ? faAlignJustify : faSquare}} />
+              </button>
+            }
+            vertical={true}
+            fixedPosn={true}
+          >
+            <button className={`btn-flat ${this.state.bgType === 'grid' ? 'active' : ''} brand-text`} title="Grid Background" onClick={() => this._setBG('grid')}>
+              <Icon options={{icon: faBorderAll}} />
+            </button>
+            <button className={`btn-flat ${this.state.bgType === 'ruled' ? 'active' : ''} brand-text`} title="Ruled Background" onClick={() => this._setBG('ruled')}>
+              <Icon options={{icon: faAlignJustify}} />
+            </button>
+            <button className={`btn-flat ${this.state.bgType === 'none' ? 'active' : ''} brand-text`} title="Blank Background" onClick={() => this._setBG('none')}>
+              <Icon options={{icon: faSquare}} />
+            </button>
+          </Dropdown>
           {/* /BG */}
 
-          <div className="vertical-separator-line" />
-
           {/* Others */}
-          <button className="btn-flat brand-text" title={`Export Page (${EXPORT_PAGE.platformFormattedString})`} onClick={() => this.saveBoardModalInstance.open()}>
-            <Icon options={{icon: faSave}} />
-          </button>
           <button
             className="btn-flat brand-text"
             title={`Clear Page (${CLEAR_PAGE.platformFormattedString})`}
@@ -297,13 +318,23 @@ export class Toolbar extends Component<IToolbarProps> {
           >
             <Icon options={{icon: faBan}} />
           </button>
-          <button
-            className="btn-flat brand-text"
-            title="Go to Home"
-            onClick={() => go('/')}
+
+          <Dropdown
+            getTriggerBtn={(ref) => <button ref={ref} title="More Options..." className="btn-flat brand-text"><Icon options={{icon: faEllipsisV}} /></button>}
+            vertical={true}
+            fixedPosn={true}
           >
-            <Icon options={{icon: faHome}} />
-          </button>
+            <button className="btn-flat brand-text" title={`Export Page (${EXPORT_PAGE.platformFormattedString})`} onClick={() => this.saveBoardModalInstance.open()}>
+              <Icon options={{icon: faSave}} />
+            </button>
+            <button
+              className="btn-flat brand-text"
+              title="Go to Home"
+              onClick={() => go('/')}
+            >
+              <Icon options={{icon: faHome}} />
+            </button>
+          </Dropdown>
           {/* /Others */}
         </div>
 
