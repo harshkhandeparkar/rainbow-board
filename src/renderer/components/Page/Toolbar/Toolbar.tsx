@@ -88,8 +88,8 @@ export class Toolbar extends Component<IToolbarProps> {
   }
 
   _initializeModal() {
-    if (!this.saveBoardModalInstance) this.saveBoardModalInstance = M.Modal.init(this.saveBoardRef.current, { inDuration: 0, outDuration: 0, dismissible: false });
-    if (!this.colorPickerInstance) this.colorPickerInstance = M.Modal.init(this.colorPickerRef.current, { inDuration: 0, outDuration: 0, dismissible: false });
+    if (!this.saveBoardModalInstance) this.saveBoardModalInstance = M.Modal.init(this.saveBoardRef.current, { inDuration: 0, outDuration: 0, dismissible: true });
+    if (!this.colorPickerInstance) this.colorPickerInstance = M.Modal.init(this.colorPickerRef.current, { inDuration: 0, outDuration: 0, dismissible: true });
   }
 
   componentDidUpdate() {
@@ -368,7 +368,7 @@ export class Toolbar extends Component<IToolbarProps> {
             </div>
           </div>
           <div className="modal-footer container">
-            <button className="btn right" title="Cancel" onClick={e => this.saveBoardModalInstance.close()}>Cancel</button>
+            <button className="btn right" title="Cancel (ESC)" onClick={e => this.saveBoardModalInstance.close()}>Cancel</button>
             <button
               className="btn brand-text left"
               title="Save"
@@ -399,7 +399,7 @@ export class Toolbar extends Component<IToolbarProps> {
             />
           </div>
           <div className="modal-footer container">
-            <button title="Done" className="btn brand-text" onClick={() => this.colorPickerInstance.close()}>Done</button>
+            <button title="Close (ESC)" className="btn brand-text" onClick={() => this.colorPickerInstance.close()}>Close</button>
           </div>
         </div>
       </div>
