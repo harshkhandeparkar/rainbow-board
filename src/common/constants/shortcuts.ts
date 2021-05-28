@@ -63,6 +63,10 @@ export const ERASER_TOOL = new Shortcut('CmdOrCtrl + 3');
 /** Switch to previous tool */
 export const PREV_TOOL = new Shortcut('CmdOrCtrl + Space');
 
+// Menu: Go
+/** Go Home */
+export const GO_HOME = new Shortcut('CmdOrCtrl + Esc');
+
 // Menu: View
 /** Toggle Fullscreen */
 export const FULLSCREEN = new Shortcut('F11');

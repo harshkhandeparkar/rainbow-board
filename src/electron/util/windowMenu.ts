@@ -40,7 +40,7 @@ export function setWindowMenu(
           ]
         },
         { type: 'separator' },
-        { label: 'Settings', accelerator: SHORTCUTS.SETTINGS.accelerator, click: () => menuClickEvents.fire(EVENTS.GO, {to: '/settings'}) },
+        { label: 'Settings', accelerator: SHORTCUTS.SETTINGS.accelerator, click: () => menuClickEvents.fire(EVENTS.GO, {to: path === '/settings' ? '/' : '/settings'}) },
         { type: 'separator' },
         { label: 'Quit', accelerator: SHORTCUTS.QUIT.accelerator, click: () => win.isClosable() && win.close() }
       ]
@@ -84,7 +84,7 @@ export function setWindowMenu(
       type: 'submenu',
       label: '&Go',
       submenu: [
-        { label: 'Home', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/'}) },
+        { label: 'Home', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/'}), accelerator: SHORTCUTS.GO_HOME.accelerator },
         { label: `What's New`, click: () => menuClickEvents.fire(EVENTS.GO, {to: '/new'}) },
         { label: 'Credits', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/credits'}) },
         { label: 'Settings', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/settings'}) }

@@ -30,7 +30,7 @@ import { Tool, ToolSettings } from 'svg-real-renderer/build/src/renderers/RealDr
 import { Color } from 'svg-real-renderer/build/src/types/RealRendererTypes';
 
 import * as EVENTS from '../../../../common/constants/eventNames';
-import { BRUSH_TOOL, LINE_TOOL, ERASER_TOOL, COLOR_PALETTE, UNDO, REDO, EXPORT_PAGE, CLEAR_PAGE, SAVE } from '../../../../common/constants/shortcuts';
+import { BRUSH_TOOL, LINE_TOOL, ERASER_TOOL, COLOR_PALETTE, UNDO, REDO, EXPORT_PAGE, CLEAR_PAGE, SAVE, GO_HOME } from '../../../../common/constants/shortcuts';
 
 export interface IToolbarProps {
   boardOptions: RealDrawBoardTypes.IRealDrawBoardParametersSettings;
@@ -335,7 +335,7 @@ export class Toolbar extends Component<IToolbarProps> {
             </button>
             <button
               className="btn-flat brand-text"
-              title="Go to Home"
+              title={`Go to Home (${GO_HOME.platformFormattedString})`}
               onClick={() => go('/')}
             >
               <Icon options={{icon: faHome}} />

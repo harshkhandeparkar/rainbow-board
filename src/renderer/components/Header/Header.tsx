@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Icon } from '../Icon/Icon';
 import { faCog, faHome, faTimes, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { faSquare } from '@fortawesome/free-regular-svg-icons';
-import { SETTINGS } from '../../../common/constants/shortcuts';
+import { GO_HOME, SETTINGS } from '../../../common/constants/shortcuts';
 import { useGnomeStyleHeaderbarSetting } from '../../../common/code/settings';
 import { MAXIMIZE_UNMAXIMIZE, QUIT, MINIMIZE, SET_WINDOW_TITLE } from '../../../common/constants/eventNames';
 
@@ -102,7 +102,7 @@ export class Header extends Component<IHeaderProps> {
             }
             {
               this.props.leftMenu.includes('home') &&
-              <Link to="/" className="btn-floating center" title="Home">
+              <Link to="/" className="btn-floating center" title={`Go to Home (${GO_HOME.platformFormattedString})`}>
                 <Icon options={{icon: faHome, size: this.isCustomHeader ? 'sm': 'lg'}} />
               </Link>
             }
