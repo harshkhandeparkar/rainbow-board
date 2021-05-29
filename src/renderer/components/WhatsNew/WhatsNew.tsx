@@ -71,6 +71,59 @@ export default class WhatsNew extends Component {
           className="container"
         >
           <New
+            title="Shortcuts"
+            desc={
+              <span>
+                The following new shortcuts (hotkeys) have been added.
+                <br /><br />
+                <b>Ctrl + ,</b>: Now goes back to the home page if used in the settings page.<br />
+                <b>Ctrl + Esc</b>: Go to home page from any page.<br />
+              </span>
+            }
+            version="v0.7.3"
+            size={2}
+          />
+          <New
+            title="Rainbow Files"
+            desc="A bug due to which exported &quot;.rainbow&quot; files were not correct has been fixed."
+            version="v0.7.3"
+            size={1}
+          />
+
+          <New
+            title="Toolbar Compactification"
+            desc={
+              <span>
+                The toolbar at the botton had 12 buttons before. Using a hydraulic press and vertical click-to-open drawers, this
+                 number has now been reduced to 9.
+                <br /> <br />
+                The following changes have been made.
+                <br />
+                <ul>
+                  <li>Dropups have been used to combine less used buttons into a single button.</li>
+                  <li>Background selector is now a single dropup instead of three buttons.</li>
+                  <li>The save whiteboard, export page and home button have been combined into one dropup menu.</li>
+                  <li>New save whiteboard button has been added.</li>
+                  <li>Changed icons and added better tooltips to the buttons.</li>
+                </ul>
+              </span>
+            }
+            version="v0.7.3"
+            size={2}
+          />
+          <New
+            title="Non-listed Changes"
+            desc={
+              <span>
+                Many more changes have been made which are not listed here. Let us know in our
+                <a href={discordInvite} target="_blank" rel="noreferrer"> Discord server</a> if you spot any.
+              </span>
+            }
+            version="v0.7.3"
+            size={1}
+          />
+
+          <New
             title="Mouse Magick"
             desc={
               <span>
