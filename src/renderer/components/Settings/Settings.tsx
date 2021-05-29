@@ -21,7 +21,7 @@ export default class Settings extends Component {
         />
         <div className="container">
           <Select
-            label="Theme:"
+            label="Theme"
             defaultValue={themeManager.getTheme().theme}
             onInput={(value) => themeManager.setTheme(value)}
             options={
@@ -35,25 +35,28 @@ export default class Settings extends Component {
           />
 
           <Checkbox
-            label="Start Maximized:"
+            label="Start Maximized"
+            info="Start Rainbow Board in maximized state each time."
             defaultValue={startMaximizedSetting.get()}
             onInput={(val) => startMaximizedSetting.set(val)}
           />
 
           <Checkbox
-            label="Start Fullscreen:"
+            label="Start Fullscreen"
+            info="Start Rainbow Board in fullscreen mode each time."
             defaultValue={startFullscreenSetting.get()}
             onInput={(val) => startFullscreenSetting.set(val)}
           />
 
           <Checkbox
-            label="Fullscreen Menubar:"
+            label="Fullscreen Menubar"
+            info="Show the top menubar in fullscreen mode."
             defaultValue={showMenuBarWhenFullscreenSetting.get()}
             onInput={(val) => showMenuBarWhenFullscreenSetting.set(val)}
           />
 {/*
           <Checkbox
-            label={<span><a href="https://gnome.org">GNOME</a> Style Headerbar:</span>}
+            label={<span><a href="https://gnome.org">GNOME</a> Style Headerbar</span>}
             defaultValue={useGnomeStyleHeaderbarSetting.get()}
             onInput={(val) => {
               useGnomeStyleHeaderbarSetting.set(val);
