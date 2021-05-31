@@ -61,7 +61,7 @@ export const LINE_TOOL = new Shortcut('CmdOrCtrl + 2');
 /** Use Eraser Tool */
 export const ERASER_TOOL = new Shortcut('CmdOrCtrl + 3');
 /** Switch to previous tool */
-export const PREV_TOOL = new Shortcut('CmdOrCtrl + Space');
+export const PREV_TOOL = new Shortcut('Alt + T');
 
 // Menu: Go
 /** Go Home */
