@@ -30,7 +30,6 @@ export function Select(props: ISelectProps) {
               options={{
                 title: info,
                 icon: faInfoCircle,
-                inverse: true,
                 size: 'sm',
                 style: {marginLeft: '4px'}
               }}
