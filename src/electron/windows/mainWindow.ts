@@ -3,9 +3,15 @@ import { indexFilePath, iconPath } from '../constants/paths';
 import { setWindowMenu } from '../util/windowMenu';
 import { setHotkeys } from '../util/hotkeys';
 import * as EVENTS from '../../common/constants/eventNames';
+import * as PATHS from '../../common/constants/paths';
 import { IPlugin } from '../../common/types/plugins';
 import { openDialog } from '../util/open';
-import { startFullscreenSetting, startMaximizedSetting, showMenuBarWhenFullscreenSetting, useGnomeStyleHeaderbarSetting } from '../../common/code/settings';
+import {
+  startFullscreenSetting,
+  startMaximizedSetting,
+  showMenuBarWhenFullscreenSetting,
+  useGnomeStyleHeaderbarSetting
+} from '../../common/code/settings';
 import { menuClickEvents, EventTypes } from '../events/menuClickEvents';
 
 let showExitPrompt = true;
@@ -37,7 +43,7 @@ export function createMainWindow(
 
   win.loadFile(indexFilePath);
 
-  setWindowMenu(win, isDev, '/');
+  setWindowMenu(win, isDev, `/${PATHS.HOME}`);
   setHotkeys(win);
 
   ipcMain.on(EVENTS.LOCATION_CHANGED, (e, {path}: {path: string}) => {
@@ -101,7 +107,7 @@ export function createMainWindow(
 
   win.on('close', (e) => {
     if (showExitPrompt) {
-      if (win.webContents.getURL().toLowerCase().includes('#/pages')) {
+      if (win.webContents.getURL().toLowerCase().includes(`/#${PATHS.WHITEBOARD}`)) {
         e.preventDefault(); // Prevents the window from closing
         dialog.showMessageBox(win, {
           type: 'question',

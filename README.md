@@ -8,11 +8,11 @@
 Cross-platform Whiteboard app made using [React](https://reactjs.org), [Electron](https://electronjs.org), and [SVG Real Renderer](https://harshkhandeparkar.github.io/svg-real-renderer)!
 
 Download from https://harshkhandeparkar.github.io/rainbow-board.
-Ask any questions or give feedback [here](https://github.com/HarshKhandeparkar/rainbow-board/issues/new/choose).
+Ask any questions or give feedback [here](https://github.com/harshkhandeparkar/rainbow-board/issues/new/choose).
 Discord Server: https://discord.gg/FEpMS43UwR
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/HarshKhandeparkar/rainbow-board/master/public/logo-no-shadow.png" />
+  <img src="https://raw.githubusercontent.com/harshkhandeparkar/rainbow-board/master/public/logo-no-shadow.png" />
 </p>
 
 ![ss1](img/screenshot-1.png)

@@ -115,7 +115,7 @@ export default class Credits extends Component {
             size={1}
             title="Full List of Libraries"
             desc="Complete list of dependencies used."
-            link="https://github.com/HarshKhandeparkar/rainbow-board/network/dependencies"
+            link="https://github.com/harshkhandeparkar/rainbow-board/network/dependencies"
           />
         </Grid>
       </div>

@@ -30,7 +30,19 @@ import { Tool, ToolSettings } from 'svg-real-renderer/build/src/renderers/RealDr
 import { Color } from 'svg-real-renderer/build/src/types/RealRendererTypes';
 
 import * as EVENTS from '../../../../common/constants/eventNames';
-import { BRUSH_TOOL, LINE_TOOL, ERASER_TOOL, COLOR_PALETTE, UNDO, REDO, EXPORT_PAGE, CLEAR_PAGE, SAVE, GO_HOME } from '../../../../common/constants/shortcuts';
+import {
+  BRUSH_TOOL,
+  LINE_TOOL,
+  ERASER_TOOL,
+  COLOR_PALETTE,
+  UNDO,
+  REDO,
+  EXPORT_PAGE,
+  CLEAR_PAGE,
+  SAVE,
+  GO_HOME
+} from '../../../../common/constants/shortcuts';
+import * as PATHS from '../../../../common/constants/paths';
 
 export interface IToolbarProps {
   boardOptions: RealDrawBoardTypes.IRealDrawBoardParametersSettings;
@@ -88,8 +100,19 @@ export class Toolbar extends Component<IToolbarProps> {
   }
 
   _initializeModal() {
-    if (!this.saveBoardModalInstance) this.saveBoardModalInstance = M.Modal.init(this.saveBoardRef.current, { inDuration: 0, outDuration: 0, dismissible: true });
-    if (!this.colorPickerInstance) this.colorPickerInstance = M.Modal.init(this.colorPickerRef.current, { inDuration: 0, outDuration: 0, dismissible: true });
+    if (!this.saveBoardModalInstance) {
+      this.saveBoardModalInstance = M.Modal.init(
+        this.saveBoardRef.current,
+        { inDuration: 0, outDuration: 0, dismissible: true }
+      )
+    }
+
+    if (!this.colorPickerInstance) {
+      this.colorPickerInstance = M.Modal.init(
+        this.colorPickerRef.current,
+        { inDuration: 0, outDuration: 0, dismissible: true }
+      )
+    }
   }
 
   componentDidUpdate() {
@@ -102,13 +125,6 @@ export class Toolbar extends Component<IToolbarProps> {
       brushSize: Number(this.brushSizeRangeRef.current.value)
     })
   }
-
-  // onColorRateChange = () => {
-  //   this.props._changeToolSetting('changeRate', Number(this.changeRateRangeRef.current.value));
-  //   this.setState({
-  //     changeRate: Number(this.changeRateRangeRef.current.value)
-  //   })
-  // }
 
   onEraserSizeChange = () => {
     this.props._changeToolSetting('eraserSize', Number(this.eraserSizeRangeRef.current.value));
@@ -133,7 +149,11 @@ export class Toolbar extends Component<IToolbarProps> {
   _setHotkeys() {
     this._removeHotkeys();
 
-    ipcHandler.addEventHandler(EVENTS.TOGGLE_COLOR_PALETTE, 'colorPaletteHandler', () => this.colorPickerInstance.isOpen ? this.colorPickerInstance.close() : this.colorPickerInstance.open());
+    ipcHandler.addEventHandler(
+      EVENTS.TOGGLE_COLOR_PALETTE,
+      'colorPaletteHandler',
+      () => this.colorPickerInstance.isOpen ? this.colorPickerInstance.close() : this.colorPickerInstance.open()
+    )
     ipcHandler.addEventHandler(EVENTS.SET_TOOL, 'setToolHandler', (event, args) => this._setTool(args.tool));
     ipcHandler.addEventHandler(EVENTS.PREV_TOOL, 'prevToolHandler', (event, args) => this._setTool(this.state.previousTool));
   }
@@ -212,15 +232,10 @@ export class Toolbar extends Component<IToolbarProps> {
 
     return (
       <div className="toolbar">
-        <div className={`top-toolbar valign-wrapper`} title="Brush Size (SCROLL)"> {/* boardState.tool === 'rainbow_brush' ? 'left' : 'hide'}`}>*/}
+        <div className={`top-toolbar valign-wrapper`} title="Brush Size (SCROLL)">
           <label>Brush Size</label>
           <input type="range" min="2" max="100" value={this.state.brushSize} ref={this.brushSizeRangeRef} onChange={this.onBrushSizeChange} />
         </div>
-
-        {/* <div className={`top-toolbar valign-wrapper ${boardState.tool === 'rainbow_brush' ? 'right' : 'hide'}`}>
-          <label>Color Change Rate</label>
-          <input type="range" min="1" max="50" value={this.state.changeRate} ref={this.changeRateRangeRef} onChange={this.onColorRateChange} />
-        </div> */}
 
         <div className={`top-toolbar valign-wrapper ${boardState.tool === 'eraser' ? '' : 'hide'}`} title="Eraser Size (SCROLL)">
           <label>Eraser Size</label>
@@ -250,9 +265,6 @@ export class Toolbar extends Component<IToolbarProps> {
             />
             <Icon options={{icon: faPaintBrush}} />
           </button>
-          {/* <button className={`btn-flat ${boardState.tool === 'rainbow_brush' ? 'active' : ''} brand-text`} title="Rainbow Brush" onClick={() => this._setTool('rainbow_brush')}>
-            <Icon options={{icon:} />
-          </button> */}
           <button
             className={`btn-flat ${boardState.tool === 'line' ? 'active' : ''} brand-text`}
             title={`Line Tool (${LINE_TOOL.platformFormattedString})`}
@@ -336,7 +348,7 @@ export class Toolbar extends Component<IToolbarProps> {
             <button
               className="btn-flat brand-text"
               title={`Go to Home (${GO_HOME.platformFormattedString})`}
-              onClick={() => go('/')}
+              onClick={() => go(`/${PATHS.HOME}`)}
             >
               <Icon options={{icon: faHome}} />
             </button>

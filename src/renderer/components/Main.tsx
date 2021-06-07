@@ -13,6 +13,7 @@ import { faPaintBrush, faBell, faFolderOpen } from '@fortawesome/free-solid-svg-
 
 import { OPEN, START_NEW } from '../../common/constants/shortcuts';
 import { OPEN as OPEN_EVENT } from '../../common/constants/eventNames';
+import * as PATHS from '../../common/constants/paths';
 import { Header } from './Header/Header';
 
 const { version, description } = packageFile;
@@ -25,7 +26,7 @@ function Main() {
 
   if (doShowChangelog) {
     changelogSetting.set(version);
-    history.push('/new');
+    history.push(`/${PATHS.WHATS_NEW}`);
   }
 
   return (
@@ -53,7 +54,7 @@ function Main() {
               width: 2
             }}
           >
-            <NavLink to="/pages" className="btn center brand-text full-width" title={`Start New (${START_NEW.platformFormattedString})`}>
+            <NavLink to={`/${PATHS.WHITEBOARD}`} className="btn center brand-text full-width" title={`Start New (${START_NEW.platformFormattedString})`}>
               <Icon options={{icon: faPaintBrush}} rightMargin={true} /> New ({START_NEW.platformFormattedString})
             </NavLink>
           </GridItem>
@@ -79,7 +80,7 @@ function Main() {
               width: 2
             }}
           >
-            <NavLink to="/new" className="btn center brand-text full-width" title="New Changes">
+            <NavLink to={`/${PATHS.WHATS_NEW}`} className="btn center brand-text full-width" title="New Changes">
               <Icon options={{icon: faBell}} rightMargin={true} />What's New!
             </NavLink>
           </GridItem>

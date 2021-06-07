@@ -5,6 +5,7 @@ import { showAboutDialog } from './aboutDialog';
 import { menuClickEvents } from '../events/menuClickEvents';
 import * as EVENTS from '../../common/constants/eventNames';
 import * as SHORTCUTS from '../../common/constants/shortcuts';
+import * as PATHS from '../../common/constants/paths';
 
 const { website, repository, version, discordInvite } = packageFile;
 
@@ -18,15 +19,33 @@ export function setWindowMenu(
       type: 'submenu',
       label: '&File',
       submenu: [
-        { label: 'Start New', accelerator: SHORTCUTS.START_NEW.accelerator, click: () => menuClickEvents.fire(EVENTS.NEW_PAGE, {}), enabled: path !== '/pages', visible: path !== '/pages' },
-        { label: 'Open File...', accelerator: SHORTCUTS.OPEN.accelerator, click: () => menuClickEvents.fire(EVENTS.OPEN, {}), enabled: path !== '/pages', visible: path !== '/pages' },
-        { label: 'Save File...', accelerator: SHORTCUTS.SAVE.accelerator, click: () => menuClickEvents.fire(EVENTS.SAVE, {}), visible: path === '/pages', enabled: path === '/pages' },
+        {
+          label: 'Start New',
+          accelerator: SHORTCUTS.START_NEW.accelerator,
+          click: () => menuClickEvents.fire(EVENTS.NEW_PAGE, {}),
+          enabled: path !== `/${PATHS.WHITEBOARD}`,
+          visible: path !== `/${PATHS.WHITEBOARD}`
+        },
+        {
+          label: 'Open File...',
+          accelerator: SHORTCUTS.OPEN.accelerator,
+          click: () => menuClickEvents.fire(EVENTS.OPEN, {}),
+          enabled: path !== `/${PATHS.WHITEBOARD}`,
+          visible: path !== `/${PATHS.WHITEBOARD}`
+        },
+        {
+          label: 'Save File...',
+          accelerator: SHORTCUTS.SAVE.accelerator,
+          click: () => menuClickEvents.fire(EVENTS.SAVE, {}),
+          visible: path === `/${PATHS.WHITEBOARD}`,
+          enabled: path === `/${PATHS.WHITEBOARD}`
+        },
         {
           label: 'Export Page...',
           accelerator: SHORTCUTS.EXPORT_PAGE.accelerator,
           registerAccelerator: false,
-          visible: path === '/pages',
-          enabled: path === '/pages',
+          visible: path === `/${PATHS.WHITEBOARD}`,
+          enabled: path === `/${PATHS.WHITEBOARD}`,
           type: 'submenu',
           submenu: [
             {
@@ -40,7 +59,11 @@ export function setWindowMenu(
           ]
         },
         { type: 'separator' },
-        { label: 'Settings', accelerator: SHORTCUTS.SETTINGS.accelerator, click: () => menuClickEvents.fire(EVENTS.GO, {to: path === '/settings' ? '/' : '/settings'}) },
+        {
+          label: 'Settings',
+          accelerator: SHORTCUTS.SETTINGS.accelerator,
+          click: () => menuClickEvents.fire(EVENTS.GO, {to: path === `/${PATHS.SETTINGS}` ? `/${PATHS.HOME}` : `/${PATHS.SETTINGS}`})
+        },
         { type: 'separator' },
         { label: 'Quit', accelerator: SHORTCUTS.QUIT.accelerator, click: () => win.isClosable() && win.close() }
       ]
@@ -48,8 +71,8 @@ export function setWindowMenu(
     {
       type: 'submenu',
       label: '&Edit',
-      visible: path === '/pages',
-      enabled: path === '/pages',
+      visible: path === `/${PATHS.WHITEBOARD}`,
+      enabled: path === `/${PATHS.WHITEBOARD}`,
       submenu: [
         { label: 'Undo', accelerator: SHORTCUTS.UNDO.accelerator, click: () => menuClickEvents.fire(EVENTS.UNDO, {}) },
         { label: 'Redo', accelerator: SHORTCUTS.REDO.accelerator, click: () => menuClickEvents.fire(EVENTS.REDO, {}) },
@@ -85,9 +108,9 @@ export function setWindowMenu(
       label: '&Go',
       submenu: [
         { label: 'Home', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/'}), accelerator: SHORTCUTS.GO_HOME.accelerator },
-        { label: `What's New`, click: () => menuClickEvents.fire(EVENTS.GO, {to: '/new'}) },
-        { label: 'Credits', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/credits'}) },
-        { label: 'Settings', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/settings'}) }
+        { label: `What's New`, click: () => menuClickEvents.fire(EVENTS.GO, {to: `/${PATHS.WHATS_NEW}`}) },
+        { label: 'Credits', click: () => menuClickEvents.fire(EVENTS.GO, {to: `/${PATHS.CREDITS}`}) },
+        { label: 'Settings', click: () => menuClickEvents.fire(EVENTS.GO, {to: `/${PATHS.SETTINGS}`}) }
       ]
     },
     {
@@ -102,14 +125,14 @@ export function setWindowMenu(
         { label: 'Latest Release', click: () => shell.openExternal(repository + '/releases/latest') },
         { label: 'All Releases', click: () => shell.openExternal(repository + '/releases') },
         { type: 'separator' },
-        { label: 'Credits', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/credits'}) },
+        { label: 'Credits', click: () => menuClickEvents.fire(EVENTS.GO, {to: `/${PATHS.CREDITS}`}) },
         { label: 'About', click: () => showAboutDialog(win) }
       ]
     }
   ]
 
   // Due to a bug in electron: https://github.com/electron/electron/issues/2895
-  if (path !== '/pages') {
+  if (path !== `/${PATHS.WHITEBOARD}`) {
     delete windowMenuTemplate[windowMenuTemplate.findIndex((menuItem) => menuItem.label.toLowerCase() === '&edit')];
   }
 

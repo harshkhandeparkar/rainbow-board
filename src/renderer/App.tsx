@@ -5,6 +5,7 @@ import Pages from './components/Pages/Pages';
 import Credits from './components/Credits/Credits';
 import WhatsNew from './components/WhatsNew/WhatsNew';
 import Settings from './components/Settings/Settings';
+import * as PATHS from '../common/constants/paths';
 
 import history from './util/history';
 import themeManager from './util/theme';
@@ -122,11 +123,11 @@ class App extends Component {
             `
           }
         </style>
-        <Route exact path="/" component={Main} />
-        <Route path="/pages" component={Pages} />
-        <Route path="/credits" component={Credits} />
-        <Route path="/new" component={WhatsNew} />
-        <Route path="/settings" component={Settings} />
+        <Route exact path={`/${PATHS.HOME}`} component={Main} />
+        <Route path={`/${PATHS.WHITEBOARD}`} component={Pages} />
+        <Route path={`/${PATHS.CREDITS}`} component={Credits} />
+        <Route path={`/${PATHS.WHATS_NEW}`} component={WhatsNew} />
+        <Route path={`/${PATHS.SETTINGS}`} component={Settings} />
       </Router>
     )
   }

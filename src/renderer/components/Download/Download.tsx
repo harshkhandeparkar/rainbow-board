@@ -175,7 +175,7 @@ export default class Download extends Component {
         })
       }
     }
-    xmlHttp.open('GET', 'https://api.github.com/repos/HarshKhandeparkar/rainbow-board/releases/latest', true); // true for asynchronous
+    xmlHttp.open('GET', 'https://api.github.com/repos/harshkhandeparkar/rainbow-board/releases/latest', true); // true for asynchronous
     xmlHttp.send(null);
     xmlHttp.onerror = () => {};
   }

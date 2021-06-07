@@ -6,6 +6,7 @@ import { faSquare } from '@fortawesome/free-regular-svg-icons';
 import { GO_HOME, SETTINGS } from '../../../common/constants/shortcuts';
 import { useGnomeStyleHeaderbarSetting } from '../../../common/code/settings';
 import { MAXIMIZE_UNMAXIMIZE, QUIT, MINIMIZE, SET_WINDOW_TITLE } from '../../../common/constants/eventNames';
+import * as PATHS from '../../../common/constants/paths';
 
 import './Header.css';
 import { ipcRenderer } from 'electron';
@@ -96,13 +97,13 @@ export class Header extends Component<IHeaderProps> {
             }
             {
               this.props.leftMenu.includes('settings') &&
-              <Link to="/settings" className="btn-floating center" title={`Open Settings (${SETTINGS.platformFormattedString})`}>
+              <Link to={`/${PATHS.SETTINGS}`} className="btn-floating center" title={`Open Settings (${SETTINGS.platformFormattedString})`}>
                 <Icon options={{icon: faCog, size: this.isCustomHeader ? 'sm': 'lg'}} />
               </Link>
             }
             {
               this.props.leftMenu.includes('home') &&
-              <Link to="/" className="btn-floating center" title={`Go to Home (${GO_HOME.platformFormattedString})`}>
+              <Link to={`/${PATHS.HOME}`} className="btn-floating center" title={`Go to Home (${GO_HOME.platformFormattedString})`}>
                 <Icon options={{icon: faHome, size: this.isCustomHeader ? 'sm': 'lg'}} />
               </Link>
             }

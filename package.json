@@ -6,7 +6,7 @@
     "name": "Harsh Khandeparkar",
     "email": "shadowwarriorpro3003@gmail.com"
   },
-  "repository": "https://github.com/HarshKhandeparkar/rainbow-board",
+  "repository": "https://github.com/harshkhandeparkar/rainbow-board",
   "sideEffects": [
     "*.css",
     "*scss"

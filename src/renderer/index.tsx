@@ -11,6 +11,7 @@ import ipcHandler from './util/ipc-handler';
 import history from './util/history';
 
 import * as EVENTS from '../common/constants/eventNames';
+import * as PATHS from '../common/constants/paths';
 import { readFile } from 'fs';
 import { basename } from 'path';
 
@@ -25,7 +26,7 @@ ipcHandler.addEventHandler(EVENTS.OPEN, 'open-handler', (e, {path}: {path: strin
   readFile(path, (err, data) => {
     if (!err) {
       history.push({
-        pathname: '/pages',
+        pathname: `/${PATHS.WHITEBOARD}`,
         state: {
           open: {
             data: JSON.parse(data.toString()),

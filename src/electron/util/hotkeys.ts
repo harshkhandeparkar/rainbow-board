@@ -3,6 +3,7 @@ import { parse } from 'path';
 import { existsSync } from 'fs';
 import * as EVENTS from '../../common/constants/eventNames';
 import { EXPORT_PAGE } from '../../common/constants/shortcuts';
+import { WHITEBOARD } from '../../common/constants/paths';
 import { menuClickEvents } from '../events/menuClickEvents';
 import { saveDialog } from './save';
 import { open, openDialog } from './open';
@@ -10,7 +11,7 @@ import { open, openDialog } from './open';
 export function setHotkeys(win: BrowserWindow) {
   ipcMain.on('set-hotkeys', (event) => {
     // Submenu: File
-    menuClickEvents.on(EVENTS.NEW_PAGE, 'hotkey-handler', () => event.reply(EVENTS.GO, {to: '/pages'}))
+    menuClickEvents.on(EVENTS.NEW_PAGE, 'hotkey-handler', () => event.reply(EVENTS.GO, {to: `/${WHITEBOARD}`}))
     menuClickEvents.on(EVENTS.ADD_PAGE, 'hotkey-handler', () => event.reply(EVENTS.ADD_PAGE));
     menuClickEvents.on(EVENTS.EXPORT_PAGE, 'hotkey-handler', ({type}) => event.reply(EVENTS.EXPORT_PAGE, {type}));
     menuClickEvents.on(EVENTS.SAVE, 'hotkey-handler', () => saveDialog(win, event));
