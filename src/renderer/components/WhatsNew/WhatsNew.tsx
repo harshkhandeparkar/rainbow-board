@@ -76,8 +76,8 @@ export default class WhatsNew extends Component {
               <span>
                 The following new shortcuts (hotkeys) have been added/changed.
                 <br /><br />
-                <b>Ctrl + ,</b>: Now goes back to the home page if used in the settings page.<br />
-                <b>Ctrl + Esc</b>: Go to home page from any page.<br />
+                <b>Ctrl + ,</b>: Now goes back to the homescreen if used in the settings page.<br />
+                <b>Ctrl + Esc</b>: Go to homescreen from any screen.<br />
                 <b>Alt + T</b>: The previous tool shortcut has been reassigned to this due to an unintended behaviour. The shortcut will work properly now.<br />
               </span>
             }

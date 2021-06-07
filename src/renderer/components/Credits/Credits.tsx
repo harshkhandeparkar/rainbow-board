@@ -96,7 +96,7 @@ export default class Credits extends Component {
           />
           <Credit
             title="Finger Paint Font"
-            desc="The paint-brush styled font used on this page."
+            desc="The paint-brush styled font used."
             link="https://fonts.google.com/specimen/Finger+Paint"
           />
 
