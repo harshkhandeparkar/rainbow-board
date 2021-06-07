@@ -298,7 +298,7 @@ export class Toolbar extends Component<IToolbarProps> {
                 <Icon options={{icon: this.state.bgType === 'grid' ? faBorderAll : this.state.bgType === 'ruled' ? faAlignJustify : faSquare}} />
               </button>
             }
-            vertical={true}
+            up={true}
             fixedPosn={true}
           >
             <button className={`btn-flat ${this.state.bgType === 'grid' ? 'active' : ''} brand-text`} title="Grid Background" onClick={() => this._setBG('grid')}>
@@ -324,7 +324,7 @@ export class Toolbar extends Component<IToolbarProps> {
 
           <Dropdown
             getTriggerBtn={(ref) => <button ref={ref} title="More Options..." className="btn-flat brand-text"><Icon options={{icon: faEllipsisV}} /></button>}
-            vertical={true}
+            up={true}
             fixedPosn={true}
           >
             <button className="btn-flat brand-text" title={`Save Whiteboard (${SAVE.platformFormattedString})`} onClick={() => this.props._save()}>

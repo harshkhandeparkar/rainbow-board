@@ -3,7 +3,7 @@ import './Dropdown.css'
 
 interface IDropdownProps {
   getTriggerBtn: (ref: RefObject<HTMLButtonElement>) => React.ReactElement<HTMLButtonElement>;
-  vertical?: boolean;
+  up?: boolean;
   fixedPosn?: boolean;
 }
 
@@ -11,7 +11,7 @@ export class Dropdown extends Component<IDropdownProps> {
   btnRef: RefObject<HTMLButtonElement> = createRef();
   dropdownRef: RefObject<HTMLDivElement> = createRef();
   arrowRef: RefObject<HTMLDivElement> = createRef();
-  vertical = this.props.vertical || false;
+  up = this.props.up || false;
   fixed = this.props.fixedPosn || false;
 
   state = {
@@ -35,7 +35,7 @@ export class Dropdown extends Component<IDropdownProps> {
     arrowLeft = Math.min(arrowLeft, dropdownLeft + dropdownRect.width - arrowRect.width / Math.sqrt(2)); // padding to the right of dropdown
     arrowLeft = Math.max(arrowLeft, dropdownLeft + arrowRect.width / Math.sqrt(2)); // padding to the left of dropdown
 
-    if (!this.vertical) {
+    if (!this.up) {
       dropdownTop = btnRect.top + btnRect.height + arrowRect.height / 2;
       arrowTop = dropdownTop - arrowRect.height / (2 * Math.sqrt(2)); // sqrt(2) to handle 45deg rotation
     }
