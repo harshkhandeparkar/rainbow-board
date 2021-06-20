@@ -91,7 +91,7 @@ export default class Credits extends Component {
 
           <Credit
             title="SVG Saver"
-            desc="Used to export the slide as PNG and SVG."
+            desc="Used to export the page as PNG and SVG."
             link="https://github.com/Hypercubed/svgsaver"
           />
           <Credit
