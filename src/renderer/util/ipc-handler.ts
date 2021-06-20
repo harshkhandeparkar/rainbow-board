@@ -4,7 +4,7 @@ import * as EVENTS from '../../common/constants/eventNames';
 
 export type IPCEventName =
   typeof EVENTS.ADD_PAGE |
-  typeof EVENTS.NEW_PAGE |
+  typeof EVENTS.NEW_WHITEBOARD |
   typeof EVENTS.EXPORT_PAGE |
   typeof EVENTS.EXPORT_PAGE_DIALOG |
   typeof EVENTS.SAVE |
@@ -31,7 +31,7 @@ export class IPCHandler {
     }
   } = {
     [EVENTS.ADD_PAGE]: {},
-    [EVENTS.NEW_PAGE]: {},
+    [EVENTS.NEW_WHITEBOARD]: {},
     [EVENTS.EXPORT_PAGE]: {},
     [EVENTS.EXPORT_PAGE_DIALOG]: {},
     [EVENTS.SAVE]: {},

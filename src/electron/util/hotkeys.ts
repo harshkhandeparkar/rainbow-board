@@ -11,7 +11,7 @@ import { open, openDialog } from './open';
 export function setHotkeys(win: BrowserWindow) {
   ipcMain.on('set-hotkeys', (event) => {
     // Submenu: File
-    menuClickEvents.on(EVENTS.NEW_PAGE, 'hotkey-handler', () => event.reply(EVENTS.GO, {to: `/${WHITEBOARD}`}))
+    menuClickEvents.on(EVENTS.NEW_WHITEBOARD, 'hotkey-handler', () => event.reply(EVENTS.GO, {to: `/${WHITEBOARD}`}))
     menuClickEvents.on(EVENTS.ADD_PAGE, 'hotkey-handler', () => event.reply(EVENTS.ADD_PAGE));
     menuClickEvents.on(EVENTS.EXPORT_PAGE, 'hotkey-handler', ({type}) => event.reply(EVENTS.EXPORT_PAGE, {type}));
     menuClickEvents.on(EVENTS.SAVE, 'hotkey-handler', () => saveDialog(win, event));

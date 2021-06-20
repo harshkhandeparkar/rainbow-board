@@ -20,9 +20,9 @@ export function setWindowMenu(
       label: '&File',
       submenu: [
         {
-          label: 'Start New',
+          label: 'Start New Whiteboard',
           accelerator: SHORTCUTS.START_NEW.accelerator,
-          click: () => menuClickEvents.fire(EVENTS.NEW_PAGE, {}),
+          click: () => menuClickEvents.fire(EVENTS.NEW_WHITEBOARD, {}),
           enabled: path !== `/${PATHS.WHITEBOARD}`,
           visible: path !== `/${PATHS.WHITEBOARD}`
         },

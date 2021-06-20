@@ -3,7 +3,7 @@ import * as EVENTS from '../../common/constants/eventNames';
 
 export type EventTypes =
   typeof EVENTS.ADD_PAGE |
-  typeof EVENTS.NEW_PAGE |
+  typeof EVENTS.NEW_WHITEBOARD |
   typeof EVENTS.EXPORT_PAGE |
   typeof EVENTS.OPEN |
   typeof EVENTS.SAVE |
@@ -20,7 +20,7 @@ export type EventTypes =
 
 const eventNames: EventTypes[] = [
   EVENTS.ADD_PAGE,
-  EVENTS.NEW_PAGE,
+  EVENTS.NEW_WHITEBOARD,
   EVENTS.EXPORT_PAGE,
   EVENTS.OPEN,
   EVENTS.SAVE,

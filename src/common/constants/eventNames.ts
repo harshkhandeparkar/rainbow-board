@@ -1,5 +1,5 @@
 export const ADD_PAGE = 'add-page';
-export const NEW_PAGE = 'new-page';
+export const NEW_WHITEBOARD = 'new-whiteboard';
 export const EXPORT_PAGE = 'export-page';
 export const EXPORT_PAGE_DIALOG = 'export-page-dialog';
 export const SAVE = 'save';
