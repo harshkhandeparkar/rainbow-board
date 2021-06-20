@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Router } from 'react-router-dom';
 import Main from './components/Main';
-import Pages from './components/Pages/Pages';
+import Whiteboard from './components/Whiteboard/Whiteboard';
 import Credits from './components/Credits/Credits';
 import WhatsNew from './components/WhatsNew/WhatsNew';
 import Settings from './components/Settings/Settings';
@@ -124,7 +124,7 @@ class App extends Component {
           }
         </style>
         <Route exact path={`/${PATHS.HOME}`} component={Main} />
-        <Route path={`/${PATHS.WHITEBOARD}`} component={Pages} />
+        <Route path={`/${PATHS.WHITEBOARD}`} component={Whiteboard} />
         <Route path={`/${PATHS.CREDITS}`} component={Credits} />
         <Route path={`/${PATHS.WHATS_NEW}`} component={WhatsNew} />
         <Route path={`/${PATHS.SETTINGS}`} component={Settings} />

@@ -4,8 +4,8 @@ import history from './history';
 import { LOCATION_CHANGED } from '../../common/constants/eventNames';
 import { WHITEBOARD } from '../../common/constants/paths';
 
-ipcHandler.addEventHandler('prompt-reply', 'leavePagesPromptEventHandler', (event, args) => {
-  if (args.response === 1 && args.event === 'leave-pages') history.push(args.options.goTo);
+ipcHandler.addEventHandler('prompt-reply', 'leaveWhiteboardPromptEventHandler', (event, args) => {
+  if (args.response === 1 && args.event === 'leave-whiteboard') history.push(args.options.goTo);
 })
 
 history.listen((location) => {
@@ -17,7 +17,7 @@ export function openLeavePrompt(goTo: string) {
     title: 'Leave Whiteboard?',
     message: 'If you leave the whiteboard, all the unsaved data will be LOST FOREVER.',
     buttons: ['No', 'Yes'],
-    event: 'leave-pages',
+    event: 'leave-whiteboard',
     options: {
       goTo
     }

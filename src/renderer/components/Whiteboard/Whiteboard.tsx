@@ -32,7 +32,7 @@ import {
   COLOR_PALETTE
 } from '../../../common/constants/shortcuts';
 
-import './Pages.css';
+import './Whiteboard.css';
 import { RealExport } from 'svg-real-renderer/build/src/types/RealRendererTypes';
 import history from '../../util/history';
 import { RealDrawBoard } from 'svg-real-renderer';
@@ -52,7 +52,7 @@ export interface IHistoryStateWithOpen {
   }
 }
 
-export class Pages extends Component {
+export class Whiteboard extends Component {
   pageRef: React.RefObject<Page> = createRef();
   pages: RealExport[] = [{
     exportData: [], // dummy data
@@ -177,13 +177,13 @@ export class Pages extends Component {
               height: ${useGnomeStyleHeaderbarSetting.get() ? 'calc(95vh - 2rem)' : '95vh'}
             }
 
-            #pages {
+            #whiteboard {
               height: ${useGnomeStyleHeaderbarSetting.get() ? 'calc(100vh - 2rem)' : '100vh'}
             }
           `}
         </style>
 
-        <div className="container-fluid center" id="pages">
+        <div className="container-fluid center" id="whiteboard">
           <div>
             <button
               className="btn-floating right page-btn"
@@ -377,4 +377,4 @@ export class Pages extends Component {
   }
 }
 
-export default Pages;
+export default Whiteboard;
