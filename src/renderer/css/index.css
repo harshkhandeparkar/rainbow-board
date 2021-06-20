@@ -60,7 +60,7 @@ footer {
   border-bottom-right-radius: 0.3rem !important;
 }
 
-.card a:hover, .save-type a:hover {
+.card a:hover, .export-type a:hover {
   text-decoration: underline;
 }
 

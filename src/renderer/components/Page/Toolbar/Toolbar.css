@@ -52,18 +52,18 @@ input[type=range] {
   border: none !important;
 }
 
-.save-type {
+.export-type {
   user-select: none;
   padding: 1rem;
   border-radius: 0.3rem;
   transition: border 300ms;
 }
 
-.save-type h6 {
+.export-type h6 {
   margin: 0;
 }
 
-.save-row .col {
+.export-row .col {
   min-height: 100% !important;
 }
 

@@ -70,11 +70,11 @@ class App extends Component {
               box-shadow: 0 1px 0 ${this.state.css.highlightTextColor} !important;
             }
 
-            .save-type.selected, .save-type:hover {
+            .export-type.selected, .export-type:hover {
               border: ${this.state.css.highlightTextColor} solid 1px;
             }
 
-            .save-type, .modal {
+            .export-type, .modal {
               border: ${this.state.css.borderColor} solid 1px;
             }
 

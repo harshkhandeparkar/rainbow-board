@@ -147,7 +147,7 @@ export class Page extends Component<IPageProps> {
       this._export(type);
     })
     ipcHandler.addEventHandler(EVENTS.EXPORT_PAGE_DIALOG, 'exportDialogEventHandler', () => {
-      this.toolbarRef.current.saveBoardModalInstance.open();
+      this.toolbarRef.current.exportPageModalInstance.open();
     })
     ipcHandler.addEventHandler(EVENTS.CLEAR_PAGE, 'clearEventHandler', () => {
       this._clearBoard();

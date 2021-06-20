@@ -53,7 +53,7 @@ export interface IToolbarProps {
     tool: Tool
   };
   _clearBoard: () => void;
-  _export: (saveType: 'svg' | 'png') => void;
+  _export: (exportType: 'svg' | 'png') => void;
   _save: () => void;
   _onUndo: () => void;
   _onRedo: () => void;
@@ -63,7 +63,7 @@ export type RBBGType = 'ruled' | 'grid' | 'none';
 
 export class Toolbar extends Component<IToolbarProps> {
   // Modals
-  saveBoardRef: RefObject<HTMLDivElement> = createRef();
+  exportPageModalRef: RefObject<HTMLDivElement> = createRef();
   colorPickerRef: RefObject<HTMLDivElement> = createRef();
 
   // Ranges
@@ -73,7 +73,7 @@ export class Toolbar extends Component<IToolbarProps> {
   lineThicknessRangeRef: RefObject<HTMLInputElement> = createRef();
   lineColorRangeRef: RefObject<HTMLInputElement> = createRef();
 
-  saveBoardModalInstance: Modal;
+  exportPageModalInstance: Modal;
   colorPickerInstance: Modal;
 
   state: {
@@ -82,8 +82,8 @@ export class Toolbar extends Component<IToolbarProps> {
     lineThickness: number;
     lineColor: Color;
     brushColor: Color;
-    saveType: 'svg' | 'png';
-    saveModalOn: boolean;
+    exportType: 'svg' | 'png';
+    exportModalOn: boolean;
     previousTool: Tool;
     bgType: RBBGType;
   } = {
@@ -93,16 +93,16 @@ export class Toolbar extends Component<IToolbarProps> {
     lineThickness: this.props.boardOptions.toolSettings.lineThickness,
     lineColor: this.props.boardOptions.toolSettings.lineColor,
     brushColor: this.props.boardOptions.toolSettings.brushColor,
-    saveType: 'png',
-    saveModalOn: false,
+    exportType: 'png',
+    exportModalOn: false,
     previousTool: this.props.boardOptions.tool,
     bgType: this.props.boardState.drawBoard.bgType.type as RBBGType
   }
 
   _initializeModal() {
-    if (!this.saveBoardModalInstance) {
-      this.saveBoardModalInstance = M.Modal.init(
-        this.saveBoardRef.current,
+    if (!this.exportPageModalInstance) {
+      this.exportPageModalInstance = M.Modal.init(
+        this.exportPageModalRef.current,
         { inDuration: 0, outDuration: 0, dismissible: true }
       )
     }
@@ -342,7 +342,7 @@ export class Toolbar extends Component<IToolbarProps> {
             <button className="btn-flat brand-text" title={`Save Whiteboard (${SAVE.platformFormattedString})`} onClick={() => this.props._save()}>
               <Icon options={{icon: faSave}} />
             </button>
-            <button className="btn-flat brand-text" title={`Export Page (${EXPORT_PAGE.platformFormattedString})`} onClick={() => this.saveBoardModalInstance.open()}>
+            <button className="btn-flat brand-text" title={`Export Page (${EXPORT_PAGE.platformFormattedString})`} onClick={() => this.exportPageModalInstance.open()}>
               <Icon options={{icon: faFileImage}} />
             </button>
             <button
@@ -356,39 +356,39 @@ export class Toolbar extends Component<IToolbarProps> {
           {/* /Others */}
         </div>
 
-        <div className="modal" ref={this.saveBoardRef}>
+        <div className="modal" ref={this.exportPageModalRef}>
           <div className="modal-content container-fluid">
             <h3>Export Page</h3>
             <p>Export the current page as an image.</p>
             <div className="container">
               <div className="row">
                 <div className="col s12">
-                  <div className={`save-type ${this.state.saveType === 'png' ? 'selected' : ''}`} onClick={() => this.setState({ saveType: 'png', saveModalOn: true })}>
+                  <div className={`export-type ${this.state.exportType === 'png' ? 'selected' : ''}`} onClick={() => this.setState({ exportType: 'png', exportModalOn: true })}>
                     <h6>PNG</h6>
-                    Saves as a normal image. Works everywhere. Default and recommended for most users.
+                    Exports as a normal image. Works everywhere. Default and recommended for most users.
                   </div>
                 </div>
               </div>
               <div className="row">
                 <div className="col s12">
-                  <div  className={`save-type ${this.state.saveType === 'svg' ? 'selected' : ''}`} onClick={() => {this.setState({ saveType: 'svg', saveModalOn: true })}}>
+                  <div  className={`export-type ${this.state.exportType === 'svg' ? 'selected' : ''}`} onClick={() => {this.setState({ exportType: 'svg', exportModalOn: true })}}>
                     <h6>SVG</h6>
-                    Saves the file as an <a href="https://en.wikipedia.org/wiki/SVG" rel="noreferrer" style={{display: 'inline'}} target="_blank">SVG</a>. Use it if you know what it is.
+                    Exports the page as an <a href="https://en.wikipedia.org/wiki/SVG" rel="noreferrer" style={{display: 'inline'}} target="_blank">SVG</a>. Use it if you know what it is.
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div className="modal-footer container">
-            <button className="btn right" title="Cancel (ESC)" onClick={e => this.saveBoardModalInstance.close()}>Cancel</button>
+            <button className="btn right" title="Cancel (ESC)" onClick={e => this.exportPageModalInstance.close()}>Cancel</button>
             <button
               className="btn brand-text left"
-              title="Save"
+              title="Export"
               onClick={e => {
-                _export(this.state.saveType);
-                this.saveBoardModalInstance.close();
+                _export(this.state.exportType);
+                this.exportPageModalInstance.close();
               }}
-            >Save</button>
+            >Export</button>
           </div>
         </div>
 
