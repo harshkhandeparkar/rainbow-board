@@ -3,7 +3,7 @@ import React from 'react';
 import { Icon } from '../../Icon/Icon';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
-import './Checkbox.css';
+import './Checkbox.scss';
 
 export interface ICheckboxProps {
   /** Label text for the checkbox */

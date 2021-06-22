@@ -21,7 +21,7 @@ import {
   faFileImage
 } from '@fortawesome/free-solid-svg-icons';
 
-import './Toolbar.css';
+import './Toolbar.scss';
 import { go } from '../../../util/navigation';
 import ipcHandler from '../../../util/ipc-handler';
 import { RealDrawBoard, RealDrawBoardTypes } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/RealDrawBoard';

@@ -9,7 +9,7 @@ import * as EVENTS from '../../../common/constants/eventNames';
 
 import { Toolbar } from './Toolbar/Toolbar';
 
-import './Page.css';
+import './Page.scss';
 import { Tool } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/tools/tools';
 import { RealDrawBoardDefaults, RealDrawBoardTypes } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/RealDrawBoard';
 

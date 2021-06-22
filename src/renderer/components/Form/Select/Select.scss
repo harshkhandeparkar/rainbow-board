@@ -1,6 +1,8 @@
+@import '../../../sass/sizes';
+
 select {
   display: block;
-  border-radius: 0.3rem;
+  border-radius: $borderRad;
   margin-top: 1rem !important;
   height: 3rem;
   width: 100%;

@@ -8,7 +8,7 @@ import { useGnomeStyleHeaderbarSetting } from '../../../common/code/settings';
 import { MAXIMIZE_UNMAXIMIZE, QUIT, MINIMIZE, SET_WINDOW_TITLE } from '../../../common/constants/eventNames';
 import * as PATHS from '../../../common/constants/paths';
 
-import './Header.css';
+import './Header.scss';
 import { ipcRenderer } from 'electron';
 
 type IMenuItem = 'settings' | 'home';

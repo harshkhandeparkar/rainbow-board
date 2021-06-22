@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Finger Paint';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/FingerPaint/FingerPaint-Regular.ttf) format('truetype');
+}
+
+* {
+  font-family: system-ui;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0px -1px 3px rgba(0,0,0,0.2);
+}
+
+.styled-text {
+  font-family: 'Finger Paint';
+}

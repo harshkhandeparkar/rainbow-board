@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-import './index.scss';
-import './css/index.css';
+import './sass/index.scss';
+import './sass/materialize.scss';
 
 import { go } from './util/navigation';
 import { ipcRenderer } from 'electron';

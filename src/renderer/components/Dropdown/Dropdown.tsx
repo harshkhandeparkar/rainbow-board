@@ -1,5 +1,5 @@
 import React, { Component, createRef, RefObject } from 'react';
-import './Dropdown.css'
+import './Dropdown.scss'
 
 interface IDropdownProps {
   /** Return a button element to be used as the trigger with the given ref */

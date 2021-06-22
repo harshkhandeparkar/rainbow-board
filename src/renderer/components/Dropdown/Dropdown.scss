@@ -1,16 +1,16 @@
 .dropdown-content {
   border-radius: 0.3rem;
   z-index: 1;
-}
 
-.dropdown-content ul {
-  margin-top: 0;
-  margin-bottom: 0;
-}
+  .btn-flat {
+    height: 100%;
+    width: 100%;
+  }
 
-.dropdown-content .btn-flat {
-  height: 100%;
-  width: 100%;
+  ul {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .dropdown-arrow {

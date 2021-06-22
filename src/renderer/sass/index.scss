@@ -1,0 +1,56 @@
+@import './normalize';
+@import './sizes';
+
+.container-fluid {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.btn {
+  border-radius: $borderRad;
+  box-shadow: none !important;
+  margin-right: 0.5rem;
+}
+
+.btn-floating {
+  box-shadow: none !important;
+}
+
+.btn-floating > i {
+  margin-top: -1px;
+  margin-left: -1px;
+}
+
+.modal {
+  border-radius: $borderRad;
+}
+
+.card, .card-content {
+  border-radius: $borderRad !important;
+  box-shadow: none;
+}
+
+.card-action {
+  border-bottom-left-radius: $borderRad !important;
+  border-bottom-right-radius: $borderRad !important;
+}
+
+.card a:hover, .export-type a:hover {
+  text-decoration: underline;
+}
+
+.full-height-card {
+  height: 100%;
+}
+
+.full-height-card .card-content {
+  height: calc(100% - 3.5rem);
+}
+
+.full-height-card .card-action {
+  height: 3.5rem;
+}
+
+.full-width {
+  width: 100%;
+}

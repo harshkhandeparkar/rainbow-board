@@ -32,7 +32,7 @@ import {
   COLOR_PALETTE
 } from '../../../common/constants/shortcuts';
 
-import './Whiteboard.css';
+import './Whiteboard.scss';
 import { RealExport } from 'svg-real-renderer/build/src/types/RealRendererTypes';
 import history from '../../util/history';
 import { RealDrawBoard } from 'svg-real-renderer';

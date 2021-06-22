@@ -39,13 +39,15 @@
   text-align: center;
 }
 
-.top-toolbar input[type=range] {
-  width: 70%;
-}
+.top-toolbar {
+  label {
+    width: 30%;
+    user-select: none;
+  }
 
-.top-toolbar label {
-  width: 30%;
-  user-select: none;
+  input[type=range] {
+    width: 70%;
+  }
 }
 
 input[type=range] {
@@ -57,10 +59,10 @@ input[type=range] {
   padding: 1rem;
   border-radius: 0.3rem;
   transition: border 300ms;
-}
 
-.export-type h6 {
-  margin: 0;
+  h6 {
+    margin: 0;
+  }
 }
 
 .export-row .col {

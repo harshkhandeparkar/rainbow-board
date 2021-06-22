@@ -3,7 +3,7 @@ import React from 'react';
 import { Icon } from '../../Icon/Icon';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
-import './Select.css';
+import './Select.scss';
 
 export interface ISelectProps {
   /** Label for the select element */

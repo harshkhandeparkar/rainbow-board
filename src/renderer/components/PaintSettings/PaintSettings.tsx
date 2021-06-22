@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { CompactPicker, ColorResult, Color } from 'react-color';
 import { Tool } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/tools/tools';
 
-import './PaintSettings.css';
+import './PaintSettings.scss';
 
 export interface IPaintSettingsProps {
   color: Color,
