@@ -85,7 +85,7 @@ export default class Credits extends Component {
           />
           <Credit
             title="React Color"
-            desc="Simple color picker."
+            desc="Simple color palette."
             link="https://casesandberg.github.io/react-color/"
           />
 

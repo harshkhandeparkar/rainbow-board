@@ -64,7 +64,7 @@ export type RBBGType = 'ruled' | 'grid' | 'none';
 export class Toolbar extends Component<IToolbarProps> {
   // Modals
   exportPageModalRef: RefObject<HTMLDivElement> = createRef();
-  colorPickerRef: RefObject<HTMLDivElement> = createRef();
+  colorPaletteRef: RefObject<HTMLDivElement> = createRef();
 
   // Ranges
   brushSizeRangeRef: RefObject<HTMLInputElement> = createRef();
@@ -74,7 +74,7 @@ export class Toolbar extends Component<IToolbarProps> {
   lineColorRangeRef: RefObject<HTMLInputElement> = createRef();
 
   exportPageModalInstance: Modal;
-  colorPickerInstance: Modal;
+  colorPaletteInstance: Modal;
 
   state: {
     brushSize: number;
@@ -107,9 +107,9 @@ export class Toolbar extends Component<IToolbarProps> {
       )
     }
 
-    if (!this.colorPickerInstance) {
-      this.colorPickerInstance = M.Modal.init(
-        this.colorPickerRef.current,
+    if (!this.colorPaletteInstance) {
+      this.colorPaletteInstance = M.Modal.init(
+        this.colorPaletteRef.current,
         { inDuration: 0, outDuration: 0, dismissible: true }
       )
     }
@@ -152,7 +152,7 @@ export class Toolbar extends Component<IToolbarProps> {
     ipcHandler.addEventHandler(
       EVENTS.TOGGLE_COLOR_PALETTE,
       'colorPaletteHandler',
-      () => this.colorPickerInstance.isOpen ? this.colorPickerInstance.close() : this.colorPickerInstance.open()
+      () => this.colorPaletteInstance.isOpen ? this.colorPaletteInstance.close() : this.colorPaletteInstance.open()
     )
     ipcHandler.addEventHandler(EVENTS.SET_TOOL, 'setToolHandler', (event, args) => this._setTool(args.tool));
     ipcHandler.addEventHandler(EVENTS.PREV_TOOL, 'prevToolHandler', (event, args) => this._setTool(this.state.previousTool));
@@ -289,7 +289,7 @@ export class Toolbar extends Component<IToolbarProps> {
           <div className="vertical-separator-line" />
 
           {/* Board Manipulation */}
-          <button className="btn-flat brand-text" title={`Color Palette (${COLOR_PALETTE.platformFormattedString})`} onClick={() => this.colorPickerInstance.open()}>
+          <button className="btn-flat brand-text" title={`Color Palette (${COLOR_PALETTE.platformFormattedString})`} onClick={() => this.colorPaletteInstance.open()}>
             <Icon options={{icon :faPalette}} />
           </button>
           <button className="btn-flat brand-text" title={`Undo (${UNDO.platformFormattedString})`} onClick={() => _onUndo()}>
@@ -392,7 +392,7 @@ export class Toolbar extends Component<IToolbarProps> {
           </div>
         </div>
 
-        <div className="modal" ref={this.colorPickerRef}>
+        <div className="modal" ref={this.colorPaletteRef}>
           <div className="modal-content">
             <PaintSettings
               color={getRGBColorString(boardState.tool === 'line' ? this.state.lineColor : this.state.brushColor)}
@@ -411,7 +411,7 @@ export class Toolbar extends Component<IToolbarProps> {
             />
           </div>
           <div className="modal-footer container">
-            <button title="Close (ESC)" className="btn brand-text" onClick={() => this.colorPickerInstance.close()}>Close</button>
+            <button title="Close (ESC)" className="btn brand-text" onClick={() => this.colorPaletteInstance.close()}>Close</button>
           </div>
         </div>
       </div>

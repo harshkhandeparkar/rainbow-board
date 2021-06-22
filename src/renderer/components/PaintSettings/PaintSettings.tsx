@@ -16,10 +16,10 @@ export default class PaintSettings extends Component<IPaintSettingsProps> {
   }
 
   componentDidMount() {
-    const colorPickerWrapper = document.querySelector('.color-picker').parentNode.parentNode as HTMLDivElement;
+    const colorPaletteWrapper = document.querySelector('.color-palette').parentNode.parentNode as HTMLDivElement;
 
     // CSS is mad science
-    (colorPickerWrapper.querySelector('div') as HTMLDivElement).remove();
+    (colorPaletteWrapper.querySelector('div') as HTMLDivElement).remove();
   }
 
   render () {
@@ -29,7 +29,7 @@ export default class PaintSettings extends Component<IPaintSettingsProps> {
           <div className="col s12 center">
             <h5>{this.props.tool === 'line' ? 'Line' : 'Brush'} Color</h5>
             <CompactPicker
-              className="color-picker"
+              className="color-palette"
               color={this.props.color}
               onChangeComplete={this.handleChangeComplete}
             />

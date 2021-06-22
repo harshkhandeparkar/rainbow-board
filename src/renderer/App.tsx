@@ -66,7 +66,7 @@ class App extends Component {
               border-bottom-color: ${this.state.css.highlightTextColor} !important;
             }
 
-            .color-picker input:focus, .color-picker input:active {
+            .color-palette input:focus, .color-palette input:active {
               box-shadow: 0 1px 0 ${this.state.css.highlightTextColor} !important;
             }
 
@@ -92,7 +92,7 @@ class App extends Component {
               color: ${this.state.css.textColor};
             }
 
-            .btn, .btn-floating, select, .color-picker, .bottom-toolbar, .top-toolbar, .page, .vertical-separator-line, .horizontal-separator-line, .card, .dropdown-content, .dropdown-arrow {
+            .btn, .btn-floating, select, .color-palette, .bottom-toolbar, .top-toolbar, .page, .vertical-separator-line, .horizontal-separator-line, .card, .dropdown-content, .dropdown-arrow {
               border: 1px solid ${this.state.css.borderColor} !important;
             }
 
@@ -100,7 +100,7 @@ class App extends Component {
               border-top: 1px solid ${this.state.css.borderColor} !important;
             }
 
-            .color-picker * {
+            .color-palette * {
               color: ${this.state.css.textColor} !important;
             }
 
