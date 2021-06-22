@@ -20,8 +20,13 @@ ReactDOM.render(
   document.getElementById('root')
 )
 
+// Enable menubar hotkeys
 ipcRenderer.send(EVENTS.SET_HOTKEYS);
+
+// Navigation events from main process
 ipcHandler.addEventHandler(EVENTS.GO, 'go-handler', (e: any, {to}: {to: string}) => go(to));
+
+// Open a .rainbow file
 ipcHandler.addEventHandler(EVENTS.OPEN, 'open-handler', (e, {path}: {path: string}) => {
   readFile(path, (err, data) => {
     if (!err) {

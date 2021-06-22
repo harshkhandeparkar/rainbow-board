@@ -2,8 +2,11 @@ import React, { Component, createRef, RefObject } from 'react';
 import './Dropdown.css'
 
 interface IDropdownProps {
+  /** Return a button element to be used as the trigger with the given ref */
   getTriggerBtn: (ref: RefObject<HTMLButtonElement>) => React.ReactElement<HTMLButtonElement>;
+  /** Dropup when true */
   up?: boolean;
+  /** position: fixed CSS */
   fixedPosn?: boolean;
 }
 

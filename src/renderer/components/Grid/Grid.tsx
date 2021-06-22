@@ -2,7 +2,9 @@
 
 export interface IGridProps {
   options?: {
+    /** Number of columns */
     numColumns?: number,
+    /** Gap between columns and rows. CSS gap property */
     gap?: string
   },
   className?: string,

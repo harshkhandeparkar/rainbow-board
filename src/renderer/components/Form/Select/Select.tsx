@@ -6,7 +6,9 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import './Select.css';
 
 export interface ISelectProps {
+  /** Label for the select element */
   label: string,
+  /** Info tooltip text */
   info?: string,
   onInput: (value: string) => void,
   defaultValue: string,

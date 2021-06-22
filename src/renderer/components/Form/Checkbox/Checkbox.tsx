@@ -6,9 +6,11 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import './Checkbox.css';
 
 export interface ICheckboxProps {
+  /** Label text for the checkbox */
   label: string | JSX.Element,
   onInput: (value: boolean) => void,
   defaultValue: boolean,
+  /** Info tooltip text */
   info?: string
 }
 

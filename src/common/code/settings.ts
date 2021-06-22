@@ -45,7 +45,11 @@ export class SettingManager<SettingType> {
   }
 }
 
+/** SETTING: Whether to start in fullscreen */
 export const startFullscreenSetting = new SettingManager<START_FULLSCREEN_SETTING>(START_FULLSCREEN_SETTING_KEY, START_FULLSCREEN_SETTING_DEFAULT, false);
+/** SETTING: Whether to start maximized */
 export const startMaximizedSetting = new SettingManager<START_MAXIMIZED_SETTING>(START_MAXIMIZED_SETTING_KEY, START_MAXIMIZED_SETTING_DEFAULT, false);
+/** SETTING: Whether to show menubar in fullscreen mode */
 export const showMenuBarWhenFullscreenSetting = new SettingManager<SHOW_MENU_BAR_WHEN_FULLSCREEN_SETTING>(SHOW_MENU_BAR_WHEN_FULLSCREEN_SETTING_KEY, SHOW_MENU_BAR_WHEN_FULLSCREEN_SETTING_DEFAULT, false);
+/** SETTING: GNOME style headerbar */
 export const useGnomeStyleHeaderbarSetting = new SettingManager<USE_GNOME_STYLE_HEADERBAR_SETTING>(USE_GNOME_STYLE_HEADERBAR_SETTING_KEY, USE_GNOME_STYLE_HEADERBAR_SETTING_DEFAULT, true);

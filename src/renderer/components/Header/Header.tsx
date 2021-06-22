@@ -15,7 +15,9 @@ type IMenuItem = 'settings' | 'home';
 
 interface IHeaderProps {
   title: string | JSX.Element,
+  /** Optional smaller, greyed subtitle */
   subtitle?: string,
+  /** Whether to display only with the custom headerbar opton enabled */
   onlyDisplayIfCustom?: boolean,
   leftMenu: IMenuItem[],
   rightMenu?: JSX.Element[]
