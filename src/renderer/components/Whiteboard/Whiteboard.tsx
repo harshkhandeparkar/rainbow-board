@@ -29,6 +29,7 @@ import { RealDrawBoard } from 'svg-real-renderer';
 import { useGnomeStyleHeaderbarSetting } from '../../../common/code/settings';
 
 import { WhiteboardHeader } from './WhiteboardHeader';
+import { height } from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
 
 export interface IHistoryStateWithOpen {
   open?: {
@@ -72,14 +73,10 @@ export class Whiteboard extends Component {
             .page {
               height: ${useGnomeStyleHeaderbarSetting.get() ? 'calc(95vh - 2rem)' : '95vh'}
             }
-
-            #whiteboard {
-              height: ${useGnomeStyleHeaderbarSetting.get() ? 'calc(100vh - 2rem)' : '100vh'}
-            }
           `}
         </style>
 
-        <div className="container-fluid center" id="whiteboard">
+        <div className="container-fluid center" id="whiteboard" style={{height: useGnomeStyleHeaderbarSetting.get() ? 'calc(100vh - 2rem)' : '100vh'}}>
           <div>
             <button
               className="btn-floating right page-btn"
@@ -157,18 +154,10 @@ export class Whiteboard extends Component {
   componentDidMount() {
     this._removeHotkeys();
 
-    ipcHandler.addEventHandler(EVENTS.NEXT_PAGE, 'nextPageHandler', () => {
-      this.nextPage();
-    })
-    ipcHandler.addEventHandler(EVENTS.PREVIOUS_PAGE, 'prevPageHandler', () => {
-      this.lastPage();
-    })
-    ipcHandler.addEventHandler(EVENTS.ADD_PAGE, 'addPageHandler', () => {
-      this.addPage();
-    })
-    ipcHandler.addEventHandler(EVENTS.DELETE_PAGE, 'deletePageHandler', () => {
-      this.deletePage();
-    })
+    ipcHandler.addEventHandler(EVENTS.NEXT_PAGE, 'nextPageHandler', () => this.nextPage())
+    ipcHandler.addEventHandler(EVENTS.PREVIOUS_PAGE, 'prevPageHandler', () => this.lastPage())
+    ipcHandler.addEventHandler(EVENTS.ADD_PAGE, 'addPageHandler', () => this.addPage())
+    ipcHandler.addEventHandler(EVENTS.DELETE_PAGE, 'deletePageHandler', () => this.deletePage())
     ipcHandler.addEventHandler(EVENTS.PROMPT_REPLY, 'deletePagePromptHandler', (event, args) => {
       if (args.event === 'delete' && args.response === 1) {
         this._deletePage();
