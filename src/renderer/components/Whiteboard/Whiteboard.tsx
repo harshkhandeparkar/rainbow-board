@@ -8,13 +8,7 @@ import {
   faPlus,
   faChevronRight,
   faChevronLeft,
-  faTrash,
-  faBars,
-  faEraser,
-  faGripLines,
-  faPaintBrush,
-  faToolbox,
-  faPalette
+  faTrash
 } from '@fortawesome/free-solid-svg-icons';
 import Page from '../Page/Page';
 import ipcHandler from '../../util/ipc-handler';
@@ -24,25 +18,17 @@ import {
   ADD_PAGE,
   NEXT_PAGE,
   DELETE_PAGE,
-  PREV_PAGE,
-  SAVE,
-  BRUSH_TOOL,
-  LINE_TOOL,
-  ERASER_TOOL,
-  COLOR_PALETTE
+  PREV_PAGE
 } from '../../../common/constants/shortcuts';
 
 import './Whiteboard.scss';
 import { RealExport } from 'svg-real-renderer/build/src/types/RealRendererTypes';
 import history from '../../util/history';
 import { RealDrawBoard } from 'svg-real-renderer';
-import { Header } from '../Header/Header';
 
 import { useGnomeStyleHeaderbarSetting } from '../../../common/code/settings';
-import { Dropdown } from '../Dropdown/Dropdown';
 
-import Grid from '../Grid/Grid';
-import GridItem from '../Grid/GridItem';
+import { WhiteboardHeader } from './WhiteboardHeader';
 
 export interface IHistoryStateWithOpen {
   open?: {
@@ -74,101 +60,11 @@ export class Whiteboard extends Component {
   render() {
     return (
       <div>
-        <Header
-          title={this.state.fileOpened ? this.state.fileName : 'Untitled Whiteboard*'}
-          subtitle={this.state.fileOpened ? this.state.location : 'Unsaved Changes'}
-          onlyDisplayIfCustom={true}
-          leftMenu={[]}
-          rightMenu={[
-            <button
-              className="btn brand-text"
-              key={1}
-              title={SAVE.platformFormattedString}
-              onClick={() => {
-                this.save();
-              }}
-            >
-              Save
-            </button>,
-            <Dropdown
-              key={2}
-              getTriggerBtn={(ref) => {
-                return (
-                  <button ref={ref} className="btn" title="Select Tool">
-                    <Icon
-                      options={{
-                        icon: faToolbox,
-                        size: 'sm'
-                      }}
-                    />
-                  </button>
-                )
-              }}
-            >
-              <button
-                className="btn"
-                onClick={() => ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SET_TOOL, options: {tool: 'brush'}})}
-                title={`Brush (${BRUSH_TOOL.platformFormattedString})`}
-              >
-                <Icon
-                  options={{
-                    icon: faPaintBrush
-                  }}
-                />
-              </button>
-              <button
-                className="btn"
-                onClick={() => ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SET_TOOL, options: {tool: 'line'}})}
-                title={`Line Tool (${LINE_TOOL.platformFormattedString})`}
-              >
-                <Icon
-                  options={{
-                    icon: faGripLines
-                  }}
-                />
-              </button>
-              <button
-                className="btn"
-                onClick={() => ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SET_TOOL, options: {tool: 'eraser'}})}
-                title={`Eraser (${ERASER_TOOL.platformFormattedString})`}
-              >
-                <Icon
-                  options={{
-                    icon: faEraser
-                  }}
-                />
-              </button>
-            </Dropdown>,
-            <Dropdown
-              key={3}
-              getTriggerBtn={(ref) => {
-                return (
-                  <button ref={ref} className="btn">
-                    <Icon options={{icon: faBars}} />
-                  </button>
-                )
-              }}
-            >
-              <div style={{lineHeight: '1.5rem', minWidth: '10rem', paddingTop: '0.5rem', paddingBottom: '0.5rem'}}>
-                <Grid
-                  options={{
-                    numColumns: 3,
-                    gap: '0'
-                  }}
-                >
-                  <GridItem className="center">
-                    <button
-                      title={`Color Palette (${COLOR_PALETTE.platformFormattedString})`}
-                      className="btn"
-                      onClick={() => ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.TOGGLE_COLOR_PALETTE, options: {}})}
-                    >
-                      <Icon options={{icon: faPalette, size: 'sm'}}></Icon>
-                    </button>
-                  </GridItem>
-                </Grid>
-              </div>
-            </Dropdown>
-          ]}
+        <WhiteboardHeader
+          fileOpened={this.state.fileOpened}
+          fileName={this.state.fileName}
+          location={this.state.location}
+          save={() => this.save()}
         />
 
         <style>
