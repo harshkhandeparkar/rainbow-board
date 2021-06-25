@@ -137,21 +137,15 @@ export class Page extends Component<IPageProps> {
   _setHotkeys() {
     this._removeHotkeys();
 
-    ipcHandler.addEventHandler(EVENTS.UNDO, 'undoEventHandler', () => {
-      this.state.boardState.drawBoard.undo();
-    })
-    ipcHandler.addEventHandler(EVENTS.REDO, 'redoEventHandler', () => {
-      this.state.boardState.drawBoard.redo();
-    })
+    ipcHandler.addEventHandler(EVENTS.UNDO, 'undoEventHandler', () => this.state.boardState.drawBoard.undo())
+    ipcHandler.addEventHandler(EVENTS.REDO, 'redoEventHandler', () => this.state.boardState.drawBoard.redo())
     ipcHandler.addEventHandler(EVENTS.EXPORT_PAGE, 'exportEventHandler', (e, {type}: {type: 'svg' | 'png'}) => {
       this._export(type);
     })
     ipcHandler.addEventHandler(EVENTS.EXPORT_PAGE_DIALOG, 'exportDialogEventHandler', () => {
       this.toolbarRef.current.exportPageModalInstance.open();
     })
-    ipcHandler.addEventHandler(EVENTS.CLEAR_PAGE, 'clearEventHandler', () => {
-      this._clearBoard();
-    })
+    ipcHandler.addEventHandler(EVENTS.CLEAR_PAGE, 'clearEventHandler', () => this._clearBoard())
     ipcHandler.addEventHandler(EVENTS.PROMPT_REPLY, 'clearPagePromptHandler', (event, args) => {
       if (args.response === 1 && args.event === 'clear') this.state.boardState.drawBoard.clear();
     })
