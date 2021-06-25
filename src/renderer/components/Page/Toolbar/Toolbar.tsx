@@ -44,6 +44,9 @@ import {
 } from '../../../../common/constants/shortcuts';
 import * as PATHS from '../../../../common/constants/paths';
 
+import { TopToolbarRange } from './TopToolbarComponents';
+import { BottomToolbarButton } from './BottomToolbarComponents';
+
 export interface IToolbarProps {
   boardOptions: RealDrawBoardTypes.IRealDrawBoardParametersSettings;
   _changeToolSetting: (setting: keyof ToolSettings, value: number) => void;
@@ -67,10 +70,7 @@ export class Toolbar extends Component<IToolbarProps> {
   colorPaletteRef: RefObject<HTMLDivElement> = createRef();
 
   // Ranges
-  brushSizeRangeRef: RefObject<HTMLInputElement> = createRef();
-  eraserSizeRangeRef: RefObject<HTMLInputElement> = createRef();
-  changeRateRangeRef: RefObject<HTMLInputElement> = createRef();
-  lineThicknessRangeRef: RefObject<HTMLInputElement> = createRef();
+  // changeRateRangeRef: RefObject<HTMLInputElement> = createRef();
   lineColorRangeRef: RefObject<HTMLInputElement> = createRef();
 
   exportPageModalInstance: Modal;
@@ -119,24 +119,24 @@ export class Toolbar extends Component<IToolbarProps> {
     this._initializeModal();
   }
 
-  onBrushSizeChange = () => {
-    this.props._changeToolSetting('brushSize', Number(this.brushSizeRangeRef.current.value));
+  onBrushSizeChange = (val: number) => {
+    this.props._changeToolSetting('brushSize', val);
     this.setState({
-      brushSize: Number(this.brushSizeRangeRef.current.value)
+      brushSize: val
     })
   }
 
-  onEraserSizeChange = () => {
-    this.props._changeToolSetting('eraserSize', Number(this.eraserSizeRangeRef.current.value));
+  onEraserSizeChange = (val: number) => {
+    this.props._changeToolSetting('eraserSize', val);
     this.setState({
-      eraserSize: Number(this.eraserSizeRangeRef.current.value)
+      eraserSize: val
     })
   }
 
-  onLineThicknessChange = () => {
-    this.props._changeToolSetting('lineThickness', Number(this.lineThicknessRangeRef.current.value));
+  onLineThicknessChange = (val: number) => {
+    this.props._changeToolSetting('lineThickness', val);
     this.setState({
-      lineThickness: Number(this.lineThicknessRangeRef.current.value)
+      lineThickness: val
     })
   }
 
@@ -232,46 +232,47 @@ export class Toolbar extends Component<IToolbarProps> {
 
     return (
       <div className="toolbar">
-        <div className={`top-toolbar valign-wrapper`} title="Brush Size (SCROLL)">
-          <label>Brush Size</label>
-          <input type="range" min="2" max="100" value={this.state.brushSize} ref={this.brushSizeRangeRef} onChange={this.onBrushSizeChange} />
-        </div>
-
-        <div className={`top-toolbar valign-wrapper ${boardState.tool === 'eraser' ? '' : 'hide'}`} title="Eraser Size (SCROLL)">
-          <label>Eraser Size</label>
-          <input type="range" min="2" max="100" value={this.state.eraserSize} ref={this.eraserSizeRangeRef} onChange={this.onEraserSizeChange} />
-        </div>
-
-        <div className={`top-toolbar valign-wrapper ${boardState.tool === 'line' ? '' : 'hide'}`} title="Line Thickness (SCROLL)">
-          <label>Line Thickness</label>
-          <input type="range" min="2" max="100" value={this.state.lineThickness} ref={this.lineThicknessRangeRef} onChange={this.onLineThicknessChange} />
-        </div>
+        <TopToolbarRange
+          label="Brush Size"
+          value={this.state.brushSize}
+          visible={boardState.tool === 'brush'}
+          onChange={this.onBrushSizeChange}
+        />
+        <TopToolbarRange
+          label="Eraser Size"
+          value={this.state.eraserSize}
+          visible={boardState.tool === 'eraser'}
+          onChange={this.onEraserSizeChange}
+        />
+        <TopToolbarRange
+          label="Line Thickness"
+          value={this.state.lineThickness}
+          visible={boardState.tool === 'line'}
+          onChange={this.onLineThicknessChange}
+        />
 
         <div className="bottom-toolbar">
           {/* Tools */}
-          <button
-            className={`btn-flat ${boardState.tool === 'brush' ? 'active' : ''} brand-text`}
-            title={`Brush (${BRUSH_TOOL.platformFormattedString})`}
+          <BottomToolbarButton
+            title="Brush"
+            shortcutString={BRUSH_TOOL.platformFormattedString}
+            active={boardState.tool === 'brush'}
+            icon={faPaintBrush}
             onClick={() => this._setTool('brush')}
-            style={{
-              position: 'relative'
-            }}
+            relativePosition={true}
           >
             <div
               className="color-circle"
-              style={{
-                background: getRGBColorString(this.state.brushColor)
-              }}
+              style={{background: getRGBColorString(this.state.brushColor)}}
             />
-            <Icon options={{icon: faPaintBrush}} />
-          </button>
-          <button
-            className={`btn-flat ${boardState.tool === 'line' ? 'active' : ''} brand-text`}
-            title={`Line Tool (${LINE_TOOL.platformFormattedString})`}
+          </BottomToolbarButton>
+          <BottomToolbarButton
+            title="Line Tool"
+            shortcutString={LINE_TOOL.platformFormattedString}
+            active={boardState.tool === 'line'}
+            icon={faGripLines}
             onClick={() => this._setTool('line')}
-            style={{
-              position: 'relative'
-            }}
+            relativePosition={true}
           >
             <div
               className="color-circle"
@@ -279,25 +280,37 @@ export class Toolbar extends Component<IToolbarProps> {
                 background: getRGBColorString(this.state.lineColor),
               }}
             />
-            <Icon options={{icon: faGripLines}} />
-          </button>
-          <button className={`btn-flat ${boardState.tool === 'eraser' ? 'active' : ''} brand-text`} title={`Eraser (${ERASER_TOOL.platformFormattedString})`} onClick={() => this._setTool('eraser')}>
-            <Icon options={{icon: faEraser}} />
-          </button>
+          </BottomToolbarButton>
+          <BottomToolbarButton
+            title="Eraser"
+            shortcutString={ERASER_TOOL.platformFormattedString}
+            active={boardState.tool === 'eraser'}
+            icon={faEraser}
+            onClick={() => this._setTool('eraser')}
+          />
           {/* /Tools */}
 
           <div className="vertical-separator-line" />
 
           {/* Board Manipulation */}
-          <button className="btn-flat brand-text" title={`Color Palette (${COLOR_PALETTE.platformFormattedString})`} onClick={() => this.colorPaletteInstance.open()}>
-            <Icon options={{icon :faPalette}} />
-          </button>
-          <button className="btn-flat brand-text" title={`Undo (${UNDO.platformFormattedString})`} onClick={() => _onUndo()}>
-            <Icon options={{icon: faUndo}} />
-          </button>
-          <button className="btn-flat brand-text" title={`Redo (${REDO.platformFormattedString})`} onClick={() => _onRedo()}>
-            <Icon options={{icon: faRedo}} />
-          </button>
+          <BottomToolbarButton
+            title="Color Palette"
+            shortcutString={COLOR_PALETTE.platformFormattedString}
+            icon={faPalette}
+            onClick={() => this.colorPaletteInstance.open()}
+          />
+          <BottomToolbarButton
+            title="Undo"
+            shortcutString={UNDO.platformFormattedString}
+            icon={faUndo}
+            onClick={() => _onUndo()}
+          />
+          <BottomToolbarButton
+            title="Redo"
+            shortcutString={REDO.platformFormattedString}
+            icon={faRedo}
+            onClick={() => _onRedo()}
+          />
           {/* /Board Manipulation */}
 
           <div className="vertical-separator-line" />
@@ -313,45 +326,58 @@ export class Toolbar extends Component<IToolbarProps> {
             up={true}
             fixedPosn={true}
           >
-            <button className={`btn-flat ${this.state.bgType === 'grid' ? 'active' : ''} brand-text`} title="Grid Background" onClick={() => this._setBG('grid')}>
-              <Icon options={{icon: faBorderAll}} />
-            </button>
-            <button className={`btn-flat ${this.state.bgType === 'ruled' ? 'active' : ''} brand-text`} title="Ruled Background" onClick={() => this._setBG('ruled')}>
-              <Icon options={{icon: faAlignJustify}} />
-            </button>
-            <button className={`btn-flat ${this.state.bgType === 'none' ? 'active' : ''} brand-text`} title="Blank Background" onClick={() => this._setBG('none')}>
-              <Icon options={{icon: faSquare}} />
-            </button>
+            <BottomToolbarButton
+              title="Grid Background"
+              icon={faBorderAll}
+              active={this.state.bgType === 'grid'}
+              onClick={() => this._setBG('grid')}
+            />
+            <BottomToolbarButton
+              title="Ruled Background"
+              icon={faAlignJustify}
+              active={this.state.bgType === 'ruled'}
+              onClick={() => this._setBG('ruled')}
+            />
+            <BottomToolbarButton
+              title="Blank Background"
+              icon={faSquare}
+              active={this.state.bgType === 'none'}
+              onClick={() => this._setBG('none')}
+            />
           </Dropdown>
           {/* /BG */}
 
           {/* Others */}
-          <button
-            className="btn-flat brand-text"
-            title={`Clear Page (${CLEAR_PAGE.platformFormattedString})`}
+          <BottomToolbarButton
+            title="Clear Page"
+            shortcutString={CLEAR_PAGE.platformFormattedString}
+            icon={faBan}
             onClick={_clearBoard}
-          >
-            <Icon options={{icon: faBan}} />
-          </button>
+          />
 
           <Dropdown
             getTriggerBtn={(ref) => <button ref={ref} title="More Options..." className="btn-flat brand-text"><Icon options={{icon: faEllipsisV}} /></button>}
             up={true}
             fixedPosn={true}
           >
-            <button className="btn-flat brand-text" title={`Save Whiteboard (${SAVE.platformFormattedString})`} onClick={() => this.props._save()}>
-              <Icon options={{icon: faSave}} />
-            </button>
-            <button className="btn-flat brand-text" title={`Export Page (${EXPORT_PAGE.platformFormattedString})`} onClick={() => this.exportPageModalInstance.open()}>
-              <Icon options={{icon: faFileImage}} />
-            </button>
-            <button
-              className="btn-flat brand-text"
-              title={`Go to Home (${GO_HOME.platformFormattedString})`}
+            <BottomToolbarButton
+              title="Save Whiteboard"
+              shortcutString={SAVE.platformFormattedString}
+              icon={faSave}
+              onClick={() => this.props._save()}
+            />
+            <BottomToolbarButton
+              title="Export Page"
+              shortcutString={EXPORT_PAGE.platformFormattedString}
+              icon={faFileImage}
+              onClick={() => this.exportPageModalInstance.open()}
+            />
+            <BottomToolbarButton
+              title="Go to Home"
+              shortcutString={GO_HOME.platformFormattedString}
+              icon={faHome}
               onClick={() => go(`/${PATHS.HOME}`)}
-            >
-              <Icon options={{icon: faHome}} />
-            </button>
+            />
           </Dropdown>
           {/* /Others */}
         </div>
@@ -410,6 +436,7 @@ export class Toolbar extends Component<IToolbarProps> {
               }}
             />
           </div>
+
           <div className="modal-footer container">
             <button title="Close (ESC)" className="btn brand-text" onClick={() => this.colorPaletteInstance.close()}>Close</button>
           </div>
