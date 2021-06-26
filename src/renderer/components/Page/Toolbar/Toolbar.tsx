@@ -1,6 +1,5 @@
 import React, { Component, createRef, RefObject } from 'react';
 import M, { Modal } from 'materialize-css';
-import PaintSettings from '../../PaintSettings/PaintSettings';
 import { Dropdown } from '../../Dropdown/Dropdown';
 
 import { Icon } from '../../Icon/Icon';
@@ -46,6 +45,7 @@ import * as PATHS from '../../../../common/constants/paths';
 
 import { TopToolbarRange } from './TopToolbarComponents';
 import { BottomToolbarButton } from './BottomToolbarComponents';
+import { ColorPaletteModal, ExportPageModal } from './Modals';
 
 export interface IToolbarProps {
   boardOptions: RealDrawBoardTypes.IRealDrawBoardParametersSettings;
@@ -82,8 +82,6 @@ export class Toolbar extends Component<IToolbarProps> {
     lineThickness: number;
     lineColor: Color;
     brushColor: Color;
-    exportType: 'svg' | 'png';
-    exportModalOn: boolean;
     previousTool: Tool;
     bgType: RBBGType;
   } = {
@@ -93,8 +91,6 @@ export class Toolbar extends Component<IToolbarProps> {
     lineThickness: this.props.boardOptions.toolSettings.lineThickness,
     lineColor: this.props.boardOptions.toolSettings.lineColor,
     brushColor: this.props.boardOptions.toolSettings.brushColor,
-    exportType: 'png',
-    exportModalOn: false,
     previousTool: this.props.boardOptions.tool,
     bgType: this.props.boardState.drawBoard.bgType.type as RBBGType
   }
@@ -383,63 +379,20 @@ export class Toolbar extends Component<IToolbarProps> {
         </div>
 
         <div className="modal" ref={this.exportPageModalRef}>
-          <div className="modal-content container-fluid">
-            <h3>Export Page</h3>
-            <p>Export the current page as an image.</p>
-            <div className="container">
-              <div className="row">
-                <div className="col s12">
-                  <div className={`export-type ${this.state.exportType === 'png' ? 'selected' : ''}`} onClick={() => this.setState({ exportType: 'png', exportModalOn: true })}>
-                    <h6>PNG</h6>
-                    Exports as a normal image. Works everywhere. Default and recommended for most users.
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col s12">
-                  <div  className={`export-type ${this.state.exportType === 'svg' ? 'selected' : ''}`} onClick={() => {this.setState({ exportType: 'svg', exportModalOn: true })}}>
-                    <h6>SVG</h6>
-                    Exports the page as an <a href="https://en.wikipedia.org/wiki/SVG" rel="noreferrer" style={{display: 'inline'}} target="_blank">SVG</a>. Use it if you know what it is.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="modal-footer container">
-            <button className="btn right" title="Cancel (ESC)" onClick={e => this.exportPageModalInstance.close()}>Cancel</button>
-            <button
-              className="btn brand-text left"
-              title="Export"
-              onClick={e => {
-                _export(this.state.exportType);
-                this.exportPageModalInstance.close();
-              }}
-            >Export</button>
-          </div>
+          <ExportPageModal
+            onClose={() => this.exportPageModalInstance.close()}
+            _export={_export}
+          />
         </div>
 
         <div className="modal" ref={this.colorPaletteRef}>
-          <div className="modal-content">
-            <PaintSettings
-              color={getRGBColorString(boardState.tool === 'line' ? this.state.lineColor : this.state.brushColor)}
-              tool={boardState.tool}
-              onPickColor={color => {
-                if(boardState.tool === 'brush' || boardState.tool === 'line'){
-                  const colorArr: Color = [color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255];
-
-                  boardState.drawBoard.changeToolSetting(`${boardState.tool}Color` as keyof ToolSettings, colorArr);
-                  this.setState({
-                    [`${boardState.tool}Color`]: colorArr
-                  })
-                }
-                else return;
-              }}
-            />
-          </div>
-
-          <div className="modal-footer container">
-            <button title="Close (ESC)" className="btn brand-text" onClick={() => this.colorPaletteInstance.close()}>Close</button>
-          </div>
+          <ColorPaletteModal
+            boardState={this.props.boardState}
+            lineColor={this.state.lineColor}
+            brushColor={this.state.brushColor}
+            onClose={() => this.colorPaletteInstance.close()}
+            onColor={(color: Color) => this.setState({[`${boardState.tool}-color`]: color})}
+          />
         </div>
       </div>
     )
