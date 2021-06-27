@@ -16,7 +16,9 @@ export type ThemeCSS = {
   /** Border color */
   borderColor: string,
   /** Extra CSS globally */
-  globalCSS: string
+  globalCSS: string,
+  /** Whether the user can select an accent color */
+  customizableAccentColor: boolean;
 }
 
 export interface IThemeStylingOptions {

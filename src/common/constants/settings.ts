@@ -28,3 +28,7 @@ export const USE_GNOME_STYLE_HEADERBAR_SETTING_KEY = 'useGnomeStyleHeaderbar';
 export type USE_GNOME_STYLE_HEADERBAR_SETTING = boolean;
 export const USE_GNOME_STYLE_HEADERBAR_SETTING_DEFAULT = false;
 
+export const CUSTOM_ACCENT_COLOR_SETTING_KEY = 'customAccentColor';
+export type CUSTOM_ACCENT_COLOR_SETTING = string; // CSS color
+export const CUSTOM_ACCENT_COLOR_SETTING_DEFAULT = 'rgb(250, 129, 29)';
+

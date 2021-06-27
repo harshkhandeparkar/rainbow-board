@@ -1,4 +1,4 @@
-import { themeSetting } from './settings';
+import { themeSetting, customAccentColorSetting } from './settings';
 import { themePlugins, boardPlugins } from './plugins';
 import { ITheme, IThemeStylingOptions, ThemeCSS } from '../../common/types/theme';
 import { RealDrawBoardTypes } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/RealDrawBoard';
@@ -30,7 +30,8 @@ class ThemeManager {
     textColor: 'black',
     highlightTextColor: 'rgb(250, 129, 29)',
     borderColor: '#a6a6a6',
-    globalCSS: ''
+    globalCSS: '',
+    customizableAccentColor: true
   }
 
   static darkThemeCSS: ThemeCSS = {
@@ -41,7 +42,8 @@ class ThemeManager {
     textColor: '#f1f1f1',
     highlightTextColor: 'rgb(250, 129, 29)',
     borderColor: '#404040',
-    globalCSS: ''
+    globalCSS: '',
+    customizableAccentColor: true
   }
 
 
@@ -98,7 +100,7 @@ class ThemeManager {
     this.theme = themeSetting.get();
   }
 
-  private _themeChanged() {
+  _themeChanged() {
     const currentTheme = this.getTheme();
 
     for (let handlerName in this.themeChangeEventListeners) {
@@ -107,6 +109,11 @@ class ThemeManager {
   }
 
   getTheme(): ITheme {
+    if (this.themeCSS[this.theme].customizableAccentColor) {
+      console.log('custommm')
+      this.themeCSS[this.theme].highlightTextColor = customAccentColorSetting.get();
+    }
+
     return {
       theme: this.theme,
       name: this.themes[this.theme],
