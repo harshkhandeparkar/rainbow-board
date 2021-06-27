@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Select } from '../Form/Select/Select';
 import { Checkbox } from '../Form/Checkbox/Checkbox';
+import { ColorPicker } from '../Form/ColorPicker/ColorPicker';
 import { VersionFooter } from '../VersionFooter/VersionFooter';
+
 import themeManager from '../../util/theme';
 import {
   showMenuBarWhenFullscreenSetting,
@@ -9,10 +11,15 @@ import {
   startMaximizedSetting
 } from '../../../common/code/settings';
 
+import { customAccentColorSetting } from '../../util/settings';
+import { CUSTOM_ACCENT_COLOR_SETTING_DEFAULT } from '../../../common/constants/settings';
+
 import { Header } from '../Header/Header';
 
 export default class Settings extends Component {
   render() {
+    const currentTheme = themeManager.getTheme();
+
     return (
       <div>
         <Header
@@ -22,7 +29,7 @@ export default class Settings extends Component {
         <div className="container">
           <Select
             label="Theme"
-            defaultValue={themeManager.getTheme().theme}
+            defaultValue={currentTheme.theme}
             onInput={(value) => themeManager.setTheme(value)}
             options={
               Object.keys(themeManager.themes).map((theme) => {
@@ -33,6 +40,19 @@ export default class Settings extends Component {
               })
             }
           />
+
+          {currentTheme.css.customizableAccentColor && (
+            <ColorPicker
+              label="Accent Color"
+              info="Accent color for the theme."
+              currentValue={currentTheme.css.highlightTextColor}
+              defaultValue={CUSTOM_ACCENT_COLOR_SETTING_DEFAULT}
+              onPick={(color) => {
+                customAccentColorSetting.set(color);
+                themeManager._themeChanged();
+              }}
+            />
+          )}
 
           <Checkbox
             label="Start Maximized"
@@ -54,7 +74,7 @@ export default class Settings extends Component {
             defaultValue={showMenuBarWhenFullscreenSetting.get()}
             onInput={(val) => showMenuBarWhenFullscreenSetting.set(val)}
           />
-{/*
+          {/*
           <Checkbox
             label={<span><a href="https://gnome.org">GNOME</a> Style Headerbar</span>}
             defaultValue={useGnomeStyleHeaderbarSetting.get()}

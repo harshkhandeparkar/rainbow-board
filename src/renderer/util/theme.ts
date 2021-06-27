@@ -110,7 +110,6 @@ class ThemeManager {
 
   getTheme(): ITheme {
     if (this.themeCSS[this.theme].customizableAccentColor) {
-      console.log('custommm')
       this.themeCSS[this.theme].highlightTextColor = customAccentColorSetting.get();
     }
 

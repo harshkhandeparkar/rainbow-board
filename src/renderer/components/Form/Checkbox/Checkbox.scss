@@ -29,19 +29,19 @@ input[type="checkbox"] {
     height: 1.5rem;
     width: 1.5rem;
     user-select: none;
+  }
 
-    :after {
-      content: "";
-      position: absolute;
-      display: none;
-      left: 0.45rem;
-  top: 0.1rem;
-  width: 0.5rem;
-  height: 1rem;
-  border-style: solid;
-  border-width: 0 3px 3px 0;
-  transform: rotate(45deg);
-    }
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 0.45rem;
+    top: 0.1rem;
+    width: 0.5rem;
+    height: 1rem;
+    border-style: solid;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
   }
 
   input:checked ~ .checkmark:after {
