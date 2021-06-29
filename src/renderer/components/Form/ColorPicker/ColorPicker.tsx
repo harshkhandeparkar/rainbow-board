@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 
 import { Icon } from '../../Icon/Icon';
-import { faInfoCircle, faCheckCircle, faUndoAlt } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle, faUndoAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { HuePicker } from 'react-color';
-import './ColorPicker.scss';
 
 export interface IColorPickerProps {
   /** Label for the select element */
@@ -24,7 +23,7 @@ export function ColorPicker(props: IColorPickerProps) {
 
   return (
     <div className="row">
-      <div className="col s4 valign-wrapper color-picker-col">
+      <div className="col s4 valign-wrapper form-col">
         <label>
           {label}
           {info ?
@@ -41,7 +40,7 @@ export function ColorPicker(props: IColorPickerProps) {
         </label>
       </div>
 
-      <div className="col s4 valign-wrapper color-picker-col">
+      <div className="col s4 valign-wrapper form-col">
         <HuePicker
           color={pickedColor}
           onChange={(colorResult) => {
@@ -51,7 +50,7 @@ export function ColorPicker(props: IColorPickerProps) {
         />
       </div>
 
-      <div className="col s2 valign-wrapper color-picker-col">
+      <div className="col s2 valign-wrapper form-col">
         <button
           className={`btn ${currentColor === pickedColor ? 'disabled' : ''}`}
           onClick={() => onPick(pickedColor)}

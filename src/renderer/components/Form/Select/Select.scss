@@ -8,15 +8,6 @@ select {
   width: 100%;
 }
 
-.select-label-col {
-  height: 3rem;
-  margin-top: 1rem;
-}
-
-.select-label-col label {
-  margin-left: auto;
-}
-
 select:focus, button:focus {
   outline: none;
 }

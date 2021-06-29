@@ -9,6 +9,7 @@ import * as PATHS from '../common/constants/paths';
 
 import history from './util/history';
 import themeManager from './util/theme';
+import { Shortcuts } from './components/Settings/Shortcuts/Shortcuts';
 
 class App extends Component {
   state = {
@@ -128,6 +129,7 @@ class App extends Component {
         <Route path={`/${PATHS.CREDITS}`} component={Credits} />
         <Route path={`/${PATHS.WHATS_NEW}`} component={WhatsNew} />
         <Route path={`/${PATHS.SETTINGS}`} component={Settings} />
+        <Route path={`/${PATHS.SHORTCUTS}`} component={Shortcuts} />
       </Router>
     )
   }

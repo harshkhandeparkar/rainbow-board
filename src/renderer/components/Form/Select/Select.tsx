@@ -23,7 +23,7 @@ export function Select(props: ISelectProps) {
 
   return (
     <div className="row">
-      <div className="col s4 valign-wrapper select-label-col">
+      <div className="col s4 valign-wrapper form-col">
         <label>
           {label}
           {info ?

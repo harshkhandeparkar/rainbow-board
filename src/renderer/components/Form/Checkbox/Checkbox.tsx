@@ -3,7 +3,7 @@ import React from 'react';
 import { Icon } from '../../Icon/Icon';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
-import './Checkbox.scss';
+import './Checkbox.scss'
 
 export interface ICheckboxProps {
   /** Label text for the checkbox */
@@ -19,7 +19,7 @@ export function Checkbox(props: ICheckboxProps) {
 
   return (
     <div className="row">
-      <div className="col s4 valign-wrapper checkbox-label-col">
+      <div className="col s4 valign-wrapper form-col">
         <label>
           {label}
           {info ?

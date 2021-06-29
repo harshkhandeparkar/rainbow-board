@@ -16,63 +16,70 @@ export function getPlatformFormattedShortcutString(accelerator: Accelerator) {
 export class Shortcut {
   accelerator: Accelerator;
   platformFormattedString: string;
+  desc: string;
 
-  constructor(accelerator: Accelerator) {
+  /**
+   *
+   * @param accelerator Electron accelerator string
+   * @param desc Description
+   */
+  constructor(accelerator: Accelerator, desc: string) {
     this.accelerator = accelerator;
     this.platformFormattedString = getPlatformFormattedShortcutString(this.accelerator);
+    this.desc = desc;
   }
 }
 
 // Menu: File
 /** Start New Page */
-export const START_NEW = new Shortcut('CmdOrCtrl + N');
+export const START_NEW = new Shortcut('CmdOrCtrl + N', 'Start new whiteboard');
 /** Save as .rainbow file */
-export const SAVE = new Shortcut('CmdOrCtrl + S');
+export const SAVE = new Shortcut('CmdOrCtrl + S', 'Save whiteboard as a file');
 /** Open .rainbow File */
-export const OPEN = new Shortcut('CmdOrCtrl + O');
+export const OPEN = new Shortcut('CmdOrCtrl + O', 'Open saved whiteboard file');
 /** Export the current page, old shortcut */
-export const EXPORT_PAGE = new Shortcut('CmdOrCtrl + E');
+export const EXPORT_PAGE = new Shortcut('CmdOrCtrl + E', 'Export current page as an image');
 /** Open Settings */
-export const SETTINGS = new Shortcut('CmdOrCtrl + ,');
+export const SETTINGS = new Shortcut('CmdOrCtrl + ,', 'Open settings screen');
 /** Quit App */
-export const QUIT = new Shortcut('CmdOrCtrl + Q');
+export const QUIT = new Shortcut('CmdOrCtrl + Q', 'Quit Rainbow Board');
 
 // Menu: Edit
 /** Undo */
-export const UNDO = new Shortcut('CmdOrCtrl + Z');
+export const UNDO = new Shortcut('CmdOrCtrl + Z', 'Undo');
 /** Redo */
-export const REDO = new Shortcut('CmdOrCtrl + Y');
+export const REDO = new Shortcut('CmdOrCtrl + Y', 'Redo');
 /** Add New Page */
-export const ADD_PAGE = new Shortcut('Plus');
+export const ADD_PAGE = new Shortcut('Plus', 'Add a new page');
 /** Clear Page */
-export const CLEAR_PAGE = new Shortcut('Delete');
+export const CLEAR_PAGE = new Shortcut('Delete', 'Cear page');
 /** Delete Page */
-export const DELETE_PAGE = new Shortcut('CmdOrCtrl + Delete');
+export const DELETE_PAGE = new Shortcut('CmdOrCtrl + Delete', 'Delete page');
 /** Next Page */
-export const NEXT_PAGE = new Shortcut('Right');
+export const NEXT_PAGE = new Shortcut('Right', 'Next page');
 /** Previous Page */
-export const PREV_PAGE = new Shortcut('Left');
+export const PREV_PAGE = new Shortcut('Left', 'Previous page');
 /** Toggle Color Palette */
-export const COLOR_PALETTE = new Shortcut('CmdOrCtrl + P');
+export const COLOR_PALETTE = new Shortcut('CmdOrCtrl + P', 'Toggle color palette');
 /** Use Brush Tool */
-export const BRUSH_TOOL = new Shortcut('CmdOrCtrl + 1');
+export const BRUSH_TOOL = new Shortcut('CmdOrCtrl + 1', 'Select brush tool');
 /** Use Line Tool */
-export const LINE_TOOL = new Shortcut('CmdOrCtrl + 2');
+export const LINE_TOOL = new Shortcut('CmdOrCtrl + 2', 'Select line tool');
 /** Use Eraser Tool */
-export const ERASER_TOOL = new Shortcut('CmdOrCtrl + 3');
+export const ERASER_TOOL = new Shortcut('CmdOrCtrl + 3', 'Select eraser tool');
 /** Switch to previous tool */
-export const PREV_TOOL = new Shortcut('Alt + T');
+export const PREV_TOOL = new Shortcut('Alt + T', 'Switch to previous tool');
 
 // Menu: Go
 /** Go Home */
-export const GO_HOME = new Shortcut('CmdOrCtrl + Esc');
+export const GO_HOME = new Shortcut('CmdOrCtrl + Esc', 'Go to home screen');
 
 // Menu: View
 /** Toggle Fullscreen */
-export const FULLSCREEN = new Shortcut('F11');
+export const FULLSCREEN = new Shortcut('F11', 'Toggle fullscren');
 
 // Menu: Developer
 /** Toggle Dev Tools */
-export const DEV_TOOLS = new Shortcut('CmdOrCtrl + Shift + I');
+export const DEV_TOOLS = new Shortcut('CmdOrCtrl + Shift + I', 'Toggle developer tools');
 /** Reload */
-export const RELOAD = new Shortcut('CmdOrCtrl + R');
+export const RELOAD = new Shortcut('CmdOrCtrl + R', 'Reload');
