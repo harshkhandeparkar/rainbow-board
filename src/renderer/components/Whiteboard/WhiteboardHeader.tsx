@@ -18,13 +18,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import * as EVENTS from '../../../common/constants/eventNames';
-import {
-  SAVE,
-  BRUSH_TOOL,
-  LINE_TOOL,
-  ERASER_TOOL,
-  COLOR_PALETTE
-} from '../../../common/constants/shortcuts';
+import { shortcutsManager } from '../../../common/code/shortcuts';
 
 
 export const WhiteboardHeader = (
@@ -35,6 +29,14 @@ export const WhiteboardHeader = (
     save: () => void
   }
 ) => {
+  const {
+    SAVE,
+    BRUSH_TOOL,
+    LINE_TOOL,
+    ERASER_TOOL,
+    COLOR_PALETTE
+  } = shortcutsManager.shortcuts;
+
   return (
     <Header
       title={props.fileOpened ? props.fileName : 'Untitled Whiteboard*'}

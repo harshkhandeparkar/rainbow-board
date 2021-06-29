@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import { Header } from '../../Header/Header';
 
-import { SHORTCUT_LIST } from '../../../../common/constants/shortcuts';
-
 import './Shortcuts.scss';
 
 export class Shortcuts extends Component {
@@ -26,14 +24,7 @@ export class Shortcuts extends Component {
 
             <tbody>
               {
-                SHORTCUT_LIST.map((sht, i) => {
-                  return (
-                    <tr key={i}>
-                      <td>{sht.desc}</td>
-                      <td>{sht.platformFormattedString}</td>
-                    </tr>
-                  )
-                })
+
               }
             </tbody>
           </table>

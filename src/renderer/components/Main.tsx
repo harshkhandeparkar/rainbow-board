@@ -11,7 +11,7 @@ import { changelogSetting } from '../util/settings';
 import { Icon } from './Icon/Icon';
 import { faPaintBrush, faBell, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 
-import { OPEN, START_NEW } from '../../common/constants/shortcuts';
+import { shortcutsManager } from '../../common/code/shortcuts';
 import { OPEN as OPEN_EVENT } from '../../common/constants/eventNames';
 import * as PATHS from '../../common/constants/paths';
 import { Header } from './Header/Header';
@@ -19,6 +19,8 @@ import { Header } from './Header/Header';
 const { version, description } = packageFile;
 
 function Main() {
+  const { START_NEW, OPEN } = shortcutsManager.shortcuts;
+
   const history = useHistory();
   let doShowChangelog = true;
 

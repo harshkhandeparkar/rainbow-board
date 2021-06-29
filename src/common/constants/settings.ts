@@ -1,5 +1,7 @@
 import packageFile from '../../../package.json';
 
+import { Accelerator } from 'electron';
+
 export const PLUGINS_SETTING_KEY = 'plugins';
 export type PLUGINS_SETTING = string[];
 export const PLUGINS_SETTING_DEFAULT: PLUGINS_SETTING = [];
@@ -32,3 +34,4 @@ export const CUSTOM_ACCENT_COLOR_SETTING_KEY = 'customAccentColor';
 export type CUSTOM_ACCENT_COLOR_SETTING = string; // CSS color
 export const CUSTOM_ACCENT_COLOR_SETTING_DEFAULT = 'rgb(250, 129, 29)';
 
+export const SHORTCUTS_SETTING_KEY = 'shortcuts';

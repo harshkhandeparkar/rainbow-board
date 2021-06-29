@@ -29,18 +29,7 @@ import { Tool, ToolSettings } from 'svg-real-renderer/build/src/renderers/RealDr
 import { Color } from 'svg-real-renderer/build/src/types/RealRendererTypes';
 
 import * as EVENTS from '../../../../common/constants/eventNames';
-import {
-  BRUSH_TOOL,
-  LINE_TOOL,
-  ERASER_TOOL,
-  COLOR_PALETTE,
-  UNDO,
-  REDO,
-  EXPORT_PAGE,
-  CLEAR_PAGE,
-  SAVE,
-  GO_HOME
-} from '../../../../common/constants/shortcuts';
+import { shortcutsManager } from '../../../../common/code/shortcuts';
 import * as PATHS from '../../../../common/constants/paths';
 
 import { TopToolbarRange } from './TopToolbarComponents';
@@ -224,6 +213,18 @@ export class Toolbar extends Component<IToolbarProps> {
   }
 
   render() {
+    const {
+      BRUSH_TOOL,
+      LINE_TOOL,
+      ERASER_TOOL,
+      COLOR_PALETTE,
+      UNDO,
+      REDO,
+      EXPORT_PAGE,
+      CLEAR_PAGE,
+      SAVE,
+      GO_HOME
+    } = shortcutsManager.shortcuts;
     const { boardState, _clearBoard, _export, _onUndo, _onRedo } = this.props;
 
     return (

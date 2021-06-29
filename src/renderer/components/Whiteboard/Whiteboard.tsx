@@ -14,12 +14,7 @@ import Page from '../Page/Page';
 import ipcHandler from '../../util/ipc-handler';
 
 import * as EVENTS from '../../../common/constants/eventNames';
-import {
-  ADD_PAGE,
-  NEXT_PAGE,
-  DELETE_PAGE,
-  PREV_PAGE
-} from '../../../common/constants/shortcuts';
+import { shortcutsManager } from '../../../common/code/shortcuts';
 
 import './Whiteboard.scss';
 import { RealExport } from 'svg-real-renderer/build/src/types/RealRendererTypes';
@@ -59,6 +54,13 @@ export class Whiteboard extends Component {
   }
 
   render() {
+    const {
+      ADD_PAGE,
+      DELETE_PAGE,
+      NEXT_PAGE,
+      PREV_PAGE
+    } = shortcutsManager.shortcuts;
+
     return (
       <div>
         <WhiteboardHeader

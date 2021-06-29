@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Icon } from '../Icon/Icon';
 import { faCog, faHome, faTimes, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { faSquare } from '@fortawesome/free-regular-svg-icons';
-import { GO_HOME, SETTINGS } from '../../../common/constants/shortcuts';
+import { shortcutsManager } from '../../../common/code/shortcuts';
 import { useGnomeStyleHeaderbarSetting } from '../../../common/code/settings';
 import { MAXIMIZE_UNMAXIMIZE, QUIT, MINIMIZE, SET_WINDOW_TITLE } from '../../../common/constants/eventNames';
 import * as PATHS from '../../../common/constants/paths';
@@ -44,6 +44,8 @@ export class Header extends Component<IHeaderProps> {
   }
 
   render() {
+    const { GO_HOME, SETTINGS } = shortcutsManager.shortcuts;
+
     const onlyDisplayIfCustom = this.props.onlyDisplayIfCustom || false;
     this.isCustomHeader = useGnomeStyleHeaderbarSetting.get();
     const rightMenu = this.props.rightMenu || [];

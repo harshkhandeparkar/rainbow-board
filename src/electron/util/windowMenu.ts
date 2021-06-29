@@ -4,8 +4,9 @@ import { shell, Menu, BrowserWindow, MenuItemConstructorOptions } from 'electron
 import { showAboutDialog } from './aboutDialog';
 import { menuClickEvents } from '../events/menuClickEvents';
 import * as EVENTS from '../../common/constants/eventNames';
-import * as SHORTCUTS from '../../common/constants/shortcuts';
 import * as PATHS from '../../common/constants/paths';
+
+import {  shortcutsManager } from '../../common/code/shortcuts';
 
 const { website, repository, version, discordInvite } = packageFile;
 
@@ -21,28 +22,28 @@ export function setWindowMenu(
       submenu: [
         {
           label: 'Start New Whiteboard',
-          accelerator: SHORTCUTS.START_NEW.accelerator,
+          accelerator:  shortcutsManager.shortcuts.START_NEW.accelerator,
           click: () => menuClickEvents.fire(EVENTS.NEW_WHITEBOARD, {}),
           enabled: path !== `/${PATHS.WHITEBOARD}`,
           visible: path !== `/${PATHS.WHITEBOARD}`
         },
         {
           label: 'Open File...',
-          accelerator: SHORTCUTS.OPEN.accelerator,
+          accelerator:  shortcutsManager.shortcuts.OPEN.accelerator,
           click: () => menuClickEvents.fire(EVENTS.OPEN, {}),
           enabled: path !== `/${PATHS.WHITEBOARD}`,
           visible: path !== `/${PATHS.WHITEBOARD}`
         },
         {
           label: 'Save File...',
-          accelerator: SHORTCUTS.SAVE.accelerator,
+          accelerator:  shortcutsManager.shortcuts.SAVE.accelerator,
           click: () => menuClickEvents.fire(EVENTS.SAVE, {}),
           visible: path === `/${PATHS.WHITEBOARD}`,
           enabled: path === `/${PATHS.WHITEBOARD}`
         },
         {
           label: 'Export Page...',
-          accelerator: SHORTCUTS.EXPORT_PAGE.accelerator,
+          accelerator:  shortcutsManager.shortcuts.EXPORT_PAGE.accelerator,
           registerAccelerator: false,
           visible: path === `/${PATHS.WHITEBOARD}`,
           enabled: path === `/${PATHS.WHITEBOARD}`,
@@ -61,11 +62,11 @@ export function setWindowMenu(
         { type: 'separator' },
         {
           label: 'Settings',
-          accelerator: SHORTCUTS.SETTINGS.accelerator,
+          accelerator:  shortcutsManager.shortcuts.SETTINGS.accelerator,
           click: () => menuClickEvents.fire(EVENTS.GO, {to: path === `/${PATHS.SETTINGS}` ? `/${PATHS.HOME}` : `/${PATHS.SETTINGS}`})
         },
         { type: 'separator' },
-        { label: 'Quit', accelerator: SHORTCUTS.QUIT.accelerator, click: () => win.isClosable() && win.close() }
+        { label: 'Quit', accelerator:  shortcutsManager.shortcuts.QUIT.accelerator, click: () => win.isClosable() && win.close() }
       ]
     },
     {
@@ -74,22 +75,22 @@ export function setWindowMenu(
       visible: path === `/${PATHS.WHITEBOARD}`,
       enabled: path === `/${PATHS.WHITEBOARD}`,
       submenu: [
-        { label: 'Undo', accelerator: SHORTCUTS.UNDO.accelerator, click: () => menuClickEvents.fire(EVENTS.UNDO, {}) },
-        { label: 'Redo', accelerator: SHORTCUTS.REDO.accelerator, click: () => menuClickEvents.fire(EVENTS.REDO, {}) },
+        { label: 'Undo', accelerator:  shortcutsManager.shortcuts.UNDO.accelerator, click: () => menuClickEvents.fire(EVENTS.UNDO, {}) },
+        { label: 'Redo', accelerator:  shortcutsManager.shortcuts.REDO.accelerator, click: () => menuClickEvents.fire(EVENTS.REDO, {}) },
         { type: 'separator' },
-        { label: 'Add Page', accelerator: SHORTCUTS.ADD_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.ADD_PAGE, {}) },
-        { label: 'Clear Page', accelerator: SHORTCUTS.CLEAR_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.CLEAR_PAGE, {}) },
-        { label: 'Delete Page', accelerator: SHORTCUTS.DELETE_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.DELETE_PAGE, {}) },
+        { label: 'Add Page', accelerator:  shortcutsManager.shortcuts.ADD_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.ADD_PAGE, {}) },
+        { label: 'Clear Page', accelerator:  shortcutsManager.shortcuts.CLEAR_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.CLEAR_PAGE, {}) },
+        { label: 'Delete Page', accelerator:  shortcutsManager.shortcuts.DELETE_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.DELETE_PAGE, {}) },
         { type: 'separator' },
-        { label: 'Next Page', accelerator: SHORTCUTS.NEXT_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.NEXT_PAGE, {}) },
-        { label: 'Previous Page', accelerator: SHORTCUTS.PREV_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.PREVIOUS_PAGE, {}) },
+        { label: 'Next Page', accelerator:  shortcutsManager.shortcuts.NEXT_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.NEXT_PAGE, {}) },
+        { label: 'Previous Page', accelerator:  shortcutsManager.shortcuts.PREV_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.PREVIOUS_PAGE, {}) },
         { type: 'separator' },
-        { label: 'Color Palette', accelerator: SHORTCUTS.COLOR_PALETTE.accelerator, click: () => menuClickEvents.fire(EVENTS.TOGGLE_COLOR_PALETTE, {}) },
-        { label: 'Previous Tool', accelerator: SHORTCUTS.PREV_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.PREV_TOOL, {}) },
+        { label: 'Color Palette', accelerator:  shortcutsManager.shortcuts.COLOR_PALETTE.accelerator, click: () => menuClickEvents.fire(EVENTS.TOGGLE_COLOR_PALETTE, {}) },
+        { label: 'Previous Tool', accelerator:  shortcutsManager.shortcuts.PREV_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.PREV_TOOL, {}) },
         { type: 'separator' },
-        { label: 'Brush Tool', accelerator: SHORTCUTS.BRUSH_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'brush'}) },
-        { label: 'Eraser', accelerator: SHORTCUTS.ERASER_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'eraser'}) },
-        { label: 'Line Tool', accelerator: SHORTCUTS.LINE_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'line'}) },
+        { label: 'Brush Tool', accelerator:  shortcutsManager.shortcuts.BRUSH_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'brush'}) },
+        { label: 'Eraser', accelerator:  shortcutsManager.shortcuts.ERASER_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'eraser'}) },
+        { label: 'Line Tool', accelerator:  shortcutsManager.shortcuts.LINE_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'line'}) },
       ]
     },
     {
@@ -98,7 +99,7 @@ export function setWindowMenu(
       submenu: [
         {
           label: 'Toggle Fullscreen',
-          accelerator: SHORTCUTS.FULLSCREEN.accelerator,
+          accelerator:  shortcutsManager.shortcuts.FULLSCREEN.accelerator,
           click: () => win.setFullScreen(!win.isFullScreen())
         }
       ]
@@ -107,7 +108,7 @@ export function setWindowMenu(
       type: 'submenu',
       label: '&Go',
       submenu: [
-        { label: 'Home', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/'}), accelerator: SHORTCUTS.GO_HOME.accelerator },
+        { label: 'Home', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/'}), accelerator:  shortcutsManager.shortcuts.GO_HOME.accelerator },
         { label: `What's New`, click: () => menuClickEvents.fire(EVENTS.GO, {to: `/${PATHS.WHATS_NEW}`}) },
         { label: 'Credits', click: () => menuClickEvents.fire(EVENTS.GO, {to: `/${PATHS.CREDITS}`}) },
         { label: 'Settings', click: () => menuClickEvents.fire(EVENTS.GO, {to: `/${PATHS.SETTINGS}`}) }
@@ -140,8 +141,8 @@ export function setWindowMenu(
     type: 'submenu',
     label: 'Developer',
     submenu: [
-      { label: 'Toggle Dev Tools', accelerator: SHORTCUTS.DEV_TOOLS.accelerator, click: () => win.webContents.toggleDevTools() },
-      { label: 'Reload', accelerator: SHORTCUTS.RELOAD.accelerator, click: () => win.webContents.reload() }
+      { label: 'Toggle Dev Tools', accelerator:  shortcutsManager.shortcuts.DEV_TOOLS.accelerator, click: () => win.webContents.toggleDevTools() },
+      { label: 'Reload', accelerator:  shortcutsManager.shortcuts.RELOAD.accelerator, click: () => win.webContents.reload() }
     ]
   })
 

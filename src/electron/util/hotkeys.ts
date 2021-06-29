@@ -2,7 +2,7 @@ import { ipcMain, globalShortcut, BrowserWindow } from 'electron';
 import { parse } from 'path';
 import { existsSync } from 'fs';
 import * as EVENTS from '../../common/constants/eventNames';
-import { EXPORT_PAGE } from '../../common/constants/shortcuts';
+import { shortcutsManager } from '../../common/code/shortcuts';
 import { WHITEBOARD } from '../../common/constants/paths';
 import { menuClickEvents } from '../events/menuClickEvents';
 import { saveDialog } from './save';
@@ -16,7 +16,7 @@ export function setHotkeys(win: BrowserWindow) {
     menuClickEvents.on(EVENTS.EXPORT_PAGE, 'hotkey-handler', ({type}) => event.reply(EVENTS.EXPORT_PAGE, {type}));
     menuClickEvents.on(EVENTS.SAVE, 'hotkey-handler', () => saveDialog(win, event));
     menuClickEvents.on(EVENTS.OPEN, 'hotkey-handler', () => openDialog(win, event));
-    globalShortcut.register(EXPORT_PAGE.accelerator, () => {
+    globalShortcut.register(shortcutsManager.shortcuts.EXPORT_PAGE.accelerator, () => {
       event.reply(EVENTS.EXPORT_PAGE_DIALOG);
     })
 
