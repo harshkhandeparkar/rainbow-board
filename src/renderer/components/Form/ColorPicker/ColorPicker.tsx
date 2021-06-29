@@ -53,17 +53,13 @@ export function ColorPicker(props: IColorPickerProps) {
 
       <div className="col s2 valign-wrapper color-picker-col">
         <button
-          className={`btn btn-floating ${currentColor === pickedColor ? 'disabled' : ''}`}
+          className={`btn ${currentColor === pickedColor ? 'disabled' : ''}`}
           onClick={() => onPick(pickedColor)}
+          style={{
+            color: pickedColor
+          }}
         >
-          <Icon
-            customColor={true}
-            options={{
-              title: 'Set custom color.',
-              color: pickedColor,
-              icon: faCheckCircle
-            }}
-          />
+          Save
         </button>
 
         <button
