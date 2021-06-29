@@ -75,7 +75,7 @@ class App extends Component {
               border: ${this.state.css.highlightTextColor} solid 1px;
             }
 
-            .export-type, .modal {
+            .export-type, .modal, table, th, td {
               border: ${this.state.css.borderColor} solid 1px;
             }
 
@@ -88,7 +88,8 @@ class App extends Component {
               background-color: ${this.state.css.bg1} !important;
             }
 
-            button, .btn, .btn-flat, .btn-floating, .card, .bottom-toolbar, .top-toolbar, select {
+            button, .btn, .btn-flat
+            , .btn-floating, .card, .bottom-toolbar, .top-toolbar, select {
               background-color: ${this.state.css.bg1} !important;
               color: ${this.state.css.textColor};
             }

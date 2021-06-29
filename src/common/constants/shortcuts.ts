@@ -30,6 +30,8 @@ export class Shortcut {
   }
 }
 
+// NOTE: UPDATE LIST AT THE END
+
 // Menu: File
 /** Start New Page */
 export const START_NEW = new Shortcut('CmdOrCtrl + N', 'Start new whiteboard');
@@ -83,3 +85,10 @@ export const FULLSCREEN = new Shortcut('F11', 'Toggle fullscren');
 export const DEV_TOOLS = new Shortcut('CmdOrCtrl + Shift + I', 'Toggle developer tools');
 /** Reload */
 export const RELOAD = new Shortcut('CmdOrCtrl + R', 'Reload');
+
+export const SHORTCUT_LIST = [
+  START_NEW, SAVE, OPEN, EXPORT_PAGE, SETTINGS, QUIT,
+  UNDO, REDO, ADD_PAGE, CLEAR_PAGE, DELETE_PAGE, NEXT_PAGE, PREV_PAGE,
+  COLOR_PALETTE, BRUSH_TOOL, LINE_TOOL, ERASER_TOOL, PREV_TOOL,
+  GO_HOME, FULLSCREEN
+]
