@@ -19,6 +19,7 @@ export class Shortcut {
   desc: string;
   identifier: string;
   fixed: boolean;
+  default: Accelerator;
 
   /**
    * @param identifier Settings key. No spaces or hyphens
@@ -27,6 +28,7 @@ export class Shortcut {
    */
   constructor(identifier: string, accelerator: Accelerator, desc: string, fixed = false) {
     this.accelerator = accelerator;
+    this.default = accelerator;
     this.platformFormattedString = getPlatformFormattedShortcutString(this.accelerator);
 
     this.identifier = identifier;
@@ -37,6 +39,10 @@ export class Shortcut {
   updateShortcut(newAccelerator: Accelerator) {
     this.accelerator = newAccelerator;
     this.platformFormattedString = getPlatformFormattedShortcutString(this.accelerator);
+  }
+
+  restoreDefault() {
+    this.updateShortcut(this.default);
   }
 }
 

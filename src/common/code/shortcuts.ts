@@ -113,6 +113,24 @@ class ShortcutsManager {
     this.shortcuts[name].updateShortcut(newValue);
     setSync(`${SHORTCUTS_SETTING_KEY}.${this.shortcuts[name].identifier}`, newValue as string);
   }
+
+  restoreDefault(name: shortcutName) {
+    this.shortcuts[name].restoreDefault();
+    setSync(`${SHORTCUTS_SETTING_KEY}.${this.shortcuts[name].identifier}`, this.shortcuts[name].default as string);
+  }
+
+  restoreAllDefaults() {
+    Object.keys(this.shortcuts).forEach((key: shortcutName) => {
+      const shortcut = this.shortcuts[key];
+
+      if (shortcut.accelerator != shortcut.default) {
+        const settingsKey = `${SHORTCUTS_SETTING_KEY}.${shortcut.identifier}`;
+
+        shortcut.restoreDefault();
+        setSync(settingsKey, shortcut.default as string);
+      }
+    })
+  }
 }
 
 export const shortcutsManager = new ShortcutsManager();
