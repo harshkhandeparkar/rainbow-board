@@ -34,7 +34,7 @@ import { Accelerator } from 'electron';
 
 if (!hasSync(SHORTCUTS_SETTING_KEY)) setSync(SHORTCUTS_SETTING_KEY, {});
 
-type shortcutName =
+export type shortcutName =
   'START_NEW' |
   'SAVE' |
   'OPEN' |
