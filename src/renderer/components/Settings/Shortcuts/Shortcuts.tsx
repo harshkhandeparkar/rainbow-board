@@ -1,13 +1,132 @@
-import React, { Component } from 'react';
+import React, { Component, createRef, RefObject } from 'react';
 import { Header } from '../../Header/Header';
 
 import { shortcutName, shortcutsManager } from '../../../../common/code/shortcuts';
 
 import './Shortcuts.scss';
-import { faRedoAlt } from '@fortawesome/free-solid-svg-icons';
-import { Icon } from '../../Icon/Icon';
+import { Modal } from 'materialize-css';
+import { getPlatformFormattedShortcutString } from '../../../../common/constants/shortcuts';
 
-export class Shortcuts extends Component {
+interface IShortcutsState {
+  shortcut: {
+    ctrlKey: boolean;
+    metaKey: boolean;
+    altKey: boolean;
+    shiftKey: boolean;
+    keys: string[];
+  }
+}
+
+export class Shortcuts extends Component<{}, IShortcutsState> {
+  modalRef: RefObject<HTMLDivElement> = createRef();
+  modalInstance: Modal;
+
+  state = {
+    shortcut: {
+      ctrlKey: false,
+      metaKey: false,
+      altKey: false,
+      shiftKey: false,
+      keys: [] as string[]
+    }
+  }
+
+  _initializeModal() {
+    if (!this.modalInstance) {
+      this.modalInstance = M.Modal.init(
+        this.modalRef.current,
+        { inDuration: 0, outDuration: 0, dismissible: false }
+      )
+    }
+  }
+
+  _keyToAcceleratorKeyCode(key: string) {
+    switch (key.toLowerCase()) {
+      case '':
+      case 'alt':
+      case 'shift':
+      case 'control':
+      case 'command':
+      case 'meta':
+      case 'cmd':
+        return null;
+      case 'arrowright':
+        return 'right';
+      case 'arrowleft':
+        return 'left';
+      case '+':
+        return 'plus';
+      case ' ':
+        return 'space';
+      default:
+        return key.toLowerCase();
+    }
+  }
+
+  componentDidMount() {
+    this._initializeModal();
+    document.addEventListener('keydown', (e) => {
+      if(!e.repeat) {
+        let keys = [...this.state.shortcut.keys];
+
+        if (e.key) {
+          const keyCode = this._keyToAcceleratorKeyCode(e.key);
+
+          if (keyCode !== null && !keys.includes(keyCode)) keys.push(keyCode);
+        }
+
+        this.setState({
+          shortcut: {
+            ctrlKey: e.ctrlKey,
+            metaKey: e.metaKey,
+            altKey: e.altKey,
+            shiftKey: e.shiftKey,
+            keys: keys
+          }
+        })
+      }
+    })
+
+    document.addEventListener('keyup', (e) => {
+      if(!e.repeat) {
+        let keys = [...this.state.shortcut.keys];
+
+        if (e.key && this._keyToAcceleratorKeyCode(e.key) !== null) {
+          const keyCode = this._keyToAcceleratorKeyCode(e.key);
+
+          if (keyCode !== null && keys.includes(keyCode)) keys.splice(keys.indexOf(keyCode), 1);
+        }
+
+        this.setState({
+          shortcut: {
+            ctrlKey: e.ctrlKey,
+            metaKey: e.metaKey,
+            altKey: e.altKey,
+            shiftKey: e.shiftKey,
+            keys: keys
+          }
+        })
+      }
+    })
+  }
+
+  _getShortcutString() {
+    const keys = [];
+
+    if (this.state.shortcut.ctrlKey) keys.push('CTRL');
+    if (this.state.shortcut.metaKey) keys.push('CMD');
+    if (this.state.shortcut.altKey) keys.push('ALT');
+    if (this.state.shortcut.shiftKey) keys.push('SHIFT');
+
+    keys.push(...this.state.shortcut.keys);
+
+    return getPlatformFormattedShortcutString(keys.join(' + '));
+  }
+
+  componentDidUpdate() {
+    this._initializeModal();
+  }
+
   render() {
     return (
       <div>
@@ -36,7 +155,7 @@ export class Shortcuts extends Component {
                       <td>{shortcut.desc}</td>
                       <td>
                         {shortcut.platformFormattedString}
-                        <button className="btn btn-small brand-text right">Edit</button>
+                        <button className="btn btn-small brand-text right" onClick={() => this.modalInstance.open()}>Edit</button>
                       </td>
                       <td>
                         <button
@@ -53,6 +172,15 @@ export class Shortcuts extends Component {
               }
             </tbody>
           </table>
+
+          <div className="modal" ref={this.modalRef}>
+            <div className="modal-content">
+              <div className="center">
+                <span>{this._getShortcutString()}</span>
+                <div className="brand-text">Press "Confirm" while holding the desired key combination.</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )
