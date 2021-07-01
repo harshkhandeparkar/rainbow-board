@@ -6,6 +6,8 @@ import { shortcutName, shortcutsManager } from '../../../../common/code/shortcut
 import './Shortcuts.scss';
 import { Modal } from 'materialize-css';
 import { getPlatformFormattedShortcutString } from '../../../../common/constants/shortcuts';
+import { Accelerator, ipcRenderer } from 'electron';
+import { RESTART } from '../../../../common/constants/eventNames';
 
 interface IShortcutsState {
   shortcut: {
@@ -14,14 +16,18 @@ interface IShortcutsState {
     altKey: boolean;
     shiftKey: boolean;
     keys: string[];
-  }
+  };
+  editing?: shortcutName;
 }
 
 export class Shortcuts extends Component<{}, IShortcutsState> {
-  modalRef: RefObject<HTMLDivElement> = createRef();
-  modalInstance: Modal;
+  recordModalRef: RefObject<HTMLDivElement> = createRef();
+  recordModalInstance: Modal;
 
-  state = {
+  restartModalRef: RefObject<HTMLDivElement> = createRef();
+  restartModalInstance: Modal;
+
+  state: IShortcutsState = {
     shortcut: {
       ctrlKey: false,
       metaKey: false,
@@ -32,10 +38,17 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
   }
 
   _initializeModal() {
-    if (!this.modalInstance) {
-      this.modalInstance = M.Modal.init(
-        this.modalRef.current,
+    if (!this.recordModalInstance) {
+      this.recordModalInstance = M.Modal.init(
+        this.recordModalRef.current,
         { inDuration: 0, outDuration: 0, dismissible: false }
+      )
+    }
+
+    if (!this.restartModalInstance) {
+      this.restartModalInstance = M.Modal.init(
+        this.restartModalRef.current,
+        { inDuration: 0, outDuration: 0, dismissible: true }
       )
     }
   }
@@ -63,7 +76,7 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
     }
   }
 
-  _getShortcutString() {
+  _getAcceleratorString(): Accelerator {
     const keys = [];
 
     if (this.state.shortcut.ctrlKey) keys.push('CTRL');
@@ -72,8 +85,11 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
     if (this.state.shortcut.shiftKey) keys.push('SHIFT');
 
     keys.push(...this.state.shortcut.keys);
+    return keys.join(' + ');
+  }
 
-    return getPlatformFormattedShortcutString(keys.join(' + '));
+  _getShortcutString() {
+    return getPlatformFormattedShortcutString(this._getAcceleratorString());
   }
 
   _keyDownListener = (e: KeyboardEvent) => {
@@ -134,6 +150,23 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
     document.removeEventListener('keyup', this._keyUpListener);
   }
 
+  _confirmChange() {
+    if(this.state.editing) {
+      shortcutsManager.updateShortcut(this.state.editing, this._getAcceleratorString());
+      this.setState({
+        shortcut: {
+          ctrlKey: false,
+          metaKey: false,
+          altKey: false,
+          shiftKey: false,
+          keys: [] as string[]
+        }
+      })
+
+      this.restartModalInstance.open();
+    }
+  }
+
   componentDidMount() {
     this._initializeModal();
   }
@@ -177,7 +210,10 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
                         <button
                           className="btn btn-small brand-text right"
                           onClick={() => {
-                            this.modalInstance.open();
+                            this.setState({
+                              editing: shortcut_name
+                            })
+                            this.recordModalInstance.open();
                             this._addListeners();
                           }}
                         >
@@ -189,6 +225,14 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
                           className={`btn btn-small brand-text ${shortcut.accelerator === shortcut.default ? 'disabled' : ''}`}
                           title="Restore Default"
                           style={{width: '100%'}}
+                          onClick={() => {
+                            shortcutsManager.restoreDefault(shortcut_name);
+                            this.setState({
+                              editing: shortcut_name
+                            })
+
+                            this.restartModalInstance.open();
+                          }}
                         >
                           {shortcut.defaultPlatformString}
                         </button>
@@ -200,7 +244,7 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
             </tbody>
           </table>
 
-          <div className="modal" ref={this.modalRef}>
+          <div className="modal" ref={this.recordModalRef}>
             <div className="modal-content">
               <div className="center">
                 <span className="keycombo-box brand-text">{this._getShortcutString() !== '' ? this._getShortcutString() : 'Recording key combination...'}</span>
@@ -209,18 +253,84 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
             </div>
 
             <div className="modal-footer">
-              <button className="btn brand-text left">Confirm</button>
+              <button
+                className="btn brand-text left"
+                onClick={() => {
+                  this.recordModalInstance.close();
+                  this._removeListeners();
+                  this._confirmChange();
+                }}
+              >
+                Confirm
+              </button>
               <button
                 className="btn right"
                 onClick={() => {
-                  this.modalInstance.close();
+                  this.recordModalInstance.close();
                   this._removeListeners();
+                  this.setState({
+                    shortcut: {
+                      ctrlKey: false,
+                      metaKey: false,
+                      altKey: false,
+                      shiftKey: false,
+                      keys: [] as string[]
+                    }
+                  })
                 }}
               >
                 Cancel
               </button>
             </div>
           </div>
+
+          <div className="modal" ref={this.restartModalRef}>
+            <div className="modal-content">
+              {this.state.editing && (
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Action</th>
+                      <th>New Shortcut</th>
+                      <th>Default</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>{shortcutsManager.shortcuts[this.state.editing].desc}</td>
+                      <td>{shortcutsManager.shortcuts[this.state.editing].platformFormattedString}</td>
+                      <td>{shortcutsManager.shortcuts[this.state.editing].defaultPlatformString}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              )}
+              <div className="center brand-text">
+                Changes will be effective after restart.
+              </div>
+            </div>
+
+            <div className="modal-footer">
+              <button
+                className="btn brand-text left"
+                onClick={() => ipcRenderer.send(RESTART)}
+              >
+                Restart Now
+              </button>
+              <button
+                className="btn right"
+                onClick={() => {
+                  this.restartModalInstance.close();
+                  this.setState({
+                    editing: null
+                  })
+                }}
+              >
+                Restart Later
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
     )
