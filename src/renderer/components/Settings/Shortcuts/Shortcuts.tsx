@@ -63,53 +63,6 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
     }
   }
 
-  componentDidMount() {
-    this._initializeModal();
-    document.addEventListener('keydown', (e) => {
-      if(!e.repeat) {
-        let keys = [...this.state.shortcut.keys];
-
-        if (e.key) {
-          const keyCode = this._keyToAcceleratorKeyCode(e.key);
-
-          if (keyCode !== null && !keys.includes(keyCode)) keys.push(keyCode);
-        }
-
-        this.setState({
-          shortcut: {
-            ctrlKey: e.ctrlKey,
-            metaKey: e.metaKey,
-            altKey: e.altKey,
-            shiftKey: e.shiftKey,
-            keys: keys
-          }
-        })
-      }
-    })
-
-    document.addEventListener('keyup', (e) => {
-      if(!e.repeat) {
-        let keys = [...this.state.shortcut.keys];
-
-        if (e.key && this._keyToAcceleratorKeyCode(e.key) !== null) {
-          const keyCode = this._keyToAcceleratorKeyCode(e.key);
-
-          if (keyCode !== null && keys.includes(keyCode)) keys.splice(keys.indexOf(keyCode), 1);
-        }
-
-        this.setState({
-          shortcut: {
-            ctrlKey: e.ctrlKey,
-            metaKey: e.metaKey,
-            altKey: e.altKey,
-            shiftKey: e.shiftKey,
-            keys: keys
-          }
-        })
-      }
-    })
-  }
-
   _getShortcutString() {
     const keys = [];
 
@@ -121,6 +74,72 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
     keys.push(...this.state.shortcut.keys);
 
     return getPlatformFormattedShortcutString(keys.join(' + '));
+  }
+
+  _keyDownListener = (e: KeyboardEvent) => {
+    e.preventDefault();
+
+    if(!e.repeat) {
+      let keys = [...this.state.shortcut.keys];
+
+      if (e.key) {
+        const keyCode = this._keyToAcceleratorKeyCode(e.key);
+
+        if (keyCode !== null && !keys.includes(keyCode)) keys.push(keyCode);
+      }
+
+      this.setState({
+        shortcut: {
+          ctrlKey: e.ctrlKey,
+          metaKey: e.metaKey,
+          altKey: e.altKey,
+          shiftKey: e.shiftKey,
+          keys: keys
+        }
+      })
+    }
+  }
+
+  _keyUpListener = (e: KeyboardEvent) => {
+    e.preventDefault();
+
+    if(!e.repeat) {
+      let keys = [...this.state.shortcut.keys];
+
+      if (e.key && this._keyToAcceleratorKeyCode(e.key) !== null) {
+        const keyCode = this._keyToAcceleratorKeyCode(e.key);
+
+        if (keyCode !== null && keys.includes(keyCode)) keys.splice(keys.indexOf(keyCode), 1);
+      }
+
+      this.setState({
+        shortcut: {
+          ctrlKey: e.ctrlKey,
+          metaKey: e.metaKey,
+          altKey: e.altKey,
+          shiftKey: e.shiftKey,
+          keys: keys
+        }
+      })
+    }
+  }
+
+  _addListeners() {
+    document.addEventListener('keydown', this._keyDownListener);
+    document.addEventListener('keyup', this._keyUpListener);
+  }
+
+  _removeListeners() {
+    document.removeEventListener('keydown', this._keyDownListener);
+    document.removeEventListener('keyup', this._keyUpListener);
+  }
+
+  componentDidMount() {
+    this._initializeModal();
+  }
+
+  componentWillUnmount() {
+    this._removeListeners();
   }
 
   componentDidUpdate() {
@@ -155,7 +174,15 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
                       <td>{shortcut.desc}</td>
                       <td>
                         {shortcut.platformFormattedString}
-                        <button className="btn btn-small brand-text right" onClick={() => this.modalInstance.open()}>Edit</button>
+                        <button
+                          className="btn btn-small brand-text right"
+                          onClick={() => {
+                            this.modalInstance.open();
+                            this._addListeners();
+                          }}
+                        >
+                          Edit
+                        </button>
                       </td>
                       <td>
                         <button
@@ -183,7 +210,15 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
 
             <div className="modal-footer">
               <button className="btn brand-text left">Confirm</button>
-              <button className="btn right" onClick={() => this.modalInstance.close()}>Cancel</button>
+              <button
+                className="btn right"
+                onClick={() => {
+                  this.modalInstance.close();
+                  this._removeListeners();
+                }}
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
