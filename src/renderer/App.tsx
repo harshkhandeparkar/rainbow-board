@@ -33,7 +33,7 @@ class App extends Component {
             `
             ${this.state.css.globalCSS}
 
-            .checkbox .checkmark {
+            .checkbox .checkmark, .keycombo-box {
               border: 1px solid ${this.state.css.borderColor};
               background-color: ${this.state.css.bg1}
             }

@@ -176,9 +176,14 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
           <div className="modal" ref={this.modalRef}>
             <div className="modal-content">
               <div className="center">
-                <span>{this._getShortcutString()}</span>
-                <div className="brand-text">Press "Confirm" while holding the desired key combination.</div>
+                <span className="keycombo-box brand-text">{this._getShortcutString() !== '' ? this._getShortcutString() : 'Recording key combination...'}</span>
+                <div>Press "Confirm" while holding the desired key combination.</div>
               </div>
+            </div>
+
+            <div className="modal-footer">
+              <button className="btn brand-text left">Confirm</button>
+              <button className="btn right" onClick={() => this.modalInstance.close()}>Cancel</button>
             </div>
           </div>
         </div>
