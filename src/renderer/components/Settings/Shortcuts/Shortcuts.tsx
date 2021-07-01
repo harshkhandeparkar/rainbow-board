@@ -5,18 +5,22 @@ import { shortcutName, shortcutsManager } from '../../../../common/code/shortcut
 
 import './Shortcuts.scss';
 import { Modal } from 'materialize-css';
-import { getPlatformFormattedShortcutString } from '../../../../common/constants/shortcuts';
-import { Accelerator, ipcRenderer } from 'electron';
+import { ipcRenderer } from 'electron';
 import { RESTART } from '../../../../common/constants/eventNames';
 
+import { _keyToAcceleratorKeyCode, _getAcceleratorString } from './util';
+import { getPlatformFormattedShortcutString } from '../../../../common/constants/shortcuts';
+
+export interface IShortcutRecording {
+  ctrlKey: boolean;
+  metaKey: boolean;
+  altKey: boolean;
+  shiftKey: boolean;
+  keys: string[];
+}
+
 interface IShortcutsState {
-  shortcut: {
-    ctrlKey: boolean;
-    metaKey: boolean;
-    altKey: boolean;
-    shiftKey: boolean;
-    keys: string[];
-  };
+  shortcut: IShortcutRecording;
   editing?: shortcutName;
 }
 
@@ -27,14 +31,16 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
   restartModalRef: RefObject<HTMLDivElement> = createRef();
   restartModalInstance: Modal;
 
+  static emptyRecording: IShortcutRecording = {
+    ctrlKey: false,
+    metaKey: false,
+    altKey: false,
+    shiftKey: false,
+    keys: [] as string[]
+  }
+
   state: IShortcutsState = {
-    shortcut: {
-      ctrlKey: false,
-      metaKey: false,
-      altKey: false,
-      shiftKey: false,
-      keys: [] as string[]
-    }
+    shortcut: Shortcuts.emptyRecording
   }
 
   _initializeModal() {
@@ -53,91 +59,49 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
     }
   }
 
-  _keyToAcceleratorKeyCode(key: string) {
-    switch (key.toLowerCase()) {
-      case '':
-      case 'alt':
-      case 'shift':
-      case 'control':
-      case 'command':
-      case 'meta':
-      case 'cmd':
-        return null;
-      case 'arrowright':
-        return 'right';
-      case 'arrowleft':
-        return 'left';
-      case '+':
-        return 'plus';
-      case ' ':
-        return 'space';
-      default:
-        return key.toLowerCase();
-    }
-  }
-
-  _getAcceleratorString(): Accelerator {
-    const keys = [];
-
-    if (this.state.shortcut.ctrlKey) keys.push('CTRL');
-    if (this.state.shortcut.metaKey) keys.push('CMD');
-    if (this.state.shortcut.altKey) keys.push('ALT');
-    if (this.state.shortcut.shiftKey) keys.push('SHIFT');
-
-    keys.push(...this.state.shortcut.keys);
-    return keys.join(' + ');
-  }
-
   _getShortcutString() {
-    return getPlatformFormattedShortcutString(this._getAcceleratorString());
+    return getPlatformFormattedShortcutString(_getAcceleratorString(this.state.shortcut))
+  }
+
+  _updateRecordingOnEvent = (e: KeyboardEvent, updateKeys: (keys: string[], keyCode: string) => string[]) => {
+    e.preventDefault();
+
+    if(!e.repeat) {
+      let keys = [...this.state.shortcut.keys];
+
+      if (e.key && _keyToAcceleratorKeyCode(e.key) !== null) {
+        keys = updateKeys(keys, _keyToAcceleratorKeyCode(e.key));
+      }
+
+      this.setState({
+        shortcut: {
+          ctrlKey: e.ctrlKey,
+          metaKey: e.metaKey,
+          altKey: e.altKey,
+          shiftKey: e.shiftKey,
+          keys: keys
+        }
+      })
+    }
   }
 
   _keyDownListener = (e: KeyboardEvent) => {
-    e.preventDefault();
-
-    if(!e.repeat) {
-      let keys = [...this.state.shortcut.keys];
-
-      if (e.key) {
-        const keyCode = this._keyToAcceleratorKeyCode(e.key);
-
-        if (keyCode !== null && !keys.includes(keyCode)) keys.push(keyCode);
+    this._updateRecordingOnEvent(
+      e, (keys, keyCode) => {
+        if (!keys.includes(keyCode)) return [...keys, keyCode];
+        else return keys;
       }
-
-      this.setState({
-        shortcut: {
-          ctrlKey: e.ctrlKey,
-          metaKey: e.metaKey,
-          altKey: e.altKey,
-          shiftKey: e.shiftKey,
-          keys: keys
-        }
-      })
-    }
+    )
   }
 
   _keyUpListener = (e: KeyboardEvent) => {
-    e.preventDefault();
+    this._updateRecordingOnEvent(
+      e, (keys, keyCode) => {
+        if (keys.includes(keyCode)) keys.splice(keys.indexOf(keyCode), 1);
 
-    if(!e.repeat) {
-      let keys = [...this.state.shortcut.keys];
-
-      if (e.key && this._keyToAcceleratorKeyCode(e.key) !== null) {
-        const keyCode = this._keyToAcceleratorKeyCode(e.key);
-
-        if (keyCode !== null && keys.includes(keyCode)) keys.splice(keys.indexOf(keyCode), 1);
+        return keys;
       }
-
-      this.setState({
-        shortcut: {
-          ctrlKey: e.ctrlKey,
-          metaKey: e.metaKey,
-          altKey: e.altKey,
-          shiftKey: e.shiftKey,
-          keys: keys
-        }
-      })
-    }
+    )
   }
 
   _addListeners() {
@@ -152,15 +116,9 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
 
   _confirmChange() {
     if(this.state.editing) {
-      shortcutsManager.updateShortcut(this.state.editing, this._getAcceleratorString());
+      shortcutsManager.updateShortcut(this.state.editing, _getAcceleratorString(this.state.shortcut));
       this.setState({
-        shortcut: {
-          ctrlKey: false,
-          metaKey: false,
-          altKey: false,
-          shiftKey: false,
-          keys: [] as string[]
-        }
+        shortcut: Shortcuts.emptyRecording
       })
 
       this.restartModalInstance.open();
@@ -247,7 +205,9 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
           <div className="modal" ref={this.recordModalRef}>
             <div className="modal-content">
               <div className="center">
-                <span className="keycombo-box brand-text">{this._getShortcutString() !== '' ? this._getShortcutString() : 'Recording key combination...'}</span>
+                <span className="keycombo-box brand-text">
+                  {this._getShortcutString() !== '' ? this._getShortcutString() : 'Recording key combination...'}
+                </span>
                 <div>Press "Confirm" while holding the desired key combination.</div>
               </div>
             </div>
@@ -268,13 +228,7 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
                   this.recordModalInstance.close();
                   this._removeListeners();
                   this.setState({
-                    shortcut: {
-                      ctrlKey: false,
-                      metaKey: false,
-                      altKey: false,
-                      shiftKey: false,
-                      keys: [] as string[]
-                    }
+                    shortcut: Shortcuts.emptyRecording
                   })
                 }}
               >
@@ -330,7 +284,6 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
               </button>
             </div>
           </div>
-
         </div>
       </div>
     )
