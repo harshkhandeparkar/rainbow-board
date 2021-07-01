@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "webpack --config=webpack.main.config.js --mode development && webpack --config=webpack.renderer.config.js --mode development && electron .",
-    "build": "webpack --config=webpack.main.config.js --mode production && webpack --config=webpack.renderer.config.js --mode production",
+    "build": "rm -rf build/ && webpack --config=webpack.main.config.js --mode production && webpack --config=webpack.renderer.config.js --mode production",
     "pack": "electron-builder --dir",
     "dist": "yarn build && electron-builder",
     "postinstall": "electron-builder install-app-deps"
