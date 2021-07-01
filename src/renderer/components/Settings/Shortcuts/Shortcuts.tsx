@@ -48,7 +48,7 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
     if (!this.restartModalInstance) {
       this.restartModalInstance = M.Modal.init(
         this.restartModalRef.current,
-        { inDuration: 0, outDuration: 0, dismissible: true }
+        { inDuration: 0, outDuration: 0, dismissible: false }
       )
     }
   }
@@ -257,7 +257,6 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
                 className="btn brand-text left"
                 onClick={() => {
                   this.recordModalInstance.close();
-                  this._removeListeners();
                   this._confirmChange();
                 }}
               >
@@ -321,6 +320,7 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
                 className="btn right"
                 onClick={() => {
                   this.restartModalInstance.close();
+                  this._removeListeners();
                   this.setState({
                     editing: null
                   })
