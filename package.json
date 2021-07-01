@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "webpack --config=webpack.main.config.js --mode development && webpack --config=webpack.renderer.config.js --mode development && electron .",
-    "build": "rm -rf build/ && webpack --config=webpack.main.config.js --mode production && webpack --config=webpack.renderer.config.js --mode production",
+    "build": "del-cli build && webpack --config=webpack.main.config.js --mode production && webpack --config=webpack.renderer.config.js --mode production",
     "pack": "electron-builder --dir",
     "dist": "yarn build && electron-builder",
     "postinstall": "electron-builder install-app-deps"
@@ -46,6 +46,7 @@
     "@types/webpack-env": "^1.16.0",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.0",
+    "del-cli": "^4.0.0",
     "electron": "^12.0.1",
     "electron-builder": "^22.10.5",
     "materialize-css": "^1.0.0",
