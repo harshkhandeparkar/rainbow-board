@@ -69,8 +69,8 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
     if(!e.repeat) {
       let keys = [...this.state.shortcut.keys];
 
-      if (e.key && _keyToAcceleratorKeyCode(e.key) !== null) {
-        keys = updateKeys(keys, _keyToAcceleratorKeyCode(e.key));
+      if (e.key && _keyToAcceleratorKeyCode(e.key, e.code) !== null) {
+        keys = updateKeys(keys, _keyToAcceleratorKeyCode(e.key, e.code));
       }
 
       this.setState({
