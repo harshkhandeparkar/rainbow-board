@@ -111,7 +111,8 @@ export function setWindowMenu(
         { label: 'Home', click: () => menuClickEvents.fire(EVENTS.GO, {to: '/'}), accelerator:  shortcutsManager.shortcuts.GO_HOME.accelerator },
         { label: `What's New`, click: () => menuClickEvents.fire(EVENTS.GO, {to: `/${PATHS.WHATS_NEW}`}) },
         { label: 'Credits', click: () => menuClickEvents.fire(EVENTS.GO, {to: `/${PATHS.CREDITS}`}) },
-        { label: 'Settings', click: () => menuClickEvents.fire(EVENTS.GO, {to: `/${PATHS.SETTINGS}`}) }
+        { label: 'Settings', click: () => menuClickEvents.fire(EVENTS.GO, {to: `/${PATHS.SETTINGS}`}) },
+        { label: 'Keyboard Shortcuts', click: () => menuClickEvents.fire(EVENTS.GO, {to: `/${PATHS.SHORTCUTS}`}) }
       ]
     },
     {
@@ -122,6 +123,8 @@ export function setWindowMenu(
         { label: 'Github', click: () => shell.openExternal(repository) },
         { label: 'Discord Server', click: () => shell.openExternal(discordInvite) },
         { label: 'Release Notes', click: () => shell.openExternal(repository + '/releases/v' + version) },
+        { type: 'separator' },
+        { label: 'Keyboard Shortcuts', click: () => menuClickEvents.fire(EVENTS.GO, {to: `/${PATHS.SHORTCUTS}`}) },
         { type: 'separator' },
         { label: 'Latest Release', click: () => shell.openExternal(repository + '/releases/latest') },
         { label: 'All Releases', click: () => shell.openExternal(repository + '/releases') },
