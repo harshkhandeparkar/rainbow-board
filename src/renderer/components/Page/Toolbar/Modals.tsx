@@ -21,21 +21,26 @@ export const ColorPaletteModal = (
   const { boardState, lineColor, brushColor, onColor, onClose } = props;
 
   return (
-      <>
+    <>
       <div className="modal-content">
-        <PaintSettings
-          color={getRGBColorString(boardState.tool === 'line' ? lineColor : brushColor)}
-          tool={boardState.tool}
-          onPickColor={color => {
-            if(boardState.tool === 'brush' || boardState.tool === 'line'){
-              const colorArr: Color = [color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255];
+        {
+          boardState.tool === 'line' || boardState.tool === 'brush' ?
+            <PaintSettings
+              color={getRGBColorString(boardState.tool === 'line' ? lineColor : brushColor)}
+              tool={boardState.tool}
+              onPickColor={color => {
+                if(boardState.tool === 'brush' || boardState.tool === 'line'){
+                  const colorArr: Color = [color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255];
 
-              boardState.drawBoard.changeToolSetting(`${boardState.tool}Color` as keyof ToolSettings, colorArr);
-              onColor(colorArr);
-            }
-            else return;
-          }}
-        />
+                  boardState.drawBoard.changeToolSetting(`${boardState.tool}Color` as keyof ToolSettings, colorArr);
+                  onColor(colorArr);
+                }
+                else return;
+              }}
+            /> :
+            <div className="brand-text">This tool has no color property.</div>
+        }
+
       </div>
 
       <div className="modal-footer container">
