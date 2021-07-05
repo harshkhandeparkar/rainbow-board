@@ -88,13 +88,14 @@ export class Whiteboard extends Component {
               <Icon options={{icon: this.state.currentPage === this.state.pagesLength - 1 ? faPlus : faChevronRight}} />
             </button>
 
-            <span
-              className="btn-floating page-btn top-left brand-text"
-              style={{ fontWeight: 'bold' }}
-              title="Page Number"
+            <div
+              className="btn page-btn top-left brand-text"
+              style={{ fontWeight: 'bold', lineHeight: '34px', borderRadius: '0.5rem', padding: '0px 0.5rem' }}
             >
-              {this.state.currentPage + 1} / {this.state.pagesLength}
-            </span>
+              <span title="Page Number">{this.state.currentPage + 1}</span>
+              <div className="vertical-separator-line" />
+              <span title="Total Pages">{this.state.pagesLength}</span>
+            </div>
 
             {
               this.state.pagesLength > 1 &&
