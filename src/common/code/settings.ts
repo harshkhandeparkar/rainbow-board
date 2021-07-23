@@ -1,4 +1,4 @@
-import { hasSync, getSync, setSync } from 'electron-settings';
+// import { hasSync, getSync, setSync } from 'electron-settings';
 import {
   START_FULLSCREEN_SETTING,
   START_FULLSCREEN_SETTING_KEY,
@@ -30,18 +30,21 @@ export class SettingManager<SettingType> {
     this.key = key;
     this.cache = cache;
 
-    if (!hasSync(key)) this.set(defaultValue as any);
-    if (this.cache) this.value = <unknown>getSync(this.key) as SettingType;
+    // if (!hasSync(key)) this.set(defaultValue as any);
+    // if (this.cache) this.value = <unknown>getSync(this.key) as SettingType;
+    this.set(defaultValue as SettingType);
   }
 
   get(): SettingType {
-    if (this.cache) return this.value;
-    else return <unknown>getSync(this.key) as SettingType;
+    // if (this.cache) return this.value;
+    // else return <unknown>getSync(this.key) as SettingType;
+    return this.value;
   }
 
   set(value: SettingType) {
-    if (this.cache) this.value = value;
-    setSync(this.key, value as any);
+    // if (this.cache) this.value = value;
+    // setSync(this.key, value as any);
+    this.value = value;
   }
 }
 

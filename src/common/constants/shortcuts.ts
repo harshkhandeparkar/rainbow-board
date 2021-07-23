@@ -1,7 +1,8 @@
 import { Accelerator } from 'electron';
 
 export function getPlatformFormattedShortcutString(accelerator: Accelerator) {
-  const CMD_CTRL = process.platform === 'darwin' ? 'CMD' : 'CTRL'
+  // const CMD_CTRL = process.platform === 'darwin' ? 'CMD' : 'CTRL';
+  const CMD_CTRL = 'CTRL';
 
   return accelerator
     .toLowerCase()

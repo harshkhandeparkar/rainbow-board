@@ -1,5 +1,4 @@
-import { ipcRenderer } from 'electron';
-import { IpcRendererEvent } from 'electron';
+// import { ipcRenderer } from 'electron';
 import * as EVENTS from '../../common/constants/eventNames';
 
 export type IPCEventName =
@@ -22,7 +21,7 @@ export type IPCEventName =
   typeof EVENTS.LOCATION_CHANGED |
   typeof EVENTS.PROMPT_REPLY;
 
-export type IPCEventHandler = (event: IpcRendererEvent, args: any) => void;
+export type IPCEventHandler = (event: any, args: any) => void;
 
 export class IPCHandler {
   eventHandlers: {
@@ -68,11 +67,11 @@ export class IPCHandler {
 
   constructor() {
     for (let eventName in this.eventHandlers) {
-      ipcRenderer.on(eventName, (event, args) => {
-        for (let handlerName in this.eventHandlers[<IPCEventName>eventName]) {
-          this.eventHandlers[<IPCEventName>eventName][handlerName](event, args);
-        }
-      })
+      // ipcRenderer.on(eventName, (event, args) => {
+      //   for (let handlerName in this.eventHandlers[<IPCEventName>eventName]) {
+      //     this.eventHandlers[<IPCEventName>eventName][handlerName](event, args);
+      //   }
+      // })
     }
   }
 }

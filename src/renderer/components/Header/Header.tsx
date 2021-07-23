@@ -9,7 +9,7 @@ import { MAXIMIZE_UNMAXIMIZE, QUIT, MINIMIZE, SET_WINDOW_TITLE } from '../../../
 import * as PATHS from '../../../common/constants/paths';
 
 import './Header.scss';
-import { ipcRenderer } from 'electron';
+// import { ipcRenderer } from 'electron';
 
 type IMenuItem = 'settings' | 'home';
 
@@ -31,7 +31,7 @@ export class Header extends Component<IHeaderProps> {
 
   _setWindowTitle() {
     if (!this.isCustomHeader) {
-      ipcRenderer.send(SET_WINDOW_TITLE, this.props.title);
+      // ipcRenderer.send(SET_WINDOW_TITLE, this.props.title);
     }
   }
 
@@ -64,7 +64,7 @@ export class Header extends Component<IHeaderProps> {
                 className="btn-floating center"
                 onClick={(e) => {
                   e.preventDefault();
-                  ipcRenderer.send(QUIT);
+                  // ipcRenderer.send(QUIT);
                 }}
               >
                 <Icon customColor={true} options={{icon: faTimes, size: this.isCustomHeader ? 'sm': 'lg', color: '#f44336'}} />
@@ -77,7 +77,7 @@ export class Header extends Component<IHeaderProps> {
                 className="btn-floating center"
                 onClick={(e) => {
                   e.preventDefault();
-                  ipcRenderer.send(MINIMIZE);
+                  // ipcRenderer.send(MINIMIZE);
                 }}
               >
                 <Icon customColor={true} options={{icon: faMinus, size: this.isCustomHeader ? 'sm': 'lg', color: '#4CAF50'}} />
@@ -90,7 +90,7 @@ export class Header extends Component<IHeaderProps> {
                 className="btn-floating center"
                 onClick={(e) => {
                   e.preventDefault();
-                  ipcRenderer.send(MAXIMIZE_UNMAXIMIZE, this.state.isMaximized);
+                  // ipcRenderer.send(MAXIMIZE_UNMAXIMIZE, this.state.isMaximized);
                   this.setState({
                     isMaximized: !this.state.isMaximized
                   })

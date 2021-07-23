@@ -1,5 +1,5 @@
 import React, { Component, createRef, RefObject } from 'react';
-import { ipcRenderer } from 'electron';
+// import { ipcRenderer } from 'electron';
 import { RealDrawBoard } from 'svg-real-renderer';
 import SVGSaver from 'svgsaver';
 import ipcHandler from '../../util/ipc-handler';
@@ -102,12 +102,12 @@ export class Page extends Component<IPageProps> {
 
   _clearBoard() {
     if (this.state.boardState.drawBoard._strokeIndex > 0) {
-      ipcRenderer.send('prompt', {
-        title: 'Clear this page?',
-        message: 'If you clear the page, all the unsaved data will be LOST FOREVER.',
-        buttons: ['No', 'Yes'],
-        event: 'clear'
-      })
+      // ipcRenderer.send('prompt', {
+      //   title: 'Clear this page?',
+      //   message: 'If you clear the page, all the unsaved data will be LOST FOREVER.',
+      //   buttons: ['No', 'Yes'],
+      //   event: 'clear'
+      // })
     }
   }
 

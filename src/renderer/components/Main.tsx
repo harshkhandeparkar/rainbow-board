@@ -1,5 +1,5 @@
 import React from 'react';
-import { ipcRenderer } from 'electron';
+// import { ipcRenderer } from 'electron';
 import { NavLink, useHistory } from 'react-router-dom';
 import packageFile from '../../../package.json';
 import Download from './Download/Download';
@@ -70,7 +70,7 @@ function Main() {
               className="btn center brand-text full-width"
               title={`Open File (${OPEN.platformFormattedString})`}
               onClick={() => {
-                ipcRenderer.send(OPEN_EVENT);
+                // ipcRenderer.send(OPEN_EVENT);
               }}
             >
               <Icon options={{icon: faFolderOpen}} rightMargin={true} /> Open ({OPEN.platformFormattedString})

@@ -29,10 +29,10 @@ import {
   RELOAD
 } from '../constants/shortcuts';
 
-import { setSync, getSync, hasSync } from 'electron-settings';
+// import { setSync, getSync, hasSync } from 'electron-settings';
 import { Accelerator } from 'electron';
 
-if (!hasSync(SHORTCUTS_SETTING_KEY)) setSync(SHORTCUTS_SETTING_KEY, {});
+// if (!hasSync(SHORTCUTS_SETTING_KEY)) setSync(SHORTCUTS_SETTING_KEY, {});
 
 export type shortcutName =
   'START_NEW' |
@@ -99,24 +99,24 @@ class ShortcutsManager {
       if (!shortcut.fixed) {
         const settingsKey = `${SHORTCUTS_SETTING_KEY}.${shortcut.identifier}`;
 
-        if (!hasSync(settingsKey)) {
-          setSync(settingsKey, shortcut.accelerator as string);
-        }
-        else {
-          shortcut.updateShortcut(getSync(settingsKey) as Accelerator);
-        }
+        // if (!hasSync(settingsKey)) {
+        //   setSync(settingsKey, shortcut.accelerator as string);
+        // }
+        // else {
+        //   shortcut.updateShortcut(getSync(settingsKey) as Accelerator);
+        // }
       }
     })
   }
 
   updateShortcut(name: shortcutName, newValue: Accelerator) {
     this.shortcuts[name].updateShortcut(newValue);
-    setSync(`${SHORTCUTS_SETTING_KEY}.${this.shortcuts[name].identifier}`, newValue as string);
+    // setSync(`${SHORTCUTS_SETTING_KEY}.${this.shortcuts[name].identifier}`, newValue as string);
   }
 
   restoreDefault(name: shortcutName) {
     this.shortcuts[name].restoreDefault();
-    setSync(`${SHORTCUTS_SETTING_KEY}.${this.shortcuts[name].identifier}`, this.shortcuts[name].default as string);
+    // setSync(`${SHORTCUTS_SETTING_KEY}.${this.shortcuts[name].identifier}`, this.shortcuts[name].default as string);
   }
 
   restoreAllDefaults() {
@@ -127,7 +127,7 @@ class ShortcutsManager {
         const settingsKey = `${SHORTCUTS_SETTING_KEY}.${shortcut.identifier}`;
 
         shortcut.restoreDefault();
-        setSync(settingsKey, shortcut.default as string);
+        // setSync(settingsKey, shortcut.default as string);
       }
     })
   }

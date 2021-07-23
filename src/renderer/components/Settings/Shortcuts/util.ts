@@ -1,4 +1,4 @@
-import { Accelerator } from 'electron';
+// import { Accelerator } from 'electron';
 import { IShortcutRecording } from './Shortcuts';
 
 export function _keyToAcceleratorKeyCode(key: string, code: string) {
@@ -47,7 +47,7 @@ export function _keyToAcceleratorKeyCode(key: string, code: string) {
   }
 }
 
-export function _getAcceleratorString(shortcut: IShortcutRecording): Accelerator {
+export function _getAcceleratorString(shortcut: IShortcutRecording): string {
   const keys = [];
 
   if (shortcut.ctrlKey) keys.push('CTRL');

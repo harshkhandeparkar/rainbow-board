@@ -1,7 +1,7 @@
-import { ipcRenderer } from 'electron';
+// import { ipcRenderer } from 'electron';
 import React, { Component, createRef } from 'react';
-import { writeFile } from 'fs';
-import { basename } from 'path';
+// import { writeFile } from 'fs';
+// import { basename } from 'path';
 
 import { Icon } from '../Icon/Icon';
 import {
@@ -24,7 +24,6 @@ import { RealDrawBoard } from 'svg-real-renderer';
 import { useGnomeStyleHeaderbarSetting } from '../../../common/code/settings';
 
 import { WhiteboardHeader } from './WhiteboardHeader';
-import { height } from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
 
 export interface IHistoryStateWithOpen {
   open?: {
@@ -175,18 +174,18 @@ export class Whiteboard extends Component {
     const board = this.pageRef.current.state.boardState.drawBoard;
     this.pages[this.state.currentPage] = board.exportData();
 
-    writeFile(path, JSON.stringify(this.pages), () => {});
+    // writeFile(path, JSON.stringify(this.pages), () => {});
 
     this.setState({
       fileOpened: true,
-      fileName: basename(path),
+      // fileName: basename(path),
       location: path
     })
   }
 
   save() {
     if (this.state.fileOpened) this._saveWhiteboard(this.state.location);
-    else ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SAVE, options: {}});
+    // else ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SAVE, options: {}});
   }
 
   componentWillUnmount() {
@@ -232,12 +231,12 @@ export class Whiteboard extends Component {
   deletePage = () => {
     if (this.state.pagesLength > 1) {
       if (this.pageRef.current.state.boardState.drawBoard._strokeIndex > 0) { // If nothing is written, directly delete
-        ipcRenderer.send('prompt', {
-          title: 'Delete this page?',
-          message: 'If you delete the page, all the unsaved data will be LOST FOREVER.',
-          buttons: ['No', 'Yes'],
-          event: 'delete'
-        })
+        // ipcRenderer.send('prompt', {
+        //   title: 'Delete this page?',
+        //   message: 'If you delete the page, all the unsaved data will be LOST FOREVER.',
+        //   buttons: ['No', 'Yes'],
+        //   event: 'delete'
+        // })
       }
       else this._deletePage();
     }

@@ -5,7 +5,7 @@ import { shortcutName, shortcutsManager } from '../../../../common/code/shortcut
 
 import './Shortcuts.scss';
 import { Modal } from 'materialize-css';
-import { ipcRenderer } from 'electron';
+// import { ipcRenderer } from 'electron';
 import { RESTART } from '../../../../common/constants/eventNames';
 
 import { _keyToAcceleratorKeyCode, _getAcceleratorString } from './util';
@@ -266,7 +266,7 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
             <div className="modal-footer">
               <button
                 className="btn brand-text left"
-                onClick={() => ipcRenderer.send(RESTART)}
+                // onClick={() => ipcRenderer.send(RESTART)}
               >
                 Restart Now
               </button>

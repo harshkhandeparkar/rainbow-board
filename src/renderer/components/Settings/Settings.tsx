@@ -95,7 +95,7 @@ export default class Settings extends Component {
             defaultValue={useGnomeStyleHeaderbarSetting.get()}
             onInput={(val) => {
               useGnomeStyleHeaderbarSetting.set(val);
-              ipcRenderer.send(RESTART);
+              // ipcRenderer.send(RESTART);
             }}
           /> */}
         </div>

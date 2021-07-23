@@ -1,0 +1,13 @@
+- webpack config
+- process.platform
+- electron-settings
+- ipcRenderer
+- entire electron code
+- theming
+- routing
+- settings
+- cursor becomes edit cursor when dragging on svg
+- package file
+- credits
+- tauri.conf.json
+- shortcuts

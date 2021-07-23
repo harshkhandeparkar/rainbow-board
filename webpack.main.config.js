@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: './src/electron/electron.ts',
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'public', 'build'),
     filename: 'main.bundle.js'
   },
   target: 'electron-main',

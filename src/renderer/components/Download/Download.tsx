@@ -10,7 +10,8 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { Dropdown } from '../Dropdown/Dropdown';
 
 const { version } = packageFile;
-const platform: 'linux' | 'darwin' | 'win32' = process.platform as 'linux' | 'darwin' | 'win32';
+// const platform: 'linux' | 'darwin' | 'win32' = process.platform as 'linux' | 'darwin' | 'win32';
+const platform: 'linux' | 'darwin' | 'win32' = 'linux';
 
 function DownloadDropdownOption(
   { link, label, icon }: {

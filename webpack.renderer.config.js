@@ -3,13 +3,12 @@ const path = require('path');
 module.exports = {
   entry: './src/renderer/index.tsx',
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'public', 'build'),
     filename: 'renderer.bundle.js'
   },
   resolve: {
     extensions: ['.ts', '.js', '.json', '.jsx', '.tsx']
   },
-  target: 'electron-renderer',
   module: {
     rules: [
       {
