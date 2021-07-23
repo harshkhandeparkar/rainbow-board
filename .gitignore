@@ -129,5 +129,5 @@ yarn-error.log*
 # Binaries
 out/
 
-
 TODO.txt
+frontend/build

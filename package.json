@@ -23,7 +23,7 @@
   "scripts": {
     "start": "webpack --config=webpack.renderer.config.js --mode development && tauri dev",
     "build": "del-cli public/build && webpack --config=webpack.renderer.config.js --mode production",
-    "dist": "yarn build && tauri builder",
+    "dist": "yarn build && tauri build",
     "tauri": "tauri"
   },
   "devDependencies": {
