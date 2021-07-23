@@ -8,7 +8,7 @@ const include = [
 module.exports = {
   entry: './src/renderer/index.tsx',
   output: {
-    path: path.resolve(__dirname, 'public', 'build'),
+    path: path.resolve(__dirname, 'frontend', 'build'),
     filename: 'renderer.bundle.js'
   },
   resolve: {

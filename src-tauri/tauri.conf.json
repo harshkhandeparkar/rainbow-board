@@ -4,8 +4,8 @@
     "version": "0.1.0"
   },
   "build": {
-    "distDir": "../public",
-    "devPath": "../public",
+    "distDir": "../frontend",
+    "devPath": "../frontend",
     "beforeDevCommand": "",
     "beforeBuildCommand": ""
   },
