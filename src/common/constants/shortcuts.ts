@@ -1,6 +1,4 @@
-import { Accelerator } from 'electron';
-
-export function getPlatformFormattedShortcutString(accelerator: Accelerator) {
+export function getPlatformFormattedShortcutString(accelerator: string) {
   // const CMD_CTRL = process.platform === 'darwin' ? 'CMD' : 'CTRL';
   const CMD_CTRL = 'CTRL';
 
@@ -15,20 +13,20 @@ export function getPlatformFormattedShortcutString(accelerator: Accelerator) {
 }
 
 export class Shortcut {
-  accelerator: Accelerator;
+  accelerator: string;
   platformFormattedString: string;
   desc: string;
   identifier: string;
   fixed: boolean;
 
-  default: Accelerator;
+  default: string;
   defaultPlatformString: string;
   /**
    * @param identifier Settings key. No spaces or hyphens
    * @param accelerator Electron accelerator string
    * @param desc Description
    */
-  constructor(identifier: string, accelerator: Accelerator, desc: string, fixed = false) {
+  constructor(identifier: string, accelerator: string, desc: string, fixed = false) {
     this.accelerator = accelerator;
     this.platformFormattedString = getPlatformFormattedShortcutString(this.accelerator);
     this.default = accelerator;
@@ -39,7 +37,7 @@ export class Shortcut {
     this.fixed = fixed;
   }
 
-  updateShortcut(newAccelerator: Accelerator) {
+  updateShortcut(newAccelerator: string) {
     this.accelerator = newAccelerator;
     this.platformFormattedString = getPlatformFormattedShortcutString(this.accelerator);
   }

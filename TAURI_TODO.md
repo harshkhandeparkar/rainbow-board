@@ -1,4 +1,4 @@
-- webpack config
+x- webpack config
 - process.platform
 - electron-settings
 - ipcRenderer

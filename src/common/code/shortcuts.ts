@@ -30,8 +30,6 @@ import {
 } from '../constants/shortcuts';
 
 // import { setSync, getSync, hasSync } from 'electron-settings';
-import { Accelerator } from 'electron';
-
 // if (!hasSync(SHORTCUTS_SETTING_KEY)) setSync(SHORTCUTS_SETTING_KEY, {});
 
 export type shortcutName =
@@ -97,19 +95,19 @@ class ShortcutsManager {
       const shortcut = this.shortcuts[key];
 
       if (!shortcut.fixed) {
-        const settingsKey = `${SHORTCUTS_SETTING_KEY}.${shortcut.identifier}`;
+        // const settingsKey = `${SHORTCUTS_SETTING_KEY}.${shortcut.identifier}`;
 
         // if (!hasSync(settingsKey)) {
         //   setSync(settingsKey, shortcut.accelerator as string);
         // }
         // else {
-        //   shortcut.updateShortcut(getSync(settingsKey) as Accelerator);
+        //   shortcut.updateShortcut(getSync(settingsKey) as string);
         // }
       }
     })
   }
 
-  updateShortcut(name: shortcutName, newValue: Accelerator) {
+  updateShortcut(name: shortcutName, newValue: string) {
     this.shortcuts[name].updateShortcut(newValue);
     // setSync(`${SHORTCUTS_SETTING_KEY}.${this.shortcuts[name].identifier}`, newValue as string);
   }

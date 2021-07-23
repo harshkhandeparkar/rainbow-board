@@ -1,4 +1,9 @@
 const path = require('path');
+const include = [
+  path.resolve(__dirname, 'src', 'renderer'),
+  path.resolve(__dirname, 'src', 'common'),
+  path.resolve(__dirname, 'node_modules')
+]
 
 module.exports = {
   entry: './src/renderer/index.tsx',
@@ -13,30 +18,33 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'],
+        include
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [
-          // Creates `style` nodes from JS strings
-          "style-loader",
-          // Translates CSS into CommonJS
-          "css-loader",
-          // Compiles Sass to CSS
-          "sass-loader",
-        ],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+        include
       },
       {
         test: /\.ts(x?)$/,
-        use: ['ts-loader']
+        include,
+        use: {
+          loader: 'ts-loader',
+          options: {
+            onlyCompileBundledFiles: true
+          }
+        }
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource'
+        type: 'asset/resource',
+        include
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
+        include
       },
       {
         test: /\.jsx?$/,
@@ -44,9 +52,11 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             exclude: /node_modules/,
+            include,
             plugins: ['@babel/plugin-transform-react-jsx', '@babel/plugin-proposal-class-properties', '@babel/plugin-transform-react-display-name']
-          }
-        }
+          },
+        },
+        include
       }
     ]
   }

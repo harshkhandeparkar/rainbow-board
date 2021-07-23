@@ -1,7 +1,5 @@
 import packageFile from '../../../package.json';
 
-import { Accelerator } from 'electron';
-
 export const PLUGINS_SETTING_KEY = 'plugins';
 export type PLUGINS_SETTING = string[];
 export const PLUGINS_SETTING_DEFAULT: PLUGINS_SETTING = [];
