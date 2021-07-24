@@ -1,7 +1,7 @@
 {
   "package": {
     "productName": "rainbow-board",
-    "version": "0.1.0"
+    "version": "0.8.0-beta.2"
   },
   "build": {
     "distDir": "../frontend",
@@ -54,8 +54,8 @@
     "windows": [
       {
         "title": "Rainbow Board",
-        "width": 800,
-        "height": 600,
+        "width": 1600,
+        "height": 900,
         "resizable": true,
         "fullscreen": false
       }

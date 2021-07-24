@@ -9,5 +9,8 @@
     "outDir": "./build/",
     "allowSyntheticDefaultImports": true,
     "jsx": "react"
-  }
+  },
+  "include": [
+    "src"
+  ]
 }

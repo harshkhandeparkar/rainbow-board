@@ -88,8 +88,7 @@ class App extends Component {
               background-color: ${this.state.css.bg1} !important;
             }
 
-            button, .btn, .btn-flat
-            , .btn-floating, .card, .bottom-toolbar, .top-toolbar, select {
+            button, .btn, .btn-flat, .btn-floating, .card, .bottom-toolbar, .top-toolbar, select {
               background-color: ${this.state.css.bg1} !important;
               color: ${this.state.css.textColor};
             }

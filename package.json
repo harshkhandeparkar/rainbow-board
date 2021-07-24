@@ -21,7 +21,7 @@
     "semver": "^7.3.5"
   },
   "scripts": {
-    "start": "webpack --config=webpack.renderer.config.js --mode development && tauri dev",
+    "start": "concurrently 'webpack --config=webpack.renderer.config.js --mode development --watch' 'tauri dev'",
     "build": "del-cli frontend/build && webpack --config=webpack.renderer.config.js --mode production",
     "dist": "yarn build && tauri build",
     "tauri": "tauri"
@@ -44,6 +44,7 @@
     "@types/semver": "^7.3.4",
     "@types/webpack-env": "^1.16.0",
     "babel-loader": "^8.2.2",
+    "concurrently": "^6.2.0",
     "css-loader": "^5.2.0",
     "del-cli": "^4.0.0",
     "materialize-css": "^1.0.0",

@@ -6,6 +6,10 @@ select {
   margin-top: 1rem !important;
   height: 3rem;
   width: 100%;
+
+  appearance: none;
+  -webkit-appearance: none;
+  padding-left: 1rem;
 }
 
 select:focus, button:focus {

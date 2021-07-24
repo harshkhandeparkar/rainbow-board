@@ -18,17 +18,14 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-        include
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-        include
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.ts(x?)$/,
-        include,
         use: {
           loader: 'ts-loader',
           options: {
@@ -38,13 +35,11 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-        include
+        type: 'asset/resource'
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource',
-        include
+        type: 'asset/resource'
       },
       {
         test: /\.jsx?$/,
@@ -52,11 +47,9 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             exclude: /node_modules/,
-            include,
             plugins: ['@babel/plugin-transform-react-jsx', '@babel/plugin-proposal-class-properties', '@babel/plugin-transform-react-display-name']
-          },
-        },
-        include
+          }
+        }
       }
     ]
   }
