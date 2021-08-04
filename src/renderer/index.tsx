@@ -30,16 +30,22 @@ ipcHandler.addEventHandler(EVENTS.GO, 'go-handler', (e: any, {to}: {to: string})
 ipcHandler.addEventHandler(EVENTS.OPEN, 'open-handler', (e, {path}: {path: string}) => {
   readFile(path, (err, data) => {
     if (!err) {
-      history.push({
-        pathname: `/${PATHS.WHITEBOARD}`,
-        state: {
-          open: {
-            data: JSON.parse(data.toString()),
-            location: path,
-            fileName: basename(path)
+      try {
+        const fileData = JSON.parse(data.toString());
+        history.push({
+          pathname: `/${PATHS.WHITEBOARD}`,
+          state: {
+            open: {
+              data: fileData,
+              location: path,
+              fileName: basename(path)
+            }
           }
-        }
-      })
+        })
+      }
+      catch(e) {
+        console.log('error parsing file', e);
+      }
     }
   })
 })
