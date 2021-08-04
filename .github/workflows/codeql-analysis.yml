@@ -23,8 +23,6 @@ on:
       'src'
   schedule:
     - cron: '31 10 * * 2'
-    - paths:
-      - 'src'
 
 jobs:
   analyze:
