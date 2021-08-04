@@ -9,5 +9,5 @@ x- webpack config
 - cursor becomes edit cursor when dragging on svg
 - package file
 - credits
-- tauri.conf.json
+- tauri.conf.json (change identifier too)
 - shortcuts
