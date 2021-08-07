@@ -94,11 +94,6 @@ export default class Credits extends Component {
             desc="Used to export the page as PNG and SVG."
             link="https://github.com/Hypercubed/svgsaver"
           />
-          <Credit
-            title="Finger Paint Font"
-            desc="The paint-brush styled font used."
-            link="https://fonts.google.com/specimen/Finger+Paint"
-          />
 
           <Credit
             title="GIMP"
