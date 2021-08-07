@@ -63,13 +63,8 @@ export default class Credits extends Component {
           />
 
           <Credit
-            title="Electron Forge"
-            desc="Used to package the app for different operating systems."
-            link="https://electronforge.io"
-          />
-          <Credit
             title="Electron Builder"
-            desc="Used to package the app for even more operating systems."
+            desc="Used to package the app for different operating systems."
             link="https://electron.build"
           />
 
@@ -101,6 +96,7 @@ export default class Credits extends Component {
             link="https://gimp.org"
           />
           <Credit
+            size={2}
             title="Contributors"
             desc="Code Contributors."
             link={repository + '/graphs/contributors'}
