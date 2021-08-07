@@ -101,13 +101,11 @@ export default class Credits extends Component {
             link="https://gimp.org"
           />
           <Credit
-            size={2}
             title="Contributors"
             desc="Code Contributors."
             link={repository + '/graphs/contributors'}
           />
           <Credit
-            size={1}
             title="Full List of Libraries"
             desc="Complete list of dependencies used."
             link="https://github.com/harshkhandeparkar/rainbow-board/network/dependencies"
