@@ -24,7 +24,6 @@ import { RealDrawBoard } from 'svg-real-renderer';
 import { useGnomeStyleHeaderbarSetting } from '../../../common/code/settings';
 
 import { WhiteboardHeader } from './WhiteboardHeader';
-import { height } from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
 
 export interface IHistoryStateWithOpen {
   open?: {

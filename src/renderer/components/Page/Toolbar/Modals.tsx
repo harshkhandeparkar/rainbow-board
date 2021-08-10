@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import PaintSettings from '../../PaintSettings/PaintSettings';
 
 import { getRGBColorString } from 'svg-real-renderer/build/src/util/getRGBColorString';
-import { Tool, ToolSettings } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/tools/tools';
 import { Color } from 'svg-real-renderer/build/src/types/RealRendererTypes';
-import { RealDrawBoard } from 'svg-real-renderer';
 
 export const ColorPaletteModal = (
   props: {

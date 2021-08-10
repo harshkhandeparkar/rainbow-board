@@ -12,6 +12,10 @@ import { Toolbar } from './Toolbar/Toolbar';
 import './Page.scss';
 import { Tool } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/tools/tools';
 import { RealDrawBoardDefaults, RealDrawBoardTypes } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/RealDrawBoard';
+import { ToolHintsModal } from '../ToolHints/ToolHints';
+import { Modal } from 'materialize-css';
+import { Icon } from '../Icon/Icon';
+import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 
 export interface IPageState {
   boardState: {
@@ -26,6 +30,9 @@ export interface IPageProps {
 }
 
 export class Page extends Component<IPageProps> {
+  hintModalRef: RefObject<HTMLDivElement> = createRef();
+  hintModalInstance: Modal;
+
   state: IPageState = {
     boardState: {
       tool: 'brush' as Tool
@@ -68,7 +75,21 @@ export class Page extends Component<IPageProps> {
     })
   }
 
+  _initializeModal() {
+    if (!this.hintModalInstance) {
+      this.hintModalInstance = M.Modal.init(
+        this.hintModalRef.current,
+        { inDuration: 0, outDuration: 0, dismissible: true }
+      )
+    }
+  }
+
+  componentDidUpdate() {
+    this._initializeModal();
+  }
+
   componentDidMount() {
+    this._initializeModal();
     const drawBoard = this.state.boardState.drawBoard;
 
     drawBoard.attach(
@@ -169,6 +190,21 @@ export class Page extends Component<IPageProps> {
           _onRedo={() => this.state.boardState.drawBoard.redo()}
           _changeToolSetting={(property, newValue) => this.state.boardState.drawBoard.changeToolSetting(property, newValue)}
         />
+
+        <button
+          className="btn btn-floating page-btn top-right brand-text"
+          onClick={() => this.hintModalInstance.open()}
+        >
+          <Icon
+            options={{
+              icon: faQuestionCircle
+            }}
+          />
+        </button>
+
+        <div className="modal" ref={this.hintModalRef}>
+          <ToolHintsModal tool={this.state.boardState.tool} onClose={() => this.hintModalInstance.close()} />
+        </div>
       </div>
     )
   }
