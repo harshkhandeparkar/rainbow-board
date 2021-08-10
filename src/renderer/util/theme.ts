@@ -60,7 +60,8 @@ class ThemeManager {
     bgColor: [1, 1, 1],
     toolSettings: {
       brushColor: [0, 0, 0],
-      lineColor: [0, 0, 0]
+      lineColor: [0, 0, 0],
+      fontColor: [0, 0, 0]
     }
   }
 
@@ -68,7 +69,8 @@ class ThemeManager {
     bgColor: [0, 0, 0],
     toolSettings: {
       brushColor: [1, 1, 1],
-      lineColor: [1, 1, 1]
+      lineColor: [1, 1, 1],
+      fontColor: [1, 1, 1]
     }
   }
 

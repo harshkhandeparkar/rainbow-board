@@ -8,34 +8,28 @@ import { RealDrawBoard } from 'svg-real-renderer';
 
 export const ColorPaletteModal = (
   props: {
-    boardState: {
-      drawBoard: RealDrawBoard,
-      tool: Tool
-    };
-    lineColor: Color;
-    brushColor: Color;
+    toolInfo: [
+      colorVal: Color,
+      propertyTitle: string
+    ];
+    show: boolean;
     onColor: (color: Color) => void;
     onClose: () => void;
   }
 ) => {
-  const { boardState, lineColor, brushColor, onColor, onClose } = props;
+  const { toolInfo, onColor, onClose, show } = props;
 
   return (
     <>
       <div className="modal-content">
         {
-          boardState.tool === 'line' || boardState.tool === 'brush' ?
+          show ?
             <PaintSettings
-              color={getRGBColorString(boardState.tool === 'line' ? lineColor : brushColor)}
-              tool={boardState.tool}
+              color={getRGBColorString(toolInfo[0])}
+              propertyTitle={toolInfo[1]}
               onPickColor={color => {
-                if(boardState.tool === 'brush' || boardState.tool === 'line'){
-                  const colorArr: Color = [color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255];
-
-                  boardState.drawBoard.changeToolSetting(`${boardState.tool}Color` as keyof ToolSettings, colorArr);
-                  onColor(colorArr);
-                }
-                else return;
+                const colorArr: Color = [color.rgb.r / 255, color.rgb.g / 255, color.rgb.b / 255];
+                onColor(colorArr);
               }}
             /> :
             <div className="brand-text">This tool has no color property.</div>

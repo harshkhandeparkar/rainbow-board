@@ -5,9 +5,9 @@ import { Tool } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/tools/
 import './PaintSettings.scss';
 
 export interface IPaintSettingsProps {
-  color: Color,
-  onPickColor: (color: ColorResult) => void,
-  tool: Tool
+  color: Color;
+  onPickColor: (color: ColorResult) => void;
+  propertyTitle: string;
 }
 
 export default class PaintSettings extends Component<IPaintSettingsProps> {
@@ -27,7 +27,7 @@ export default class PaintSettings extends Component<IPaintSettingsProps> {
       <div className="container">
         <div className="row">
           <div className="col s12 center">
-            <h5>{this.props.tool === 'line' ? 'Line' : 'Brush'} Color</h5>
+            <h5>{this.props.propertyTitle}</h5>
             <CompactPicker
               className="color-palette"
               color={this.props.color}

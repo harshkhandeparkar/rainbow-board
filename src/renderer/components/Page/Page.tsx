@@ -57,6 +57,7 @@ export class Page extends Component<IPageProps> {
         brushSize: 3,
         lineThickness: 3,
         eraserSize: 30,
+        fontSize: 20,
         ...('toolSettings' in customBoardOptions ? customBoardOptions.toolSettings : {})
       }
     }

@@ -69,19 +69,32 @@ export class Toolbar extends Component<IToolbarProps> {
 
   state: {
     brushSize: number;
-    eraserSize: number;
+    brushColor: Color;
+
     lineThickness: number;
     lineColor: Color;
-    brushColor: Color;
+
+    eraserSize: number;
+
+    fontSize: number;
+    fontColor: Color;
+    textToolMode: 'new' | 'edit';
+
     previousTool: Tool;
     bgType: RBBGType;
   } = {
     brushSize: this.props.boardOptions.toolSettings.brushSize,
-    eraserSize: this.props.boardOptions.toolSettings.eraserSize,
-    // changeRate: this.props.boardOptions.toolSettings.changeRate,
+    brushColor: this.props.boardOptions.toolSettings.brushColor,
+
     lineThickness: this.props.boardOptions.toolSettings.lineThickness,
     lineColor: this.props.boardOptions.toolSettings.lineColor,
-    brushColor: this.props.boardOptions.toolSettings.brushColor,
+
+    eraserSize: this.props.boardOptions.toolSettings.eraserSize,
+
+    fontSize: this.props.boardOptions.toolSettings.fontSize,
+    fontColor: this.props.boardOptions.toolSettings.fontColor,
+    textToolMode: this.props.boardOptions.toolSettings.textToolMode,
+
     previousTool: this.props.boardOptions.tool,
     bgType: this.props.boardState.drawBoard.bgType.type as RBBGType
   }
@@ -124,6 +137,13 @@ export class Toolbar extends Component<IToolbarProps> {
     this.props._changeToolSetting('lineThickness', val);
     this.setState({
       lineThickness: val
+    })
+  }
+
+  onFontSizeChange = (val: number) => {
+    this.props._changeToolSetting('fontSize', val);
+    this.setState({
+      fontSize: val
     })
   }
 
@@ -248,6 +268,12 @@ export class Toolbar extends Component<IToolbarProps> {
           value={this.state.lineThickness}
           visible={boardState.tool === 'line'}
           onChange={this.onLineThicknessChange}
+        />
+        <TopToolbarRange
+          label="Font Size"
+          value={this.state.fontSize}
+          visible={boardState.tool === 'text'}
+          onChange={this.onFontSizeChange}
         />
 
         <div className="bottom-toolbar">
@@ -397,11 +423,36 @@ export class Toolbar extends Component<IToolbarProps> {
 
         <div className="modal" ref={this.colorPaletteRef}>
           <ColorPaletteModal
-            boardState={this.props.boardState}
-            lineColor={this.state.lineColor}
-            brushColor={this.state.brushColor}
+            show={boardState.tool !== 'eraser'}
+            toolInfo={
+              ((): [Color, string] => {
+                switch (boardState.tool) {
+                  case 'text':
+                    return [this.state.fontColor, 'Font Color'];
+                  case 'line':
+                    return [this.state.lineColor, 'Line Color'];
+                  case 'brush':
+                    return [this.state.brushColor, 'Brush Color'];
+                }
+              })()
+            }
             onClose={() => this.colorPaletteInstance.close()}
-            onColor={(color: Color) => this.setState({[`${boardState.tool}-color`]: color})}
+            onColor={(color: Color) => {
+              switch (this.props.boardState.tool) {
+                case 'text':
+                  boardState.drawBoard.changeToolSetting('fontColor', color);
+                  this.setState({fontColor: color});
+                  break;
+                case 'line':
+                  boardState.drawBoard.changeToolSetting('lineColor', color);
+                  this.setState({lineColor: color});
+                  break;
+                case 'brush':
+                  boardState.drawBoard.changeToolSetting('brushColor', color);
+                  this.setState({brushColor: color});
+                  break;
+              }
+            }}
           />
         </div>
       </div>
