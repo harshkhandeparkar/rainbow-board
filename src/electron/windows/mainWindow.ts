@@ -125,7 +125,7 @@ export function createMainWindow(
   })
 
   win.webContents.on('did-finish-load', () => {
-    if (splashWin !== null) if (!splashWin.isDestroyed()) splashWin.close();
+    // if (splashWin !== null) if (!splashWin.isDestroyed()) splashWin.close();
     win.show();
   })
 }

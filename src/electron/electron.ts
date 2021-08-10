@@ -12,8 +12,9 @@ loadPlugins(plugins);
 app.setName('Rainbow Board');
 
 app.whenReady().then(() => {
-  const splashWin = makeSplashScreen();
-  createMainWindow(isDev, plugins, splashWin);
+  // const splashWin = makeSplashScreen();
+  // createMainWindow(isDev, plugins, splashWin);
+  createMainWindow(isDev, plugins, null);
 })
 
 app.on('window-all-closed', () => {
