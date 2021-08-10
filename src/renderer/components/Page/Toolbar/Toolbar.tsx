@@ -33,14 +33,14 @@ import * as EVENTS from '../../../../common/constants/eventNames';
 import { shortcutsManager } from '../../../../common/code/shortcuts';
 import * as PATHS from '../../../../common/constants/paths';
 
-import { TopToolbarRange } from './TopToolbarComponents';
+import { TopToolbarRange, TopToolbarToggle } from './TopToolbarComponents';
 import { BottomToolbarButton } from './BottomToolbarComponents';
 import { ColorPaletteModal, ExportPageModal } from './Modals';
 import { TEXT_TOOL } from '../../../../common/constants/shortcuts';
 
 export interface IToolbarProps {
   boardOptions: RealDrawBoardTypes.IRealDrawBoardParametersSettings;
-  _changeToolSetting: (setting: keyof ToolSettings, value: number) => void;
+  _changeToolSetting: (setting: keyof ToolSettings, value: ToolSettings[keyof ToolSettings]) => void;
   _setTool: (tool: Tool) => void;
   boardState: {
     drawBoard: RealDrawBoard,
@@ -144,6 +144,13 @@ export class Toolbar extends Component<IToolbarProps> {
     this.props._changeToolSetting('fontSize', val);
     this.setState({
       fontSize: val
+    })
+  }
+
+  onTextToolModeChange = (val: 'new' | 'edit') => {
+    this.props._changeToolSetting('textToolMode', val);
+    this.setState({
+      textToolMode: val
     })
   }
 
@@ -271,9 +278,18 @@ export class Toolbar extends Component<IToolbarProps> {
         />
         <TopToolbarRange
           label="Font Size"
+          className="left"
           value={this.state.fontSize}
           visible={boardState.tool === 'text'}
           onChange={this.onFontSizeChange}
+        />
+        <TopToolbarToggle
+          label="Text Tool Mode"
+          className="right"
+          values={[['edit', 'Edit'], ['new', 'New']]}
+          value={this.state.textToolMode}
+          visible={boardState.tool === 'text'}
+          onChange={this.onTextToolModeChange}
         />
 
         <div className="bottom-toolbar">
