@@ -17,7 +17,8 @@ import {
   faAlignJustify,
   faSquare,
   faEllipsisV,
-  faFileImage
+  faFileImage,
+  faFont
 } from '@fortawesome/free-solid-svg-icons';
 
 import './Toolbar.scss';
@@ -35,6 +36,7 @@ import * as PATHS from '../../../../common/constants/paths';
 import { TopToolbarRange } from './TopToolbarComponents';
 import { BottomToolbarButton } from './BottomToolbarComponents';
 import { ColorPaletteModal, ExportPageModal } from './Modals';
+import { TEXT_TOOL } from '../../../../common/constants/shortcuts';
 
 export interface IToolbarProps {
   boardOptions: RealDrawBoardTypes.IRealDrawBoardParametersSettings;
@@ -284,6 +286,13 @@ export class Toolbar extends Component<IToolbarProps> {
             active={boardState.tool === 'eraser'}
             icon={faEraser}
             onClick={() => this._setTool('eraser')}
+          />
+          <BottomToolbarButton
+            title="Text Tool"
+            shortcutString={TEXT_TOOL.platformFormattedString}
+            active={boardState.tool === 'text'}
+            icon={faFont}
+            onClick={() => this._setTool('text')}
           />
           {/* /Tools */}
 

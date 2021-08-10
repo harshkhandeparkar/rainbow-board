@@ -85,6 +85,8 @@ export const BRUSH_TOOL = new Shortcut('brush_tool', 'CmdOrCtrl + 1', 'Select br
 export const LINE_TOOL = new Shortcut('line_tool', 'CmdOrCtrl + 2', 'Select line tool');
 /** Use Eraser Tool */
 export const ERASER_TOOL = new Shortcut('eraser_tool', 'CmdOrCtrl + 3', 'Select eraser tool');
+/** Use Text Tool */
+export const TEXT_TOOL = new Shortcut('text_tool', 'CmdOrCtrl + 4', 'Select text tool');
 /** Switch to previous tool */
 export const PREV_TOOL = new Shortcut('prev_tool', 'Alt + T', 'Switch to previous tool');
 

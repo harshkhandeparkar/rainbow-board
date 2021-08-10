@@ -20,6 +20,7 @@ import {
   BRUSH_TOOL,
   LINE_TOOL,
   ERASER_TOOL,
+  TEXT_TOOL,
   PREV_TOOL,
   GO_HOME,
 
@@ -83,6 +84,7 @@ class ShortcutsManager {
     BRUSH_TOOL,
     LINE_TOOL,
     ERASER_TOOL,
+    TEXT_TOOL,
     PREV_TOOL,
     GO_HOME,
 

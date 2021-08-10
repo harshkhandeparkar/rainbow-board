@@ -89,8 +89,9 @@ export function setWindowMenu(
         { label: 'Previous Tool', accelerator:  shortcutsManager.shortcuts.PREV_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.PREV_TOOL, {}) },
         { type: 'separator' },
         { label: 'Brush Tool', accelerator:  shortcutsManager.shortcuts.BRUSH_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'brush'}) },
-        { label: 'Eraser', accelerator:  shortcutsManager.shortcuts.ERASER_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'eraser'}) },
         { label: 'Line Tool', accelerator:  shortcutsManager.shortcuts.LINE_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'line'}) },
+        { label: 'Eraser', accelerator:  shortcutsManager.shortcuts.ERASER_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'eraser'}) },
+        { label: 'Line Tool', accelerator:  shortcutsManager.shortcuts.TEXT_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'text'}) }
       ]
     },
     {
