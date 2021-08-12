@@ -192,8 +192,12 @@ export class Page extends Component<IPageProps> {
         />
 
         <button
-          className="btn btn-floating page-btn top-right brand-text"
+          className="btn btn-floating page-btn top-left brand-text"
           onClick={() => this.hintModalInstance.open()}
+          style={{
+            marginRight: '0px',
+            marginTop: '3rem'
+          }}
         >
           <Icon
             options={{
