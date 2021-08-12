@@ -1,4 +1,6 @@
+import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 import React, { createRef, RefObject } from 'react';
+import { Icon } from '../../Icon/Icon';
 
 export const TopToolbarRange = (
   props: {
@@ -28,11 +30,9 @@ export const TopToolbarToggle = (
       val1: [value: any, text: string],
       val2: [value: any, text: string]
     ],
-    className?: string,
     value: any,
     label: string,
-    onChange: (val: any) => void,
-    visible: boolean
+    onChange: (val: any) => void
   }
 ) => {
   const onChange = () => {
@@ -40,9 +40,34 @@ export const TopToolbarToggle = (
   }
 
   return (
-    <div className={`top-toolbar valign-wrapper ${props.visible ? '' : 'hide'} ${props.className ?? ''}`} title={`${props.label} (SCROLL)`}>
+    <>
       <label>{props.label}</label>
       <button className="btn brand-text" onClick={onChange}>{props.values.find((val) => val[0] === props.value)[1]}</button>
-    </div>
+    </>
+  )
+}
+
+export const TopToolbarToggleButton = (
+  props: {
+    icon: FontAwesomeIconProps['icon'],
+    value: boolean,
+    onChange: (val: boolean) => void,
+    tooltip: string
+  }
+) => {
+  const onChange = () => {
+    props.onChange(!props.value);
+  }
+
+  return (
+    <>
+      <button className={`btn brand-text ${props.value ? 'active' : ''}`} onClick={onChange} title={props.tooltip}>
+        <Icon
+          options={{
+            icon: props.icon
+          }}
+        />
+      </button>
+    </>
   )
 }

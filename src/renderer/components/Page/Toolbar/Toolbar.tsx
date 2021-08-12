@@ -18,7 +18,10 @@ import {
   faSquare,
   faEllipsisV,
   faFileImage,
-  faFont
+  faFont,
+  faBold,
+  faItalic,
+  faUnderline
 } from '@fortawesome/free-solid-svg-icons';
 
 import './Toolbar.scss';
@@ -33,7 +36,7 @@ import * as EVENTS from '../../../../common/constants/eventNames';
 import { shortcutsManager } from '../../../../common/code/shortcuts';
 import * as PATHS from '../../../../common/constants/paths';
 
-import { TopToolbarRange, TopToolbarToggle } from './TopToolbarComponents';
+import { TopToolbarRange, TopToolbarToggle, TopToolbarToggleButton } from './TopToolbarComponents';
 import { BottomToolbarButton } from './BottomToolbarComponents';
 import { ColorPaletteModal, ExportPageModal } from './Modals';
 import { TEXT_TOOL } from '../../../../common/constants/shortcuts';
@@ -79,6 +82,9 @@ export class Toolbar extends Component<IToolbarProps> {
     fontSize: number;
     fontColor: Color;
     textToolMode: 'new' | 'edit';
+    bold: boolean;
+    italic: boolean;
+    underline: boolean;
 
     previousTool: Tool;
     bgType: RBBGType;
@@ -94,6 +100,9 @@ export class Toolbar extends Component<IToolbarProps> {
     fontSize: this.props.boardOptions.toolSettings.fontSize,
     fontColor: this.props.boardOptions.toolSettings.fontColor,
     textToolMode: this.props.boardOptions.toolSettings.textToolMode,
+    bold: this.props.boardOptions.toolSettings.bold,
+    italic: this.props.boardOptions.toolSettings.italic,
+    underline: this.props.boardOptions.toolSettings.underline,
 
     previousTool: this.props.boardOptions.tool,
     bgType: this.props.boardState.drawBoard.bgType.type as RBBGType
@@ -151,6 +160,13 @@ export class Toolbar extends Component<IToolbarProps> {
     this.props._changeToolSetting('textToolMode', val);
     this.setState({
       textToolMode: val
+    })
+  }
+
+  onFontStyleChange = (property: 'bold' | 'italic' | 'underline', val: boolean) => {
+    this.props._changeToolSetting(property, val);
+    this.setState({
+      [property]: val
     })
   }
 
@@ -283,14 +299,36 @@ export class Toolbar extends Component<IToolbarProps> {
           visible={boardState.tool === 'text'}
           onChange={this.onFontSizeChange}
         />
-        <TopToolbarToggle
-          label="Text Tool Mode"
-          className="right"
-          values={[['edit', 'Edit'], ['new', 'New']]}
-          value={this.state.textToolMode}
-          visible={boardState.tool === 'text'}
-          onChange={this.onTextToolModeChange}
-        />
+
+        <div className={`top-toolbar valign-wrapper right ${boardState.tool === 'text' ? '' : 'hide'}`}>
+          <TopToolbarToggle
+            label="Text Tool Mode"
+            values={[['edit', 'Edit'], ['new', 'New']]}
+            value={this.state.textToolMode}
+            onChange={this.onTextToolModeChange}
+          />
+
+          <label>Font Style</label>
+
+          <TopToolbarToggleButton
+            icon={faBold}
+            tooltip="Bold"
+            value={this.state.bold}
+            onChange={(val) => {this.onFontStyleChange('bold', val)}}
+          />
+          <TopToolbarToggleButton
+            icon={faItalic}
+            tooltip="Italic"
+            value={this.state.italic}
+            onChange={(val) => {this.onFontStyleChange('italic', val)}}
+          />
+          <TopToolbarToggleButton
+            icon={faUnderline}
+            tooltip="Underline"
+            value={this.state.underline}
+            onChange={(val) => {this.onFontStyleChange('underline', val)}}
+          />
+        </div>
 
         <div className="bottom-toolbar">
           {/* Tools */}

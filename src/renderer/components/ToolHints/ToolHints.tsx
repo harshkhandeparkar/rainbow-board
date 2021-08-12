@@ -47,7 +47,8 @@ const TOOL_HINT_MAP  = {
 
       <b>Scroll</b>: Scrolling the mousewheel directly will change the font size.<br />
       <b>Color</b>: Click on the color palette button or use {COLOR_PALETTE.platformFormattedString} shortcut while using the brush tool to change the font color. <br />
-      <b>Mode</b>: Use the button at the top right corner to manually switch modes. <br /> <br />
+      <b>Mode</b>: Use the button at the top right corner to manually switch modes. <br />
+      <b>Text Style</b>: The style (bold, italic, underline) for the entire text can be changed using the buttons at the top toolbar. <br /> <br />
 
       Certain features such as other standard keyboard shortcuts have not been added yet but will be added in the future. Join our <a href={discordInvite} target="_blank" rel="noopener noreferrer">Discord Server</a> to follow the development or give feedback.
     </>
