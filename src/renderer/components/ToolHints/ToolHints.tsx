@@ -9,7 +9,7 @@ const TOOL_TITLE_MAP = {
   brush: 'Brush Tool',
   eraser: 'Eraser',
   line: 'Line Tool',
-  text: 'Text Tool'
+  text: 'TEXT Tool'
 }
 
 const TOOL_HINT_MAP  = {
@@ -35,7 +35,7 @@ const TOOL_HINT_MAP  = {
     </>,
   text:
     <>
-      The text tool has two modes, <i>new</i> and <i>edit</i>. In new mode, click and drag to start a new text entry, this will also change the mode to edit. <br />
+      The <b>T</b>echnologically <b>E</b>nhanced e<b>X</b>treme <b>T</b>ranscription (TEXT) tool has two modes, <i>new</i> and <i>edit</i>. In new mode, click and drag to start a new TEXT entry, this will also change the mode to edit. <br />
       In edit mode, use the keyboard to enter text and the following keyboard shortcuts: <br />
 
       <ul>

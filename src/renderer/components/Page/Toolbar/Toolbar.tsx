@@ -302,7 +302,7 @@ export class Toolbar extends Component<IToolbarProps> {
 
         <div className={`top-toolbar valign-wrapper right ${boardState.tool === 'text' ? '' : 'hide'}`}>
           <TopToolbarToggle
-            label="Text Tool Mode"
+            label="TEXT Tool Mode"
             values={[['edit', 'Edit'], ['new', 'New']]}
             value={this.state.textToolMode}
             onChange={this.onTextToolModeChange}
@@ -368,7 +368,7 @@ export class Toolbar extends Component<IToolbarProps> {
             onClick={() => this._setTool('eraser')}
           />
           <BottomToolbarButton
-            title="Text Tool"
+            title="TEXT Tool"
             shortcutString={TEXT_TOOL.platformFormattedString}
             active={boardState.tool === 'text'}
             icon={faFont}
