@@ -119,7 +119,7 @@ class ThemeManager {
       theme: this.theme,
       name: this.themes[this.theme],
       css: this.themeCSS[this.theme],
-      boardOptions: this.themeCustomBoardOptions[this.theme] || {}
+      boardOptions: this.themeCustomBoardOptions[this.theme] ?? {}
     }
   }
 

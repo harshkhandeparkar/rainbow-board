@@ -14,8 +14,8 @@ export class Dropdown extends Component<IDropdownProps> {
   btnRef: RefObject<HTMLButtonElement> = createRef();
   dropdownRef: RefObject<HTMLDivElement> = createRef();
   arrowRef: RefObject<HTMLDivElement> = createRef();
-  up = this.props.up || false;
-  fixed = this.props.fixedPosn || false;
+  up = this.props.up ?? false;
+  fixed = this.props.fixedPosn ?? false;
 
   state = {
     dropped: false

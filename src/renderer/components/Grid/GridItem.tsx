@@ -9,7 +9,7 @@ export interface IGridItemProps {
 }
 
 export default function GridItem({ children, options = {}, className }: IGridItemProps) {
-  const width = options.width || 1;
+  const width = options.width ?? 1;
 
   return (
     <div className={`grid-item ${className ? className : ''}`} style={{ gridColumnEnd: `span ${width}` }}>

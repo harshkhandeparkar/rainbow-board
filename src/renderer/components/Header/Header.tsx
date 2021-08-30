@@ -46,9 +46,9 @@ export class Header extends Component<IHeaderProps> {
   render() {
     const { GO_HOME, SETTINGS } = shortcutsManager.shortcuts;
 
-    const onlyDisplayIfCustom = this.props.onlyDisplayIfCustom || false;
+    const onlyDisplayIfCustom = this.props.onlyDisplayIfCustom ?? false;
     this.isCustomHeader = useGnomeStyleHeaderbarSetting.get();
-    const rightMenu = this.props.rightMenu || [];
+    const rightMenu = this.props.rightMenu ?? [];
 
     const doDisplay = !onlyDisplayIfCustom || onlyDisplayIfCustom && this.isCustomHeader;
 

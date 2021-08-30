@@ -15,7 +15,7 @@ export interface IGridProps {
 export default function Grid(
   { children, options = {}, className = '', style = {} }: IGridProps
 ) {
-  let numColumns = options.numColumns || 3;
+  let numColumns = options.numColumns ?? 3;
   let gridTemplateColumns = '';
 
   for (let i = 0; i < numColumns; i++) gridTemplateColumns += `1fr `;
@@ -26,7 +26,7 @@ export default function Grid(
         ...style,
         display: 'grid',
         gridTemplateColumns,
-        gap: options.gap || '50px 50px',
+        gap: options.gap ?? '50px 50px',
       }}
       className={`grid-container ${className}`}
     >

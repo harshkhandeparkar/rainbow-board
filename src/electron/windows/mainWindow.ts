@@ -101,7 +101,7 @@ export function createMainWindow(
       title: args.title,
       message: args.message
     }).then(({ response }) => {
-      event.reply(EVENTS.PROMPT_REPLY, { event: args.event, response, options: args.options || {} });
+      event.reply(EVENTS.PROMPT_REPLY, { event: args.event, response, options: args.options ?? {} });
     })
   })
 
