@@ -25,6 +25,8 @@ import { useGnomeStyleHeaderbarSetting } from '../../../common/code/settings';
 
 import { WhiteboardHeader } from './WhiteboardHeader';
 
+import { HOME } from '../../../common/constants/paths';
+
 export interface IHistoryStateWithOpen {
   open?: {
     data: RealExport[],
@@ -35,14 +37,7 @@ export interface IHistoryStateWithOpen {
 
 export class Whiteboard extends Component {
   pageRef: React.RefObject<Page> = createRef();
-  pages: RealExport[] = [{
-    exportData: [], // dummy data
-    strokeIndex: 0,
-    dimensions: [0, 0],
-    bgType: {
-      type: 'none'
-    }
-  }]
+  pages: RealExport[] = []
 
   state = {
     currentPage: 0,
@@ -125,16 +120,42 @@ export class Whiteboard extends Component {
               // open a .rainbow file
               if (history.location.state) {
                 if ('open' in (history.location.state as IHistoryStateWithOpen)) {
-                  this.pages = (history.location.state as IHistoryStateWithOpen).open.data;
-                  board.importData(this.pages[0]);
+                  const pages = (history.location.state as IHistoryStateWithOpen).open.data;
 
-                  this.setState({
-                    currentPage: 0,
-                    pagesLength: this.pages.length,
-                    fileOpened: true,
-                    fileName: (history.location.state as IHistoryStateWithOpen).open.fileName,
-                    location: (history.location.state as IHistoryStateWithOpen).open.location
-                  })
+                  let isOldVersion = false;
+
+                  for (let page of pages) {
+                    if (RealDrawBoard.getExportVersion(page) === 1) {
+                      isOldVersion = true;
+                      break;
+                    }
+                  }
+
+                  if (isOldVersion) {
+                    ipcRenderer.send('prompt', {
+                      title: 'Continue?',
+                      message: `\
+This new version of Rainbow Board, and future versions have a new format for the ".rainbow" files.
+The ".rainbow" file you loaded uses the old format. The next time you save it, the format will change and the new save file will not load on older versions of Rainbow Board.
+
+This change has been made because the old format could be vulnerable to security issues.
+Opening a file that was exported directly from Rainbow Board, wasn't tempered with and is from\
+ a trusted source, can be opened without any threats but it is advised to not open non-trusted ".rainbow" files on your personal computer.
+
+Would you like to open this file?
+`,
+                      buttons: ['No', 'Yes'],
+                      event: 'import-warning'
+                    })
+
+                    ipcHandler.addEventHandler('prompt-reply', 'importWarningPromptHandler', (event, args) => {
+                      if (args.event === 'import-warning') {
+                        if (args.response === 0) history.push(HOME);
+                        else this._loadPages(board, pages);
+                      }
+                    })
+                  }
+                  else this._loadPages(board, pages);
                 }
               }
             }}
@@ -142,6 +163,19 @@ export class Whiteboard extends Component {
         </div>
       </div>
     )
+  }
+
+  _loadPages(board: RealDrawBoard, pages: RealExport[]) {
+    this.pages = pages;
+    board.importData(this.pages[0]);
+
+    this.setState({
+      currentPage: 0,
+      pagesLength: this.pages.length,
+      fileOpened: true,
+      fileName: (history.location.state as IHistoryStateWithOpen).open.fileName,
+      location: (history.location.state as IHistoryStateWithOpen).open.location
+    })
   }
 
   _removeHotkeys() {
