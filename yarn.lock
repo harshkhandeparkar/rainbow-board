@@ -3535,10 +3535,10 @@ supports-color@^8.0.0:
   dependencies:
     has-flag "^4.0.0"
 
-svg-real-renderer@^0.4.3:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/svg-real-renderer/-/svg-real-renderer-0.4.3.tgz#13e217822a382ee178aff2e04da1211d9db1e1b9"
-  integrity sha512-3dRWIsGFU7nfdktRp+CeR0UomMzjSMIvJlqtoyuZHa8DJCNlMo+tY4zObMm8nPhZrvZta8h2LL3lyA8+Dks3JQ==
+svg-real-renderer@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/svg-real-renderer/-/svg-real-renderer-0.4.4.tgz#fb11df15a4249ea96ce4c189a1524c601db2476f"
+  integrity sha512-2e69eXrMxs35v/RV1EMKkC/9RrGkVhYlfm+ohqevR3UWMfKNfeBFJ9niMXNIM04lSkr5O9MEJUZbLsAEQo7z0w==
 
 svgsaver@^0.9.0:
   version "0.9.0"
