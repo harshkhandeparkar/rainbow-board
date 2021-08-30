@@ -83,13 +83,13 @@ export default class WhatsNew extends Component {
                 To get instructions on how to use the TEXT TOOL, click on the <b>?</b> icon on the top left corner.
               </span>
             }
-            version="v0.8.3"
+            version="v0.8.0"
             size={2}
           />
           <New
             title="Usage Hints"
             desc="To get help on how to use the selected tool, you can now click on the ? icon on the top right corner."
-            version="v0.8.3"
+            version="v0.8.0"
           />
 
           <New
@@ -103,7 +103,7 @@ export default class WhatsNew extends Component {
                 <b>NOTE: THIS NEW FORMAT WILL NOT OPEN ON OLDER VERSIONS OF RAINBOW BOARD. PLEASE UPDATE BEFORE USING.</b>
               </span>
             }
-            version="v0.8.3"
+            version="v0.8.0"
             size={3}
           />
 
@@ -115,7 +115,7 @@ export default class WhatsNew extends Component {
                 This change was requested by thedudethatcode on the Rainbow Board<a href={discordInvite} target="_blank" rel="noreferrer">Discord server</a>.
               </span>
             }
-            version="v0.8.3"
+            version="v0.8.0"
           />
           <New
             title="Customizable Shortcuts"
@@ -124,12 +124,12 @@ export default class WhatsNew extends Component {
                 If you don't like the default keyboard shortcuts of Rainbow Board, you can now change them from the <Link to={PATHS.SHORTCUTS}>shortcut settings</Link> in the <Link to={PATHS.SETTINGS} title={SHORTCUTS.SETTINGS.platformFormattedString}>settings</Link>.
               </span>
             }
-            version="v0.8.3"
+            version="v0.8.0"
           />
           <New
             title="Smaller Changes"
             desc="Many more smaller tweaks and fixes have been made."
-            version="v0.8.3"
+            version="v0.8.0"
           />
         </Grid>
       </div>
