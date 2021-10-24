@@ -49,14 +49,16 @@ export const ExportPageModal = (
     _exportAll: (exportType: 'svg' | 'png') => void;
   }
 ) => {
+  const [exportAllFormVisible, setExportAllFormVisible] = useState<boolean>(false);
   const [exportType, setExportType] = useState<'svg' | 'png'>('png');
 
   return (
     <>
-      <div className="modal-content container-fluid">
-        <h3>Export Page</h3>
-        <p>Export the current page as an image.</p>
-        <div className="container">
+    <div className="modal-content container-fluid">
+      <h3>{exportAllFormVisible ? 'Export All Pages' : 'Export Page'}</h3>
+      <p>{exportAllFormVisible ? 'Export all the current pages as images.' : 'Export the current page as an image.'}</p>
+
+      <div className="container">
           <div className="row">
             <div className="col s12">
               <div
@@ -86,23 +88,25 @@ export const ExportPageModal = (
         <button className="btn right" title="Cancel (ESC)" onClick={() => props.onClose()}>Cancel</button>
         <button
           className="btn brand-text left"
-          title="Export"
+          title="Confirm"
           style={{
             marginRight: '0.5rem'
           }}
           onClick={() => {
-            props._export(exportType);
+            exportAllFormVisible ? props._exportAll(exportType) : props._export(exportType);
             props.onClose();
           }}
-        >Export</button>
+        >
+          Confirm
+        </button>
+
         <button
           className="btn brand-text left"
-          title="Export"
-          onClick={() => {
-            props._exportAll(exportType);
-            props.onClose();
-          }}
-        >Export All</button>
+          title={exportAllFormVisible ? 'Export...' : 'Export All...'}
+          onClick={() => setExportAllFormVisible(!exportAllFormVisible)}
+        >
+          {exportAllFormVisible ? 'Export...' : 'Export All...'}
+        </button>
       </div>
     </>
   )
