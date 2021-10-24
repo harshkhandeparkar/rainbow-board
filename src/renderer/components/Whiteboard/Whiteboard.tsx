@@ -116,6 +116,7 @@ export class Whiteboard extends Component {
           <Page
             ref={this.pageRef}
             _save={() => this.save()}
+            _getPages={() => this.pages}
             onDrawBoard={(board: RealDrawBoard) => {
               // open a .rainbow file
               if (history.location.state) {

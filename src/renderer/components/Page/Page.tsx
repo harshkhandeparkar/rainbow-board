@@ -16,6 +16,7 @@ import { ToolHintsModal } from '../ToolHints/ToolHints';
 import { Modal } from 'materialize-css';
 import { Icon } from '../Icon/Icon';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
+import { RealExport } from 'svg-real-renderer/src/types/RealRendererTypes';
 
 export interface IPageState {
   boardState: {
@@ -27,6 +28,7 @@ export interface IPageState {
 export interface IPageProps {
   onDrawBoard: (board: RealDrawBoard) => void;
   _save: () => void;
+  _getPages: () => RealExport[];
 }
 
 export class Page extends Component<IPageProps> {
@@ -70,8 +72,7 @@ export class Page extends Component<IPageProps> {
     }
 
     this.state.boardState.drawBoard = new RealDrawBoard({
-      svg: this.svgRef.current,
-      ...this.boardOptions,
+      ...this.boardOptions
     })
   }
 
@@ -147,6 +148,34 @@ export class Page extends Component<IPageProps> {
     this.svgRef.current.removeAttribute('height');
   }
 
+  _exportAll(type: 'svg' | 'png') {
+    const svgSaver = new SVGSaver();
+
+    const tempSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    tempSVG.style.setProperty('display', 'none');
+    tempSVG.style.setProperty('position', 'fixed');
+
+    document.body.appendChild(tempSVG);
+
+    const tempRDB = new RealDrawBoard({});
+    tempRDB.attach(tempSVG, this.state.boardState.drawBoard.dimensions);
+
+    const pages = this.props._getPages();
+
+    for (let pageNo in pages) {
+      const page = pages[pageNo];
+      tempRDB.importData(page);
+
+      tempSVG.setAttribute('width', tempRDB.dimensions[0].toString());
+      tempSVG.setAttribute('height', tempRDB.dimensions[1].toString());
+
+      if (type === 'svg') svgSaver.asSvg(tempSVG, `page-${parseInt(pageNo) + 1}.svg`);
+      else svgSaver.asPng(tempSVG, `page-${parseInt(pageNo) + 1}`);
+    }
+
+    tempSVG.remove();
+  }
+
   _removeHotkeys() {
     ipcHandler.removeEventHandler(EVENTS.UNDO, 'undoEventHandler');
     ipcHandler.removeEventHandler(EVENTS.REDO, 'redoEventHandler');
@@ -184,6 +213,7 @@ export class Page extends Component<IPageProps> {
           boardState={{ drawBoard: this.state.boardState.drawBoard, tool: this.state.boardState.tool }}
           _setTool={(tool) => this._setTool(tool)}
           _export={(type) => this._export(type)}
+          _exportAll={(type) => this._exportAll(type)}
           _save={() => this.props._save()}
           _clearBoard={() => this._clearBoard()}
           _onUndo={() => this.state.boardState.drawBoard.undo()}

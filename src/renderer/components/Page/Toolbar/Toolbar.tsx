@@ -51,6 +51,7 @@ export interface IToolbarProps {
   };
   _clearBoard: () => void;
   _export: (exportType: 'svg' | 'png') => void;
+  _exportAll: (exportType: 'svg' | 'png') => void;
   _save: () => void;
   _onUndo: () => void;
   _onRedo: () => void;
@@ -270,7 +271,7 @@ export class Toolbar extends Component<IToolbarProps> {
       SAVE,
       GO_HOME
     } = shortcutsManager.shortcuts;
-    const { boardState, _clearBoard, _export, _onUndo, _onRedo } = this.props;
+    const { boardState, _clearBoard, _export, _exportAll, _onUndo, _onRedo } = this.props;
 
     return (
       <div className="toolbar">
@@ -472,6 +473,7 @@ export class Toolbar extends Component<IToolbarProps> {
           <ExportPageModal
             onClose={() => this.exportPageModalInstance.close()}
             _export={_export}
+            _exportAll={_exportAll}
           />
         </div>
 

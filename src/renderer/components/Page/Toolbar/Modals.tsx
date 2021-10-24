@@ -46,6 +46,7 @@ export const ExportPageModal = (
   props: {
     onClose: () => void;
     _export: (exportType: 'svg' | 'png') => void;
+    _exportAll: (exportType: 'svg' | 'png') => void;
   }
 ) => {
   const [exportType, setExportType] = useState<'svg' | 'png'>('png');
@@ -91,6 +92,14 @@ export const ExportPageModal = (
             props.onClose();
           }}
         >Export</button>
+        <button
+          className="btn brand-text left"
+          title="Export"
+          onClick={() => {
+            props._exportAll(exportType);
+            props.onClose();
+          }}
+        >Export All</button>
       </div>
     </>
   )
