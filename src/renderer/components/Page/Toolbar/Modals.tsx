@@ -87,6 +87,9 @@ export const ExportPageModal = (
         <button
           className="btn brand-text left"
           title="Export"
+          style={{
+            marginRight: '0.5rem'
+          }}
           onClick={() => {
             props._export(exportType);
             props.onClose();
