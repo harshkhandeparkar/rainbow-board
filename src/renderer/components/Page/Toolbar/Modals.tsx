@@ -55,8 +55,8 @@ export const ExportPageModal = (
   return (
     <>
     <div className="modal-content container-fluid">
-      <h3>{exportAllFormVisible ? 'Export All Pages' : 'Export Page'}</h3>
-      <p>{exportAllFormVisible ? 'Export all the current pages as images.' : 'Export the current page as an image.'}</p>
+      <h3>{exportAllFormVisible ? 'Export All Pages' : 'Export Current Page'}</h3>
+      <p>{exportAllFormVisible ? 'Export all the pages as images.' : 'Export the current page as an image.'}</p>
 
       <div className="container">
           <div className="row">
