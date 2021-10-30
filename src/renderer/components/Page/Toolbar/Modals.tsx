@@ -105,7 +105,7 @@ export const ExportPageModal = (
           title={exportAllFormVisible ? 'Export...' : 'Export All...'}
           onClick={() => setExportAllFormVisible(!exportAllFormVisible)}
         >
-          {exportAllFormVisible ? 'Export...' : 'Export All...'}
+          {exportAllFormVisible ? 'Export Current...' : 'Export All...'}
         </button>
       </div>
     </>
