@@ -1247,11 +1247,6 @@ commondir@^1.0.1:
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   integrity sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=
 
-computed-styles@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/computed-styles/-/computed-styles-1.1.2.tgz#a7e732ba145149399ade70c2f94b353dd8ad629d"
-  integrity sha1-p+cyuhRRSTma3nDC+Us1PditYp0=
-
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
@@ -1768,11 +1763,6 @@ fd-slicer@~1.1.0:
   integrity sha1-JcfInLH5B3+IkbvmHY85Dq4lbx4=
   dependencies:
     pend "~1.2.0"
-
-file-saver@^1.3.3:
-  version "1.3.8"
-  resolved "https://registry.yarnpkg.com/file-saver/-/file-saver-1.3.8.tgz#e68a30c7cb044e2fb362b428469feb291c2e09d8"
-  integrity sha512-spKHSBQIxxS81N/O21WmuXA2F6wppUCsutpzenOeZzOCCJ5gEfcbqJP983IrpLXzYmXnMUa6J03SubcNPdKrlg==
 
 filelist@^1.0.1:
   version "1.0.2"
@@ -3540,13 +3530,10 @@ svg-real-renderer@^0.4.4:
   resolved "https://registry.yarnpkg.com/svg-real-renderer/-/svg-real-renderer-0.4.4.tgz#fb11df15a4249ea96ce4c189a1524c601db2476f"
   integrity sha512-2e69eXrMxs35v/RV1EMKkC/9RrGkVhYlfm+ohqevR3UWMfKNfeBFJ9niMXNIM04lSkr5O9MEJUZbLsAEQo7z0w==
 
-svgsaver@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/svgsaver/-/svgsaver-0.9.0.tgz#93d5dbb3f840953b8df0a14a942f4cc8d552335e"
-  integrity sha1-k9Xbs/hAlTuN8KFKlC9MyNVSM14=
-  dependencies:
-    computed-styles "^1.1.2"
-    file-saver "^1.3.3"
+svgsaver-reboot@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/svgsaver-reboot/-/svgsaver-reboot-0.10.0.tgz#3da431157f1cc0e482f4d19548c4ec5fa9c79784"
+  integrity sha512-a+nCPLxrqIc1/wy6yysuL8tlu3BXeNm8WC0rhijQ7V3O+z98xpuRD75gb8yeufCSyXLQ2laVj/bonOcvFoSHeg==
 
 tapable@^1.0.0:
   version "1.1.3"

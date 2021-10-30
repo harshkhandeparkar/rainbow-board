@@ -1,7 +1,7 @@
 import React, { Component, createRef, RefObject } from 'react';
 import { ipcRenderer } from 'electron';
 import { RealDrawBoard } from 'svg-real-renderer';
-import SVGSaver from 'svgsaver';
+import { SVGSaver } from 'svgsaver-reboot';
 import ipcHandler from '../../util/ipc-handler';
 import themeManager from '../../util/theme';
 
@@ -134,22 +134,22 @@ export class Page extends Component<IPageProps> {
     }
   }
 
-  _export(type: 'svg' | 'png') {
-    const svgSaver = new SVGSaver();
+  async _export(type: 'svg' | 'png') {
+    const saver = new SVGSaver(this.svgRef.current);
 
     this.state.boardState.drawBoard.clearPreview();
     this.svgRef.current.setAttribute('width', this.state.boardState.drawBoard.dimensions[0].toString());
     this.svgRef.current.setAttribute('height', this.state.boardState.drawBoard.dimensions[1].toString());
 
-    if (type === 'svg') svgSaver.asSvg(this.svgRef.current, 'page.svg');
-    else svgSaver.asPng(this.svgRef.current, 'page');
+    if (type === 'svg') saver.saveAsSVG('page');
+    else await saver.saveAsPNG('page');
 
     this.svgRef.current.removeAttribute('width');
     this.svgRef.current.removeAttribute('height');
   }
 
-  _exportAll(type: 'svg' | 'png') {
-    const svgSaver = new SVGSaver();
+  async _exportAll(type: 'svg' | 'png') {
+    const saver = new SVGSaver();
 
     const tempSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     tempSVG.style.setProperty('display', 'none');
@@ -169,8 +169,10 @@ export class Page extends Component<IPageProps> {
       tempSVG.setAttribute('width', tempRDB.dimensions[0].toString());
       tempSVG.setAttribute('height', tempRDB.dimensions[1].toString());
 
-      if (type === 'svg') svgSaver.asSvg(tempSVG, `page-${parseInt(pageNo) + 1}.svg`);
-      else svgSaver.asPng(tempSVG, `page-${parseInt(pageNo) + 1}`);
+      saver.loadNewSVG(tempSVG);
+
+      if (type === 'svg') saver.saveAsSVG(`page-${parseInt(pageNo) + 1}`);
+      else saver.saveAsPNG(`page-${parseInt(pageNo) + 1}`);
     }
 
     tempSVG.remove();

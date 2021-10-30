@@ -85,9 +85,9 @@ export default class Credits extends Component {
           />
 
           <Credit
-            title="SVG Saver"
+            title="SVG Saver Reboot"
             desc="Used to export the page as PNG and SVG."
-            link="https://github.com/Hypercubed/svgsaver"
+            link="https://github.com/harshkhandeparkar/svgsaver-reboot"
           />
 
           <Credit
