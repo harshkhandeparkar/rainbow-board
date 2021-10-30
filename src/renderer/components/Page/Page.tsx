@@ -18,6 +18,9 @@ import { Icon } from '../Icon/Icon';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import { RealExport } from 'svg-real-renderer/src/types/RealRendererTypes';
 
+import { writeFile } from 'fs/promises';
+import { join } from 'path';
+
 export interface IPageState {
   boardState: {
     tool: Tool,
@@ -148,11 +151,10 @@ export class Page extends Component<IPageProps> {
     this.svgRef.current.removeAttribute('height');
   }
 
-  async _exportAll(type: 'svg' | 'png') {
+  async _exportAll(type: 'svg' | 'png', directoryPath: string) {
     const saver = new SVGSaver();
 
     const tempSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    tempSVG.style.setProperty('display', 'none');
     tempSVG.style.setProperty('position', 'fixed');
 
     document.body.appendChild(tempSVG);
@@ -171,8 +173,24 @@ export class Page extends Component<IPageProps> {
 
       saver.loadNewSVG(tempSVG);
 
-      if (type === 'svg') saver.saveAsSVG(`page-${parseInt(pageNo) + 1}`);
-      else saver.saveAsPNG(`page-${parseInt(pageNo) + 1}`);
+      if (type === 'svg') await writeFile(
+        join(
+          directoryPath,
+          `page-${parseInt(pageNo) + 1}.svg`
+        ),
+          await saver.getSVGBlob().text()
+      )
+      else await writeFile(
+        join(
+          directoryPath,
+          `page-${parseInt(pageNo) + 1}.png`
+        ),
+        // thank you stackoverflow user: https://stackoverflow.com/a/51709828
+        (await saver.getPNGDataURL()).replace(/^data:image\/png;base64,/, ""),
+        {
+          encoding: 'base64'
+        }
+      )
     }
 
     tempSVG.remove();
@@ -215,7 +233,7 @@ export class Page extends Component<IPageProps> {
           boardState={{ drawBoard: this.state.boardState.drawBoard, tool: this.state.boardState.tool }}
           _setTool={(tool) => this._setTool(tool)}
           _export={(type) => this._export(type)}
-          _exportAll={(type) => this._exportAll(type)}
+          _exportAll={(type, directoryPath) => this._exportAll(type, directoryPath)}
           _save={() => this.props._save()}
           _clearBoard={() => this._clearBoard()}
           _onUndo={() => this.state.boardState.drawBoard.undo()}
