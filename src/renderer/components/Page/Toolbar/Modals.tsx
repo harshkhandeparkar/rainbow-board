@@ -102,7 +102,7 @@ export const ExportPageModal = (
 
         <button
           className="btn brand-text left"
-          title={exportAllFormVisible ? 'Export...' : 'Export All...'}
+          title={exportAllFormVisible ? 'Export Current...' : 'Export All...'}
           onClick={() => setExportAllFormVisible(!exportAllFormVisible)}
         >
           {exportAllFormVisible ? 'Export Current...' : 'Export All...'}
