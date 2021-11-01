@@ -1,6 +1,6 @@
 import { IpcRendererEvent, IpcMainEvent } from 'electron';
 import { Tool } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/tools/tools';
-import { EventTypes } from '../../electron/events/menuClickEvents';
+import { IMenuEventTypes } from '../../electron/events/menuClickEvents';
 
 export const NEW_WHITEBOARD = 'new-whiteboard';
 
@@ -90,8 +90,8 @@ export interface IPCEventArgs {
   };
 
   [FIRE_MENU_EVENT]: {
-    eventName: EventTypes;
-    options: any;
+    eventName: keyof IMenuEventTypes;
+    options: IMenuEventTypes[keyof IMenuEventTypes];
   };
 
   [MAXIMIZE_UNMAXIMIZE]: {};

@@ -1,39 +1,47 @@
 import { Event, EventHandler } from './event';
 
-export class EventList<EventTypes> {
-  events: {[eventName: string]: Event} = {};
+interface IEventTypes {
+  [eventName: string]: any;
+}
 
-  constructor(eventsList: EventTypes[]) {
+export class EventList
+  <EventTypes extends IEventTypes>
+{
+  events: {
+    [event in keyof EventTypes]: Event<EventTypes[event]>
+  } = {} as any;
+
+  constructor(eventsList: (keyof EventTypes)[]) {
     for (let eventName of eventsList) {
-      this.events[<string><unknown>eventName] = new Event(<string><unknown>eventName);
+      this.events[eventName] = new Event(<string>eventName);
     }
   }
 
-  on(
-    eventName: EventTypes,
+  on<E extends keyof EventTypes>(
+    eventName: E,
     handlerName:string,
-    handler: EventHandler
+    handler: EventHandler<EventTypes[E]>
   ) {
-    if (Object.keys(this.events).includes(<string><unknown>eventName)) {
-      this.events[<string><unknown>eventName].addEventHandler(handlerName, handler);
+    if (Object.keys(this.events).includes(<string>eventName)) {
+      this.events[eventName].addEventHandler(handlerName, handler);
     }
   }
 
-  off(
-    eventName: EventTypes,
+  off<E extends keyof EventTypes>(
+    eventName: E,
     handlerName:string
   ) {
-    if (Object.keys(this.events).includes(<string><unknown>eventName)) {
-      this.events[<string><unknown>eventName].removeEventHandler(handlerName);
+    if (Object.keys(this.events).includes(<string>eventName)) {
+      this.events[eventName].removeEventHandler(handlerName);
     }
   }
 
-  fire(
-    eventName: EventTypes,
-    options: any
+  fire<E extends keyof EventTypes>(
+    eventName: E,
+    options: EventTypes[E]
   ) {
-    if (Object.keys(this.events).includes(<string><unknown>eventName)) {
-      this.events[<string><unknown>eventName].fire(options);
+    if (Object.keys(this.events).includes(<string>eventName)) {
+      this.events[eventName].fire(options);
     }
   }
 }

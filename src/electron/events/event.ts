@@ -1,7 +1,7 @@
-export type EventHandler = (options: any) => void;
+export type EventHandler<T> = (options: T) => void;
 
-export class Event {
-  eventHandlers: {[handlerName: string]: EventHandler} = {};
+export class Event<EventOptions extends Object> {
+  eventHandlers: {[handlerName: string]: EventHandler<EventOptions>} = {} as any;
   name: string;
 
   /**
@@ -9,7 +9,10 @@ export class Event {
    * @param handlerName Unique name for the event handler.
    * @param handler Event handler function/callback.
    */
-  addEventHandler(handlerName: string, handler: EventHandler) {
+  addEventHandler(
+    handlerName: string,
+    handler: EventHandler<EventOptions>
+  ) {
     if (!Object.keys(this.eventHandlers).includes(handlerName)) {
       this.eventHandlers[handlerName] = handler;
     }
@@ -29,7 +32,7 @@ export class Event {
    * Fire the event.
    * @param options Options to be given to the handler callback
    */
-  fire(options: any) {
+  fire(options: EventOptions) {
     for (let handlerName in this.eventHandlers) {
       this.eventHandlers[handlerName](options);
     }

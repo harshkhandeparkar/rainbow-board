@@ -1,24 +1,37 @@
 import { EventList } from './eventList';
 import * as EVENTS from '../../common/constants/events';
+import { Tool } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/tools/tools';
 
-export type EventTypes =
-  typeof EVENTS.ADD_PAGE |
-  typeof EVENTS.NEW_WHITEBOARD |
-  typeof EVENTS.EXPORT_PAGE |
-  typeof EVENTS.OPEN |
-  typeof EVENTS.SAVE |
-  typeof EVENTS.NEXT_PAGE |
-  typeof EVENTS.PREVIOUS_PAGE |
-  typeof EVENTS.CLEAR_PAGE |
-  typeof EVENTS.DELETE_PAGE |
-  typeof EVENTS.UNDO |
-  typeof EVENTS.REDO |
-  typeof EVENTS.TOGGLE_COLOR_PALETTE |
-  typeof EVENTS.SET_TOOL |
-  typeof EVENTS.PREV_TOOL |
-  typeof EVENTS.GO;
+export interface IMenuEventTypes {
+  [EVENTS.NEW_WHITEBOARD]: {};
+  [EVENTS.ADD_PAGE]: {};
 
-const eventNames: EventTypes[] = [
+  [EVENTS.OPEN]: {};
+  [EVENTS.SAVE]: {};
+
+  [EVENTS.EXPORT_PAGE]: {
+    type: 'svg' | 'png';
+  };
+  [EVENTS.NEXT_PAGE]: {};
+  [EVENTS.PREVIOUS_PAGE]: {};
+  [EVENTS.CLEAR_PAGE]: {};
+  [EVENTS.DELETE_PAGE]: {};
+
+  [EVENTS.UNDO]: {};
+  [EVENTS.REDO]: {};
+
+  [EVENTS.TOGGLE_COLOR_PALETTE]: {};
+  [EVENTS.SET_TOOL]: {
+    tool: Tool;
+  };
+  [EVENTS.PREV_TOOL]: {};
+
+  [EVENTS.GO]: {
+    to: string;
+  };
+}
+
+const eventNames: (keyof IMenuEventTypes)[] = [
   EVENTS.ADD_PAGE,
   EVENTS.NEW_WHITEBOARD,
   EVENTS.EXPORT_PAGE,
@@ -36,4 +49,4 @@ const eventNames: EventTypes[] = [
   EVENTS.GO
 ]
 
-export const menuClickEvents = new EventList<EventTypes>(eventNames);
+export const menuClickEvents = new EventList<IMenuEventTypes>(eventNames);
