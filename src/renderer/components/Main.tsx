@@ -12,7 +12,7 @@ import { Icon } from './Icon/Icon';
 import { faPaintBrush, faBell, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 
 import { shortcutsManager } from '../../common/code/shortcuts';
-import { OPEN as OPEN_EVENT } from '../../common/constants/eventNames';
+import { OPEN as OPEN_EVENT } from '../../common/constants/events';
 import * as PATHS from '../../common/constants/paths';
 import { Header } from './Header/Header';
 

@@ -32,7 +32,7 @@ import { getRGBColorString } from 'svg-real-renderer/build/src/util/getRGBColorS
 import { Tool, ToolSettings } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/tools/tools';
 import { Color } from 'svg-real-renderer/build/src/types/RealRendererTypes';
 
-import * as EVENTS from '../../../../common/constants/eventNames';
+import * as EVENTS from '../../../../common/constants/events';
 import { shortcutsManager } from '../../../../common/code/shortcuts';
 import * as PATHS from '../../../../common/constants/paths';
 

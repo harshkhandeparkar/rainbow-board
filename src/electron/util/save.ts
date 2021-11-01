@@ -1,6 +1,6 @@
 import { BrowserWindow, dialog, app, IpcMainEvent } from 'electron';
 import { join, basename, dirname } from 'path';
-import { SAVE } from '../../common/constants/eventNames';
+import { SAVE } from '../../common/constants/events';
 
 export function saveDialog(win: BrowserWindow, event: IpcMainEvent) {
   dialog.showSaveDialog(win, {

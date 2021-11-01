@@ -1,6 +1,6 @@
 import { BrowserWindow, dialog, app, IpcMainEvent } from 'electron';
 import { extname } from 'path';
-import { OPEN } from '../../common/constants/eventNames';
+import { OPEN } from '../../common/constants/events';
 
 export function openDialog(win: BrowserWindow, event: IpcMainEvent) {
   dialog.showOpenDialog(win, {

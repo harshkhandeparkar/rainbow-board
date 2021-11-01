@@ -17,7 +17,7 @@ import {
   faPalette
 } from '@fortawesome/free-solid-svg-icons';
 
-import * as EVENTS from '../../../common/constants/eventNames';
+import * as EVENTS from '../../../common/constants/events';
 import { shortcutsManager } from '../../../common/code/shortcuts';
 
 

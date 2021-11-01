@@ -3,7 +3,7 @@ import { shell, Menu, BrowserWindow, MenuItemConstructorOptions } from 'electron
 
 import { showAboutDialog } from './aboutDialog';
 import { menuClickEvents } from '../events/menuClickEvents';
-import * as EVENTS from '../../common/constants/eventNames';
+import * as EVENTS from '../../common/constants/events';
 import * as PATHS from '../../common/constants/paths';
 
 import {  shortcutsManager } from '../../common/code/shortcuts';

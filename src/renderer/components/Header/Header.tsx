@@ -5,7 +5,7 @@ import { faCog, faHome, faTimes, faMinus } from '@fortawesome/free-solid-svg-ico
 import { faSquare } from '@fortawesome/free-regular-svg-icons';
 import { shortcutsManager } from '../../../common/code/shortcuts';
 import { useGnomeStyleHeaderbarSetting } from '../../../common/code/settings';
-import { MAXIMIZE_UNMAXIMIZE, QUIT, MINIMIZE, SET_WINDOW_TITLE } from '../../../common/constants/eventNames';
+import { MAXIMIZE_UNMAXIMIZE, QUIT, MINIMIZE, SET_WINDOW_TITLE } from '../../../common/constants/events';
 import * as PATHS from '../../../common/constants/paths';
 
 import './Header.scss';

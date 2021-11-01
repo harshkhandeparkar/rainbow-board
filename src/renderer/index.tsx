@@ -10,7 +10,7 @@ import { ipcRenderer } from 'electron';
 import ipcHandler from './util/ipc-handler';
 import history from './util/history';
 
-import * as EVENTS from '../common/constants/eventNames';
+import * as EVENTS from '../common/constants/events';
 import * as PATHS from '../common/constants/paths';
 import { readFile } from 'fs';
 import { basename } from 'path';

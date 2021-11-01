@@ -1,5 +1,5 @@
 import { EventList } from './eventList';
-import * as EVENTS from '../../common/constants/eventNames';
+import * as EVENTS from '../../common/constants/events';
 
 export type EventTypes =
   typeof EVENTS.ADD_PAGE |

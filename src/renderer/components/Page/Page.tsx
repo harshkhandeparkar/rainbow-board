@@ -5,7 +5,7 @@ import { SVGSaver } from 'svgsaver-reboot';
 import ipcHandler from '../../util/ipc-handler';
 import themeManager from '../../util/theme';
 
-import * as EVENTS from '../../../common/constants/eventNames';
+import * as EVENTS from '../../../common/constants/events';
 
 import { Toolbar } from './Toolbar/Toolbar';
 
@@ -233,7 +233,7 @@ export class Page extends Component<IPageProps> {
           boardState={{ drawBoard: this.state.boardState.drawBoard, tool: this.state.boardState.tool }}
           _setTool={(tool) => this._setTool(tool)}
           _export={(type) => this._export(type)}
-          _exportAll={(type, directoryPath) => this._exportAll(type, directoryPath)}
+          _exportAll={(type: 'svg' | 'png', directoryPath: string) => this._exportAll(type, directoryPath)}
           _save={() => this.props._save()}
           _clearBoard={() => this._clearBoard()}
           _onUndo={() => this.state.boardState.drawBoard.undo()}

@@ -13,7 +13,7 @@ import {
 import Page from '../Page/Page';
 import ipcHandler from '../../util/ipc-handler';
 
-import * as EVENTS from '../../../common/constants/eventNames';
+import * as EVENTS from '../../../common/constants/events';
 import { shortcutsManager } from '../../../common/code/shortcuts';
 
 import './Whiteboard.scss';

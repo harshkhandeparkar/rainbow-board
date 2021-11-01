@@ -1,7 +1,7 @@
 import { ipcRenderer } from 'electron';
 import ipcHandler from './ipc-handler';
 import history from './history';
-import { LOCATION_CHANGED } from '../../common/constants/eventNames';
+import { LOCATION_CHANGED } from '../../common/constants/events';
 import { WHITEBOARD } from '../../common/constants/paths';
 
 ipcHandler.addEventHandler('prompt-reply', 'leaveWhiteboardPromptEventHandler', (event, args) => {

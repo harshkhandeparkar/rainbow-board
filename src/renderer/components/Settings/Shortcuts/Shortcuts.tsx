@@ -6,7 +6,7 @@ import { shortcutName, shortcutsManager } from '../../../../common/code/shortcut
 import './Shortcuts.scss';
 import { Modal } from 'materialize-css';
 import { ipcRenderer } from 'electron';
-import { RESTART } from '../../../../common/constants/eventNames';
+import { RESTART } from '../../../../common/constants/events';
 
 import { _keyToAcceleratorKeyCode, _getAcceleratorString } from './util';
 import { getPlatformFormattedShortcutString } from '../../../../common/constants/shortcuts';

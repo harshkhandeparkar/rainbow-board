@@ -1,7 +1,7 @@
 import { ipcMain, globalShortcut, BrowserWindow } from 'electron';
 import { parse } from 'path';
 import { existsSync } from 'fs';
-import * as EVENTS from '../../common/constants/eventNames';
+import * as EVENTS from '../../common/constants/events';
 import { shortcutsManager } from '../../common/code/shortcuts';
 import { WHITEBOARD } from '../../common/constants/paths';
 import { menuClickEvents } from '../events/menuClickEvents';
