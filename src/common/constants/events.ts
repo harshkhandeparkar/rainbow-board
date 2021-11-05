@@ -82,7 +82,7 @@ export interface IPCRendererReceiveEventArgs {
   [PROMPT_REPLY]: {
     event: string;
     response: number;
-    options: any;
+    options?: Object;
   };
 
   [GET_PLUGINS]: IPlugin[];
