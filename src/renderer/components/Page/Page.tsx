@@ -128,7 +128,7 @@ export class Page extends Component<IPageProps> {
 
   _clearBoard() {
     if (this.state.boardState.drawBoard._strokeIndex > 0) {
-      ipcRenderer.send('prompt', {
+      ipcRenderer.send(EVENTS.PROMPT, {
         title: 'Clear this page?',
         message: 'If you clear the page, all the unsaved data will be LOST FOREVER.',
         buttons: ['No', 'Yes'],

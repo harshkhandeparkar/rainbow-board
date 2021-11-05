@@ -140,7 +140,7 @@ export class Whiteboard extends Component {
                   }
 
                   if (isOldVersion) {
-                    ipcRenderer.send('prompt', {
+                    ipcRenderer.send(EVENTS.PROMPT, {
                       title: 'Continue?',
                       message: `\
 This new version of Rainbow Board, and future versions have a new format for the ".rainbow" files.
@@ -273,7 +273,7 @@ Would you like to open this file?
   deletePage = () => {
     if (this.state.pagesLength > 1) {
       if (this.pageRef.current.state.boardState.drawBoard._strokeIndex > 0) { // If nothing is written, directly delete
-        ipcRenderer.send('prompt', {
+        ipcRenderer.send(EVENTS.PROMPT, {
           title: 'Delete this page?',
           message: 'If you delete the page, all the unsaved data will be LOST FOREVER.',
           buttons: ['No', 'Yes'],
