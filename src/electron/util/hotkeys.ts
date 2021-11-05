@@ -7,10 +7,10 @@ import { WHITEBOARD } from '../../common/constants/paths';
 import { menuClickEvents } from '../events/menuClickEvents';
 import { saveDialog } from './save';
 import { open, openDialog } from './open';
-import { ipcListen } from '../events/limitedIPC';
+import { ipcMainListen } from '../events/limitedIPC';
 
 export function setHotkeys(win: BrowserWindow) {
-  ipcListen('set-hotkeys', (event) => {
+  ipcMainListen('set-hotkeys', (event) => {
     // Submenu: File
     menuClickEvents.on(EVENTS.NEW_WHITEBOARD, 'hotkey-handler', () => event.reply(EVENTS.GO, {to: `/${WHITEBOARD}`}))
     menuClickEvents.on(EVENTS.ADD_PAGE, 'hotkey-handler', () => event.reply(EVENTS.ADD_PAGE, null));

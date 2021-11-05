@@ -11,7 +11,7 @@ import {
   showMenuBarWhenFullscreenSetting,
   useGnomeStyleHeaderbarSetting
 } from '../../common/code/settings';
-import { ipcListen } from '../events/limitedIPC';
+import { ipcMainListen } from '../events/limitedIPC';
 
 let showExitPrompt = true;
 
@@ -36,7 +36,7 @@ export function createMainWindow(
 
   if(startMaximizedSetting.get()) win.maximize();
 
-  ipcListen(EVENTS.GET_PLUGINS, (e) => {
+  ipcMainListen(EVENTS.GET_PLUGINS, (e) => {
     e.returnValue = plugins.filter(plugin => plugin.usable);
   })
 
