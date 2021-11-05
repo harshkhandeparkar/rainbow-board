@@ -2,48 +2,48 @@ import { BrowserWindow, App, dialog } from 'electron';
 import * as EVENTS from '../../common/constants/events';
 import { openDialog } from '../util/open';
 import { setWindowMenu } from '../util/windowMenu';
-import { menuClickEvents } from './menuClickEvents';
-import { IPCListen } from './limitedIPC';
+import { menuClickEvents } from '../events/menuClickEvents';
+import { ipcListen } from '../events/limitedIPC';
 
 export function setIPCHandlers(
     win: BrowserWindow,
     app: App,
     isDev: boolean
 ) {
-    IPCListen(EVENTS.LOCATION_CHANGED, (e, {path}) => {
+    ipcListen(EVENTS.LOCATION_CHANGED, (e, {path}) => {
         setWindowMenu(win, isDev, path);
     })
 
-    IPCListen(EVENTS.RESTART, () => {
+    ipcListen(EVENTS.RESTART, () => {
         app.relaunch();
         app.quit();
     })
 
-    IPCListen(EVENTS.OPEN, (e) => {
+    ipcListen(EVENTS.OPEN, (e) => {
         openDialog(win, e);
     })
 
-    IPCListen(EVENTS.FIRE_MENU_EVENT, (e, {eventName, options}) => {
+    ipcListen(EVENTS.FIRE_MENU_EVENT, (e, {eventName, options}) => {
         menuClickEvents.fire(eventName, options);
     })
 
-    IPCListen(EVENTS.MAXIMIZE_UNMAXIMIZE, (e) => {
+    ipcListen(EVENTS.MAXIMIZE_UNMAXIMIZE, (e) => {
         win.isMaximized() ? win.unmaximize() : win.maximize();
     })
 
-    IPCListen(EVENTS.QUIT, (e) => {
+    ipcListen(EVENTS.QUIT, (e) => {
         app.quit();
     })
 
-    IPCListen(EVENTS.MINIMIZE, (e) => {
+    ipcListen(EVENTS.MINIMIZE, (e) => {
         win.minimize();
     })
 
-    IPCListen(EVENTS.SET_WINDOW_TITLE, (e, {title}) => {
+    ipcListen(EVENTS.SET_WINDOW_TITLE, (e, {title}) => {
         win.setTitle(title);
     })
 
-    IPCListen(
+    ipcListen(
         EVENTS.PROMPT,
         (event, args) => {
             dialog.showMessageBox(win, {

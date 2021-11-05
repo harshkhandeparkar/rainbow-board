@@ -1,6 +1,7 @@
 import { IpcRendererEvent, IpcMainEvent } from 'electron';
 import { Tool } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/tools/tools';
 import { IMenuEventTypes } from '../../electron/events/menuClickEvents';
+import { IPlugin } from '../types/plugins';
 
 export const NEW_WHITEBOARD = 'new-whiteboard';
 
@@ -32,6 +33,7 @@ export const PROMPT = 'prompt';
 export const PROMPT_REPLY = 'prompt-reply';
 
 export const SET_HOTKEYS = 'set-hotkeys';
+export const GET_PLUGINS = 'get-plugins';
 
 export const RESTART = 'restart';
 
@@ -46,35 +48,39 @@ export const FIRE_MENU_EVENT = 'fire-menu-event';
 export const SET_WINDOW_TITLE = 'set-window-title';
 
 export interface IPCEventArgs {
-  [NEW_WHITEBOARD]: {};
-  [ADD_PAGE]: {};
+  [NEW_WHITEBOARD]: null;
+  [ADD_PAGE]: null;
 
-  [EXPORT_PAGE]: {};
-  [EXPORT_PAGE_DIALOG]: {};
+  [EXPORT_PAGE]: {
+    type: 'png' | 'svg';
+  };
+  [EXPORT_PAGE_DIALOG]: null;
 
-  [SAVE]: {};
-  [OPEN]: {};
+  [SAVE]: null;
+  [OPEN]: null;
 
-  [NEXT_PAGE]: {};
-  [PREVIOUS_PAGE]: {};
-  [CLEAR_PAGE]: {};
-  [DELETE_PAGE]: {};
-  [UNDO]: {};
-  [REDO]: {};
+  [NEXT_PAGE]: null;
+  [PREVIOUS_PAGE]: null;
+  [CLEAR_PAGE]: null;
+  [DELETE_PAGE]: null;
+  [UNDO]: null;
+  [REDO]: null;
 
-  [TOGGLE_COLOR_PALETTE]: {};
+  [TOGGLE_COLOR_PALETTE]: null;
   [SET_TOOL]: {
     tool: Tool
   };
-  [PREV_TOOL]: {};
+  [PREV_TOOL]: null;
 
-  [GO]: {};
+  [GO]: {
+    to: string;
+  };
   [LOCATION_CHANGED]: {
     path: string;
   };
 
-  [RESTART]: {};
-  [QUIT]: {};
+  [RESTART]: null;
+  [QUIT]: null;
 
   [PROMPT]: {
     event: string;
@@ -94,11 +100,14 @@ export interface IPCEventArgs {
     options: IMenuEventTypes[keyof IMenuEventTypes];
   };
 
-  [MAXIMIZE_UNMAXIMIZE]: {};
-  [MINIMIZE]: {};
+  [MAXIMIZE_UNMAXIMIZE]: null;
+  [MINIMIZE]: null;
   [SET_WINDOW_TITLE]: {
     title: string;
   };
+
+  [SET_HOTKEYS]: null;
+  [GET_PLUGINS]: IPlugin[];
 }
 
 export type IPCEventName = keyof IPCEventArgs;

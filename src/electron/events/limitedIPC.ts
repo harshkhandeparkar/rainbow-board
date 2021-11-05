@@ -1,6 +1,17 @@
 import { ipcMain, IpcMainEvent } from 'electron';
-import { IPCEventHandler, IPCEventName } from '../../common/constants/events';
+import { IPCEventHandler, IPCEventName, IPCEventArgs } from '../../common/constants/events';
 
-export function IPCListen<E extends IPCEventName>(event: E, handler: IPCEventHandler<IpcMainEvent, E>) {
+export interface ITypedIpcMainEvent extends IpcMainEvent {
+    reply: typeof ipcSend;
+}
+
+export function ipcListen<E extends IPCEventName>(event: E, handler: IPCEventHandler<ITypedIpcMainEvent, E>) {
     ipcMain.on(event, handler);
+}
+
+export function ipcSend<E extends IPCEventName>(
+    event: E,
+    args: IPCEventArgs[E]
+) {
+    ipcMain.emit(event, args);
 }
