@@ -82,7 +82,9 @@ export interface IPCRendererReceiveEventArgs {
   [PROMPT_REPLY]: {
     event: string;
     response: number;
-    options?: Object;
+    options?: {
+      goTo: string;
+    };
   };
 
   [GET_PLUGINS]: IPlugin[];
@@ -103,7 +105,9 @@ export interface IPCRendererSendEventArgs {
     buttons: string[];
     title: string;
     message: string;
-    options?: Object;
+    options?: {
+      goTo: string;
+    };
   };
   [OPEN]: null;
 

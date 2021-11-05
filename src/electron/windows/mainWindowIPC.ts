@@ -57,7 +57,7 @@ export function setIPCHandlers(
                     {
                         event: args.event,
                         response,
-                        options: args.options ?? {}
+                        options: args.options ?? null
                     }
                 )
             })
