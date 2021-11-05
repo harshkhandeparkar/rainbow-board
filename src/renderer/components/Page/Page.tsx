@@ -20,6 +20,7 @@ import { RealExport } from 'svg-real-renderer/src/types/RealRendererTypes';
 
 import { writeFile } from 'fs/promises';
 import { join } from 'path';
+import { ipcRendererSend } from '../../util/ipc-sender';
 
 export interface IPageState {
   boardState: {
@@ -128,7 +129,7 @@ export class Page extends Component<IPageProps> {
 
   _clearBoard() {
     if (this.state.boardState.drawBoard._strokeIndex > 0) {
-      ipcRenderer.send(EVENTS.PROMPT, {
+      ipcRendererSend(EVENTS.PROMPT, {
         title: 'Clear this page?',
         message: 'If you clear the page, all the unsaved data will be LOST FOREVER.',
         buttons: ['No', 'Yes'],

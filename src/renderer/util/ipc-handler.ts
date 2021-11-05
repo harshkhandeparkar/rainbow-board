@@ -1,11 +1,13 @@
 import { ipcRenderer, IpcRendererEvent } from 'electron';
 import * as EVENTS from '../../common/constants/events';
-import { IPCEventName, IPCEventHandler } from '../../common/constants/events';
+import { IPCRendererReceiveEvents, IPCRendererReceiveEventArgs, IPCEventHandler } from '../../common/constants/events';
+
+type IPCRendererHandler<E extends IPCRendererReceiveEvents> = IPCEventHandler<IpcRendererEvent, IPCRendererReceiveEventArgs, E>
 
 export class IPCHandler {
   eventHandlers: {
-    [event in IPCEventName]: {
-      [handlerName: string]: IPCEventHandler<IpcRendererEvent, event>
+    [event in IPCRendererReceiveEvents]: {
+      [handlerName: string]: IPCRendererHandler<event>
     }
   } = {
     [EVENTS.NEW_WHITEBOARD]: {},
@@ -30,32 +32,26 @@ export class IPCHandler {
     [EVENTS.PREV_TOOL]: {},
 
     [EVENTS.GO]: {},
-    [EVENTS.LOCATION_CHANGED]: {},
 
     [EVENTS.RESTART]: {},
     [EVENTS.QUIT]: {},
 
     [EVENTS.PROMPT_REPLY]: {},
-    [EVENTS.PROMPT]: {},
 
-    [EVENTS.FIRE_MENU_EVENT]: {},
-
-    [EVENTS.MAXIMIZE_UNMAXIMIZE]: {},
-    [EVENTS.MINIMIZE]: {},
-    [EVENTS.SET_WINDOW_TITLE]: {}
+    [EVENTS.GET_PLUGINS]: {}
   }
 
-  addEventHandler<E extends IPCEventName>(
+  addEventHandler<E extends IPCRendererReceiveEvents>(
     event: E,
     handlerName: string,
-    handler: IPCEventHandler<IpcRendererEvent, E>
+    handler: IPCRendererHandler<E>
   ) {
     if (!Object.keys(this.eventHandlers[event]).includes(handlerName)) {
-      (this.eventHandlers[event][handlerName] as IPCEventHandler<IpcRendererEvent, E>) = handler;
+      (this.eventHandlers[event][handlerName] as IPCRendererHandler<E>) = handler;
     }
   }
 
-  removeEventHandler(event: IPCEventName, handlerName: string) {
+  removeEventHandler(event: IPCRendererReceiveEvents, handlerName: string) {
     if (Object.keys(this.eventHandlers[event]).includes(handlerName)) {
       delete this.eventHandlers[event][handlerName];
     }
@@ -64,8 +60,8 @@ export class IPCHandler {
   constructor() {
     for (let eventName in this.eventHandlers) {
       ipcRenderer.on(eventName, (event, args) => {
-        for (let handlerName in this.eventHandlers[<IPCEventName>eventName]) {
-          this.eventHandlers[<IPCEventName>eventName][handlerName](event, args);
+        for (let handlerName in this.eventHandlers[<IPCRendererReceiveEvents>eventName]) {
+          this.eventHandlers[<IPCRendererReceiveEvents>eventName][handlerName](event, args);
         }
       })
     }

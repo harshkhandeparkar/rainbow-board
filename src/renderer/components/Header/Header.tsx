@@ -10,6 +10,7 @@ import * as PATHS from '../../../common/constants/paths';
 
 import './Header.scss';
 import { ipcRenderer } from 'electron';
+import { ipcRendererSend } from '../../util/ipc-sender';
 
 type IMenuItem = 'settings' | 'home';
 
@@ -31,7 +32,12 @@ export class Header extends Component<IHeaderProps> {
 
   _setWindowTitle() {
     if (!this.isCustomHeader) {
-      ipcRenderer.send(SET_WINDOW_TITLE, this.props.title);
+      if (typeof this.props.title === 'string') {
+        ipcRendererSend(
+          SET_WINDOW_TITLE,
+          {title: this.props.title}
+        )
+      }
     }
   }
 
@@ -64,7 +70,7 @@ export class Header extends Component<IHeaderProps> {
                 className="btn-floating center"
                 onClick={(e) => {
                   e.preventDefault();
-                  ipcRenderer.send(QUIT);
+                  ipcRendererSend(QUIT, null);
                 }}
               >
                 <Icon customColor={true} options={{icon: faTimes, size: this.isCustomHeader ? 'sm': 'lg', color: '#f44336'}} />
@@ -77,7 +83,7 @@ export class Header extends Component<IHeaderProps> {
                 className="btn-floating center"
                 onClick={(e) => {
                   e.preventDefault();
-                  ipcRenderer.send(MINIMIZE);
+                  ipcRendererSend(MINIMIZE, null);
                 }}
               >
                 <Icon customColor={true} options={{icon: faMinus, size: this.isCustomHeader ? 'sm': 'lg', color: '#4CAF50'}} />
@@ -90,7 +96,11 @@ export class Header extends Component<IHeaderProps> {
                 className="btn-floating center"
                 onClick={(e) => {
                   e.preventDefault();
-                  ipcRenderer.send(MAXIMIZE_UNMAXIMIZE, this.state.isMaximized);
+                  ipcRendererSend(
+                    MAXIMIZE_UNMAXIMIZE,
+                    {maximized_state: this.state.isMaximized}
+                  )
+
                   this.setState({
                     isMaximized: !this.state.isMaximized
                   })

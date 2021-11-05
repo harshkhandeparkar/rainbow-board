@@ -27,8 +27,8 @@ export function setIPCHandlers(
         menuClickEvents.fire(eventName, options);
     })
 
-    ipcMainListen(EVENTS.MAXIMIZE_UNMAXIMIZE, (e) => {
-        win.isMaximized() ? win.unmaximize() : win.maximize();
+    ipcMainListen(EVENTS.MAXIMIZE_UNMAXIMIZE, (e, {maximized_state}) => {
+        maximized_state ? win.unmaximize() : win.maximize();
     })
 
     ipcMainListen(EVENTS.QUIT, (e) => {

@@ -15,6 +15,7 @@ import { shortcutsManager } from '../../common/code/shortcuts';
 import { OPEN as OPEN_EVENT } from '../../common/constants/events';
 import * as PATHS from '../../common/constants/paths';
 import { Header } from './Header/Header';
+import { ipcRendererSend } from '../util/ipc-sender';
 
 const { version, description } = packageFile;
 
@@ -70,7 +71,7 @@ function Main() {
               className="btn center brand-text full-width"
               title={`Open File (${OPEN.platformFormattedString})`}
               onClick={() => {
-                ipcRenderer.send(OPEN_EVENT);
+                ipcRendererSend(OPEN_EVENT, null);
               }}
             >
               <Icon options={{icon: faFolderOpen}} rightMargin={true} /> Open ({OPEN.platformFormattedString})

@@ -19,6 +19,7 @@ import {
 
 import * as EVENTS from '../../../common/constants/events';
 import { shortcutsManager } from '../../../common/code/shortcuts';
+import { ipcRendererSend } from '../../util/ipc-sender';
 
 
 export const WhiteboardHeader = (
@@ -71,7 +72,7 @@ export const WhiteboardHeader = (
         >
           <button
             className="btn"
-            onClick={() => ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SET_TOOL, options: {tool: 'brush'}})}
+            onClick={() => ipcRendererSend(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SET_TOOL, options: {tool: 'brush'}})}
             title={`Brush (${BRUSH_TOOL.platformFormattedString})`}
           >
             <Icon
@@ -82,7 +83,7 @@ export const WhiteboardHeader = (
           </button>
           <button
             className="btn"
-            onClick={() => ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SET_TOOL, options: {tool: 'line'}})}
+            onClick={() => ipcRendererSend(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SET_TOOL, options: {tool: 'line'}})}
             title={`Line Tool (${LINE_TOOL.platformFormattedString})`}
           >
             <Icon
@@ -93,7 +94,7 @@ export const WhiteboardHeader = (
           </button>
           <button
             className="btn"
-            onClick={() => ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SET_TOOL, options: {tool: 'eraser'}})}
+            onClick={() => ipcRendererSend(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SET_TOOL, options: {tool: 'eraser'}})}
             title={`Eraser (${ERASER_TOOL.platformFormattedString})`}
           >
             <Icon
@@ -124,7 +125,7 @@ export const WhiteboardHeader = (
                 <button
                   title={`Color Palette (${COLOR_PALETTE.platformFormattedString})`}
                   className="btn"
-                  onClick={() => ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.TOGGLE_COLOR_PALETTE, options: {}})}
+                  onClick={() => ipcRendererSend(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.TOGGLE_COLOR_PALETTE, options: {}})}
                 >
                   <Icon options={{icon: faPalette, size: 'sm'}}></Icon>
                 </button>

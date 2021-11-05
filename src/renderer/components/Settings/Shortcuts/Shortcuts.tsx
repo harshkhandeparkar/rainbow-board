@@ -10,6 +10,7 @@ import { RESTART } from '../../../../common/constants/events';
 
 import { _keyToAcceleratorKeyCode, _getAcceleratorString } from './util';
 import { getPlatformFormattedShortcutString } from '../../../../common/constants/shortcuts';
+import { ipcRendererSend } from '../../../util/ipc-sender';
 
 export interface IShortcutRecording {
   ctrlKey: boolean;
@@ -266,7 +267,7 @@ export class Shortcuts extends Component<{}, IShortcutsState> {
             <div className="modal-footer">
               <button
                 className="btn brand-text left"
-                onClick={() => ipcRenderer.send(RESTART)}
+                onClick={() => ipcRendererSend(RESTART, null)}
               >
                 Restart Now
               </button>

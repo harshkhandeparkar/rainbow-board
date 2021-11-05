@@ -26,6 +26,7 @@ import { useGnomeStyleHeaderbarSetting } from '../../../common/code/settings';
 import { WhiteboardHeader } from './WhiteboardHeader';
 
 import { HOME } from '../../../common/constants/paths';
+import { ipcRendererSend } from '../../util/ipc-sender';
 
 export interface IHistoryStateWithOpen {
   open?: {
@@ -140,7 +141,7 @@ export class Whiteboard extends Component {
                   }
 
                   if (isOldVersion) {
-                    ipcRenderer.send(EVENTS.PROMPT, {
+                    ipcRendererSend(EVENTS.PROMPT, {
                       title: 'Continue?',
                       message: `\
 This new version of Rainbow Board, and future versions have a new format for the ".rainbow" files.
@@ -227,7 +228,7 @@ Would you like to open this file?
 
   save() {
     if (this.state.fileOpened) this._saveWhiteboard(this.state.location);
-    else ipcRenderer.send(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SAVE, options: {}});
+    else ipcRendererSend(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SAVE, options: {}});
   }
 
   componentWillUnmount() {
@@ -273,7 +274,7 @@ Would you like to open this file?
   deletePage = () => {
     if (this.state.pagesLength > 1) {
       if (this.pageRef.current.state.boardState.drawBoard._strokeIndex > 0) { // If nothing is written, directly delete
-        ipcRenderer.send(EVENTS.PROMPT, {
+        ipcRendererSend(EVENTS.PROMPT, {
           title: 'Delete this page?',
           message: 'If you delete the page, all the unsaved data will be LOST FOREVER.',
           buttons: ['No', 'Yes'],

@@ -14,6 +14,7 @@ import * as EVENTS from '../common/constants/events';
 import * as PATHS from '../common/constants/paths';
 import { readFile } from 'fs';
 import { basename } from 'path';
+import { ipcRendererSend } from './util/ipc-sender';
 
 ReactDOM.render(
   <App />,
@@ -21,7 +22,7 @@ ReactDOM.render(
 )
 
 // Enable menubar hotkeys
-ipcRenderer.send(EVENTS.SET_HOTKEYS);
+ipcRendererSend(EVENTS.SET_HOTKEYS, null);
 
 // Navigation events from main process
 ipcHandler.addEventHandler(EVENTS.GO, 'go-handler', (e: any, {to}: {to: string}) => go(to));

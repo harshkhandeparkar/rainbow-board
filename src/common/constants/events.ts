@@ -47,7 +47,7 @@ export const FIRE_MENU_EVENT = 'fire-menu-event';
 /** EVENT: Change the window title */
 export const SET_WINDOW_TITLE = 'set-window-title';
 
-export interface IPCEventArgs {
+export interface IPCRendererReceiveEventArgs {
   [NEW_WHITEBOARD]: null;
   [ADD_PAGE]: null;
 
@@ -75,6 +75,22 @@ export interface IPCEventArgs {
   [GO]: {
     to: string;
   };
+
+  [RESTART]: null;
+  [QUIT]: null;
+
+  [PROMPT_REPLY]: {
+    event: string;
+    response: number;
+    options: any;
+  };
+
+  [GET_PLUGINS]: IPlugin[];
+}
+
+export type IPCRendererReceiveEvents = keyof IPCRendererReceiveEventArgs;
+
+export interface IPCRendererSendEventArgs {
   [LOCATION_CHANGED]: {
     path: string;
   };
@@ -87,20 +103,18 @@ export interface IPCEventArgs {
     buttons: string[];
     title: string;
     message: string;
-    options: any;
+    options?: Object;
   };
-  [PROMPT_REPLY]: {
-    event: string;
-    response: number;
-    options: any;
-  };
+  [OPEN]: null;
 
   [FIRE_MENU_EVENT]: {
     eventName: keyof IMenuEventTypes;
     options: IMenuEventTypes[keyof IMenuEventTypes];
   };
 
-  [MAXIMIZE_UNMAXIMIZE]: null;
+  [MAXIMIZE_UNMAXIMIZE]: {
+    maximized_state: boolean;
+  };
   [MINIMIZE]: null;
   [SET_WINDOW_TITLE]: {
     title: string;
@@ -109,9 +123,26 @@ export interface IPCEventArgs {
   [SET_HOTKEYS]: null;
   [GET_PLUGINS]: IPlugin[];
 }
+export type IPCRendererSendEvents = keyof IPCRendererSendEventArgs;
 
-export type IPCEventName = keyof IPCEventArgs;
+export interface IPCMainReceiveEventArgs extends IPCRendererSendEventArgs {};
+export type IPCMainReceiveEvents = keyof IPCMainReceiveEventArgs;
+
+export interface IPCMainSendEventArgs extends IPCRendererReceiveEventArgs {};
+export type IPCMainSendEvents = keyof IPCMainSendEventArgs;
+
+type IPCEventArgs =
+  IPCMainReceiveEventArgs | IPCMainSendEventArgs |
+  IPCRendererReceiveEventArgs | IPCRendererSendEventArgs;
+
+type IPCEventNames =
+  IPCMainSendEvents | IPCMainReceiveEvents |
+  IPCRendererSendEvents | IPCRendererReceiveEvents;
 
 export type IPCEventHandler
-  <E extends IpcMainEvent | IpcRendererEvent, T extends keyof IPCEventArgs>
-  = (event: E, args: IPCEventArgs[T]) => void;
+  <
+    E extends IpcMainEvent | IpcRendererEvent,
+    Scope extends IPCEventArgs,
+    T extends keyof Scope
+  >
+  = (event: E, args: Scope[T]) => void;
