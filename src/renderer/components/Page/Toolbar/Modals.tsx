@@ -5,6 +5,7 @@ import { getRGBColorString } from 'svg-real-renderer/build/src/util/getRGBColorS
 import { Color } from 'svg-real-renderer/build/src/types/RealRendererTypes';
 import { ipcRendererSend } from '../../../util/ipc-sender';
 import { OPEN } from '../../../../common/constants/events';
+import ipcHandler from '../../../util/ipc-handler';
 
 export const ColorPaletteModal = (
   props: {
@@ -54,6 +55,12 @@ export const ExportPageModal = (
   const [exportAllFormVisible, setExportAllFormVisible] = useState<boolean>(false);
   const [exportType, setExportType] = useState<'svg' | 'png'>('png');
   const [exportDirectory, setExportDirectory] = useState<string | null>(null);
+
+  ipcHandler.addEventHandler(OPEN, 'exportAllOpenHandler', (e, {path, dialogId}) => {
+    if (dialogId === 1) {
+      setExportDirectory(path);
+    }
+  })
 
   return (
     <>
@@ -111,7 +118,7 @@ export const ExportPageModal = (
                           Select a folder to export the images into.
                         </>
                       ) : (
-                        <h6>Exported to: {exportDirectory}</h6>
+                        <h6>Exporting to: {exportDirectory}</h6>
                       )
                     }
                   </div>
