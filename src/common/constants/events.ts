@@ -56,7 +56,9 @@ export interface IPCRendererReceiveEventArgs {
   };
   [EXPORT_PAGE_DIALOG]: null;
 
-  [SAVE]: null;
+  [SAVE]: {
+    finalFilePath: string;
+  };
   [OPEN]: {
     path: string;
   };

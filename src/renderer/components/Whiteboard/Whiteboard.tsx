@@ -208,7 +208,7 @@ Would you like to open this file?
         this._deletePage();
       }
     })
-    ipcHandler.addEventHandler(EVENTS.SAVE, 'saveWhiteboardHandler', (e, {finalFilePath}: {finalFilePath: string}) => {
+    ipcHandler.addEventHandler(EVENTS.SAVE, 'saveWhiteboardHandler', (e, { finalFilePath }) => {
       this._saveWhiteboard(finalFilePath);
     })
   }

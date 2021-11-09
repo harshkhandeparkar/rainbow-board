@@ -1,8 +1,12 @@
-import { BrowserWindow, dialog, app, IpcMainEvent } from 'electron';
+import { BrowserWindow, dialog, app } from 'electron';
 import { join, basename, dirname } from 'path';
 import { SAVE } from '../../common/constants/events';
+import { ITypedIpcMainEvent } from '../events/limitedIPC';
 
-export function saveDialog(win: BrowserWindow, event: IpcMainEvent) {
+export function saveDialog(
+  win: BrowserWindow,
+  event: ITypedIpcMainEvent
+) {
   dialog.showSaveDialog(win, {
     title: 'Save Whiteboard',
     defaultPath: join(app.getPath('documents'), 'whiteboard.rainbow'),

@@ -1,4 +1,4 @@
-import { BrowserWindow, dialog, app, IpcMainEvent } from 'electron';
+import { BrowserWindow, dialog, app } from 'electron';
 import { extname } from 'path';
 import { OPEN } from '../../common/constants/events';
 import { ITypedIpcMainEvent } from '../events/limitedIPC';

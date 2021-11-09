@@ -211,7 +211,7 @@ export class Page extends Component<IPageProps> {
 
     ipcHandler.addEventHandler(EVENTS.UNDO, 'undoEventHandler', () => this.state.boardState.drawBoard.undo())
     ipcHandler.addEventHandler(EVENTS.REDO, 'redoEventHandler', () => this.state.boardState.drawBoard.redo())
-    ipcHandler.addEventHandler(EVENTS.EXPORT_PAGE, 'exportEventHandler', (e, {type}: {type: 'svg' | 'png'}) => {
+    ipcHandler.addEventHandler(EVENTS.EXPORT_PAGE, 'exportEventHandler', (e, {type}) => {
       this._export(type);
     })
     ipcHandler.addEventHandler(EVENTS.EXPORT_PAGE_DIALOG, 'exportDialogEventHandler', () => {

@@ -25,10 +25,10 @@ ReactDOM.render(
 ipcRendererSend(EVENTS.SET_HOTKEYS, null);
 
 // Navigation events from main process
-ipcHandler.addEventHandler(EVENTS.GO, 'go-handler', (e: any, {to}: {to: string}) => go(to));
+ipcHandler.addEventHandler(EVENTS.GO, 'go-handler', (e: any, {to}) => go(to));
 
 // Open a .rainbow file
-ipcHandler.addEventHandler(EVENTS.OPEN, 'open-handler', (e, {path}: {path: string}) => {
+ipcHandler.addEventHandler(EVENTS.OPEN, 'open-handler', (e, {path}) => {
   readFile(path, (err, data) => {
     if (!err) {
       try {
