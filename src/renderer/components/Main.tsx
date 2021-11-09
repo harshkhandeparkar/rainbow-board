@@ -12,7 +12,7 @@ import { Icon } from './Icon/Icon';
 import { faPaintBrush, faBell, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 
 import { shortcutsManager } from '../../common/code/shortcuts';
-import { OPEN as OPEN_EVENT } from '../../common/constants/events';
+import { FIRE_MENU_EVENT } from '../../common/constants/events';
 import * as PATHS from '../../common/constants/paths';
 import { Header } from './Header/Header';
 import { ipcRendererSend } from '../util/ipc-sender';
@@ -71,7 +71,10 @@ function Main() {
               className="btn center brand-text full-width"
               title={`Open File (${OPEN.platformFormattedString})`}
               onClick={() => {
-                ipcRendererSend(OPEN_EVENT, null);
+                ipcRendererSend(FIRE_MENU_EVENT, {
+                  eventName: 'open',
+                  options: {}
+                })
               }}
             >
               <Icon options={{icon: faFolderOpen}} rightMargin={true} /> Open ({OPEN.platformFormattedString})

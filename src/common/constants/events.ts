@@ -1,6 +1,7 @@
 import { IpcRendererEvent, IpcMainEvent } from 'electron';
 import { Tool } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/tools/tools';
 import { IMenuEventTypes } from '../../electron/events/menuClickEvents';
+import { IOpenDialogOptions } from '../../electron/util/open';
 import { IPlugin } from '../types/plugins';
 
 export const NEW_WHITEBOARD = 'new-whiteboard';
@@ -113,7 +114,9 @@ export interface IPCRendererSendEventArgs {
       goTo: string;
     };
   };
-  [OPEN]: null;
+  [OPEN]: {
+    options: IOpenDialogOptions;
+  };
 
   [FIRE_MENU_EVENT]: {
     eventName: keyof IMenuEventTypes;
