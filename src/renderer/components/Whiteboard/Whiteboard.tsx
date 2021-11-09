@@ -157,7 +157,7 @@ Would you like to open this file?
                       event: 'import-warning'
                     })
 
-                    ipcHandler.addEventHandler('prompt-reply', 'importWarningPromptHandler', (event, args) => {
+                    ipcHandler.addEventHandler(EVENTS.PROMPT_REPLY, 'importWarningPromptHandler', (event, args) => {
                       if (args.event === 'import-warning') {
                         if (args.response === 0) history.push(HOME);
                         else this._loadPages(board, pages);

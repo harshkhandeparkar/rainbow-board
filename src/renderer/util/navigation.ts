@@ -1,11 +1,10 @@
-import { ipcRenderer } from 'electron';
 import ipcHandler from './ipc-handler';
 import history from './history';
-import { LOCATION_CHANGED, PROMPT } from '../../common/constants/events';
+import { LOCATION_CHANGED, PROMPT, PROMPT_REPLY } from '../../common/constants/events';
 import { WHITEBOARD } from '../../common/constants/paths';
 import { ipcRendererSend } from './ipc-sender';
 
-ipcHandler.addEventHandler('prompt-reply', 'leaveWhiteboardPromptEventHandler', (event, args) => {
+ipcHandler.addEventHandler(PROMPT_REPLY, 'leaveWhiteboardPromptEventHandler', (event, args) => {
   if (args.response === 1 && args.event === 'leave-whiteboard') history.push(args.options.goTo);
 })
 

@@ -10,7 +10,7 @@ import { open, openDialog } from './open';
 import { ipcMainListen } from '../events/limitedIPC';
 
 export function setHotkeys(win: BrowserWindow) {
-  ipcMainListen('set-hotkeys', (event) => {
+  ipcMainListen(EVENTS.SET_HOTKEYS, (event) => {
     // Submenu: File
     menuClickEvents.on(EVENTS.NEW_WHITEBOARD, 'hotkey-handler', () => event.reply(EVENTS.GO, {to: `/${WHITEBOARD}`}))
     menuClickEvents.on(EVENTS.ADD_PAGE, 'hotkey-handler', () => event.reply(EVENTS.ADD_PAGE, null));
