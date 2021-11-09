@@ -75,6 +75,11 @@ class App extends Component {
               border: ${this.state.css.highlightTextColor} solid 1px;
             }
 
+            .export-type:hover {
+              cursor: pointer;
+              background-color: ${this.state.css.bg1};
+            }
+
             .export-type, .modal, table, th, td {
               border: ${this.state.css.borderColor} solid 1px;
             }

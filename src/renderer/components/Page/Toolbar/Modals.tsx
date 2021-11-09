@@ -96,32 +96,32 @@ export const ExportPageModal = (
           {
             exportAllFormVisible && (
               <div className="row">
-                <div className="col s12">
-                  <div
-                    className={`export-type ${exportDirectory === null ? '' : 'selected'}`}
-                    onClick={() => {
-                      ipcRendererSend(OPEN, {
-                        dialogId: 1,
-                        options: {
-                          title: 'Select Folder',
-                          message: 'Select a folder to export the pages to.',
-                          openDirectory: true,
-                          filters: []
-                        }
-                      })
-                    }}
-                  >
-                    {
-                      exportDirectory === null ? (
-                        <>
-                          <h6>Select Export Folder</h6>
-                          Select a folder to export the images into.
-                        </>
-                      ) : (
-                        <h6>Exporting to: {exportDirectory}</h6>
-                      )
-                    }
-                  </div>
+                <div className="col s4 valign-wrapper form-col">
+                  <label>Export To: </label>
+                </div>
+                <div
+                  className={`col s8 form-col export-type valign-wrapper ${exportDirectory === null ? '' : 'selected'}`}
+                  onClick={() => {
+                    ipcRendererSend(OPEN, {
+                      dialogId: 1,
+                      options: {
+                        title: 'Select Folder',
+                        message: 'Select a folder to export the pages to.',
+                        openDirectory: true,
+                        filters: []
+                      }
+                    })
+                  }}
+                >
+                  {
+                    exportDirectory === null ? (
+                      <span style={{marginRight: 'auto', marginLeft: 'auto'}}>
+                        Select a folder to export the images into.
+                      </span>
+                    ) : (
+                      <b style={{marginRight: 'auto', marginLeft: 'auto'}}>{exportDirectory}</b>
+                    )
+                  }
                 </div>
               </div>
             )
