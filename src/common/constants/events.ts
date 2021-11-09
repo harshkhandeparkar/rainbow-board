@@ -62,6 +62,7 @@ export interface IPCRendererReceiveEventArgs {
   };
   [OPEN]: {
     path: string;
+    dialogId: number;
   };
 
   [NEXT_PAGE]: null;
@@ -116,6 +117,7 @@ export interface IPCRendererSendEventArgs {
   };
   [OPEN]: {
     options: IOpenDialogOptions;
+    dialogId: number;
   };
 
   [FIRE_MENU_EVENT]: {

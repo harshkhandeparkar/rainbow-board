@@ -19,8 +19,8 @@ export function setIPCHandlers(
         app.quit();
     })
 
-    ipcMainListen(EVENTS.OPEN, (e, {options}) => {
-        openDialog(win, e, options);
+    ipcMainListen(EVENTS.OPEN, (e, {options, dialogId}) => {
+        openDialog(win, e, options, dialogId);
     })
 
     ipcMainListen(EVENTS.FIRE_MENU_EVENT, (e, {eventName, options}) => {

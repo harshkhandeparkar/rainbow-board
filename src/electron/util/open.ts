@@ -15,7 +15,8 @@ export interface IOpenDialogOptions {
 export function openDialog(
   win: BrowserWindow,
   event: ITypedIpcMainEvent,
-  dialogOptions: IOpenDialogOptions
+  dialogOptions: IOpenDialogOptions,
+  dialogId: number
 ) {
   dialog.showOpenDialog(win, {
     title: dialogOptions.title,
@@ -30,17 +31,11 @@ export function openDialog(
     if (!canceled) {
       const filePath = filePaths[0];
 
-      open(event, filePath);
+      open(event, filePath, dialogId);
     }
   })
 }
 
-export function open(event: ITypedIpcMainEvent, path: string) {
-  if (extname(path).toString() !== '.rainbow') {
-    dialog.showErrorBox(
-      'Invalid File',
-      'The file to be opened should be a valid .rainbow file.'
-    )
-  }
-  else event.reply(OPEN, { path });
+export function open(event: ITypedIpcMainEvent, path: string, dialogId: number) {
+  event.reply(OPEN, { path, dialogId });
 }

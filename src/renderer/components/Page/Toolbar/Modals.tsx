@@ -3,6 +3,8 @@ import PaintSettings from '../../PaintSettings/PaintSettings';
 
 import { getRGBColorString } from 'svg-real-renderer/build/src/util/getRGBColorString';
 import { Color } from 'svg-real-renderer/build/src/types/RealRendererTypes';
+import { ipcRendererSend } from '../../../util/ipc-sender';
+import { OPEN } from '../../../../common/constants/events';
 
 export const ColorPaletteModal = (
   props: {
@@ -46,11 +48,12 @@ export const ExportPageModal = (
   props: {
     onClose: () => void;
     _export: (exportType: 'svg' | 'png') => void;
-    _exportAll: (exportType: 'svg' | 'png') => void;
+    _exportAll: (exportType: 'svg' | 'png', directoryPath: string) => void;
   }
 ) => {
   const [exportAllFormVisible, setExportAllFormVisible] = useState<boolean>(false);
   const [exportType, setExportType] = useState<'svg' | 'png'>('png');
+  const [exportDirectory, setExportDirectory] = useState<string | null>(null);
 
   return (
     <>
@@ -70,6 +73,7 @@ export const ExportPageModal = (
               </div>
             </div>
           </div>
+
           <div className="row">
             <div className="col s12">
               <div
@@ -81,6 +85,40 @@ export const ExportPageModal = (
               </div>
             </div>
           </div>
+
+          {
+            exportAllFormVisible && (
+              <div className="row">
+                <div className="col s12">
+                  <div
+                    className={`export-type ${exportDirectory === null ? '' : 'selected'}`}
+                    onClick={() => {
+                      ipcRendererSend(OPEN, {
+                        dialogId: 1,
+                        options: {
+                          title: 'Select Folder',
+                          message: 'Select a folder to export the pages to.',
+                          openDirectory: true,
+                          filters: []
+                        }
+                      })
+                    }}
+                  >
+                    {
+                      exportDirectory === null ? (
+                        <>
+                          <h6>Select Export Folder</h6>
+                          Select a folder to export the images into.
+                        </>
+                      ) : (
+                        <h6>Exported to: {exportDirectory}</h6>
+                      )
+                    }
+                  </div>
+                </div>
+              </div>
+            )
+          }
         </div>
       </div>
 
@@ -93,7 +131,7 @@ export const ExportPageModal = (
             marginRight: '0.5rem'
           }}
           onClick={() => {
-            exportAllFormVisible ? props._exportAll(exportType) : props._export(exportType);
+            exportAllFormVisible ? (exportDirectory !== null && props._exportAll(exportType, exportDirectory)) : props._export(exportType);
             props.onClose();
           }}
         >

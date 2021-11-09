@@ -51,7 +51,7 @@ export interface IToolbarProps {
   };
   _clearBoard: () => void;
   _export: (exportType: 'svg' | 'png') => void;
-  _exportAll: (exportType: 'svg' | 'png') => void;
+  _exportAll: (exportType: 'svg' | 'png', directoryPath: string) => void;
   _save: () => void;
   _onUndo: () => void;
   _onRedo: () => void;

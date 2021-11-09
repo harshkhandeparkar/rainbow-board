@@ -28,25 +28,27 @@ ipcRendererSend(EVENTS.SET_HOTKEYS, null);
 ipcHandler.addEventHandler(EVENTS.GO, 'go-handler', (e: any, {to}) => go(to));
 
 // Open a .rainbow file
-ipcHandler.addEventHandler(EVENTS.OPEN, 'open-handler', (e, {path}) => {
-  readFile(path, (err, data) => {
-    if (!err) {
-      try {
-        const fileData = JSON.parse(data.toString());
-        history.push({
-          pathname: `/${PATHS.WHITEBOARD}`,
-          state: {
-            open: {
-              data: fileData,
-              location: path,
-              fileName: basename(path)
+ipcHandler.addEventHandler(EVENTS.OPEN, 'open-handler', (e, {path, dialogId}) => {
+  if (dialogId === 0) {
+    readFile(path, (err, data) => {
+      if (!err) {
+        try {
+          const fileData = JSON.parse(data.toString());
+          history.push({
+            pathname: `/${PATHS.WHITEBOARD}`,
+            state: {
+              open: {
+                data: fileData,
+                location: path,
+                fileName: basename(path)
+              }
             }
-          }
-        })
+          })
+        }
+        catch(e) {
+          console.log('error parsing file', e);
+        }
       }
-      catch(e) {
-        console.log('error parsing file', e);
-      }
-    }
-  })
+    })
+  }
 })

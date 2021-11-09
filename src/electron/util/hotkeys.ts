@@ -24,7 +24,8 @@ export function setHotkeys(win: BrowserWindow) {
         message: 'Select a `.rainbow` whiteboard file to open.',
         openDirectory: false,
         filters: [{name: 'Rainbow File', extensions: ['rainbow']}]
-      }
+      },
+      0
     ))
     globalShortcut.register(shortcutsManager.shortcuts.EXPORT_PAGE.accelerator, () => {
       event.reply(EVENTS.EXPORT_PAGE_DIALOG, null);
@@ -52,7 +53,7 @@ export function setHotkeys(win: BrowserWindow) {
     })
 
     if (possibleFilePath !== undefined) {
-      open(event, possibleFilePath);
+      open(event, possibleFilePath, 0);
     }
   })
 }
