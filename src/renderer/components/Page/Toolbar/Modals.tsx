@@ -99,46 +99,49 @@ export const ExportPageModal = (
 
           {
             exportAllFormVisible && (
-              <div className="row">
-                <div className="col s4 valign-wrapper form-col">
-                  <label>Export To:</label>
-                </div>
-                <div className="col s8 form-col valign-wrapper">
-                  <div
-                    className={`export-type ${errDirNotSelected ? 'error' : (exportDirectory === null ? '' : 'selected')}`}
-                    style={{width: '100%'}}
-                    onClick={() => {
-                      ipcRendererSend(OPEN, {
-                        dialogId: 1,
-                        options: {
-                          title: 'Select Folder',
-                          message: 'Select a folder to export the pages to.',
-                          openDirectory: true,
-                          filters: []
-                        }
-                      })
-                    }}
-                  >
-                    {
-                      errDirNotSelected ? (
-                        <>
-                          You have to select a folder to export to
-                          <Icon options={{icon: faExclamationCircle, color: 'red', className: 'right'}} customColor={true}/>
-                        </>
-                      )
-                      : (
-                        exportDirectory === null ? (
-                          <span style={{marginRight: 'auto', marginLeft: 'auto'}}>
-                            Select a folder to export the images into.
-                          </span>
-                        ) : (
-                          <b style={{marginRight: 'auto', marginLeft: 'auto'}}>{exportDirectory}</b>
+              <>
+                <hr className="horizontal-separator-line" />
+                <div className="row">
+                  <div className="col s3 valign-wrapper form-col">
+                    <label>Export To:</label>
+                  </div>
+                  <div className="col s9 form-col valign-wrapper">
+                    <div
+                      className={`export-type ${errDirNotSelected ? 'error' : (exportDirectory === null ? '' : 'selected')}`}
+                      style={{width: '100%'}}
+                      onClick={() => {
+                        ipcRendererSend(OPEN, {
+                          dialogId: 1,
+                          options: {
+                            title: 'Select Folder',
+                            message: 'Select a folder to export the pages to.',
+                            openDirectory: true,
+                            filters: []
+                          }
+                        })
+                      }}
+                    >
+                      {
+                        errDirNotSelected ? (
+                          <>
+                            You have to select a folder to export to
+                            <Icon options={{icon: faExclamationCircle, color: 'red', className: 'right'}} customColor={true}/>
+                          </>
                         )
-                      )
-                    }
+                        : (
+                          exportDirectory === null ? (
+                            <span style={{marginRight: 'auto', marginLeft: 'auto'}}>
+                              Select a folder to export the images into.
+                            </span>
+                          ) : (
+                            <b style={{marginRight: 'auto', marginLeft: 'auto'}}>{exportDirectory}</b>
+                          )
+                        )
+                      }
+                    </div>
                   </div>
                 </div>
-              </div>
+              </>
             )
           }
         </div>
@@ -153,7 +156,7 @@ export const ExportPageModal = (
             marginRight: '0.5rem'
           }}
           onClick={() => {
-            if (exportDirectory === null) return setErrDirNotSelected(true);
+            if (exportDirectory === null && exportAllFormVisible) return setErrDirNotSelected(true);
 
             exportAllFormVisible ? props._exportAll(exportType, exportDirectory) : props._export(exportType);
             props.onClose();
