@@ -57,7 +57,9 @@ export interface IPCRendererReceiveEventArgs {
   [EXPORT_PAGE_DIALOG]: null;
 
   [SAVE]: null;
-  [OPEN]: null;
+  [OPEN]: {
+    path: string;
+  };
 
   [NEXT_PAGE]: null;
   [PREVIOUS_PAGE]: null;

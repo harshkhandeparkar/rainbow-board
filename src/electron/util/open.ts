@@ -1,16 +1,30 @@
 import { BrowserWindow, dialog, app, IpcMainEvent } from 'electron';
 import { extname } from 'path';
 import { OPEN } from '../../common/constants/events';
+import { ITypedIpcMainEvent } from '../events/limitedIPC';
 
-export function openDialog(win: BrowserWindow, event: IpcMainEvent) {
+export interface IOpenDialogOptions {
+  title: string;
+  message: string;
+  /** Documents folder by default */
+  defaultPath?: string;
+  openDirectory: boolean;
+  filters: Electron.FileFilter[];
+}
+
+export function openDialog(
+  win: BrowserWindow,
+  event: ITypedIpcMainEvent,
+  dialogOptions: IOpenDialogOptions
+) {
   dialog.showOpenDialog(win, {
-    title: 'Open Whiteboard',
-    defaultPath: app.getPath('documents'),
-    buttonLabel: 'Open',
-    filters: [{name: 'Rainbow File', extensions: ['rainbow']}],
-    message: 'Open a saved .rainbow file.',
+    title: dialogOptions.title,
+    defaultPath: dialogOptions.defaultPath ?? app.getPath('documents'),
+    buttonLabel: dialogOptions.openDirectory ? 'Select Folder' : 'Select File',
+    filters: dialogOptions.filters,
+    message: dialogOptions.message,
     properties: [
-      'openFile'
+      dialogOptions.openDirectory ? 'openDirectory' : 'openFile'
     ]
   }).then(({ canceled, filePaths }) => {
     if (!canceled) {
@@ -21,7 +35,7 @@ export function openDialog(win: BrowserWindow, event: IpcMainEvent) {
   })
 }
 
-export function open(event: IpcMainEvent, path: string) {
+export function open(event: ITypedIpcMainEvent, path: string) {
   if (extname(path).toString() !== '.rainbow') {
     dialog.showErrorBox(
       'Invalid File',

@@ -16,7 +16,16 @@ export function setHotkeys(win: BrowserWindow) {
     menuClickEvents.on(EVENTS.ADD_PAGE, 'hotkey-handler', () => event.reply(EVENTS.ADD_PAGE, null));
     menuClickEvents.on(EVENTS.EXPORT_PAGE, 'hotkey-handler', ({type}) => event.reply(EVENTS.EXPORT_PAGE, {type}));
     menuClickEvents.on(EVENTS.SAVE, 'hotkey-handler', () => saveDialog(win, event));
-    menuClickEvents.on(EVENTS.OPEN, 'hotkey-handler', () => openDialog(win, event));
+    menuClickEvents.on(EVENTS.OPEN, 'hotkey-handler', () => openDialog(
+      win,
+      event,
+      {
+        title: 'Open Rainbow File',
+        message: 'Select a `.rainbow` whiteboard file to open.',
+        openDirectory: false,
+        filters: [{name: 'Rainbow File', extensions: ['rainbow']}]
+      }
+    ))
     globalShortcut.register(shortcutsManager.shortcuts.EXPORT_PAGE.accelerator, () => {
       event.reply(EVENTS.EXPORT_PAGE_DIALOG, null);
     })
