@@ -138,6 +138,27 @@ export class Page extends Component<IPageProps> {
     }
   }
 
+  async _saveExport(saver: SVGSaver, type: 'svg' | 'png', directoryPath: string, basename: string) {
+    if (type === 'svg') await writeFile(
+      join(
+        directoryPath,
+        `${basename}.svg`
+      ),
+        await saver.getSVGBlob().text()
+    )
+    else await writeFile(
+      join(
+        directoryPath,
+        `${basename}.png`
+      ),
+      // thank you stackoverflow user: https://stackoverflow.com/a/51709828
+      (await saver.getPNGDataURL()).replace(/^data:image\/png;base64,/, ""),
+      {
+        encoding: 'base64'
+      }
+    )
+  }
+
   async _export(type: 'svg' | 'png') {
     const saver = new SVGSaver(this.svgRef.current);
 
@@ -174,24 +195,7 @@ export class Page extends Component<IPageProps> {
 
       saver.loadNewSVG(tempSVG);
 
-      if (type === 'svg') await writeFile(
-        join(
-          directoryPath,
-          `page-${parseInt(pageNo) + 1}.svg`
-        ),
-          await saver.getSVGBlob().text()
-      )
-      else await writeFile(
-        join(
-          directoryPath,
-          `page-${parseInt(pageNo) + 1}.png`
-        ),
-        // thank you stackoverflow user: https://stackoverflow.com/a/51709828
-        (await saver.getPNGDataURL()).replace(/^data:image\/png;base64,/, ""),
-        {
-          encoding: 'base64'
-        }
-      )
+      this._saveExport(saver, type, directoryPath, `page-${parseInt(pageNo) + 1}`)
     }
 
     tempSVG.remove();
