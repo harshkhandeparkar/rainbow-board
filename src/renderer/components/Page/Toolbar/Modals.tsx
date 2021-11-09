@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import PaintSettings from '../../PaintSettings/PaintSettings';
+import { Icon } from '../../Icon/Icon';
 
 import { getRGBColorString } from 'svg-real-renderer/build/src/util/getRGBColorString';
 import { Color } from 'svg-real-renderer/build/src/types/RealRendererTypes';
 import { ipcRendererSend } from '../../../util/ipc-sender';
 import { OPEN } from '../../../../common/constants/events';
 import ipcHandler from '../../../util/ipc-handler';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 export const ColorPaletteModal = (
   props: {
@@ -55,10 +57,12 @@ export const ExportPageModal = (
   const [exportAllFormVisible, setExportAllFormVisible] = useState<boolean>(false);
   const [exportType, setExportType] = useState<'svg' | 'png'>('png');
   const [exportDirectory, setExportDirectory] = useState<string | null>(null);
+  const [errDirNotSelected, setErrDirNotSelected] = useState<boolean>(false);
 
   ipcHandler.addEventHandler(OPEN, 'exportAllOpenHandler', (e, {path, dialogId}) => {
     if (dialogId === 1) {
       setExportDirectory(path);
+      setErrDirNotSelected(false);
     }
   })
 
@@ -97,31 +101,42 @@ export const ExportPageModal = (
             exportAllFormVisible && (
               <div className="row">
                 <div className="col s4 valign-wrapper form-col">
-                  <label>Export To: </label>
+                  <label>Export To:</label>
                 </div>
-                <div
-                  className={`col s8 form-col export-type valign-wrapper ${exportDirectory === null ? '' : 'selected'}`}
-                  onClick={() => {
-                    ipcRendererSend(OPEN, {
-                      dialogId: 1,
-                      options: {
-                        title: 'Select Folder',
-                        message: 'Select a folder to export the pages to.',
-                        openDirectory: true,
-                        filters: []
-                      }
-                    })
-                  }}
-                >
-                  {
-                    exportDirectory === null ? (
-                      <span style={{marginRight: 'auto', marginLeft: 'auto'}}>
-                        Select a folder to export the images into.
-                      </span>
-                    ) : (
-                      <b style={{marginRight: 'auto', marginLeft: 'auto'}}>{exportDirectory}</b>
-                    )
-                  }
+                <div className="col s8 form-col valign-wrapper">
+                  <div
+                    className={`export-type ${errDirNotSelected ? 'error' : (exportDirectory === null ? '' : 'selected')}`}
+                    style={{width: '100%'}}
+                    onClick={() => {
+                      ipcRendererSend(OPEN, {
+                        dialogId: 1,
+                        options: {
+                          title: 'Select Folder',
+                          message: 'Select a folder to export the pages to.',
+                          openDirectory: true,
+                          filters: []
+                        }
+                      })
+                    }}
+                  >
+                    {
+                      errDirNotSelected ? (
+                        <>
+                          You have to select a folder to export to
+                          <Icon options={{icon: faExclamationCircle, color: 'red', className: 'right'}} customColor={true}/>
+                        </>
+                      )
+                      : (
+                        exportDirectory === null ? (
+                          <span style={{marginRight: 'auto', marginLeft: 'auto'}}>
+                            Select a folder to export the images into.
+                          </span>
+                        ) : (
+                          <b style={{marginRight: 'auto', marginLeft: 'auto'}}>{exportDirectory}</b>
+                        )
+                      )
+                    }
+                  </div>
                 </div>
               </div>
             )
@@ -138,7 +153,9 @@ export const ExportPageModal = (
             marginRight: '0.5rem'
           }}
           onClick={() => {
-            exportAllFormVisible ? (exportDirectory !== null && props._exportAll(exportType, exportDirectory)) : props._export(exportType);
+            if (exportDirectory === null) return setErrDirNotSelected(true);
+
+            exportAllFormVisible ? props._exportAll(exportType, exportDirectory) : props._export(exportType);
             props.onClose();
           }}
         >

@@ -70,6 +70,10 @@ input[type=range] {
   }
 }
 
+.export-type.error {
+  border-color: red;
+}
+
 .export-row .col {
   min-height: 100% !important;
 }
