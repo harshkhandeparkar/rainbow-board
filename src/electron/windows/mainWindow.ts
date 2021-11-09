@@ -1,4 +1,4 @@
-import { BrowserWindow, shell, dialog, ipcMain, app } from 'electron';
+import { BrowserWindow, shell, dialog, app } from 'electron';
 import { indexFilePath, iconPath } from '../constants/paths';
 import { setWindowMenu } from '../util/windowMenu';
 import { setHotkeys } from '../util/hotkeys';
@@ -12,6 +12,7 @@ import {
   useGnomeStyleHeaderbarSetting
 } from '../../common/code/settings';
 import { ipcMainListen } from '../events/limitedIPC';
+import { setIPCHandlers } from './mainWindowIPC';
 
 let showExitPrompt = true;
 
@@ -39,6 +40,8 @@ export function createMainWindow(
   ipcMainListen(EVENTS.GET_PLUGINS, (e) => {
     e.returnValue = plugins.filter(plugin => plugin.usable);
   })
+
+  setIPCHandlers(win, app, isDev);
 
   win.loadFile(indexFilePath);
 
