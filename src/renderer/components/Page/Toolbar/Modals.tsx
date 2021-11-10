@@ -100,7 +100,9 @@ export const ExportPageModal = (
           {
             exportAllFormVisible && (
               <>
+              <div className="row"><div className="col s12">
                 <hr className="horizontal-separator-line" />
+              </div></div>
                 <div className="row">
                   <div className="col s3 valign-wrapper form-col">
                     <label>Export To:</label>
