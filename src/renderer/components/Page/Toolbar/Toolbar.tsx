@@ -38,7 +38,8 @@ import * as PATHS from '../../../../common/constants/paths';
 
 import { TopToolbarRange, TopToolbarToggle, TopToolbarToggleButton } from './TopToolbarComponents';
 import { BottomToolbarButton } from './BottomToolbarComponents';
-import { ColorPaletteModal, ExportPageModal } from './Modals';
+import { ExportPageModal } from './modals/ExportPageModal';
+import { ColorPaletteModal} from './modals/ColorPaletteModal';
 import { TEXT_TOOL } from '../../../../common/constants/shortcuts';
 
 export interface IToolbarProps {
@@ -129,40 +130,18 @@ export class Toolbar extends Component<IToolbarProps> {
     this._initializeModal();
   }
 
-  onBrushSizeChange = (val: number) => {
-    this.props._changeToolSetting('brushSize', val);
+  getOnPropertyChangeHandler = <K extends keyof ToolSettings>(property: K) => (val: ToolSettings[K]) => {
+  this.props._changeToolSetting(property, val);
     this.setState({
-      brushSize: val
+      [property]: val
     })
   }
 
-  onEraserSizeChange = (val: number) => {
-    this.props._changeToolSetting('eraserSize', val);
-    this.setState({
-      eraserSize: val
-    })
-  }
-
-  onLineThicknessChange = (val: number) => {
-    this.props._changeToolSetting('lineThickness', val);
-    this.setState({
-      lineThickness: val
-    })
-  }
-
-  onFontSizeChange = (val: number) => {
-    this.props._changeToolSetting('fontSize', val);
-    this.setState({
-      fontSize: val
-    })
-  }
-
-  onTextToolModeChange = (val: 'new' | 'edit') => {
-    this.props._changeToolSetting('textToolMode', val);
-    this.setState({
-      textToolMode: val
-    })
-  }
+  onBrushSizeChange = this.getOnPropertyChangeHandler('brushSize');
+  onEraserSizeChange = this.getOnPropertyChangeHandler('eraserSize');
+  onLineThicknessChange = this.getOnPropertyChangeHandler('lineThickness');
+  onFontSizeChange = this.getOnPropertyChangeHandler('fontSize');
+  onTextToolModeChange = this.getOnPropertyChangeHandler('textToolMode');
 
   onFontStyleChange = (property: 'bold' | 'italic' | 'underline', val: boolean) => {
     this.props._changeToolSetting(property, val);
