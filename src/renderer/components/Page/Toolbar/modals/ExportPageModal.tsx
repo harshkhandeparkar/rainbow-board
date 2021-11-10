@@ -1,10 +1,43 @@
-import React, { useState } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
 import { Icon } from '../../../Icon/Icon';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { ipcRendererSend } from '../../../../util/ipc-sender';
-import { OPEN } from '../../../../../common/constants/events';
+import { IPCRendererSendEventArgs, OPEN } from '../../../../../common/constants/events';
 import ipcHandler from '../../../../util/ipc-handler';
+
+const exportFolderOpenDialogOptions: IPCRendererSendEventArgs['open'] = {
+  dialogId: 1,
+  options: {
+    title: 'Select Folder',
+    message: 'Select a folder to export the pages to.',
+    openDirectory: true,
+    filters: []
+  }
+}
+
+const EPageModalBtnClassTypeMap = {
+  regular: '',
+  selected: 'selected',
+  error: 'error'
+}
+
+const ExportPageModalButton = (
+  {type, onClick, title, description}: {
+    type: 'regular' | 'selected' | 'error',
+    onClick: MouseEventHandler<HTMLDivElement>,
+    title: string,
+    description: string
+  }
+) => (
+  <div
+    className={`export-page-modal-btn ${EPageModalBtnClassTypeMap[type]}`}
+    onClick={onClick}
+  >
+    <h6>{title}</h6>
+    {description}
+  </div>
+)
 
 export const ExportPageModal = (
   props: {
@@ -34,25 +67,23 @@ export const ExportPageModal = (
       <div className="container">
           <div className="row">
             <div className="col s12">
-              <div
-                className={`export-type ${exportType === 'png' ? 'selected' : ''}`}
+              <ExportPageModalButton
+                type={exportType === 'png' ? 'selected' : 'regular'}
                 onClick={() => setExportType('png')}
-              >
-                <h6>PNG</h6>
-                Exports as a normal image. Works everywhere. Default and recommended for most users.
-              </div>
+                title="PNG"
+                description="Exports as a normal image. Works everywhere. Default and recommended for most users"
+              />
             </div>
           </div>
 
           <div className="row">
             <div className="col s12">
-              <div
-                className={`export-type ${exportType === 'svg' ? 'selected' : ''}`}
+              <ExportPageModalButton
+                type={exportType === 'svg' ? 'selected' : 'regular'}
                 onClick={() => setExportType('svg')}
-              >
-                <h6>SVG</h6>
-                Exports the page as an <a href="https://en.wikipedia.org/wiki/SVG" rel="noreferrer" style={{display: 'inline'}} target="_blank">SVG</a>. Use it if you know what it is.
-              </div>
+                title="SVG"
+                description="Exports the page as an SVG. Use it if you know what it is."
+              />
             </div>
           </div>
 
@@ -60,43 +91,30 @@ export const ExportPageModal = (
             exportAllFormVisible && (
               <>
               <div className="row"><div className="col s12">
-                  <hr className="horizontal-separator-line" />
+                <hr className="horizontal-separator-line" />
               </div></div>
                 <div className="row">
                   <div className="col s3 valign-wrapper form-col">
                     <label>Export To:</label>
                   </div>
+
                   <div className="col s9 form-col valign-wrapper">
                     <div
-                      className={`export-type ${errDirNotSelected ? 'error' : (exportDirectory === null ? '' : 'selected')}`}
+                      className={`export-page-modal-btn ${errDirNotSelected ? 'error' : (exportDirectory === null ? '' : 'selected')}`}
                       style={{width: '100%'}}
-                      onClick={() => {
-                        ipcRendererSend(OPEN, {
-                          dialogId: 1,
-                          options: {
-                            title: 'Select Folder',
-                            message: 'Select a folder to export the pages to.',
-                            openDirectory: true,
-                            filters: []
-                          }
-                        })
-                      }}
+                      onClick={() => ipcRendererSend(OPEN, exportFolderOpenDialogOptions)}
                     >
                       {
-                        errDirNotSelected ? (
-                          <>
-                            You have to select a folder to export to
-                            <Icon options={{icon: faExclamationCircle, color: 'red', className: 'right'}} customColor={true}/>
-                          </>
-                        )
+                        errDirNotSelected ? (<>
+                          You have to select a folder to export to
+                          <Icon options={{icon: faExclamationCircle, color: 'red', className: 'right'}} customColor={true}/>
+                        </>)
                         : (
                           exportDirectory === null ? (
                             <span style={{marginRight: 'auto', marginLeft: 'auto'}}>
                               Select a folder to export the images into.
                             </span>
-                          ) : (
-                            <b style={{marginRight: 'auto', marginLeft: 'auto'}}>{exportDirectory}</b>
-                          )
+                          ) : <b style={{marginRight: 'auto', marginLeft: 'auto'}}>{exportDirectory}</b>
                         )
                       }
                     </div>
