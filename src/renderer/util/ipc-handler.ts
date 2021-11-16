@@ -14,7 +14,6 @@ export class IPCHandler {
     [EVENTS.ADD_PAGE]: {},
 
     [EVENTS.EXPORT_PAGE]: {},
-    [EVENTS.EXPORT_PAGE_DIALOG]: {},
 
     [EVENTS.SAVE]: {},
     [EVENTS.OPEN]: {},

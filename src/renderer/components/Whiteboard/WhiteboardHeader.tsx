@@ -125,7 +125,7 @@ export const WhiteboardHeader = (
                 <button
                   title={`Color Palette (${COLOR_PALETTE.platformFormattedString})`}
                   className="btn"
-                  onClick={() => ipcRendererSend(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.TOGGLE_COLOR_PALETTE, options: {}})}
+                  onClick={() => ipcRendererSend(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.TOGGLE_COLOR_PALETTE, options: null})}
                 >
                   <Icon options={{icon: faPalette, size: 'sm'}}></Icon>
                 </button>

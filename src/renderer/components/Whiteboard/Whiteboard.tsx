@@ -228,7 +228,7 @@ Would you like to open this file?
 
   save() {
     if (this.state.fileOpened) this._saveWhiteboard(this.state.location);
-    else ipcRendererSend(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SAVE, options: {}});
+    else ipcRendererSend(EVENTS.FIRE_MENU_EVENT, {eventName: EVENTS.SAVE, options: null});
   }
 
   componentWillUnmount() {

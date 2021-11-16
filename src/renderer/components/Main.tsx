@@ -73,7 +73,7 @@ function Main() {
               onClick={() => {
                 ipcRendererSend(FIRE_MENU_EVENT, {
                   eventName: 'open',
-                  options: {}
+                  options: null
                 })
               }}
             >

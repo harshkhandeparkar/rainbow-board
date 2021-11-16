@@ -6,10 +6,8 @@ import { IPlugin } from '../types/plugins';
 
 export const NEW_WHITEBOARD = 'new-whiteboard';
 
-/** EVENT: Export a page as an image */
-export const EXPORT_PAGE = 'export-page';
 /** EVENT: Open the export page dialog */
-export const EXPORT_PAGE_DIALOG = 'export-page-dialog';
+export const EXPORT_PAGE = 'export-page';
 
 export const SAVE = 'save';
 export const OPEN = 'open';
@@ -52,10 +50,7 @@ export interface IPCRendererReceiveEventArgs {
   [NEW_WHITEBOARD]: null;
   [ADD_PAGE]: null;
 
-  [EXPORT_PAGE]: {
-    type: 'png' | 'svg';
-  };
-  [EXPORT_PAGE_DIALOG]: null;
+  [EXPORT_PAGE]: null;
 
   [SAVE]: {
     finalFilePath: string;

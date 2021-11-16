@@ -14,7 +14,7 @@ export function setHotkeys(win: BrowserWindow) {
     // Submenu: File
     menuClickEvents.on(EVENTS.NEW_WHITEBOARD, 'hotkey-handler', () => event.reply(EVENTS.GO, {to: `/${WHITEBOARD}`}))
     menuClickEvents.on(EVENTS.ADD_PAGE, 'hotkey-handler', () => event.reply(EVENTS.ADD_PAGE, null));
-    menuClickEvents.on(EVENTS.EXPORT_PAGE, 'hotkey-handler', ({type}) => event.reply(EVENTS.EXPORT_PAGE, {type}));
+    menuClickEvents.on(EVENTS.EXPORT_PAGE, 'hotkey-handler', () => event.reply(EVENTS.EXPORT_PAGE, null));
     menuClickEvents.on(EVENTS.SAVE, 'hotkey-handler', () => saveDialog(win, event));
     menuClickEvents.on(EVENTS.OPEN, 'hotkey-handler', () => openDialog(
       win,
@@ -27,9 +27,6 @@ export function setHotkeys(win: BrowserWindow) {
       },
       0
     ))
-    globalShortcut.register(shortcutsManager.shortcuts.EXPORT_PAGE.accelerator, () => {
-      event.reply(EVENTS.EXPORT_PAGE_DIALOG, null);
-    })
 
     // Submenu: Edit
     menuClickEvents.on(EVENTS.UNDO, 'hotkey-handler', () => event.reply(EVENTS.UNDO, null));

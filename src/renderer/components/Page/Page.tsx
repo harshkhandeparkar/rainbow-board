@@ -204,7 +204,6 @@ export class Page extends Component<IPageProps> {
     ipcHandler.removeEventHandler(EVENTS.UNDO, 'undoEventHandler');
     ipcHandler.removeEventHandler(EVENTS.REDO, 'redoEventHandler');
     ipcHandler.removeEventHandler(EVENTS.EXPORT_PAGE, 'exportEventHandler');
-    ipcHandler.removeEventHandler(EVENTS.EXPORT_PAGE_DIALOG, 'exportDialogEventHandler');
     ipcHandler.removeEventHandler(EVENTS.CLEAR_PAGE, 'clearEventHandler');
     ipcHandler.removeEventHandler(EVENTS.PROMPT_REPLY, 'clearPagePromptHandler');
   }
@@ -214,12 +213,10 @@ export class Page extends Component<IPageProps> {
 
     ipcHandler.addEventHandler(EVENTS.UNDO, 'undoEventHandler', () => this.state.boardState.drawBoard.undo())
     ipcHandler.addEventHandler(EVENTS.REDO, 'redoEventHandler', () => this.state.boardState.drawBoard.redo())
-    ipcHandler.addEventHandler(EVENTS.EXPORT_PAGE, 'exportEventHandler', (e, {type}) => {
+    ipcHandler.addEventHandler(EVENTS.EXPORT_PAGE, 'exportEventHandler', (e) => {
       this.toolbarRef.current.exportPageModalInstance.open();
     })
-    ipcHandler.addEventHandler(EVENTS.EXPORT_PAGE_DIALOG, 'exportDialogEventHandler', () => {
-      this.toolbarRef.current.exportPageModalInstance.open();
-    })
+
     ipcHandler.addEventHandler(EVENTS.CLEAR_PAGE, 'clearEventHandler', () => this._clearBoard())
     ipcHandler.addEventHandler(EVENTS.PROMPT_REPLY, 'clearPagePromptHandler', (event, args) => {
       if (args.response === 1 && args.event === 'clear') this.state.boardState.drawBoard.clear();

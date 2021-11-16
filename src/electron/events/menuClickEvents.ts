@@ -3,28 +3,26 @@ import * as EVENTS from '../../common/constants/events';
 import { Tool } from 'svg-real-renderer/build/src/renderers/RealDrawBoard/tools/tools';
 
 export interface IMenuEventTypes {
-  [EVENTS.NEW_WHITEBOARD]: {};
-  [EVENTS.ADD_PAGE]: {};
+  [EVENTS.NEW_WHITEBOARD]: null;
+  [EVENTS.ADD_PAGE]: null;
 
-  [EVENTS.OPEN]: {};
-  [EVENTS.SAVE]: {};
+  [EVENTS.OPEN]: null;
+  [EVENTS.SAVE]: null;
 
-  [EVENTS.EXPORT_PAGE]: {
-    type: 'svg' | 'png';
-  };
-  [EVENTS.NEXT_PAGE]: {};
-  [EVENTS.PREVIOUS_PAGE]: {};
-  [EVENTS.CLEAR_PAGE]: {};
-  [EVENTS.DELETE_PAGE]: {};
+  [EVENTS.EXPORT_PAGE]: null;
+  [EVENTS.NEXT_PAGE]: null;
+  [EVENTS.PREVIOUS_PAGE]: null;
+  [EVENTS.CLEAR_PAGE]: null;
+  [EVENTS.DELETE_PAGE]: null;
 
-  [EVENTS.UNDO]: {};
-  [EVENTS.REDO]: {};
+  [EVENTS.UNDO]: null;
+  [EVENTS.REDO]: null;
 
-  [EVENTS.TOGGLE_COLOR_PALETTE]: {};
+  [EVENTS.TOGGLE_COLOR_PALETTE]: null;
   [EVENTS.SET_TOOL]: {
     tool: Tool;
   };
-  [EVENTS.PREV_TOOL]: {};
+  [EVENTS.PREV_TOOL]: null;
 
   [EVENTS.GO]: {
     to: string;

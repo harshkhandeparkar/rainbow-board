@@ -23,41 +23,30 @@ export function setWindowMenu(
         {
           label: 'Start New Whiteboard',
           accelerator:  shortcutsManager.shortcuts.START_NEW.accelerator,
-          click: () => menuClickEvents.fire(EVENTS.NEW_WHITEBOARD, {}),
+          click: () => menuClickEvents.fire(EVENTS.NEW_WHITEBOARD, null),
           enabled: path !== `/${PATHS.WHITEBOARD}`,
           visible: path !== `/${PATHS.WHITEBOARD}`
         },
         {
           label: 'Open File...',
           accelerator:  shortcutsManager.shortcuts.OPEN.accelerator,
-          click: () => menuClickEvents.fire(EVENTS.OPEN, {}),
+          click: () => menuClickEvents.fire(EVENTS.OPEN, null),
           enabled: path !== `/${PATHS.WHITEBOARD}`,
           visible: path !== `/${PATHS.WHITEBOARD}`
         },
         {
           label: 'Save File...',
           accelerator:  shortcutsManager.shortcuts.SAVE.accelerator,
-          click: () => menuClickEvents.fire(EVENTS.SAVE, {}),
+          click: () => menuClickEvents.fire(EVENTS.SAVE, null),
           visible: path === `/${PATHS.WHITEBOARD}`,
           enabled: path === `/${PATHS.WHITEBOARD}`
         },
         {
           label: 'Export Page...',
           accelerator:  shortcutsManager.shortcuts.EXPORT_PAGE.accelerator,
-          registerAccelerator: false,
           visible: path === `/${PATHS.WHITEBOARD}`,
           enabled: path === `/${PATHS.WHITEBOARD}`,
-          type: 'submenu',
-          submenu: [
-            {
-              label: 'PNG',
-              click: () => menuClickEvents.fire(EVENTS.EXPORT_PAGE, { type: 'png' })
-            },
-            {
-              label: 'SVG',
-              click: () => menuClickEvents.fire(EVENTS.EXPORT_PAGE, { type: 'svg' })
-            }
-          ]
+          click: () => menuClickEvents.fire(EVENTS.EXPORT_PAGE, null)
         },
         { type: 'separator' },
         {
@@ -75,18 +64,18 @@ export function setWindowMenu(
       visible: path === `/${PATHS.WHITEBOARD}`,
       enabled: path === `/${PATHS.WHITEBOARD}`,
       submenu: [
-        { label: 'Undo', accelerator:  shortcutsManager.shortcuts.UNDO.accelerator, click: () => menuClickEvents.fire(EVENTS.UNDO, {}) },
-        { label: 'Redo', accelerator:  shortcutsManager.shortcuts.REDO.accelerator, click: () => menuClickEvents.fire(EVENTS.REDO, {}) },
+        { label: 'Undo', accelerator:  shortcutsManager.shortcuts.UNDO.accelerator, click: () => menuClickEvents.fire(EVENTS.UNDO, null) },
+        { label: 'Redo', accelerator:  shortcutsManager.shortcuts.REDO.accelerator, click: () => menuClickEvents.fire(EVENTS.REDO, null) },
         { type: 'separator' },
-        { label: 'Add Page', accelerator:  shortcutsManager.shortcuts.ADD_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.ADD_PAGE, {}) },
-        { label: 'Clear Page', accelerator:  shortcutsManager.shortcuts.CLEAR_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.CLEAR_PAGE, {}) },
-        { label: 'Delete Page', accelerator:  shortcutsManager.shortcuts.DELETE_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.DELETE_PAGE, {}) },
+        { label: 'Add Page', accelerator:  shortcutsManager.shortcuts.ADD_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.ADD_PAGE, null) },
+        { label: 'Clear Page', accelerator:  shortcutsManager.shortcuts.CLEAR_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.CLEAR_PAGE, null) },
+        { label: 'Delete Page', accelerator:  shortcutsManager.shortcuts.DELETE_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.DELETE_PAGE, null) },
         { type: 'separator' },
-        { label: 'Next Page', accelerator:  shortcutsManager.shortcuts.NEXT_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.NEXT_PAGE, {}) },
-        { label: 'Previous Page', accelerator:  shortcutsManager.shortcuts.PREV_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.PREVIOUS_PAGE, {}) },
+        { label: 'Next Page', accelerator:  shortcutsManager.shortcuts.NEXT_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.NEXT_PAGE, null) },
+        { label: 'Previous Page', accelerator:  shortcutsManager.shortcuts.PREV_PAGE.accelerator, click: () => menuClickEvents.fire(EVENTS.PREVIOUS_PAGE, null) },
         { type: 'separator' },
-        { label: 'Color Palette', accelerator:  shortcutsManager.shortcuts.COLOR_PALETTE.accelerator, click: () => menuClickEvents.fire(EVENTS.TOGGLE_COLOR_PALETTE, {}) },
-        { label: 'Previous Tool', accelerator:  shortcutsManager.shortcuts.PREV_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.PREV_TOOL, {}) },
+        { label: 'Color Palette', accelerator:  shortcutsManager.shortcuts.COLOR_PALETTE.accelerator, click: () => menuClickEvents.fire(EVENTS.TOGGLE_COLOR_PALETTE, null) },
+        { label: 'Previous Tool', accelerator:  shortcutsManager.shortcuts.PREV_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.PREV_TOOL, null) },
         { type: 'separator' },
         { label: 'Brush Tool', accelerator:  shortcutsManager.shortcuts.BRUSH_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'brush'}) },
         { label: 'Line Tool', accelerator:  shortcutsManager.shortcuts.LINE_TOOL.accelerator, click: () => menuClickEvents.fire(EVENTS.SET_TOOL, {tool: 'line'}) },
