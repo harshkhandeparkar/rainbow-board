@@ -40,6 +40,7 @@ export function Textbox(props: ITextboxProps) {
         <input
           type="text"
           name="theme-textbox"
+          spellCheck={false}
           onInput={(e) => onInput((e.target as HTMLInputElement).value)}
           defaultValue={defaultValue}
           placeholder={placeholder}

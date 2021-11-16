@@ -125,7 +125,7 @@ export const ExportPageModal = (
                 <Textbox
                   label="Export Name"
                   defaultValue=""
-                  placeholder="harold"
+                  placeholder="Select a name for the file."
                   onInput={console.log}
                 />
               </>
