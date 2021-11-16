@@ -43,11 +43,12 @@ const ExportPageModalButton = (
 export const ExportPageModal = (
   props: {
     onClose: () => void;
-    _export: (exportType: 'svg' | 'png') => void;
-    _exportAll: (exportType: 'svg' | 'png', directoryPath: string) => void;
+    _export: (name: string, exportType: 'svg' | 'png', directoryPath: string) => void;
+    _exportAll: (prefix:string, exportType: 'svg' | 'png', directoryPath: string) => void;
   }
 ) => {
   const [exportAllFormVisible, setExportAllFormVisible] = useState<boolean>(false);
+  const [exportName, setExportName] = useState<string>('page');
   const [exportType, setExportType] = useState<'svg' | 'png'>('png');
   const [exportDirectory, setExportDirectory] = useState<string | null>(null);
   const [errDirNotSelected, setErrDirNotSelected] = useState<boolean>(false);
@@ -88,49 +89,43 @@ export const ExportPageModal = (
             </div>
           </div>
 
-          {
-            exportAllFormVisible && (
-              <>
-              <div className="row"><div className="col s12">
-                <hr className="horizontal-separator-line" />
-              </div></div>
-                <div className="row">
-                  <div className="col s3 valign-wrapper form-col">
-                    <label>Export To:</label>
-                  </div>
+          <div className="row"><div className="col s12">
+            <hr className="horizontal-separator-line" />
+          </div></div>
+            <div className="row">
+              <div className="col s3 valign-wrapper form-col">
+                <label>Export To:</label>
+              </div>
 
-                  <div className="col s9 form-col valign-wrapper">
-                    <div
-                      className={`export-page-modal-btn ${errDirNotSelected ? 'error' : (exportDirectory === null ? '' : 'selected')}`}
-                      style={{width: '100%'}}
-                      onClick={() => ipcRendererSend(OPEN, exportFolderOpenDialogOptions)}
-                    >
-                      {
-                        errDirNotSelected ? (<>
-                          You have to select a folder to export to
-                          <Icon options={{icon: faExclamationCircle, color: 'red', className: 'right'}} customColor={true}/>
-                        </>)
-                        : (
-                          exportDirectory === null ? (
-                            <span style={{marginRight: 'auto', marginLeft: 'auto'}}>
-                              Select a folder to export the images into.
-                            </span>
-                          ) : <b style={{marginRight: 'auto', marginLeft: 'auto'}}>{exportDirectory}</b>
-                        )
-                      }
-                    </div>
-                  </div>
+              <div className="col s9 form-col valign-wrapper">
+                <div
+                  className={`export-page-modal-btn ${errDirNotSelected ? 'error' : (exportDirectory === null ? '' : 'selected')}`}
+                  style={{width: '100%'}}
+                  onClick={() => ipcRendererSend(OPEN, exportFolderOpenDialogOptions)}
+                >
+                  {
+                    errDirNotSelected ? (<>
+                      You have to select a folder to export to
+                      <Icon options={{icon: faExclamationCircle, color: 'red', className: 'right'}} customColor={true}/>
+                    </>)
+                    : (
+                      exportDirectory === null ? (
+                        <span style={{marginRight: 'auto', marginLeft: 'auto'}}>
+                          Select a folder to export the images into.
+                        </span>
+                      ) : <b style={{marginRight: 'auto', marginLeft: 'auto'}}>{exportDirectory}</b>
+                    )
+                  }
                 </div>
+              </div>
+            </div>
 
-                <Textbox
-                  label="Export Name"
-                  defaultValue=""
-                  placeholder="Select a name for the file."
-                  onInput={console.log}
-                />
-              </>
-            )
-          }
+            <Textbox
+              label="Export Name"
+              defaultValue={exportName}
+              placeholder="Select a name for the file."
+              onInput={(value) => setExportName(value)}
+            />
         </div>
       </div>
 
@@ -143,9 +138,9 @@ export const ExportPageModal = (
             marginRight: '0.5rem'
           }}
           onClick={() => {
-            if (exportDirectory === null && exportAllFormVisible) return setErrDirNotSelected(true);
+            if (exportDirectory === null) return setErrDirNotSelected(true);
 
-            exportAllFormVisible ? props._exportAll(exportType, exportDirectory) : props._export(exportType);
+            exportAllFormVisible ? props._exportAll(exportName, exportType, exportDirectory) : props._export(exportName, exportType, exportDirectory);
             props.onClose();
           }}
         >
@@ -154,10 +149,10 @@ export const ExportPageModal = (
 
         <button
           className="btn brand-text left"
-          title={exportAllFormVisible ? 'Export Current...' : 'Export All...'}
+          title={exportAllFormVisible ? 'Export Current Page...' : 'Export All Pages...'}
           onClick={() => setExportAllFormVisible(!exportAllFormVisible)}
         >
-          {exportAllFormVisible ? 'Export Current...' : 'Export All...'}
+          {exportAllFormVisible ? 'Export Current Page...' : 'Export All Pages...'}
         </button>
       </div>
     </>

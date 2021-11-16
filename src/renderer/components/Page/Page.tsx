@@ -159,21 +159,20 @@ export class Page extends Component<IPageProps> {
     )
   }
 
-  async _export(type: 'svg' | 'png') {
+  async _export(name: string, type: 'svg' | 'png', directoryPath: string) {
     const saver = new SVGSaver(this.svgRef.current);
 
     this.state.boardState.drawBoard.clearPreview();
     this.svgRef.current.setAttribute('width', this.state.boardState.drawBoard.dimensions[0].toString());
     this.svgRef.current.setAttribute('height', this.state.boardState.drawBoard.dimensions[1].toString());
 
-    if (type === 'svg') saver.saveAsSVG('page');
-    else await saver.saveAsPNG('page');
+    this._saveExport(saver, type, directoryPath, name);
 
     this.svgRef.current.removeAttribute('width');
     this.svgRef.current.removeAttribute('height');
   }
 
-  async _exportAll(type: 'svg' | 'png', directoryPath: string) {
+  async _exportAll(prefix: string, type: 'svg' | 'png', directoryPath: string) {
     const saver = new SVGSaver();
 
     const tempSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -195,7 +194,7 @@ export class Page extends Component<IPageProps> {
 
       saver.loadNewSVG(tempSVG);
 
-      this._saveExport(saver, type, directoryPath, `page-${parseInt(pageNo) + 1}`)
+      this._saveExport(saver, type, directoryPath, `${prefix}-${parseInt(pageNo) + 1}`);
     }
 
     tempSVG.remove();
@@ -216,7 +215,7 @@ export class Page extends Component<IPageProps> {
     ipcHandler.addEventHandler(EVENTS.UNDO, 'undoEventHandler', () => this.state.boardState.drawBoard.undo())
     ipcHandler.addEventHandler(EVENTS.REDO, 'redoEventHandler', () => this.state.boardState.drawBoard.redo())
     ipcHandler.addEventHandler(EVENTS.EXPORT_PAGE, 'exportEventHandler', (e, {type}) => {
-      this._export(type);
+      this.toolbarRef.current.exportPageModalInstance.open();
     })
     ipcHandler.addEventHandler(EVENTS.EXPORT_PAGE_DIALOG, 'exportDialogEventHandler', () => {
       this.toolbarRef.current.exportPageModalInstance.open();
@@ -237,8 +236,8 @@ export class Page extends Component<IPageProps> {
           boardOptions={this.boardOptions}
           boardState={{ drawBoard: this.state.boardState.drawBoard, tool: this.state.boardState.tool }}
           _setTool={(tool) => this._setTool(tool)}
-          _export={(type) => this._export(type)}
-          _exportAll={(type: 'svg' | 'png', directoryPath: string) => this._exportAll(type, directoryPath)}
+          _export={(name, type, directoryPath) => this._export(name, type, directoryPath)}
+          _exportAll={(prefix, type, directoryPath) => this._exportAll(prefix, type, directoryPath)}
           _save={() => this.props._save()}
           _clearBoard={() => this._clearBoard()}
           _onUndo={() => this.state.boardState.drawBoard.undo()}
