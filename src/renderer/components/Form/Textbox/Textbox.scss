@@ -1,0 +1,16 @@
+@import '../../../sass/sizes';
+
+input {
+  display: block;
+  border-radius: $borderRad;
+  margin-top: 1rem !important;
+  height: 3rem;
+  width: 100%;
+  padding-left: $padding !important;
+  padding-right: $padding !important;
+  background-color: transparent;
+}
+
+input:focus, button:focus {
+  outline: none;
+}

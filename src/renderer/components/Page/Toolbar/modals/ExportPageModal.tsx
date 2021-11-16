@@ -1,6 +1,7 @@
 import React, { MouseEventHandler, useState } from 'react';
 import { Icon } from '../../../Icon/Icon';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { Textbox } from '../../../Form/Textbox/Textbox';
 
 import { ipcRendererSend } from '../../../../util/ipc-sender';
 import { IPCRendererSendEventArgs, OPEN } from '../../../../../common/constants/events';
@@ -120,6 +121,13 @@ export const ExportPageModal = (
                     </div>
                   </div>
                 </div>
+
+                <Textbox
+                  label="Export Name"
+                  defaultValue=""
+                  placeholder="harold"
+                  onInput={console.log}
+                />
               </>
             )
           }

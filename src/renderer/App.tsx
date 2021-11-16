@@ -71,7 +71,7 @@ class App extends Component {
               box-shadow: 0 1px 0 ${this.state.css.highlightTextColor} !important;
             }
 
-            .export-page-modal-btn.selected, .export-page-modal-btn:hover {
+            .export-page-modal-btn.selected, .export-page-modal-btn:hover, input[type=text]:hover, input[type=text]:focus {
               border: ${this.state.css.highlightTextColor} solid 1px;
             }
 
@@ -80,7 +80,7 @@ class App extends Component {
               background-color: ${this.state.css.bg1};
             }
 
-            .export-page-modal-btn, .modal, table, th, td {
+            .export-page-modal-btn, .modal, table, th, td, input[type=text] {
               border: ${this.state.css.borderColor} solid 1px;
             }
 
@@ -107,7 +107,7 @@ class App extends Component {
               border-top: 1px solid ${this.state.css.borderColor} !important;
             }
 
-            .color-palette * {
+            .color-palette *, input[type=text] {
               color: ${this.state.css.textColor} !important;
             }
 
