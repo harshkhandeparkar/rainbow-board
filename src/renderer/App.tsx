@@ -71,8 +71,8 @@ class App extends Component {
               box-shadow: 0 1px 0 ${this.state.css.highlightTextColor} !important;
             }
 
-            .export-page-modal-btn.selected, .export-page-modal-btn:hover, input[type=text]:hover, input[type=text]:focus {
-              border: ${this.state.css.highlightTextColor} solid 1px;
+            .export-page-modal-btn.selected, .export-page-modal-btn:hover, input[type=text]:hover, input[type=text]:focus, select:hover {
+              border: ${this.state.css.highlightTextColor} solid 1px !important;
             }
 
             .export-page-modal-btn:hover {
