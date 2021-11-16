@@ -47,7 +47,7 @@ export const ExportPageModal = (
     _exportAll: (prefix:string, exportType: 'svg' | 'png', directoryPath: string) => void;
   }
 ) => {
-  const [exportAllFormVisible, setExportAllFormVisible] = useState<boolean>(false);
+  const [exportAll, setExportAll] = useState<boolean>(false);
   const [exportName, setExportName] = useState<string>('page');
   const [exportType, setExportType] = useState<'svg' | 'png'>('png');
   const [exportDirectory, setExportDirectory] = useState<string | null>(null);
@@ -63,8 +63,8 @@ export const ExportPageModal = (
   return (
     <>
     <div className="modal-content container-fluid">
-      <h3>{exportAllFormVisible ? 'Export All Pages' : 'Export Current Page'}</h3>
-      <p>{exportAllFormVisible ? 'Export all the pages as images.' : 'Export the current page as an image.'}</p>
+      <h3>{exportAll ? 'Export All Pages' : 'Export Current Page'}</h3>
+      <p>{exportAll ? 'Export all the pages as images.' : 'Export the current page as an image.'}</p>
 
       <div className="container">
           <div className="row">
@@ -121,7 +121,8 @@ export const ExportPageModal = (
             </div>
 
             <Textbox
-              label="Export Name"
+              label={`Export ${exportAll ? 'Prefix' : 'Name'}`}
+              info={`${exportAll ? 'Prefix' : 'Name'} for the file${exportAll ? 's' : ''} to be exported without the extension.`}
               defaultValue={exportName}
               placeholder="Select a name for the file."
               onInput={(value) => setExportName(value)}
@@ -140,7 +141,7 @@ export const ExportPageModal = (
           onClick={() => {
             if (exportDirectory === null) return setErrDirNotSelected(true);
 
-            exportAllFormVisible ? props._exportAll(exportName, exportType, exportDirectory) : props._export(exportName, exportType, exportDirectory);
+            exportAll ? props._exportAll(exportName, exportType, exportDirectory) : props._export(exportName, exportType, exportDirectory);
             props.onClose();
           }}
         >
@@ -149,10 +150,10 @@ export const ExportPageModal = (
 
         <button
           className="btn brand-text left"
-          title={exportAllFormVisible ? 'Export Current Page...' : 'Export All Pages...'}
-          onClick={() => setExportAllFormVisible(!exportAllFormVisible)}
+          title={exportAll ? 'Export Current Page...' : 'Export All Pages...'}
+          onClick={() => setExportAll(!exportAll)}
         >
-          {exportAllFormVisible ? 'Export Current Page...' : 'Export All Pages...'}
+          {exportAll ? 'Export Current Page...' : 'Export All Pages...'}
         </button>
       </div>
     </>
