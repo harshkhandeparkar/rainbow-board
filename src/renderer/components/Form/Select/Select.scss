@@ -11,3 +11,7 @@ select {
 select:focus, button:focus {
   outline: none;
 }
+
+select:hover {
+  cursor: pointer;
+}
