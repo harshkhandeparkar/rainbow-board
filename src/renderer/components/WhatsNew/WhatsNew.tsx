@@ -11,7 +11,6 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons/faExclama
 import { Header } from '../Header/Header';
 import * as PATHS from '../../../common/constants/paths';
 import * as SHORTCUTS from '../../../common/constants/shortcuts';
-import { Link } from 'react-router-dom';
 
 const { version: currentVersion, discordInvite, repository } = packageFile;
 
@@ -74,62 +73,20 @@ export default class WhatsNew extends Component {
           className="container"
         >
           <New
-            title="Technologically Enhanced eXtreme Transcription Tool"
+            title="Multiple Export"
             desc={
               <span>
-                The <b>T</b>echnologically <b>E</b>nhanced e<b>X</b>treme <b>T</b>ranscription (TEXT) Tool has been the single most requested feature for Rainbow Board. <br />
-                Over 4 people requested the same feature on the Rainbow Board <a href={discordInvite} target="_blank" rel="noreferrer">Discord server</a>. <br />
-                You can select the TEXT Tool using the toolbar on the bottom or using the <i>{SHORTCUTS.TEXT_TOOL.platformFormattedString}</i> keyboard shortcut.
-                To get instructions on how to use the TEXT TOOL, click on the <b>?</b> icon on the top left corner.
-              </span>
-            }
-            version="v0.8.0"
-            size={2}
-          />
-          <New
-            title="Usage Hints"
-            desc="To get help on how to use the selected tool, you can now click on the ? icon on the top right corner."
-            version="v0.8.0"
-          />
+                This feature was requested by Gabriella on the Rainbow Board <a href={discordInvite} rel="noreferrer" target="_blank">Discord server.</a> <br /><br />
 
-          <New
-            title="Safer Rainbow Files"
-            desc={
-              <span>
-                The &quot;.rainbow&quot; file format used to save and load the whiteboard has been changed due to a potential security vulnerability.
-                I found and tried to exploit this vulnerability but it didn't work so perhaps the threat isn't as dangerous but the vulnerability was patched anyway. <br /> <br />
-                On loading an older format of the file, you will be presented with a warning. If the file is from a trusted source, or was exported directly from Rainbow Board without tampering then it is perfectly safe to load it.<br />
-                This file will be converted to the safer format on saving next time. <br />
-                <b>NOTE: THIS NEW FORMAT WILL NOT OPEN ON OLDER VERSIONS OF RAINBOW BOARD. PLEASE UPDATE BEFORE USING.</b>
+                You can now export all the pages from the whiteboard at once in a folder. Click on "Export All Pages..." button at the bottom of the prompt that opens
+                by using the {SHORTCUTS.EXPORT_PAGE.platformFormattedString} shortcut or clicking on the export page button. <br /><br />
+
+                Select a folder to export the files to and a name for the files. Each file will be named using the following format: `name-xx.png`
+                where name is the name you type and xx is the page number. The pages can be exported as SVG or PNG.
               </span>
             }
-            version="v0.8.0"
+            version="v0.8.1"
             size={3}
-          />
-
-          <New
-            title="Custom Accent Color"
-            desc={
-              <span>
-                You can select a custom accent color apart from the theme from the <Link to={PATHS.SETTINGS} title={SHORTCUTS.SETTINGS.platformFormattedString}>settings</Link>. <br/>
-                This change was requested by thedudethatcode on the Rainbow Board<a href={discordInvite} target="_blank" rel="noreferrer">Discord server</a>.
-              </span>
-            }
-            version="v0.8.0"
-          />
-          <New
-            title="Customizable Shortcuts"
-            desc={
-              <span>
-                If you don't like the default keyboard shortcuts of Rainbow Board, you can now change them from the <Link to={PATHS.SHORTCUTS}>shortcut settings</Link> in the <Link to={PATHS.SETTINGS} title={SHORTCUTS.SETTINGS.platformFormattedString}>settings</Link>.
-              </span>
-            }
-            version="v0.8.0"
-          />
-          <New
-            title="Smaller Changes"
-            desc="Many more smaller tweaks and fixes have been made."
-            version="v0.8.0"
           />
         </Grid>
       </div>
