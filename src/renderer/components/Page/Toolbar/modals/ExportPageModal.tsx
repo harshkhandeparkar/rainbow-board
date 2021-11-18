@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useState } from 'react';
+import React, { MouseEventHandler, useEffect, useState } from 'react';
 import { Icon } from '../../../Icon/Icon';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { Textbox } from '../../../Form/Textbox/Textbox';
@@ -53,11 +53,13 @@ export const ExportPageModal = (
   const [exportDirectory, setExportDirectory] = useState<string | null>(null);
   const [errDirNotSelected, setErrDirNotSelected] = useState<boolean>(false);
 
-  ipcHandler.addEventHandler(OPEN, 'exportAllOpenHandler', (e, {path, dialogId}) => {
-    if (dialogId === 1) {
-      setExportDirectory(path);
-      setErrDirNotSelected(false);
-    }
+  useEffect(() => {
+    ipcHandler.addEventHandler(OPEN, 'exportAllOpenHandler', (e, {path, dialogId}) => {
+      if (dialogId === 1) {
+        setExportDirectory(path);
+        setErrDirNotSelected(false);
+      }
+    })
   })
 
   return (
